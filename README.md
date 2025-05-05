@@ -20,6 +20,17 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## UI and Styling
+
+This project uses the [`shadcn/ui`](https://ui.shadcn.com/) package to build reusable and accessible user interface components.
+
+- **Base style:** `new-york`
+- **Base color:** `zinc`
+- **Icons:** [Lucide](https://lucide.dev/)
+- **Configuration file:** `components.json`
+
+You can customize styles and colors by editing the configuration in `components.json` and the color tokens in `app/globals.css`.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
