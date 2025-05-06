@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import SidebarClientWrapper from "@/components/ui/SidebarClientWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,17 +27,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="flex min-h-screen">
-          {/* Sidebar */}
-          <div className="hidden md:block">
-            {/* Sidebar solo visible en desktop, puedes adaptar para móvil con Sheet si lo deseas */}
-            <SidebarClientWrapper />
-          </div>
-          {/* Contenido principal */}
-          <main className="flex-1">
-            {children}
-          </main>
-        </div>
+        {/* Solo el contenido principal, sin sidebar */}
+        {children}
       </body>
     </html>
   );
