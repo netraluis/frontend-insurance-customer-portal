@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { toast } from "sonner"
 import { verifyOtp, resendOtp } from "@/lib/auth"
+import { useRouter } from "next/navigation"
 
 interface OtpVerificationFormProps {
   email: string
@@ -19,6 +20,14 @@ export default function OtpVerificationForm({ email, onSuccess, onBack }: OtpVer
   const [isResending, setIsResending] = useState(false)
   const [otp, setOtp] = useState(["", "", "", "", "", ""])
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
+  const router = useRouter()
+
+  // Redirect to dashboard if access_token exists
+  useEffect(() => {
+    if (typeof window !== "undefined" && localStorage.getItem("access_token")) {
+      router.push("/dashboard")
+    }
+  }, [])
 
   // Focus the first input on mount
   useEffect(() => {
@@ -89,6 +98,13 @@ export default function OtpVerificationForm({ email, onSuccess, onBack }: OtpVer
       const result = await verifyOtp(email, otpValue)
 
       if (result.success) {
+        // Save the access_token and user in localStorage
+        if (result.access_token) {
+          localStorage.setItem("access_token", result.access_token)
+        }
+        if (result.user) {
+          localStorage.setItem("user", JSON.stringify(result.user))
+        }
         toast.success("Verification successful", {
           description: "You have been successfully logged in.",
         })

@@ -30,7 +30,7 @@ export async function sendMagicLink(email: string): Promise<{ success: boolean }
 /**
  * Verifies the OTP provided by the user
  */
-export async function verifyOtp(email: string, otp: string): Promise<{ success: boolean }> {
+export async function verifyOtp(email: string, otp: string): Promise<{ success: boolean, access_token?: string, user?: any }> {
     try {
         const response = await fetch(`${BACKEND_URL}/auth/verify-otp`, {
             method: 'POST',
@@ -41,7 +41,11 @@ export async function verifyOtp(email: string, otp: string): Promise<{ success: 
             return { success: false }
         }
         const res = await response.json()
-        return { success: res?.data?.access_token }
+        return {
+            success: !!res?.data?.access_token,
+            access_token: res?.data?.access_token,
+            user: res?.data?.user
+        }
     } catch (error) {
         return { success: false }
     }
