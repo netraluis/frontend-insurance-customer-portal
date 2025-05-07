@@ -50,6 +50,7 @@ export default function LoginForm() {
         })
       }
     } catch (error) {
+      console.error({error})
       toast.error("Error", {
         description: "Something went wrong. Please try again.",
       })
@@ -87,7 +88,7 @@ export default function LoginForm() {
                     disabled={isLoading}
                   />
                 </FormControl>
-                <FormDescription>We'll send you a verification code to this email.</FormDescription>
+                <FormDescription>We&apos;ll send you a verification code to this email.</FormDescription>
                 <FormMessage />
               </FormItem>
             )}

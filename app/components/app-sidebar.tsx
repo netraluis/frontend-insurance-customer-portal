@@ -3,24 +3,17 @@
 import type * as React from "react"
 import {
   AudioWaveform,
-  BookOpen,
-  Bot,
   BotMessageSquare,
   Car,
   ClipboardList,
   Command,
   FileText,
   FolderOpen,
-  Frame,
   GalleryVerticalEnd,
   HeartPulse,
   House,
-  Map,
   PanelLeft,
-  PieChart,
   Plane,
-  Settings2,
-  SquareTerminal,
 } from "lucide-react"
 
 import { NavMain } from "./nav-main"

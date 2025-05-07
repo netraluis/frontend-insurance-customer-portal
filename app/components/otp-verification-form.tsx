@@ -27,14 +27,14 @@ export default function OtpVerificationForm({ email, onSuccess, onBack }: OtpVer
     if (typeof window !== "undefined" && localStorage.getItem("access_token")) {
       router.push("/dashboard")
     }
-  }, [])
+  }, [router])
 
   // Focus the first input on mount
   useEffect(() => {
     if (inputRefs.current[0]) {
       inputRefs.current[0].focus()
     }
-  }, [])
+  }, [inputRefs])
 
   const handleChange = (index: number, value: string) => {
     // Only allow numbers
@@ -115,6 +115,7 @@ export default function OtpVerificationForm({ email, onSuccess, onBack }: OtpVer
         })
       }
     } catch (error) {
+      console.error({error})
       toast.error("Error", {
         description: "Something went wrong. Please try again.",
       })
@@ -134,6 +135,7 @@ export default function OtpVerificationForm({ email, onSuccess, onBack }: OtpVer
         description: `We've sent a new verification code to ${email}`,
       })
     } catch (error) {
+      console.error({error})
       toast.error("Error", {
         description: "Failed to resend verification code. Please try again.",
       })

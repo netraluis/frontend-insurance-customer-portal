@@ -10,7 +10,7 @@ export default function LoginPage() {
     if (typeof window !== "undefined" && localStorage.getItem("access_token")) {
       router.push("/dashboard")
     }
-  }, [])
+  }, [router])
   return (
     <div className="container relative flex min-h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
       <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
@@ -33,8 +33,8 @@ export default function LoginPage() {
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
             <p className="text-lg">
-              "Acme Inc has transformed how we manage our business operations, providing unparalleled security and
-              efficiency."
+              Acme Inc has transformed how we manage our business operations, providing unparalleled security and
+              efficiency.
             </p>
             <footer className="text-sm">Sofia Davis, CEO of Davis Enterprises</footer>
           </blockquote>

@@ -9,6 +9,6 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
     if (!token) {
       router.push("/login")
     }
-  }, [])
+  }, [router])
   return <>{children}</>
 } 

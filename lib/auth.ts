@@ -22,6 +22,7 @@ export async function sendMagicLink(email: string): Promise<{ success: boolean }
         const res = await response.json()
         return { success: res?.data?.otp_sent }
     } catch (error) {
+        console.error({error})
         // Si hay un error, devolvemos false
         return { success: false }
     }
@@ -30,7 +31,7 @@ export async function sendMagicLink(email: string): Promise<{ success: boolean }
 /**
  * Verifies the OTP provided by the user
  */
-export async function verifyOtp(email: string, otp: string): Promise<{ success: boolean, access_token?: string, user?: any }> {
+export async function verifyOtp(email: string, otp: string): Promise<{ success: boolean, access_token?: string, user?: unknown }> {
     try {
         const response = await fetch(`${BACKEND_URL}/auth/verify-otp`, {
             method: 'POST',
@@ -47,6 +48,7 @@ export async function verifyOtp(email: string, otp: string): Promise<{ success: 
             user: res?.data?.user
         }
     } catch (error) {
+        console.error({error})
         return { success: false }
     }
 }
@@ -57,6 +59,7 @@ export async function verifyOtp(email: string, otp: string): Promise<{ success: 
 export async function resendOtp(email: string): Promise<{ success: boolean }> {
     // Simulate API call delay
     await new Promise((resolve) => setTimeout(resolve, 1500))
+    console.log('reenviando otp',{email})
 
     // In a real implementation, this would:
     // 1. Generate a new secure OTP
