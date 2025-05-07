@@ -1,6 +1,7 @@
 "use client"
 
-import { BadgeCheck, Bell, ChevronsUpDown, CreditCard, LogOut, User, Info } from "lucide-react"
+import { Bell, ChevronsUpDown, LogOut, User, Info } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
@@ -24,6 +25,13 @@ export function NavUser({
   }
 }) {
   const { isMobile } = useSidebar()
+  const router = useRouter()
+
+  const handleLogout = () => {
+    localStorage.removeItem("access_token")
+    localStorage.removeItem("user")
+    router.push("/login")
+  }
 
   return (
     <SidebarMenu>
@@ -80,7 +88,7 @@ export function NavUser({
                 Informació
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={handleLogout}>
                 <LogOut />
                 Tanca sessió
               </DropdownMenuItem>
