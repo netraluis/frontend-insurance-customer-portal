@@ -6,9 +6,11 @@ import {
   BookOpen,
   Bot,
   Command,
+  FileText,
   Frame,
   GalleryVerticalEnd,
   Map,
+  PanelLeft,
   PieChart,
   Settings2,
   SquareTerminal,
@@ -23,8 +25,8 @@ import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } fr
 // This is sample data.
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
+    name: "Anton Òdena",
+    email: "anton@anton.ad",
     avatar: "/avatars/shadcn.jpg",
   },
   teams: [
@@ -46,9 +48,9 @@ const data = {
   ],
   navMain: [
     {
-      title: "Playground",
+      title: "Inici",
       url: "#",
-      icon: SquareTerminal,
+      icon: PanelLeft,
       isActive: true,
       items: [
         {
@@ -66,9 +68,9 @@ const data = {
       ],
     },
     {
-      title: "Models",
+      title: "Pòlisses",
       url: "#",
-      icon: Bot,
+      icon: FileText,
       items: [
         {
           title: "Genesis",
@@ -85,7 +87,7 @@ const data = {
       ],
     },
     {
-      title: "Documentation",
+      title: "Sinístres",
       url: "#",
       icon: BookOpen,
       items: [
@@ -108,7 +110,7 @@ const data = {
       ],
     },
     {
-      title: "Settings",
+      title: "Assistent",
       url: "#",
       icon: Settings2,
       items: [
@@ -130,20 +132,50 @@ const data = {
         },
       ],
     },
+    {
+      title: "Documents",
+      url: "#",
+      icon: Settings2,
+      items: [
+        {
+          title: "General",
+          url: "#",
+        },
+        {
+          title: "Team",
+          url: "#",
+        },
+        {
+          title: "Billing",
+          url: "#",
+        },
+        {
+          title: "Limits",
+          url: "#",
+        },
+      ],
+    },
+
   ],
+  
   projects: [
     {
-      name: "Design Engineering",
+      name: "Auto",
       url: "#",
       icon: Frame,
     },
     {
-      name: "Sales & Marketing",
+      name: "Llar",
       url: "#",
       icon: PieChart,
     },
     {
-      name: "Travel",
+      name: "Viatge",
+      url: "#",
+      icon: Map,
+    },
+    {
+      name: "Salut",
       url: "#",
       icon: Map,
     },
