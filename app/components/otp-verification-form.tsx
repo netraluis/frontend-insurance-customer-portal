@@ -37,15 +37,21 @@ export default function OtpVerificationForm({ email, onSuccess, onBack }: OtpVer
     setOtp(newOtp)
 
     // Auto-focus next input if value is entered
-    if (value && index < 5 && inputRefs.current[index + 1]) {
-      inputRefs.current[index + 1].focus()
+    if (value && index < 5) {
+      const nextInput = inputRefs.current[index + 1]
+      if (nextInput) {
+        nextInput.focus()
+      }
     }
   }
 
   const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
     // Move to previous input on backspace if current input is empty
-    if (e.key === "Backspace" && !otp[index] && index > 0 && inputRefs.current[index - 1]) {
-      inputRefs.current[index - 1].focus()
+    if (e.key === "Backspace" && !otp[index] && index > 0) {
+      const prevInput = inputRefs.current[index - 1]
+      if (prevInput) {
+        prevInput.focus()
+      }
     }
   }
 
@@ -133,7 +139,9 @@ export default function OtpVerificationForm({ email, onSuccess, onBack }: OtpVer
           {otp.map((digit, index) => (
             <Input
               key={index}
-              ref={(el) => (inputRefs.current[index] = el)}
+              ref={(el) => {
+                inputRefs.current[index] = el
+              }}
               type="text"
               inputMode="numeric"
               maxLength={1}
