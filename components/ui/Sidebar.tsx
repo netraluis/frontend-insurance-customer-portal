@@ -124,10 +124,42 @@ export function Sidebar({ className, collapsed, setCollapsed }: { className?: st
           </button>
         </div>
         {/* Usuario inferior solo icono */}
-        <div className="mb-4 flex flex-col items-center gap-2 w-full">
-          <button className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-100 text-zinc-700 font-semibold text-xs focus:outline-none hover:bg-zinc-200 transition-colors">
-            CN
-          </button>
+        <div className="mb-10 flex flex-col items-center gap-2 w-full">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="flex items-center w-full gap-3 px-0 py-2 rounded-lg bg-white border border-[#E4E4E7] hover:bg-zinc-100 transition-colors focus:outline-none justify-center">
+                <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-100 text-zinc-700 font-semibold text-xs border border-[#E4E4E7]">CN</span>
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" sideOffset={0} className="w-56 p-2 rounded-xl border border-[#E4E4E7] bg-white shadow-lg mt-2 ml-14">
+              {/* Usuario arriba */}
+              <div className="flex items-center gap-3 px-3 py-2">
+                <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-zinc-100 text-zinc-700 font-semibold text-xs border border-[#E4E4E7]">CN</span>
+              </div>
+              <div className="my-2 border-t border-[#E4E4E7]" />
+              <DropdownMenuItem className="flex items-center gap-3 px-3 py-2 rounded-lg text-[15px] font-normal text-sidebar-foreground hover:bg-muted hover:text-primary">
+                <Star className="w-5 h-5" />
+                Upgrade to Pro
+              </DropdownMenuItem>
+              <DropdownMenuItem className="flex items-center gap-3 px-3 py-2 rounded-lg text-[15px] font-normal text-sidebar-foreground hover:bg-muted hover:text-primary">
+                <User className="w-5 h-5" />
+                Account
+              </DropdownMenuItem>
+              <DropdownMenuItem className="flex items-center gap-3 px-3 py-2 rounded-lg text-[15px] font-normal text-sidebar-foreground hover:bg-muted hover:text-primary">
+                <Briefcase className="w-5 h-5" />
+                Billing
+              </DropdownMenuItem>
+              <DropdownMenuItem className="flex items-center gap-3 px-3 py-2 rounded-lg text-[15px] font-normal text-sidebar-foreground hover:bg-muted hover:text-primary">
+                <Bell className="w-5 h-5" />
+                Notifications
+              </DropdownMenuItem>
+              <div className="my-2 border-t border-[#E4E4E7]" />
+              <DropdownMenuItem className="flex items-center gap-3 px-3 py-2 rounded-lg text-[15px] font-normal text-destructive hover:bg-muted/80 hover:text-destructive">
+                <LogOutIcon className="w-5 h-5" />
+                Log out
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </aside>
     );
@@ -231,37 +263,52 @@ export function Sidebar({ className, collapsed, setCollapsed }: { className?: st
       </div>
       {/* Footer user profile */}
       <div className="px-4 py-4 border-t border-[#E4E4E7]">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <button className="flex items-center w-full gap-3 px-2 py-2 rounded-lg hover:bg-muted/80 transition-colors focus:outline-none">
-              <UserAvatar />
-              <div className="flex flex-col flex-1 items-start text-left">
-                <span className="font-semibold text-[15px] leading-tight">shadcn</span>
-                <span className="text-xs text-muted-foreground leading-tight">m@example.com</span>
+        <div className="mb-10 flex flex-col items-center gap-2 w-full">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="flex items-center w-full gap-3 px-3 py-2 rounded-lg bg-white border border-[#E4E4E7] hover:bg-zinc-100 transition-colors focus:outline-none">
+                <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-100 text-zinc-700 font-semibold text-xs border border-[#E4E4E7]">CN</span>
+                <div className="flex flex-col flex-1 items-start text-left">
+                  <span className="font-bold text-[15px] leading-tight">shadcn</span>
+                  <span className="text-xs text-muted-foreground leading-tight">m@example.com</span>
+                </div>
+                <ChevronDown className="w-5 h-5 text-muted-foreground ml-auto" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" sideOffset={0} className="w-72 p-2 rounded-xl border border-[#E4E4E7] bg-white shadow-lg mt-2 ml-0">
+              {/* Usuario arriba */}
+              <div className="flex items-center gap-3 px-3 py-2">
+                <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-zinc-100 text-zinc-700 font-semibold text-xs border border-[#E4E4E7]">CN</span>
+                <div className="flex flex-col">
+                  <span className="font-bold text-[15px] leading-tight">shadcn</span>
+                  <span className="text-xs text-muted-foreground leading-tight">m@example.com</span>
+                </div>
               </div>
-              <ChevronDown className="w-5 h-5 text-muted-foreground ml-auto" />
-            </button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" sideOffset={10} className="w-60 p-2 rounded-lg border border-[#E4E4E7] bg-white shadow-lg ml-10">
-            <DropdownMenuItem className="flex items-center gap-2 px-3 py-2 rounded-md text-[15px] font-medium text-sidebar-foreground hover:bg-muted hover:text-primary">
-              <User className="w-5 h-5" />
-              El meu compte
-            </DropdownMenuItem>
-            <DropdownMenuItem className="flex items-center gap-2 px-3 py-2 rounded-md text-[15px] font-medium text-sidebar-foreground hover:bg-muted hover:text-primary">
-              <Bell className="w-5 h-5" />
-              Notificacions
-            </DropdownMenuItem>
-            <DropdownMenuItem className="flex items-center gap-2 px-3 py-2 rounded-md text-[15px] font-medium text-sidebar-foreground hover:bg-muted hover:text-primary">
-              <Info className="w-5 h-5" />
-              Informació
-            </DropdownMenuItem>
-            <div className="my-2 border-t border-[#E4E4E7]" />
-            <DropdownMenuItem className="flex items-center gap-2 px-3 py-2 rounded-md text-[15px] font-medium text-destructive hover:bg-muted/80 hover:text-destructive">
-              <LogOutIcon className="w-5 h-5" />
-              Tanca la sessió
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+              <div className="my-2 border-t border-[#E4E4E7]" />
+              <DropdownMenuItem className="flex items-center gap-3 px-3 py-2 rounded-lg text-[15px] font-normal text-sidebar-foreground hover:bg-muted hover:text-primary">
+                <Star className="w-5 h-5" />
+                Upgrade to Pro
+              </DropdownMenuItem>
+              <DropdownMenuItem className="flex items-center gap-3 px-3 py-2 rounded-lg text-[15px] font-normal text-sidebar-foreground hover:bg-muted hover:text-primary">
+                <User className="w-5 h-5" />
+                Account
+              </DropdownMenuItem>
+              <DropdownMenuItem className="flex items-center gap-3 px-3 py-2 rounded-lg text-[15px] font-normal text-sidebar-foreground hover:bg-muted hover:text-primary">
+                <Briefcase className="w-5 h-5" />
+                Billing
+              </DropdownMenuItem>
+              <DropdownMenuItem className="flex items-center gap-3 px-3 py-2 rounded-lg text-[15px] font-normal text-sidebar-foreground hover:bg-muted hover:text-primary">
+                <Bell className="w-5 h-5" />
+                Notifications
+              </DropdownMenuItem>
+              <div className="my-2 border-t border-[#E4E4E7]" />
+              <DropdownMenuItem className="flex items-center gap-3 px-3 py-2 rounded-lg text-[15px] font-normal text-destructive hover:bg-muted/80 hover:text-destructive">
+                <LogOutIcon className="w-5 h-5" />
+                Log out
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
     </aside>
   );
