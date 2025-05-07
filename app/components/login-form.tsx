@@ -37,13 +37,18 @@ export default function LoginForm() {
 
     try {
       // In a real implementation, this would call your API to send the magic link
-      await sendMagicLink(values.email)
-
+      const response = await sendMagicLink(values.email)
       setEmail(values.email)
       setShowOtpForm(true)
-      toast.success("Verification code sent", {
-        description: `We've sent a verification code to ${values.email}`,
-      })
+      if(response.success){
+        toast.success("Verification code sent", {
+          description: `We've sent a verification code to ${values.email}`,
+        })
+      } else {
+        toast.error("Error", {
+          description: "Something went wrong. Please try again.",
+        })
+      }
     } catch (error) {
       toast.error("Error", {
         description: "Something went wrong. Please try again.",

@@ -86,7 +86,6 @@ export default function OtpVerificationForm({ email, onSuccess, onBack }: OtpVer
     setIsLoading(true)
 
     try {
-      // In a real implementation, this would call your API to verify the OTP
       const result = await verifyOtp(email, otpValue)
 
       if (result.success) {
