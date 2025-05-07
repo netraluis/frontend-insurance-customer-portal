@@ -63,14 +63,13 @@ export function NavUser({
                 </div>
               </div>
             </DropdownMenuLabel>
-            <DropdownMenuSeparator />
             <DropdownMenuGroup>
+            <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <User />
                 El meu compte
               </DropdownMenuItem>
             </DropdownMenuGroup>
-            <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <Bell />
@@ -80,6 +79,7 @@ export function NavUser({
                 <Info />
                 Informació
               </DropdownMenuItem>
+              <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <LogOut />
                 Tanca sessió

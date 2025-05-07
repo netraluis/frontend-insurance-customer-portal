@@ -38,17 +38,17 @@ const data = {
   },
   teams: [
     {
-      name: "Acme Inc",
+      name: "Aton Òdena",
       logo: GalleryVerticalEnd,
       plan: "Enterprise",
     },
     {
-      name: "Acme Corp.",
+      name: "The Agents Lab SL",
       logo: AudioWaveform,
       plan: "Startup",
     },
     {
-      name: "Evil Corp.",
+      name: "Acme Inc",
       logo: Command,
       plan: "Free",
     },
