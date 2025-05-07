@@ -120,3 +120,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes highlight {
+  0% { background-color: #fef9c3; }
+  100% { background-color: #fff; }
+}
+.animate-highlight {
+  animation: highlight 0.5s;
+}
