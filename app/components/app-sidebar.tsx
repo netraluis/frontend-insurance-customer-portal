@@ -5,13 +5,20 @@ import {
   AudioWaveform,
   BookOpen,
   Bot,
+  BotMessageSquare,
+  Car,
+  ClipboardList,
   Command,
   FileText,
+  FolderOpen,
   Frame,
   GalleryVerticalEnd,
+  HeartPulse,
+  House,
   Map,
   PanelLeft,
   PieChart,
+  Plane,
   Settings2,
   SquareTerminal,
 } from "lucide-react"
@@ -89,7 +96,7 @@ const data = {
     {
       title: "Sinístres",
       url: "#",
-      icon: BookOpen,
+      icon: ClipboardList,
       items: [
         {
           title: "Introduction",
@@ -112,7 +119,7 @@ const data = {
     {
       title: "Assistent",
       url: "#",
-      icon: Settings2,
+      icon: BotMessageSquare,
       items: [
         {
           title: "General",
@@ -135,7 +142,7 @@ const data = {
     {
       title: "Documents",
       url: "#",
-      icon: Settings2,
+      icon: FolderOpen,
       items: [
         {
           title: "General",
@@ -162,22 +169,22 @@ const data = {
     {
       name: "Auto",
       url: "#",
-      icon: Frame,
+      icon: Car,
     },
     {
       name: "Llar",
       url: "#",
-      icon: PieChart,
+      icon: House,
     },
     {
       name: "Viatge",
       url: "#",
-      icon: Map,
+      icon: Plane,
     },
     {
       name: "Salut",
       url: "#",
-      icon: Map,
+      icon: HeartPulse,
     },
   ],
 }
