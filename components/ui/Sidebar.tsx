@@ -1,317 +1,612 @@
-"use client";
-import { Home, User, FileText, LogOut, Menu, ChevronDown, Plus, Library, FileArchive, CalendarCheck, Folder, Car, Home as HomeIcon, Plane, Heart, Bell, Info, LogOut as LogOutIcon, BookOpen, Settings, Star, History, Layers, Briefcase, MoreHorizontal } from "lucide-react";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { useState } from "react";
-import Image from "next/image";
+"use client"
+
+import * as React from "react"
+import { Slot } from "@radix-ui/react-slot"
+import { VariantProps, cva } from "class-variance-authority"
+import { PanelLeftIcon } from "lucide-react"
+
+import { useIsMobile } from "@/hooks/use-mobile"
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Separator } from "@/components/ui/separator"
 import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
-import React from "react";
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet"
+import { Skeleton } from "@/components/ui/skeleton"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
-const menuLinks = [
-  { href: "/", label: "Inici", icon: Library },
-  { href: "/polisses", label: "Pòlisses", icon: FileText },
-  { href: "/sinistres", label: "Sinistres", icon: FileArchive },
-  { href: "/assitent", label: "Assitent", icon: CalendarCheck },
-  { href: "/documents", label: "Documents", icon: Folder },
-];
+const SIDEBAR_COOKIE_NAME = "sidebar_state"
+const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
+const SIDEBAR_WIDTH = "16rem"
+const SIDEBAR_WIDTH_MOBILE = "18rem"
+const SIDEBAR_WIDTH_ICON = "3rem"
+const SIDEBAR_KEYBOARD_SHORTCUT = "b"
 
-const polissesLinks = [
-  { href: "/auto", label: "Auto", icon: Car },
-  { href: "/llar", label: "Llar", icon: HomeIcon },
-  { href: "/viatge", label: "Viatge", icon: Plane },
-  { href: "/salut", label: "Salut", icon: Heart },
-];
+type SidebarContextProps = {
+  state: "expanded" | "collapsed"
+  open: boolean
+  setOpen: (open: boolean) => void
+  openMobile: boolean
+  setOpenMobile: (open: boolean) => void
+  isMobile: boolean
+  toggleSidebar: () => void
+}
 
-const accounts = [
-  { name: "Acme Inc" },
-  { name: "Empresa S.A." },
-];
+const SidebarContext = React.createContext<SidebarContextProps | null>(null)
 
-function getRandomColor(name: string) {
-  // Genera un color pastel basado en el nombre
-  let hash = 0;
-  for (let i = 0; i < name.length; i++) {
-    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+export function useSidebar() {
+  const context = React.useContext(SidebarContext)
+  if (!context) {
+    throw new Error("useSidebar must be used within a SidebarProvider.")
   }
-  const h = hash % 360;
-  return `hsl(${h}, 70%, 80%)`;
+  return context
 }
 
-function Avatar({ size = 28 }: { name: string; size?: number }) {
+export function SidebarProvider({
+  defaultOpen = true,
+  open: openProp,
+  onOpenChange: setOpenProp,
+  className,
+  style,
+  children,
+  ...props
+}: React.ComponentProps<"div"> & {
+  defaultOpen?: boolean
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
+}) {
+  const isMobile = useIsMobile()
+  const [openMobile, setOpenMobile] = React.useState(false)
+  const [_open, _setOpen] = React.useState(defaultOpen)
+  const open = openProp ?? _open
+  const setOpen = React.useCallback(
+    (value: boolean | ((value: boolean) => boolean)) => {
+      const openState = typeof value === "function" ? value(open) : value
+      if (setOpenProp) {
+        setOpenProp(openState)
+      } else {
+        _setOpen(openState)
+      }
+      document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`
+    },
+    [setOpenProp, open]
+  )
+
+  const toggleSidebar = React.useCallback(() => {
+    return isMobile ? setOpenMobile((open) => !open) : setOpen((open) => !open)
+  }, [isMobile, setOpen, setOpenMobile])
+
+  React.useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (
+        event.key === SIDEBAR_KEYBOARD_SHORTCUT &&
+        (event.metaKey || event.ctrlKey)
+      ) {
+        event.preventDefault()
+        toggleSidebar()
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [toggleSidebar])
+
+  const state = open ? "expanded" : "collapsed"
+
+  const contextValue = React.useMemo<SidebarContextProps>(
+    () => ({
+      state,
+      open,
+      setOpen,
+      isMobile,
+      openMobile,
+      setOpenMobile,
+      toggleSidebar,
+    }),
+    [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
+  )
+
   return (
-    <span
-      className="flex items-center justify-center mr-2 border border-[#E4E4E7]"
-      style={{
-        width: size,
-        height: size,
-        borderRadius: 6,
-        background: "linear-gradient(90deg, #3b82f6 0%, #ec4899 100%)",
-        minWidth: 35,
-        minHeight: 35,
-      }}
-    />
-  );
+    <SidebarContext.Provider value={contextValue}>
+      <TooltipProvider delayDuration={0}>
+        <div
+          data-slot="sidebar-wrapper"
+          style={
+            {
+              "--sidebar-width": SIDEBAR_WIDTH,
+              "--sidebar-width-icon": SIDEBAR_WIDTH_ICON,
+              ...style,
+            } as React.CSSProperties
+          }
+          className={cn(
+            "group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full",
+            className
+          )}
+          {...props}
+        >
+          {children}
+        </div>
+      </TooltipProvider>
+    </SidebarContext.Provider>
+  )
 }
 
-// Header company avatar
-function CompanyAvatar() {
-  return (
-    <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-black">
-      <Library className="w-6 h-6 text-white" />
-    </span>
-  );
-}
+export function Sidebar({
+  side = "left",
+  variant = "sidebar",
+  collapsible = "offcanvas",
+  className,
+  children,
+  ...props
+}: React.ComponentProps<"div"> & {
+  side?: "left" | "right"
+  variant?: "sidebar" | "floating" | "inset"
+  collapsible?: "offcanvas" | "icon" | "none"
+}) {
+  const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
 
-// Footer user avatar
-function UserAvatar() {
-  return (
-    <span className="flex items-center justify-center w-9 h-9 rounded-full bg-muted font-semibold text-xs text-muted-foreground border border-[#E4E4E7]">
-      CN
-    </span>
-  );
-}
-
-const platformLinks = [
-  {
-    label: "Playground",
-    icon: FileText,
-    href: "/playground",
-    children: [
-      { label: "History", icon: History, href: "/playground/history" },
-      { label: "Starred", icon: Star, href: "/playground/starred" },
-      { label: "Settings", icon: Settings, href: "/playground/settings" },
-    ],
-  },
-  { label: "Models", icon: Layers, href: "/models" },
-  { label: "Documentation", icon: BookOpen, href: "/docs" },
-  { label: "Settings", icon: Settings, href: "/settings" },
-];
-
-const projectLinks = [
-  { label: "Design Engineering", icon: Briefcase, href: "/projects/design" },
-  { label: "Sales & Marketing", icon: Briefcase, href: "/projects/sales" },
-  { label: "Travel", icon: Plane, href: "/projects/travel" },
-];
-
-export function Sidebar({ className, collapsed, setCollapsed }: { className?: string; collapsed: boolean; setCollapsed: React.Dispatch<React.SetStateAction<boolean>> }) {
-  // Para submenús
-  const [openPlayground, setOpenPlayground] = useState(true);
-  if (collapsed) {
+  if (collapsible === "none") {
     return (
-      <aside className={cn("h-screen w-16 bg-[#FAFAFA] text-[#020817] border-r border-[#E4E4E7] flex flex-col", className)}>
-        {/* Logo negro arriba */}
-        <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-black mt-6 mx-auto">
-          <Library className="w-6 h-6 text-white" />
-        </div>
-        {/* Iconos de navegación justo debajo del logo */}
-        <div className="flex flex-col gap-2 items-center flex-1 justify-start w-full mt-10">
-          <button className="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-zinc-100 transition-colors">
-            <FileText className="w-5 h-5 text-zinc-700" />
-          </button>
-          <button className="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-zinc-100 transition-colors">
-            <FileArchive className="w-5 h-5 text-zinc-700" />
-          </button>
-          <button className="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-zinc-100 transition-colors">
-            <CalendarCheck className="w-5 h-5 text-zinc-700" />
-          </button>
-          <button className="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-zinc-100 transition-colors">
-            <Folder className="w-5 h-5 text-zinc-700" />
-          </button>
-        </div>
-        {/* Usuario inferior solo icono */}
-        <div className="mb-10 flex flex-col items-center gap-2 w-full">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button className="flex items-center w-full gap-3 px-0 py-2 rounded-lg bg-white border border-[#E4E4E7] hover:bg-zinc-100 transition-colors focus:outline-none justify-center">
-                <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-100 text-zinc-700 font-semibold text-xs border border-[#E4E4E7]">CN</span>
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" sideOffset={0} className="w-56 p-2 rounded-xl border border-[#E4E4E7] bg-white shadow-lg mt-2 ml-14">
-              {/* Usuario arriba */}
-              <div className="flex items-center gap-3 px-3 py-2">
-                <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-zinc-100 text-zinc-700 font-semibold text-xs border border-[#E4E4E7]">CN</span>
-              </div>
-              <div className="my-2 border-t border-[#E4E4E7]" />
-              <DropdownMenuItem className="flex items-center gap-3 px-3 py-2 rounded-lg text-[15px] font-normal text-sidebar-foreground hover:bg-muted hover:text-primary">
-                <Star className="w-5 h-5" />
-                Upgrade to Pro
-              </DropdownMenuItem>
-              <DropdownMenuItem className="flex items-center gap-3 px-3 py-2 rounded-lg text-[15px] font-normal text-sidebar-foreground hover:bg-muted hover:text-primary">
-                <User className="w-5 h-5" />
-                Account
-              </DropdownMenuItem>
-              <DropdownMenuItem className="flex items-center gap-3 px-3 py-2 rounded-lg text-[15px] font-normal text-sidebar-foreground hover:bg-muted hover:text-primary">
-                <Briefcase className="w-5 h-5" />
-                Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem className="flex items-center gap-3 px-3 py-2 rounded-lg text-[15px] font-normal text-sidebar-foreground hover:bg-muted hover:text-primary">
-                <Bell className="w-5 h-5" />
-                Notifications
-              </DropdownMenuItem>
-              <div className="my-2 border-t border-[#E4E4E7]" />
-              <DropdownMenuItem className="flex items-center gap-3 px-3 py-2 rounded-lg text-[15px] font-normal text-destructive hover:bg-muted/80 hover:text-destructive">
-                <LogOutIcon className="w-5 h-5" />
-                Log out
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </aside>
-    );
+      <div
+        data-slot="sidebar"
+        className={cn(
+          "bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col",
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </div>
+    )
   }
+
+  if (isMobile) {
+    return (
+      <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
+        <SheetContent
+          data-sidebar="sidebar"
+          data-slot="sidebar"
+          data-mobile="true"
+          className="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden"
+          style={
+            {
+              "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
+            } as React.CSSProperties
+          }
+          side={side}
+        >
+          <SheetHeader className="sr-only">
+            <SheetTitle>Sidebar</SheetTitle>
+            <SheetDescription>Displays the mobile sidebar.</SheetDescription>
+          </SheetHeader>
+          <div className="flex h-full w-full flex-col">{children}</div>
+        </SheetContent>
+      </Sheet>
+    )
+  }
+
   return (
-    <aside className={cn("h-screen w-64 bg-[#FAFAFA] text-[#020817] border-r border-[#E4E4E7] flex flex-col items-stretch shadow-sm", className)}>
-      <div className="flex items-center gap-3 px-4 pt-6 pb-4 bg-[#F4F4F5] rounded-xl shadow-sm min-w-[180px] w-full">
-        <CompanyAvatar />
-        <div className="flex flex-col flex-1 min-w-0">
-          <span className="font-semibold text-[15px] leading-tight truncate">Acme Inc</span>
-          <span className="text-xs text-muted-foreground leading-tight truncate">Enterprise</span>
-        </div>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <button className="ml-auto p-1.5 rounded-md hover:bg-muted transition-colors focus:outline-none">
-              <ChevronDown className="w-5 h-5 text-muted-foreground" />
-            </button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" sideOffset={0} className="w-56 p-2 rounded-lg border border-[#E4E4E7] bg-white shadow-lg mt-2">
-            <DropdownMenuItem className="px-3 py-2 text-sm">Anton Òdena</DropdownMenuItem>
-            <DropdownMenuItem className="px-3 py-2 text-sm">The Agents Labs</DropdownMenuItem>
-            <DropdownMenuItem className="px-3 py-2 text-sm">Acme Inc</DropdownMenuItem>
-            <DropdownMenuItem className="flex items-center gap-2 cursor-pointer px-2 py-2 rounded-md text-sm transition-colors text-primary hover:bg-muted/70 select-none mt-1">
-              <span className="flex items-center justify-center bg-muted text-primary rounded-[6px] w-7 h-7 border border-[#E4E4E7]">
-                <Plus className="w-4 h-4" />
-              </span>
-              <span className="truncate">Afegir un compte</span>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-      {/* Scrollable nav */}
-      <div className="flex-1 overflow-y-auto px-2 pb-2">
-        {/* Platform section */}
-        <div className="mb-4">
-          <div className="uppercase text-xs font-semibold text-muted-foreground tracking-wide opacity-70 px-2 mb-2">Platform</div>
-          <div className="flex flex-col gap-1">
-            {/* Playground with subitems */}
-            <div>
-              <button onClick={() => setOpenPlayground((v) => !v)} className="flex items-center w-full gap-3 px-3 py-2 rounded-md transition-colors text-[15px] font-medium text-sidebar-foreground hover:bg-muted hover:text-primary group">
-                <FileText className="w-5 h-5" />
-                <span className="flex-1 text-left">Playground</span>
-                <ChevronDown className={cn("w-4 h-4 ml-auto transition-transform", openPlayground ? "rotate-180" : "rotate-0")}/>
-              </button>
-              {openPlayground && (
-                <div className="pl-8 flex flex-col gap-1 border-l border-[#E4E4E7] ml-2">
-                  <Link href="/playground/history" className="flex items-center gap-2 px-2 py-1 text-[14px] text-muted-foreground hover:text-primary transition-colors">
-                    <History className="w-4 h-4" />
-                    History
-                  </Link>
-                  <Link href="/playground/starred" className="flex items-center gap-2 px-2 py-1 text-[14px] text-muted-foreground hover:text-primary transition-colors">
-                    <Star className="w-4 h-4" />
-                    Starred
-                  </Link>
-                  <Link href="/playground/settings" className="flex items-center gap-2 px-2 py-1 text-[14px] text-muted-foreground hover:text-primary transition-colors">
-                    <Settings className="w-4 h-4" />
-                    Settings
-                  </Link>
-                </div>
-              )}
-            </div>
-            {/* Otros links */}
-            <Link href="/models" className="flex items-center gap-3 px-3 py-2 rounded-md transition-colors text-[15px] font-medium text-sidebar-foreground hover:bg-muted hover:text-primary">
-              <Layers className="w-5 h-5" />
-              <span>Models</span>
-              <ChevronDown className="w-4 h-4 ml-auto rotate-270" style={{transform: 'rotate(-90deg)'}} />
-            </Link>
-            <Link href="/docs" className="flex items-center gap-3 px-3 py-2 rounded-md transition-colors text-[15px] font-medium text-sidebar-foreground hover:bg-muted hover:text-primary">
-              <BookOpen className="w-5 h-5" />
-              <span>Documentation</span>
-            </Link>
-            <Link href="/settings" className="flex items-center gap-3 px-3 py-2 rounded-md transition-colors text-[15px] font-medium text-sidebar-foreground hover:bg-muted hover:text-primary">
-              <Settings className="w-5 h-5" />
-              <span>Settings</span>
-              <ChevronDown className="w-4 h-4 ml-auto rotate-270" style={{transform: 'rotate(-90deg)'}} />
-            </Link>
-          </div>
-        </div>
-        {/* Projects section */}
-        <div className="mb-4">
-          <div className="uppercase text-xs font-semibold text-muted-foreground tracking-wide opacity-70 px-2 mb-2">Projects</div>
-          <div className="flex flex-col gap-1">
-            <Link href="/projects/design" className="flex items-center gap-3 px-3 py-2 rounded-md transition-colors text-[15px] font-medium text-sidebar-foreground hover:bg-muted hover:text-primary">
-              <Briefcase className="w-5 h-5" />
-              <span>Design Engineering</span>
-            </Link>
-            <Link href="/projects/sales" className="flex items-center gap-3 px-3 py-2 rounded-md transition-colors text-[15px] font-medium text-sidebar-foreground hover:bg-muted hover:text-primary">
-              <Briefcase className="w-5 h-5" />
-              <span>Sales & Marketing</span>
-            </Link>
-            <Link href="/projects/travel" className="flex items-center gap-3 px-3 py-2 rounded-md transition-colors text-[15px] font-medium text-sidebar-foreground hover:bg-muted hover:text-primary">
-              <Plane className="w-5 h-5" />
-              <span>Travel</span>
-            </Link>
-            <button className="flex items-center gap-3 px-3 py-2 rounded-md transition-colors text-[15px] font-medium text-muted-foreground hover:bg-muted">
-              <MoreHorizontal className="w-5 h-5" />
-              <span>More</span>
-            </button>
-          </div>
+    <div
+      className="group peer text-sidebar-foreground hidden md:block"
+      data-state={state}
+      data-collapsible={state === "collapsed" ? collapsible : ""}
+      data-variant={variant}
+      data-side={side}
+      data-slot="sidebar"
+    >
+      <div
+        data-slot="sidebar-gap"
+        className={cn(
+          "relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear",
+          "group-data-[collapsible=offcanvas]:w-0",
+          "group-data-[side=right]:rotate-180",
+          variant === "floating" || variant === "inset"
+            ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4)))]"
+            : "group-data-[collapsible=icon]:w-(--sidebar-width-icon)"
+        )}
+      />
+      <div
+        data-slot="sidebar-container"
+        className={cn(
+          "fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear md:flex",
+          side === "left"
+            ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]"
+            : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",
+          variant === "floating" || variant === "inset"
+            ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]"
+            : "group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[side=left]:border-r group-data-[side=right]:border-l",
+          className
+        )}
+        {...props}
+      >
+        <div
+          data-sidebar="sidebar"
+          data-slot="sidebar-inner"
+          className="bg-sidebar group-data-[variant=floating]:border-sidebar-border flex h-full w-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm"
+        >
+          {children}
         </div>
       </div>
-      {/* Footer user profile */}
-      <div className="px-4 py-4 border-t border-[#E4E4E7]">
-        <div className="mb-10 flex flex-col items-center gap-2 w-full">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button className="flex items-center w-full gap-3 px-3 py-2 rounded-lg bg-white border border-[#E4E4E7] hover:bg-zinc-100 transition-colors focus:outline-none">
-                <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-100 text-zinc-700 font-semibold text-xs border border-[#E4E4E7]">CN</span>
-                <div className="flex flex-col flex-1 items-start text-left">
-                  <span className="font-bold text-[15px] leading-tight">shadcn</span>
-                  <span className="text-xs text-muted-foreground leading-tight">m@example.com</span>
-                </div>
-                <ChevronDown className="w-5 h-5 text-muted-foreground ml-auto" />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" sideOffset={0} className="w-72 p-2 rounded-xl border border-[#E4E4E7] bg-white shadow-lg mt-2 ml-0">
-              {/* Usuario arriba */}
-              <div className="flex items-center gap-3 px-3 py-2">
-                <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-zinc-100 text-zinc-700 font-semibold text-xs border border-[#E4E4E7]">CN</span>
-                <div className="flex flex-col">
-                  <span className="font-bold text-[15px] leading-tight">shadcn</span>
-                  <span className="text-xs text-muted-foreground leading-tight">m@example.com</span>
-                </div>
-              </div>
-              <div className="my-2 border-t border-[#E4E4E7]" />
-              <DropdownMenuItem className="flex items-center gap-3 px-3 py-2 rounded-lg text-[15px] font-normal text-sidebar-foreground hover:bg-muted hover:text-primary">
-                <Star className="w-5 h-5" />
-                Upgrade to Pro
-              </DropdownMenuItem>
-              <DropdownMenuItem className="flex items-center gap-3 px-3 py-2 rounded-lg text-[15px] font-normal text-sidebar-foreground hover:bg-muted hover:text-primary">
-                <User className="w-5 h-5" />
-                Account
-              </DropdownMenuItem>
-              <DropdownMenuItem className="flex items-center gap-3 px-3 py-2 rounded-lg text-[15px] font-normal text-sidebar-foreground hover:bg-muted hover:text-primary">
-                <Briefcase className="w-5 h-5" />
-                Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem className="flex items-center gap-3 px-3 py-2 rounded-lg text-[15px] font-normal text-sidebar-foreground hover:bg-muted hover:text-primary">
-                <Bell className="w-5 h-5" />
-                Notifications
-              </DropdownMenuItem>
-              <div className="my-2 border-t border-[#E4E4E7]" />
-              <DropdownMenuItem className="flex items-center gap-3 px-3 py-2 rounded-lg text-[15px] font-normal text-destructive hover:bg-muted/80 hover:text-destructive">
-                <LogOutIcon className="w-5 h-5" />
-                Log out
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </div>
-    </aside>
-  );
+    </div>
+  )
 }
 
-export default Sidebar; 
+export function SidebarTrigger({
+  className,
+  onClick,
+  ...props
+}: React.ComponentProps<typeof Button>) {
+  const { toggleSidebar } = useSidebar()
+
+  return (
+    <Button
+      variant="ghost"
+      size="icon"
+      className={cn(
+        "h-9 w-9 relative z-20",
+        className
+      )}
+      onClick={(e) => {
+        onClick?.(e)
+        toggleSidebar()
+      }}
+      {...props}
+    >
+      <PanelLeftIcon className="h-4 w-4" />
+      <span className="sr-only">Toggle Sidebar</span>
+    </Button>
+  )
+}
+
+export function SidebarRail({ className, ...props }: React.ComponentProps<"button">) {
+  return (
+    <button
+      type="button"
+      className={cn(
+        "group-data-[collapsible=icon]:bg-sidebar group-data-[collapsible=icon]:text-sidebar-foreground fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width-icon) transition-[left,right] duration-200 ease-linear md:block",
+        "group-data-[collapsible=icon]:left-0",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export function SidebarInset({ className, ...props }: React.ComponentProps<"main">) {
+  return (
+    <main
+      data-slot="sidebar-inset"
+      className={cn(
+        "flex min-h-svh flex-1 flex-col transition-[margin] duration-200 ease-linear",
+        "group-data-[collapsible=offcanvas]:md:ml-0",
+        "group-data-[collapsible=icon]:md:ml-(--sidebar-width-icon)",
+        "group-data-[side=right]:group-data-[collapsible=icon]:md:ml-0 group-data-[side=right]:group-data-[collapsible=icon]:md:mr-(--sidebar-width-icon)",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export function SidebarInput({
+  className,
+  ...props
+}: React.ComponentProps<typeof Input>) {
+  return (
+    <Input
+      className={cn(
+        "group-data-[collapsible=icon]:h-9 group-data-[collapsible=icon]:w-9 group-data-[collapsible=icon]:p-0 group-data-[collapsible=icon]:[&>svg]:size-4",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export function SidebarHeader({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="sidebar-header"
+      className={cn("flex h-14 shrink-0 items-center px-4", className)}
+      {...props}
+    />
+  )
+}
+
+export function SidebarFooter({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="sidebar-footer"
+      className={cn("mt-auto flex h-14 shrink-0 items-center px-4", className)}
+      {...props}
+    />
+  )
+}
+
+export function SidebarSeparator({
+  className,
+  ...props
+}: React.ComponentProps<typeof Separator>) {
+  return (
+    <Separator
+      data-slot="sidebar-separator"
+      className={cn("my-2", className)}
+      {...props}
+    />
+  )
+}
+
+export function SidebarContent({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="sidebar-content"
+      className={cn("flex-1 overflow-auto p-2", className)}
+      {...props}
+    />
+  )
+}
+
+export function SidebarGroup({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="sidebar-group"
+      className={cn("flex flex-col gap-2 p-2", className)}
+      {...props}
+    />
+  )
+}
+
+export function SidebarGroupLabel({
+  className,
+  asChild = false,
+  ...props
+}: React.ComponentProps<"div"> & { asChild?: boolean }) {
+  const Comp = asChild ? Slot : "div"
+  return (
+    <Comp
+      data-slot="sidebar-group-label"
+      className={cn(
+        "text-sidebar-foreground/70 px-2 text-xs font-medium",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export function SidebarGroupAction({
+  className,
+  asChild = false,
+  ...props
+}: React.ComponentProps<"button"> & { asChild?: boolean }) {
+  const Comp = asChild ? Slot : "button"
+  return (
+    <Comp
+      type="button"
+      data-slot="sidebar-group-action"
+      className={cn(
+        "text-sidebar-foreground/70 hover:text-sidebar-foreground ml-auto h-8 w-8 shrink-0 rounded-md p-0",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export function SidebarGroupContent({
+  className,
+  ...props
+}: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="sidebar-group-content"
+      className={cn("flex flex-col gap-1", className)}
+      {...props}
+    />
+  )
+}
+
+export function SidebarMenu({ className, ...props }: React.ComponentProps<"ul">) {
+  return (
+    <ul
+      data-slot="sidebar-menu"
+      className={cn("flex flex-col gap-1", className)}
+      {...props}
+    />
+  )
+}
+
+export function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
+  return (
+    <li
+      data-slot="sidebar-menu-item"
+      className={cn("relative", className)}
+      {...props}
+    />
+  )
+}
+
+const sidebarMenuButtonVariants = cva(
+  "group/sidebar-menu-button inline-flex w-full items-center justify-start gap-2 rounded-md px-2 py-1.5 text-sm font-medium transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-sidebar-ring disabled:pointer-events-none disabled:opacity-50",
+  {
+    variants: {
+      variant: {
+        default: "text-sidebar-foreground",
+        ghost: "text-sidebar-foreground/70 hover:text-sidebar-foreground",
+      },
+      size: {
+        default: "h-9",
+        sm: "h-8 text-xs",
+        lg: "h-10",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+)
+
+export function SidebarMenuButton({
+  asChild = false,
+  isActive = false,
+  variant = "default",
+  size = "default",
+  tooltip,
+  className,
+  ...props
+}: React.ComponentProps<"button"> & {
+  asChild?: boolean
+  isActive?: boolean
+  tooltip?: string | React.ComponentProps<typeof TooltipContent>
+} & VariantProps<typeof sidebarMenuButtonVariants>) {
+  const Comp = asChild ? Slot : "button"
+  const { state } = useSidebar()
+
+  const content = (
+    <Comp
+      type="button"
+      data-slot="sidebar-menu-button"
+      data-active={isActive}
+      className={cn(
+        sidebarMenuButtonVariants({ variant, size }),
+        isActive && "bg-sidebar-accent text-sidebar-accent-foreground",
+        className
+      )}
+      {...props}
+    />
+  )
+
+  if (tooltip && state === "collapsed") {
+    return (
+      <Tooltip>
+        <TooltipTrigger asChild>{content}</TooltipTrigger>
+        <TooltipContent
+          side="right"
+          {...(typeof tooltip === "string" ? { children: tooltip } : tooltip)}
+        />
+      </Tooltip>
+    )
+  }
+
+  return content
+}
+
+export function SidebarMenuAction({
+  className,
+  asChild = false,
+  showOnHover = false,
+  ...props
+}: React.ComponentProps<"button"> & {
+  asChild?: boolean
+  showOnHover?: boolean
+}) {
+  const Comp = asChild ? Slot : "button"
+  return (
+    <Comp
+      type="button"
+      data-slot="sidebar-menu-action"
+      className={cn(
+        "text-sidebar-foreground/70 hover:text-sidebar-foreground absolute right-1 top-1/2 -translate-y-1/2 rounded-md p-1 opacity-0 transition-opacity group-hover/sidebar-menu-item:opacity-100",
+        showOnHover && "opacity-0 group-hover/sidebar-menu-item:opacity-100",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export function SidebarMenuBadge({
+  className,
+  ...props
+}: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="sidebar-menu-badge"
+      className={cn(
+        "bg-sidebar-accent text-sidebar-accent-foreground ml-auto rounded-md px-1.5 py-0.5 text-xs font-medium",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export function SidebarMenuSkeleton({
+  className,
+  showIcon = false,
+  ...props
+}: React.ComponentProps<"div"> & {
+  showIcon?: boolean
+}) {
+  return (
+    <div
+      data-slot="sidebar-menu-skeleton"
+      className={cn("flex items-center gap-2 px-2 py-1.5", className)}
+      {...props}
+    >
+      {showIcon && <Skeleton className="size-4" />}
+      <Skeleton className="h-4 flex-1" />
+    </div>
+  )
+}
+
+export function SidebarMenuSub({ className, ...props }: React.ComponentProps<"ul">) {
+  return (
+    <ul
+      data-slot="sidebar-menu-sub"
+      className={cn("flex flex-col gap-1", className)}
+      {...props}
+    />
+  )
+}
+
+export function SidebarMenuSubItem({
+  className,
+  ...props
+}: React.ComponentProps<"li">) {
+  return (
+    <li
+      data-slot="sidebar-menu-sub-item"
+      className={cn("relative", className)}
+      {...props}
+    />
+  )
+}
+
+export function SidebarMenuSubButton({
+  asChild = false,
+  size = "md",
+  isActive = false,
+  className,
+  ...props
+}: React.ComponentProps<"a"> & {
+  asChild?: boolean
+  size?: "sm" | "md"
+  isActive?: boolean
+}) {
+  const Comp = asChild ? Slot : "a"
+  return (
+    <Comp
+      data-slot="sidebar-menu-sub-button"
+      data-active={isActive}
+      className={cn(
+        "text-sidebar-foreground/70 hover:text-sidebar-foreground inline-flex w-full items-center rounded-md px-2 py-1.5 text-sm font-medium transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-sidebar-ring disabled:pointer-events-none disabled:opacity-50",
+        size === "sm" && "h-8 text-xs",
+        size === "md" && "h-9",
+        isActive && "bg-sidebar-accent text-sidebar-accent-foreground",
+        className
+      )}
+      {...props}
+    />
+  )
+} 
