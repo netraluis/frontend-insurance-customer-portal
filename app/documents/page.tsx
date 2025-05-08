@@ -6,8 +6,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Badge } from "@/components/ui/badge"
 import { ArrowUpDown, Upload, Grid, List } from "lucide-react"
-import { DocumentList } from "@/components/document-list"
-import { UploadDocumentDialog } from "@/components/upload-document-dialog"
+import { DocumentList } from "@/app/components/document-list"
+import { UploadDocumentDialog } from "@/app/components/upload-document-dialog"
 import { useState } from "react"
 
 // Sample document data

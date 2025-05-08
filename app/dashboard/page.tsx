@@ -30,7 +30,7 @@ export default function Page() {
           <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-6">
             <SidebarTrigger />
             <div className="flex items-center gap-2">
-              <h1 className="text-xl font-semibold">Dashboard</h1>
+              <h1 className="text-xl font-semibold">Inici</h1>
             </div>
             <div className="ml-auto"></div>
           </header>
@@ -39,35 +39,34 @@ export default function Page() {
             <div className="grid gap-6">
               {/* Metrics Section */}
               <section>
-                <h2 className="text-2xl font-semibold mb-4">Welcome back, John</h2>
+                <h2 className="text-2xl font-semibold mb-4">Hola Anton</h2>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Aquí puedes ver tus polizas, reclamos y documentos.
+                </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                   <DashboardMetricCard
-                    title="Active Policies"
+                    title="Pòlisses actives"
                     value="4"
                     icon={Calendar}
-                    description="All policies are active"
-                    trend="stable"
+                    description="+1 que l'any passat"
                   />
                   <DashboardMetricCard
-                    title="Open Claims"
+                    title="Sinistres oberts"
                     value="1"
                     icon={ClipboardList}
-                    description="1 claim in progress"
-                    trend="up"
+                    description="-2 que l'anys passat"
                   />
                   <DashboardMetricCard
-                    title="Documents"
-                    value="12"
+                    title="Pròxim pagament"
+                    value="$876,43"
                     icon={Folder}
-                    description="2 require attention"
-                    trend="up"
+                    description="En 15 dies"
                   />
                   <DashboardMetricCard
-                    title="Next Payment"
-                    value="$248.33"
+                    title="Pròxima renovació"
+                    value="18 jul"
                     icon={Calendar}
-                    description="Due in 14 days"
-                    trend="down"
+                    description="#AUTO-2023-45678"
                   />
                 </div>
               </section>
@@ -77,7 +76,7 @@ export default function Page() {
                 <Card>
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between">
-                      <CardTitle>Your Policies</CardTitle>
+                      <CardTitle>Pòlisses</CardTitle>
                       <Button variant="ghost" size="sm" asChild>
                         <Link href="/policies">
                           View All
@@ -90,11 +89,8 @@ export default function Page() {
                   <CardContent>
                     <Tabs defaultValue="all">
                       <TabsList className="mb-4">
-                        <TabsTrigger value="all">All</TabsTrigger>
-                        <TabsTrigger value="auto">Auto</TabsTrigger>
-                        <TabsTrigger value="home">Home</TabsTrigger>
-                        <TabsTrigger value="travel">Travel</TabsTrigger>
-                        <TabsTrigger value="health">Health</TabsTrigger>
+                        <TabsTrigger value="all">Recents</TabsTrigger>
+                        <TabsTrigger value="auto">Caducitat</TabsTrigger>
                       </TabsList>
                       <TabsContent value="all" className="space-y-4">
                         <PolicyCard

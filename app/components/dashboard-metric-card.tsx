@@ -40,13 +40,7 @@ export function DashboardMetricCard({
       <div className="flex items-center justify-between">
         <div className="insurance-card-icon">
           <Icon className="h-5 w-5 text-zinc-700" />
-        </div>
-        {trend && (
-          <div className={cn("flex items-center rounded-full px-2 py-1 text-xs font-medium", classes)}>
-            {icon}
-            {trend}
-          </div>
-        )}
+        </div>      
       </div>
       <div className="mt-3">
         <h3 className="text-sm font-medium text-zinc-500">{title}</h3>
