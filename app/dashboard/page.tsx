@@ -94,7 +94,7 @@ export default function Page() {
                         <TabsTrigger value="auto">Caducitat</TabsTrigger>
                       </TabsList>
                       <TabsContent value="all" className="space-y-4">
-                        <div className="flex h-60 items-top justify-center bg-white space-x-5">
+                        <div className="flex flex-wrap gap-4 items-top bg-white justify-left">
 
                           <CardPolisses
                             type="home"
@@ -103,13 +103,29 @@ export default function Page() {
                             expiryDate="2025-05-15"
                             status="active"
                           />
-                          <CardPolisses
-                            type="home"
-                            policyNumber="1234567890"
-                            coverage="100,000"
-                            expiryDate="2025-05-15"
-                            status="active"
-                          />
+                            <CardPolisses
+                              type="home"
+                              policyNumber="1234567890"
+                              coverage="100,000"
+                              expiryDate="2025-05-15"
+                              status="active"
+                            />
+                              <CardPolisses
+                              type="home"
+                              policyNumber="1234567890"
+                              coverage="100,000"
+                              expiryDate="2025-05-15"
+                              status="active"
+                            />
+                              <CardPolisses
+                              type="home"
+                              policyNumber="1234567890"
+                              coverage="100,000"
+                              expiryDate="2025-05-15"
+                              status="active"
+                            /> 
+                            
+                            
                         </div>
                       </TabsContent>
                       <TabsContent value="auto" className="space-y-4">

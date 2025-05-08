@@ -17,7 +17,7 @@ interface CardPolissesProps {
 
 export function CardPolisses({
   type,
-  icon = <Car className="h-5 w-5" />,
+  icon = <Car className="h-7 w-7" />,
   policyNumber,
   coverage,
   expiryDate,
@@ -25,15 +25,15 @@ export function CardPolisses({
   onViewDetails = () => {},
 }: CardPolissesProps) {
   return (
-    <Card className="w-full overflow-hidden border border-zinc-200">
-      <CardContent className="p-6">
+    <Card className="w-99 h-55 overflow-hidden border border-zinc-200">
+      <CardContent>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="flex h-14 w-14 items-center justify-center rounded-full bg-zinc-100">{icon}</div>
             <h3 className="text-2xl font-semibold text-zinc-900">{type}</h3>
           </div>
           <div
-            className={`rounded-full bg-zinc-900 px-4 py-1 text-sm font-medium text-white ${status !== "active" && "bg-zinc-200 text-zinc-700"}`}
+            className={`rounded-full bg-green-100 px-4 py-1 text-sm font-medium text-black ${status !== "active" && "bg-zinc-200 text-zinc-700"}`}
           >
             {status}
           </div>
@@ -52,16 +52,6 @@ export function CardPolisses({
           </div>
         </div>
       </CardContent>
-
-      <CardFooter className="border-t border-zinc-100 p-0">
-        <button
-          type="button"
-          className="w-full rounded-none py-4 text-center font-medium text-zinc-900 hover:bg-zinc-50 transition-colors"
-          onClick={onViewDetails}
-        >
-          View Details
-        </button>
-      </CardFooter>
     </Card>
   )
 }
