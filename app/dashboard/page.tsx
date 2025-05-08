@@ -19,6 +19,7 @@ import { ClaimCard } from "../components/claim-card"
 import { Tabs, TabsContent } from "@/components/ui/tabs"
 import { PolicyCard } from "../components/policy-card"
 import { DashboardMetricCard } from "../components/dashboard-metric-card"
+import { CardPolisses } from "../components/card-polisses"
 
 export default function Page() {
   return (
@@ -93,42 +94,23 @@ export default function Page() {
                         <TabsTrigger value="auto">Caducitat</TabsTrigger>
                       </TabsList>
                       <TabsContent value="all" className="space-y-4">
-                        <PolicyCard
-                          id="POL-AUTO-001"
-                          title="Auto Insurance"
-                          type="auto"
-                          icon={Car}
-                          premium="$128.45/month"
-                          renewalDate="May 15, 2025"
-                          status="active"
-                        />
-                        <PolicyCard
-                          id="POL-HOME-001"
-                          title="Home Insurance"
-                          type="home"
-                          icon={HomeIcon}
-                          premium="$89.99/month"
-                          renewalDate="August 22, 2025"
-                          status="active"
-                        />
-                        <PolicyCard
-                          id="POL-TRAVEL-001"
-                          title="Travel Insurance"
-                          type="travel"
-                          icon={Plane}
-                          premium="$45.00/trip"
-                          renewalDate="December 10, 2025"
-                          status="active"
-                        />
-                        <PolicyCard
-                          id="POL-HEALTH-001"
-                          title="Health Insurance"
-                          type="health"
-                          icon={Heart}
-                          premium="$210.50/month"
-                          renewalDate="February 28, 2026"
-                          status="active"
-                        />
+                        <div className="flex h-60 items-top justify-center bg-white space-x-5">
+
+                          <CardPolisses
+                            type="home"
+                            policyNumber="1234567890"
+                            coverage="100,000"
+                            expiryDate="2025-05-15"
+                            status="active"
+                          />
+                          <CardPolisses
+                            type="home"
+                            policyNumber="1234567890"
+                            coverage="100,000"
+                            expiryDate="2025-05-15"
+                            status="active"
+                          />
+                        </div>
                       </TabsContent>
                       <TabsContent value="auto" className="space-y-4">
                         <PolicyCard

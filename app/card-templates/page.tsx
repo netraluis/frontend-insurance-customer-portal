@@ -127,12 +127,6 @@ export default function CardTemplatesPage() {
               { label: "Premium", value: "$128.45/month" },
               { label: "Renewal", value: "May 15, 2025" },
             ]}
-            actions={
-              <Button variant="ghost" size="sm" className="gap-1">
-                View Details
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Button>
-            }
             footer={{
               content: (
                 <div className="flex justify-between w-full">
