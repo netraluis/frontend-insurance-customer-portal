@@ -1,3 +1,5 @@
+"use client"
+
 import { AppSidebar } from "@/app/components/app-sidebar"
 import {
   Breadcrumb,
@@ -7,6 +9,7 @@ import {
 } from "@/components/ui/breadcrumb"
 import { Separator } from "@/components/ui/separator"
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { Car } from "lucide-react"
 
 export default function Page() {
   return (
@@ -26,6 +29,11 @@ export default function Page() {
             </Breadcrumb>
           </div>
         </header>
+        <div className="flex min-h-screen items-center justify-center bg-white p-4">
+      <div className="w-full max-w-md">
+      
+      </div>
+    </div>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
           <div className="grid auto-rows-min gap-4 md:grid-cols-3">
             <div className="aspect-video rounded-xl bg-muted/50" />
