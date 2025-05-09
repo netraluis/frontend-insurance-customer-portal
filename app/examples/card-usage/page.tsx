@@ -90,7 +90,7 @@ export default function CardUsageExample() {
                     ]}
                     actions={
                       <Button variant="ghost" size="sm" className="gap-1" asChild>
-                        <a href="/policies/detail/POL-AUTO-001">
+                        <a href="/dashboard/policies/detail/POL-AUTO-001">
                           View Details
                           <ArrowRight className="ml-1 h-3 w-3" />
                         </a>
@@ -109,7 +109,7 @@ export default function CardUsageExample() {
                     ]}
                     actions={
                       <Button variant="ghost" size="sm" className="gap-1" asChild>
-                        <a href="/policies/detail/POL-HOME-001">
+                        <a href="/dashboard/policies/detail/POL-HOME-001">
                           View Details
                           <ArrowRight className="ml-1 h-3 w-3" />
                         </a>

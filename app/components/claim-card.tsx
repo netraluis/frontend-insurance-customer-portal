@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
-import { ArrowRight, CheckCircle2, Clock, AlertCircle } from "lucide-react"
+import { ArrowRight, CheckCircle2, Clock, AlertCircle, View } from "lucide-react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { InsuranceCard } from "@/app/components/ui/insurance-card"

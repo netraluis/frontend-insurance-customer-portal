@@ -3,7 +3,9 @@
 import type React from "react"
 
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { Car } from "lucide-react"
+import { ArrowRight, Car} from "lucide-react"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 interface CardPolissesProps {
   type: string
@@ -25,7 +27,8 @@ export function CardPolisses({
   onViewDetails = () => {},
 }: CardPolissesProps) {
   return (
-    <Card className="w-99 h-55 overflow-hidden border border-zinc-200">
+    <Link href={`/dashboard/policies/detail/${policyNumber}`}>
+    <Card className="w-99 h-80 overflow-hidden border border-zinc-200">
       <CardContent>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
@@ -52,6 +55,16 @@ export function CardPolisses({
           </div>
         </div>
       </CardContent>
+      <CardFooter className="border-t border-zinc-100 p-0">
+        <button
+          type="button"
+          className="w-full rounded-none py-4 text-center font-medium text-zinc-900 hover:bg-zinc-50 transition-colors"
+          
+        >
+          View Details
+        </button>
+      </CardFooter>
     </Card>
+    </Link> 
   )
 }

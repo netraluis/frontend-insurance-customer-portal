@@ -19,7 +19,7 @@ interface Policy {
   premium: string
   renewalDate: string
   startDate: string
-  status: "active" | "pending" | "expired"
+  status: string
   coverageAmount: string
 }
 
@@ -285,7 +285,7 @@ function PolicyCard({ policy, view }: PolicyCardProps) {
               </div>
             </div>
 
-            <Badge variant="outline" className={cn("capitalize self-start sm:self-auto", statusColors[policy.status])}>
+            <Badge variant="outline" className={cn("capitalize self-start sm:self-auto", statusColors[policy.status as keyof typeof statusColors])}>
               {policy.status}
             </Badge>
 
@@ -305,7 +305,7 @@ function PolicyCard({ policy, view }: PolicyCardProps) {
             </div>
 
             <Button variant="ghost" size="sm" className="self-end sm:self-auto" asChild>
-              <Link href={`/policies/detail/${policy.id}`}>
+              <Link href={`/dashboard/policies/detail/${policy.id}`}>
                 View Details
                 <ArrowRight className="ml-1 h-3 w-3" />
               </Link>
@@ -329,7 +329,7 @@ function PolicyCard({ policy, view }: PolicyCardProps) {
                 <h3 className="font-medium">{policy.title}</h3>
                 <p className="text-sm text-zinc-500">Policy #{policy.id}</p>
               </div>
-              <Badge variant="outline" className={cn("capitalize", statusColors[policy.status])}>
+              <Badge variant="outline" className={cn("capitalize", statusColors[policy.status as keyof typeof statusColors])}>
                 {policy.status}
               </Badge>
             </div>
@@ -342,7 +342,7 @@ function PolicyCard({ policy, view }: PolicyCardProps) {
         <div className="flex items-center justify-between border-t bg-zinc-50 px-6 py-3">
           <span className="text-xs font-medium uppercase text-zinc-500">{policy.type} Insurance</span>
           <Button variant="ghost" size="sm" asChild>
-            <Link href={`/policies/detail/${policy.id}`}>
+            <Link href={`/dashboard/policies/detail/${policy.id}`}>
               View Details
               <ArrowRight className="ml-1 h-3 w-3" />
             </Link>

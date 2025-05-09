@@ -68,7 +68,7 @@ export function PolicyListWithLoading() {
             details={policy.details}
             actions={
               <Button variant="ghost" size="sm" className="gap-1" asChild>
-                <Link href={`/policies/detail/${policy.id}`}>
+                <Link href={`/dashboard/policies/detail/${policy.id}`}>
                   View Details
                   <ArrowRight className="ml-1 h-3 w-3" />
                 </Link>

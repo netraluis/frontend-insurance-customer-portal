@@ -43,7 +43,7 @@ export function PolicyCard({ id, title, type, icon: Icon, premium, renewalDate, 
       <div className="insurance-card-footer">
         <span className="text-xs font-medium uppercase text-zinc-500">{type} Insurance</span>
         <Button variant="ghost" size="sm" asChild>
-          <Link href={`/policies/detail/${id}`}>
+          <Link href={`/dashboard/policies/detail/${id}`}>
             View Details
             <ArrowRight className="ml-1 h-3 w-3" />
           </Link>
