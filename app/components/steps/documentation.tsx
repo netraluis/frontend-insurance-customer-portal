@@ -247,7 +247,7 @@ export default function Documentation() {
           ) : (
             <div className="text-center py-8 border border-dashed rounded-md border-zinc-300 bg-zinc-50">
                 <p className="text-zinc-500">No hi ha documents carregats encara.</p>
-              <p className="text-sm text-zinc-400 mt-1">Clica "Carregar document" per afegir fotos, vídeos o informes.</p>
+              <p className="text-sm text-zinc-400 mt-1">Clica &ldquo;Carregar document&ldquo; per afegir fotos, vídeos o informes.</p>
             </div>
           )}
         </div>

@@ -62,7 +62,9 @@ export function FormStepper({ currentStep }: FormStepperProps) {
                     if (isClickable) {
                       // Access the setCurrentStep from context
                       const { setCurrentStep } = claimFormContext || {}
-                      setCurrentStep && setCurrentStep(step.id)
+                      if(setCurrentStep) {
+                        setCurrentStep(step.id)
+                      }
                       window.scrollTo(0, 0)
                     }
                   }}

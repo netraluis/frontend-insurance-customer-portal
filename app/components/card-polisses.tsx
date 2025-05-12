@@ -2,9 +2,8 @@
 
 import type React from "react"
 
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { ArrowRight, Car} from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Car} from "lucide-react"
 import Link from "next/link"
 
 interface CardPolissesProps {
@@ -24,7 +23,6 @@ export function CardPolisses({
   coverage,
   expiryDate,
   status,
-  onViewDetails = () => {},
 }: CardPolissesProps) {
   return (
     <Link href={`/dashboard/policies/detail/${policyNumber}`}>

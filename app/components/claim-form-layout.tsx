@@ -11,7 +11,6 @@ import Documentation from "./steps/documentation"
 import ReviewSubmit from "./steps/review-submit"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Toaster} from "@/components/ui/sonner"
 import { ArrowLeft, ArrowRight, Save } from "lucide-react"
 import { toast } from "sonner"
 

@@ -82,7 +82,7 @@ export default function AssistantPage() {
               </CardHeader>
               <CardContent className="space-y-2">
                 <Button variant="ghost" className="w-full justify-start text-left h-auto py-2">
-                  What's covered under my auto insurance policy?
+                  What&apos;s covered under my auto insurance policy?
                 </Button>
                 <Button variant="ghost" className="w-full justify-start text-left h-auto py-2">
                   How do I file a claim for my recent accident?

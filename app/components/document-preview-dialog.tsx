@@ -15,6 +15,7 @@ import {
   Share2,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import Image from 'next/image';
 
 interface Document {
   id: string
@@ -121,7 +122,7 @@ export function DocumentPreviewDialog({ document, open, onOpenChange }: Document
             </div>
           ) : document.fileType.toLowerCase() === "jpg" || document.fileType.toLowerCase() === "png" ? (
             <div className="bg-zinc-100 h-[300px] flex items-center justify-center">
-              <img src="/digital-document-overview.png" alt={document.title} className="max-h-full object-contain" />
+              <Image src="/digital-document-overview.png" alt="Descripción" height={300} className="max-h-full object-contain"/>
             </div>
           ) : (
             <div className="bg-zinc-100 h-[300px] flex items-center justify-center">

@@ -23,6 +23,7 @@ export default function AccidentDetails() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [isDrawing, setIsDrawing] = useState(false)
   const [sketchDataURL, setSketchDataURL] = useState<string | null>(null)
+  console.log({sketchDataURL})
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target

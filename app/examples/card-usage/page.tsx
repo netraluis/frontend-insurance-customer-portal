@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { SidebarTrigger } from "@/components/ui/sidebar"
-import { BasicCard, MetricCard, ListItemCard, DocumentCard, StatusCard } from "@/components/card-templates"
+import { BasicCard, MetricCard, ListItemCard, DocumentCard, StatusCard } from "@/app/components/card-templates"
 import {
   Car,
   HomeIcon,
@@ -12,6 +12,7 @@ import {
   Eye,
   MoreHorizontal,
 } from "lucide-react"
+import Link from "next/link"
 
 export default function CardUsageExample() {
   return (
@@ -90,10 +91,10 @@ export default function CardUsageExample() {
                     ]}
                     actions={
                       <Button variant="ghost" size="sm" className="gap-1" asChild>
-                        <a href="/dashboard/policies/detail/POL-AUTO-001">
+                        <Link href="/dashboard/policies/detail/POL-AUTO-001">
                           View Details
                           <ArrowRight className="ml-1 h-3 w-3" />
-                        </a>
+                        </Link>
                       </Button>
                     }
                   />
@@ -109,10 +110,10 @@ export default function CardUsageExample() {
                     ]}
                     actions={
                       <Button variant="ghost" size="sm" className="gap-1" asChild>
-                        <a href="/dashboard/policies/detail/POL-HOME-001">
+                        <Link href="/dashboard/policies/detail/POL-HOME-001">
                           View Details
                           <ArrowRight className="ml-1 h-3 w-3" />
-                        </a>
+                        </Link>
                       </Button>
                     }
                   />

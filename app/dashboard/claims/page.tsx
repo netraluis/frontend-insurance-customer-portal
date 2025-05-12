@@ -175,7 +175,7 @@ export default function ClaimsPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [policyTypeFilter, setPolicyTypeFilter] = useState("all")
   const [statusFilter, setStatusFilter] = useState("all")
-  const [dateFilter, setDateFilter] = useState("all")
+  // const [dateFilter, setDateFilter] = useState("all")
 
   // Calculate claim statistics
   const totalClaims = claims.length
