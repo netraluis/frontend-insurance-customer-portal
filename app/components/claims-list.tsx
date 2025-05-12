@@ -46,11 +46,11 @@ export function ClaimsList({ claims, view, getPolicyTypeIcon, getStatusIcon, get
         <div className="rounded-full bg-zinc-100 p-3 mb-4">
           <FileText className="h-6 w-6 text-zinc-500" />
         </div>
-        <h3 className="text-lg font-medium">No claims found</h3>
+        <h3 className="text-lg font-medium">No hi ha reclamacions</h3>
         <p className="text-sm text-zinc-500 max-w-sm mt-1">
-          No claims match your current search or filters. Try adjusting your criteria or file a new claim.
+          No hi ha reclamants que coincideixin amb la teva cerca o filtres. Pots provar a canviar els criteris o presentar un nou reclam.
         </p>
-        <Button className="mt-4">File New Claim</Button>
+        <Button className="mt-4">Nou reclam</Button>
       </div>
     )
   }
@@ -95,7 +95,7 @@ function ClaimCard({ claim, view, getPolicyTypeIcon, getStatusIcon, getStatusCol
               </div>
               <div>
                 <h3 className="font-medium">{claim.title}</h3>
-                <p className="text-sm text-zinc-500">Claim #{claim.id}</p>
+                <p className="text-sm text-zinc-500">Reclamació #{claim.id}</p>
               </div>
             </div>
 
@@ -109,11 +109,11 @@ function ClaimCard({ claim, view, getPolicyTypeIcon, getStatusIcon, getStatusCol
 
             <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-zinc-500 mt-2 sm:mt-0 sm:ml-auto">
               <div>
-                <span className="block text-xs uppercase text-zinc-400">Filed</span>
+                <span className="block text-xs uppercase text-zinc-400">Presentada</span>
                 <span>{claim.date}</span>
               </div>
               <div>
-                <span className="block text-xs uppercase text-zinc-400">Amount</span>
+                <span className="block text-xs uppercase text-zinc-400">Import</span>
                 <span>{claim.amount}</span>
               </div>
               <div>
@@ -125,7 +125,7 @@ function ClaimCard({ claim, view, getPolicyTypeIcon, getStatusIcon, getStatusCol
             <div className="flex items-center gap-2 self-end sm:self-auto">
               <Button variant="ghost" size="sm" asChild>
                 <Link href={`/claims/detail/${claim.id}`}>
-                  View Details
+                  Veure Detalls
                   <ArrowRight className="ml-1 h-3 w-3" />
                 </Link>
               </Button>
@@ -133,22 +133,22 @@ function ClaimCard({ claim, view, getPolicyTypeIcon, getStatusIcon, getStatusCol
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="sm">
                     <MoreHorizontal className="h-4 w-4" />
-                    <span className="sr-only">More options</span>
+                    <span className="sr-only">Més opcions</span>
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem>
                     <FileText className="mr-2 h-4 w-4" />
-                    View Documents
+                    Veure Documents
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <MessageSquare className="mr-2 h-4 w-4" />
-                    Contact Adjuster
+                    Contactar Adjustador
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
                     <Calendar className="mr-2 h-4 w-4" />
-                    View Timeline
+                    Veure Línia de Temps
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -180,7 +180,7 @@ function ClaimCard({ claim, view, getPolicyTypeIcon, getStatusIcon, getStatusCol
 
         <div className="mt-3">
           <div className="mb-1 flex items-center justify-between text-xs">
-            <span>Progress</span>
+            <span>Progres</span>
             <span>{claim.progress}%</span>
           </div>
           <Progress value={claim.progress} className="h-1.5" />
@@ -200,10 +200,10 @@ function ClaimCard({ claim, view, getPolicyTypeIcon, getStatusIcon, getStatusCol
         <p className="mt-3 text-sm text-zinc-600 line-clamp-2">{claim.description}</p>
 
         <div className="mt-3 flex justify-between items-center">
-          <span className="text-xs text-zinc-500 capitalize">{claim.policyType} Policy</span>
+          <span className="text-xs text-zinc-500 capitalize">{claim.policyType} Pòlissa</span>
           <Button variant="ghost" size="sm" asChild>
             <Link href={`/claims/detail/${claim.id}`}>
-              View Details
+              Veure Detalls
               <ArrowRight className="ml-1 h-3 w-3" />
             </Link>
           </Button>
