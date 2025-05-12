@@ -28,7 +28,7 @@ export function CardPolisses({
 }: CardPolissesProps) {
   return (
     <Link href={`/dashboard/policies/detail/${policyNumber}`}>
-    <Card className="w-99 h-80 overflow-hidden border border-zinc-200">
+    <Card className="w-99 h-55 overflow-hidden border border-zinc-200">
       <CardContent>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
@@ -55,15 +55,7 @@ export function CardPolisses({
           </div>
         </div>
       </CardContent>
-      <CardFooter className="border-t border-zinc-100 p-0">
-        <button
-          type="button"
-          className="w-full rounded-none py-4 text-center font-medium text-zinc-900 hover:bg-zinc-50 transition-colors"
-          
-        >
-          View Details
-        </button>
-      </CardFooter>
+
     </Card>
     </Link> 
   )

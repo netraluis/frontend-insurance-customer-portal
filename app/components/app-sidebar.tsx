@@ -49,24 +49,24 @@ const data = {
   navMain: [
     {
       title: "Inici",
-      url: "#",
+      url: "/dashboard",
       icon: PanelLeft,
       isActive: true,
     },
     {
       title: "Pòlisses",
-      url: "#",
+      url: "/dashboard/policies/detail",
       icon: FileText,
-      
+      isActive: true,
     },
     {
       title: "Sinístres",
-      url: "#",
+      url: "/dashboard/claims",
       icon: ClipboardList,
     },
     {
       title: "Assistent",
-      url: "#",
+      url: "/dashboard/assistant",
       icon: BotMessageSquare,
     },
     {

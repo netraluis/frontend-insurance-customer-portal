@@ -268,18 +268,7 @@ export default function Page() {
           </Card>
         </section>
 
-        {/* Virtual Assistant Section */}
-        <section>
-          <Card>
-            <CardHeader>
-              <CardTitle>Virtual Assistant</CardTitle>
-              <CardDescription>Get 24/7 support for your insurance needs</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ChatAssistant />
-            </CardContent>
-          </Card>
-        </section>
+        
       </div>
     </main>
     </div>

@@ -84,7 +84,7 @@ export default function PolicyDetail({ params }: { params: { id: string } }) {
       <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-6">
         <SidebarTrigger />
         <Button variant="ghost" size="icon" asChild>
-          <Link href="/policies">
+          <Link href="/dashboard">
             <ArrowLeft className="h-4 w-4" />
             <span className="sr-only">Back</span>
           </Link>
