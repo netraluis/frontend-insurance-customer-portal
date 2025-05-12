@@ -17,6 +17,7 @@ export default function PolicyInformation() {
   }
 
   const handlePhoneChange = (value: string, isValid: boolean) => {
+    console.log({value, isValid})
     updateFormData({ phone: value })
   }
 

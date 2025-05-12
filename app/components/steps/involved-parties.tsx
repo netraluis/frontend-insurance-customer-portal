@@ -148,7 +148,7 @@ export default function InvolvedParties() {
         <div className="space-y-2">
           <h3 className="text-lg font-medium text-zinc-900">Parts Involucrades</h3>
           <p className="text-sm text-zinc-500">
-          Afegiu informació sobre altres conductors i testimonis implicats en l'accident.          </p>
+          Afegiu informació sobre altres conductors i testimonis implicats en l&apos;accident.          </p>
         </div>
 
         <Tabs defaultValue="drivers" value={activeTab} onValueChange={setActiveTab}>
@@ -178,7 +178,7 @@ export default function InvolvedParties() {
                   <DialogHeader>
                     <DialogTitle>{editingDriverIndex !== null ? "Editar conductor" : "Afegeix conductor"}</DialogTitle>
                     <DialogDescription>
-                      Entra les dades de l'altre conductor implicat en l'accident.
+                      Entra les dades de l&apos;altre conductor implicat en l&ldquo;accident.
                     </DialogDescription>
                   </DialogHeader>
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 py-4">
@@ -335,7 +335,7 @@ export default function InvolvedParties() {
               <div className="text-center py-8 border border-dashed rounded-md border-zinc-300 bg-zinc-50">
                 <p className="text-zinc-500">No conductors afegits encara.</p>
                 <p className="text-sm text-zinc-400 mt-1">
-                  Clica "Afegeix conductor" per afegir informació sobre altres conductors implicats.
+                  Clica &apos;Afegeix conductor&apos; per afegir informació sobre altres conductors implicats.
                 </p>
               </div>
             )}
@@ -476,7 +476,7 @@ export default function InvolvedParties() {
               <div className="text-center py-8 border border-dashed rounded-md border-zinc-300 bg-zinc-50">
                 <p className="text-zinc-500">No witnesses added yet.</p>
                 <p className="text-sm text-zinc-400 mt-1">
-                  Click "Add Witness" to add information about witnesses to the accident.
+                  Click &apos;Add Witness&apos; to add information about witnesses to the accident.
                 </p>
               </div>
             )}

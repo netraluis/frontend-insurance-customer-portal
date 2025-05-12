@@ -17,6 +17,7 @@ import { format } from "date-fns"
 })*/
 
 export async function sendConfirmationEmail(formData: FormData, claimNumber: string, pdfBuffer: Buffer) {
+  console.log("Sending confirmation email...", pdfBuffer)
   try {
     // Format the incident date
     const formattedDate = formData.incidentDate ? format(new Date(formData.incidentDate), "PPP") : "Not specified"
@@ -125,6 +126,7 @@ export async function sendConfirmationEmail(formData: FormData, claimNumber: str
       </html>
     `
 
+    console.log("Sending email to:", htmlContent)
     // Send the email
     /*const info = await transporter.sendMail({
       from: process.env.EMAIL_FROM || '"Auto Claims" <claims@example.com>',

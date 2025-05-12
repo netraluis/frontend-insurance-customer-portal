@@ -1,17 +1,8 @@
 "use client"
 
-import { AppSidebar } from "@/app/components/app-sidebar"
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList
-} from "@/components/ui/breadcrumb"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
 import { TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ArrowRight, Calendar, Car, ClipboardList, Folder, Heart, HomeIcon, Link, Plane } from "lucide-react"
-import { ChatAssistant } from "../components/chat-assistant"
 import { DocumentCard } from "../components/card-templates/document-card"
 import { Button } from "@/components/ui/button"
 import { ClaimCard } from "../components/claim-card"

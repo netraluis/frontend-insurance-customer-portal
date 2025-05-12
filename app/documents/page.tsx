@@ -147,7 +147,9 @@ const documents = [
 export default function DocumentsPage() {
   const [isUploadDialogOpen, setIsUploadDialogOpen] = useState(false)
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
+  // ts-ignore
   const [searchTerm, setSearchTerm] = useState("")
+  console.log({setSearchTerm})
 
   return (
     <div className="flex flex-col min-h-screen animate-in">

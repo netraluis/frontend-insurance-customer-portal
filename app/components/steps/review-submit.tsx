@@ -9,14 +9,13 @@ import { Button } from "@/components/ui/button"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { CheckCircle2, Edit, Download, Mail } from "lucide-react"
 import { format } from "date-fns"
-import { Toaster} from "@/components/ui/sonner"
 import { generateClaimPDF } from "@/lib/generate-pdf"
 import { sendConfirmationEmail } from "@/app/actions/email-actions"
 import { toast } from "sonner"
 
 export default function ReviewSubmit() {
   const { formData, setCurrentStep, setIsSubmitted } = useClaimForm()
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  // const [isSubmitting, setIsSubmitting] = useState(false)
   const [isLocalSubmitted, setIsLocalSubmitted] = useState(false)
   const [claimNumber, setClaimNumber] = useState("")
   const [pdfUrl, setPdfUrl] = useState<string | null>(null)
@@ -31,7 +30,7 @@ export default function ReviewSubmit() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsSubmitting(true)
+    // setIsSubmitting(true)
 
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 2000))
@@ -46,7 +45,7 @@ export default function ReviewSubmit() {
     setClaimNumber(generatedClaimNumber)
     setPdfUrl(dataUrl)
     setPdfBuffer(buffer)
-    setIsSubmitting(false)
+    // setIsSubmitting(false)
     setIsLocalSubmitted(true)
     setIsSubmitted(true) // Update the context state
 
@@ -143,7 +142,7 @@ export default function ReviewSubmit() {
       <CardContent className="p-0 space-y-6">
         <div className="space-y-2">
           <h3 className="text-lg font-medium text-zinc-900">Revisar la seva reclamació</h3>
-          <p className="text-sm text-zinc-500">Reviseu totes les dades abans d'enviar la seva reclamació.</p>
+          <p className="text-sm text-zinc-500">Reviseu totes les dades abans d&apos;enviar la seva reclamació.</p>
         </div>
 
         <Accordion type="multiple" defaultValue={["policy"]}>
@@ -229,7 +228,7 @@ export default function ReviewSubmit() {
           <AccordionItem value="accident" className="border border-zinc-200 rounded-md mb-4">
             <AccordionTrigger className="px-4 hover:no-underline hover:bg-zinc-50">
               <div className="flex justify-between items-center w-full">
-                <span className="font-medium">Detalls de l'accident</span>
+                <span className="font-medium">Detalls de l&apos;accident</span>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -251,7 +250,7 @@ export default function ReviewSubmit() {
                   <dd className="mt-1 text-sm text-zinc-900">{formData.accidentLocation}</dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Data de l'incident</dt>
+                  <dt className="text-sm font-medium text-zinc-500">Data de l&apos;incident</dt>
                   <dd className="mt-1 text-sm text-zinc-900">
                     {formData.incidentDate ? format(formData.incidentDate, "PPP") : "No especificat"}
                   </dd>
@@ -269,7 +268,7 @@ export default function ReviewSubmit() {
                   <dd className="mt-1 text-sm text-zinc-900">{formData.trafficServiceInvolved ? "Sí" : "No"}</dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Informe d'accident amistós</dt>
+                  <dt className="text-sm font-medium text-zinc-500">Informe d&apos;accident amistós</dt>
                   <dd className="mt-1 text-sm text-zinc-900">{formData.friendlyReport ? "Sí" : "No"}</dd>
                 </div>
                 <div className="sm:col-span-1">

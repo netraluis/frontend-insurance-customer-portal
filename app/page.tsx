@@ -1,6 +1,4 @@
 import Image from "next/image";
-import { ClaimFormProvider } from "@/app/components/claim-form-context"
-import ClaimFormLayout from "@/app/components/claim-form-layout"
 
 export default function Home() {
   return (

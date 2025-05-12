@@ -9,6 +9,7 @@ import { Bell, Car, Shield, FileText, CreditCard, Download, ArrowLeft, CheckCirc
 import Link from "next/link"
 import { ClaimCard } from "@/app/components/claim-card"
 import { DocumentCard } from "@/app/components/document-card"
+import Image from 'next/image';
 
 export default function PolicyDetail({ params }: { params: { id: string } }) {
   // In a real app, you would fetch the policy details based on the ID
@@ -214,11 +215,8 @@ export default function PolicyDetail({ params }: { params: { id: string } }) {
                     </div>
 
                     <div className="flex items-center justify-center">
-                      <img
-                        src="/sleek-camry-drive.png"
-                        alt="Toyota Camry 2022"
-                        className="max-h-[150px] object-contain"
-                      />
+                      
+                      <Image src="/sleek-camry-drive.png" alt="Toyota Camry 2022" height={150} className="max-h-[150px] object-contain"/>
                     </div>
                   </div>
                 </CardContent>
@@ -272,7 +270,7 @@ export default function PolicyDetail({ params }: { params: { id: string } }) {
                         <CheckCircle2 className="h-12 w-12 text-green-500 mb-2" />
                         <h3 className="text-lg font-medium">No Claims Filed</h3>
                         <p className="text-sm text-zinc-500 max-w-md mt-1">
-                          You haven't filed any claims under this policy. If you need to file a claim, please use the
+                          You haven&apos;t filed any claims under this policy. If you need to file a claim, please use the
                           button below.
                         </p>
                         <Button className="mt-4">File a New Claim</Button>

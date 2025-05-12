@@ -2,7 +2,6 @@ import { SidebarTrigger } from "@/components/ui/sidebar"
 import { Button } from "@/components/ui/button"
 import { Plus } from "lucide-react"
 import { Car, HomeIcon, Plane, Heart } from "lucide-react"
-import { PolicyList } from "@/app/components/policy-list"
 import { PolicyListWithFilters } from "@/app/components/policy-list-with-filters"
 
 // Sample policy data

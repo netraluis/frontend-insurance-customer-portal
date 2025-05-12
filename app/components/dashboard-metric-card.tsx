@@ -1,6 +1,4 @@
 import type React from "react"
-import { ArrowDown, ArrowRight, ArrowUp } from "lucide-react"
-import { cn } from "@/lib/utils"
 import { InsuranceCard } from "@/app/components/ui/insurance-card"
 
 interface DashboardMetricCardProps {
@@ -16,24 +14,8 @@ export function DashboardMetricCard({
   value,
   icon: Icon,
   description,
-  trend = "stable",
 }: DashboardMetricCardProps) {
-  const trendInfo = {
-    up: {
-      icon: <ArrowUp className="mr-1 h-3 w-3" />,
-      classes: "bg-green-50 text-green-700",
-    },
-    down: {
-      icon: <ArrowDown className="mr-1 h-3 w-3" />,
-      classes: "bg-red-50 text-red-700",
-    },
-    stable: {
-      icon: <ArrowRight className="mr-1 h-3 w-3" />,
-      classes: "bg-zinc-50 text-zinc-700",
-    },
-  }
 
-  const { icon, classes } = trendInfo[trend]
 
   return (
     <InsuranceCard className="h-full">
