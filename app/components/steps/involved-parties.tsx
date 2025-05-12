@@ -21,10 +21,13 @@ import {
 } from "@/components/ui/dialog"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Plus, Trash2, Edit2 } from "lucide-react"
+import { Switch } from "@/components/ui/switch"
 
 export default function InvolvedParties() {
   const { formData, updateFormData } = useClaimForm()
   const [activeTab, setActiveTab] = useState("drivers")
+  const [hasOtherVehicles, setHasOtherVehicles] = useState(false)
+  const [hasWitnesses, setHasWitnesses] = useState(false)
 
   // Driver state
   const [driverDialogOpen, setDriverDialogOpen] = useState(false)
@@ -148,17 +151,35 @@ export default function InvolvedParties() {
         <div className="space-y-2">
           <h3 className="text-lg font-medium text-zinc-900">Parts Involucrades</h3>
           <p className="text-sm text-zinc-500">
-          Afegiu informació sobre altres conductors i testimonis implicats en l&apos;accident.          </p>
+            Afegiu informació sobre altres conductors i testimonis implicats en l&apos;accident.          </p>
         </div>
 
-        <Tabs defaultValue="drivers" value={activeTab} onValueChange={setActiveTab}>
+        <Switch
+          id="policeInvolved"
+          checked={hasOtherVehicles}
+          onCheckedChange={(checked) => setHasOtherVehicles(checked)}
+        />
+        <label htmlFor="policeInvolved" className="ml-3 text-sm text-black">
+          Va estar involucrat un altre vehicle?
+        </label>
+        <br />
+        <Switch
+          id="hasWitnesses"
+          checked={hasWitnesses}
+          onCheckedChange={(checked) => setHasWitnesses(checked)}
+        />
+        <label htmlFor="hasWitnesses" className="ml-3 text-sm text-black">
+          Van haver-hi testimonis?
+        </label>
+
+        {/* <Tabs defaultValue="drivers" value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="drivers">Altres conductors</TabsTrigger>
             <TabsTrigger value="witnesses">Testimonis</TabsTrigger>
           </TabsList>
 
           {/* Drivers Tab */}
-          <TabsContent value="drivers" className="space-y-4">
+          {hasOtherVehicles && (
             <div className="flex justify-between items-center">
               <h4 className="text-md font-medium">Conductors Implicats</h4>
               <Dialog open={driverDialogOpen} onOpenChange={setDriverDialogOpen}>
@@ -283,68 +304,69 @@ export default function InvolvedParties() {
                 </DialogContent>
               </Dialog>
             </div>
+          )}
 
-            {formData.drivers.length > 0 ? (
-              <div className="border rounded-md">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Name</TableHead>
-                      <TableHead>Vehicle</TableHead>
-                      <TableHead>Insurance</TableHead>
-                      <TableHead className="w-[100px]">Actions</TableHead>
+
+          {hasOtherVehicles && formData.drivers.length > 0 ? (
+            <div className="border rounded-md">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Nom</TableHead>
+                    <TableHead>Vehicle</TableHead>
+                    <TableHead>Assistencia</TableHead>
+                    <TableHead className="w-[100px]">Accions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {formData.drivers.map((driver, index) => (
+                    <TableRow key={index}>
+                      <TableCell>
+                        <div className="font-medium">
+                          {driver.firstName} {driver.lastName}
+                        </div>
+                        <div className="text-sm text-zinc-500">{driver.email}</div>
+                      </TableCell>
+                      <TableCell>
+                        <div>
+                          {driver.vehicleMake} {driver.vehicleModel}
+                        </div>
+                        <div className="text-sm text-zinc-500">{driver.licensePlate}</div>
+                      </TableCell>
+                      <TableCell>
+                        <div>{driver.insuranceCompany}</div>
+                        <div className="text-sm text-zinc-500">{driver.policyNumber}</div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex space-x-2">
+                          <Button variant="ghost" size="icon" onClick={() => handleEditDriver(index)}>
+                            <Edit2 className="h-4 w-4" />
+                            <span className="sr-only">Edit</span>
+                          </Button>
+                          <Button variant="ghost" size="icon" onClick={() => handleDeleteDriver(index)}>
+                            <Trash2 className="h-4 w-4" />
+                            <span className="sr-only">Delete</span>
+                          </Button>
+                        </div>
+                      </TableCell>
                     </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {formData.drivers.map((driver, index) => (
-                      <TableRow key={index}>
-                        <TableCell>
-                          <div className="font-medium">
-                            {driver.firstName} {driver.lastName}
-                          </div>
-                          <div className="text-sm text-zinc-500">{driver.email}</div>
-                        </TableCell>
-                        <TableCell>
-                          <div>
-                            {driver.vehicleMake} {driver.vehicleModel}
-                          </div>
-                          <div className="text-sm text-zinc-500">{driver.licensePlate}</div>
-                        </TableCell>
-                        <TableCell>
-                          <div>{driver.insuranceCompany}</div>
-                          <div className="text-sm text-zinc-500">{driver.policyNumber}</div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex space-x-2">
-                            <Button variant="ghost" size="icon" onClick={() => handleEditDriver(index)}>
-                              <Edit2 className="h-4 w-4" />
-                              <span className="sr-only">Edit</span>
-                            </Button>
-                            <Button variant="ghost" size="icon" onClick={() => handleDeleteDriver(index)}>
-                              <Trash2 className="h-4 w-4" />
-                              <span className="sr-only">Delete</span>
-                            </Button>
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            ) : (
-              <div className="text-center py-8 border border-dashed rounded-md border-zinc-300 bg-zinc-50">
-                <p className="text-zinc-500">No conductors afegits encara.</p>
-                <p className="text-sm text-zinc-400 mt-1">
-                  Clica &apos;Afegeix conductor&apos; per afegir informació sobre altres conductors implicats.
-                </p>
-              </div>
-            )}
-          </TabsContent>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          ) : (
+            hasOtherVehicles && <div className="text-center py-8 border border-dashed rounded-md border-zinc-300 bg-zinc-50">
+              <p className="text-zinc-500">No conductors afegits encara.</p>
+              <p className="text-sm text-zinc-400 mt-1">
+                Clica &apos;Afegeix conductor&apos; per afegir informació sobre altres conductors implicats.
+              </p>
+            </div>
+          )}
 
           {/* Witnesses Tab */}
-          <TabsContent value="witnesses" className="space-y-4">
-            <div className="flex justify-between items-center">
-              <h4 className="text-md font-medium">Witnesses</h4>
+          {hasWitnesses && (
+              <div className="flex justify-between items-center">
+                <h4 className="text-md font-medium">Witnesses</h4>
               <Dialog open={witnessDialogOpen} onOpenChange={setWitnessDialogOpen}>
                 <DialogTrigger asChild>
                   <Button
@@ -428,8 +450,10 @@ export default function InvolvedParties() {
                 </DialogContent>
               </Dialog>
             </div>
+            )
+            }
 
-            {formData.witnesses.length > 0 ? (
+            {hasWitnesses &&formData.witnesses.length > 0 ? (
               <div className="border rounded-md">
                 <Table>
                   <TableHeader>
@@ -473,16 +497,16 @@ export default function InvolvedParties() {
                 </Table>
               </div>
             ) : (
-              <div className="text-center py-8 border border-dashed rounded-md border-zinc-300 bg-zinc-50">
+              hasWitnesses && <div className="text-center py-8 border border-dashed rounded-md border-zinc-300 bg-zinc-50">
                 <p className="text-zinc-500">No witnesses added yet.</p>
                 <p className="text-sm text-zinc-400 mt-1">
                   Click &apos;Add Witness&apos; to add information about witnesses to the accident.
                 </p>
               </div>
             )}
-          </TabsContent>
-        </Tabs>
       </CardContent>
     </Card>
   )
 }
+
+
