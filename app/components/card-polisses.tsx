@@ -3,7 +3,9 @@
 import type React from "react"
 
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { Car } from "lucide-react"
+import { ArrowRight, Car} from "lucide-react"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 interface CardPolissesProps {
   type: string
@@ -25,6 +27,7 @@ export function CardPolisses({
   onViewDetails = () => {},
 }: CardPolissesProps) {
   return (
+    <Link href={`/dashboard/policies/detail/${policyNumber}`}>
     <Card className="w-99 h-55 overflow-hidden border border-zinc-200">
       <CardContent>
         <div className="flex items-center justify-between">
@@ -52,6 +55,8 @@ export function CardPolisses({
           </div>
         </div>
       </CardContent>
+
     </Card>
+    </Link> 
   )
 }

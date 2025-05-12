@@ -123,7 +123,7 @@ function PolicyCard({ policy, view }: PolicyCardProps) {
             </div>
 
             <Button variant="ghost" size="sm" className="self-end sm:self-auto" asChild>
-              <Link href={`/policies/detail/${policy.id}`}>
+              <Link href={`/dashboard/policies/detail/${policy.id}`}>
                 View Details
                 <ArrowRight className="ml-1 h-3 w-3" />
               </Link>
@@ -160,7 +160,7 @@ function PolicyCard({ policy, view }: PolicyCardProps) {
         <div className="flex items-center justify-between border-t bg-zinc-50 px-6 py-3">
           <span className="text-xs font-medium uppercase text-zinc-500">{policy.type} Insurance</span>
           <Button variant="ghost" size="sm" asChild>
-            <Link href={`/policies/detail/${policy.id}`}>
+            <Link href={`/dashboard/policies/detail/${policy.id}`}>
               View Details
               <ArrowRight className="ml-1 h-3 w-3" />
             </Link>

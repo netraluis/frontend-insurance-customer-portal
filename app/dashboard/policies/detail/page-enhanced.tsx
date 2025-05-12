@@ -2,7 +2,8 @@ import { SidebarTrigger } from "@/components/ui/sidebar"
 import { Button } from "@/components/ui/button"
 import { Plus } from "lucide-react"
 import { Car, HomeIcon, Plane, Heart } from "lucide-react"
-import { PolicyListWithFilters } from "@/components/policy-list-with-filters"
+import { PolicyList } from "@/app/components/policy-list"
+import { PolicyListWithFilters } from "@/app/components/policy-list-with-filters"
 
 // Sample policy data
 const policies = [
@@ -98,7 +99,7 @@ export default function PoliciesPage() {
             </Button>
           </div>
 
-          <PolicyListWithFilters policies={policies} />
+          <PolicyListWithFilters policies={policies} defaultView="list" />
         </div>
       </main>
     </div>
