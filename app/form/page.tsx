@@ -1,5 +1,5 @@
-import { ClaimFormProvider } from "@/components/claim-form-context"
-import ClaimFormLayout from "@/components/claim-form-layout"
+import { ClaimFormProvider } from "@/app/components/claim-form-context"
+import ClaimFormLayout from "@/app/components/claim-form-layout"
 
 export default function Home() {
   return (
