@@ -1,12 +1,12 @@
 "use server"
 
-import nodemailer from "nodemailer"
-import type { FormData } from "@/components/claim-form-context"
+//import nodemailer from "nodemailer"
+import type { FormData } from "../components/claim-form-context"
 import { format } from "date-fns"
 
 // Create a transporter using SMTP
 // For production, you would use your actual email service credentials
-const transporter = nodemailer.createTransport({
+/*const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST || "smtp.example.com",
   port: Number.parseInt(process.env.EMAIL_PORT || "587"),
   secure: process.env.EMAIL_SECURE === "true",
@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER || "user@example.com",
     pass: process.env.EMAIL_PASSWORD || "password",
   },
-})
+})*/
 
 export async function sendConfirmationEmail(formData: FormData, claimNumber: string, pdfBuffer: Buffer) {
   try {
@@ -126,7 +126,7 @@ export async function sendConfirmationEmail(formData: FormData, claimNumber: str
     `
 
     // Send the email
-    const info = await transporter.sendMail({
+    /*const info = await transporter.sendMail({
       from: process.env.EMAIL_FROM || '"Auto Claims" <claims@example.com>',
       to: formData.email,
       subject: `Auto Claim Confirmation - Reference #${claimNumber}`,
@@ -138,9 +138,9 @@ export async function sendConfirmationEmail(formData: FormData, claimNumber: str
           contentType: "application/pdf",
         },
       ],
-    })
+    })*/
 
-    return { success: true, messageId: info.messageId }
+    return { success: true, messageId: "info.messageId" }
   } catch (error) {
     console.error("Error sending confirmation email:", error)
     return { success: false, error: (error as Error).message }

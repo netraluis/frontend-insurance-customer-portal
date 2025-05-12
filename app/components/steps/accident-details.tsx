@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 
 import type React from "react"
 
-import { useClaimForm } from "../claim-form-context"
+import { useClaimForm } from "@/app/components/claim-form-context"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"

@@ -2,11 +2,11 @@
 
 import type React from "react"
 
-import { useClaimForm } from "../claim-form-context"
+import { useClaimForm } from "@/app/components/claim-form-context"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
-import { PhoneInput } from "@/components/ui/phone-input"
+import { PhoneInput } from "@/app/components/phone-input"
 
 export default function PolicyInformation() {
   const { formData, updateFormData } = useClaimForm()

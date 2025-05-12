@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useClaimForm } from "./claim-form-context"
-import { FormStepper } from "./form-stepper"
+import { FormStepper } from "@/app/components/form-stepper"
 import PolicyInformation from "./steps/policy-information"
 import VehicleInformation from "./steps/vehicle-information"
 import AccidentDetails from "./steps/accident-details"
@@ -11,8 +11,9 @@ import Documentation from "./steps/documentation"
 import ReviewSubmit from "./steps/review-submit"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { toast } from "@/components/ui/use-toast"
+import { Toaster} from "@/components/ui/sonner"
 import { ArrowLeft, ArrowRight, Save } from "lucide-react"
+import { toast } from "sonner"
 
 export default function ClaimFormLayout() {
   const { currentStep, setCurrentStep, isStepComplete, saveProgress, loadProgress, isSubmitted } = useClaimForm()
@@ -41,20 +42,14 @@ export default function ClaimFormLayout() {
     // Try to load saved progress when component mounts - only once
     const hasLoadedProgress = loadProgress()
     if (hasLoadedProgress) {
-      toast({
-        title: "Progress Restored",
-        description: "Your previously saved form data has been loaded.",
-      })
+      toast.success("Your previously saved form data has been loaded.")
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []) // Empty dependency array ensures this only runs once
 
   const handleSave = () => {
     saveProgress()
-    toast({
-      title: "Progress Saved",
-      description: "Your form progress has been saved. You can return later to continue.",
-    })
+    toast.success("Your form progress has been saved. You can return later to continue.")
   }
 
   const handleNext = () => {

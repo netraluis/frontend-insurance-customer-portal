@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
-import { useClaimForm, type Driver, type Witness } from "../claim-form-context"
+import { useClaimForm, type Driver, type Witness } from "@/app/components/claim-form-context"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"

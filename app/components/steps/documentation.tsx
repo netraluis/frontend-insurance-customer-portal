@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
-import { useClaimForm, type Document } from "../claim-form-context"
+import { useClaimForm, type Document } from "@/app/components/claim-form-context"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -231,8 +231,6 @@ export default function Documentation() {
                         <div className="flex space-x-2">
                           <Button
                             variant="ghost"
-                            size="icon"
-                            onClick={() => handleDeleteDocument(doc.id)}
                             size="icon"
                             onClick={() => handleDeleteDocument(doc.id)}
                           >

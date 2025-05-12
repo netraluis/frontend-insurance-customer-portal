@@ -3,15 +3,16 @@
 import type React from "react"
 
 import { useState } from "react"
-import { useClaimForm } from "../claim-form-context"
+import { useClaimForm } from "@/app/components/claim-form-context"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { CheckCircle2, Edit, Download, Mail } from "lucide-react"
 import { format } from "date-fns"
-import { toast } from "@/components/ui/use-toast"
+import { Toaster} from "@/components/ui/sonner"
 import { generateClaimPDF } from "@/lib/generate-pdf"
 import { sendConfirmationEmail } from "@/app/actions/email-actions"
+import { toast } from "sonner"
 
 export default function ReviewSubmit() {
   const { formData, setCurrentStep, setIsSubmitted } = useClaimForm()
@@ -49,11 +50,7 @@ export default function ReviewSubmit() {
     setIsLocalSubmitted(true)
     setIsSubmitted(true) // Update the context state
 
-    toast({
-      title: "Claim Submitted Successfully",
-      description: "Your claim has been submitted. You will receive a confirmation email shortly.",
-    })
-
+    toast("Claim Submitted Successfully")
     // Clear local storage
     if (typeof window !== "undefined") {
       localStorage.removeItem("autoClaimFormData")
@@ -83,24 +80,14 @@ export default function ReviewSubmit() {
 
       if (result.success) {
         setIsEmailSent(true)
-        toast({
-          title: "Email Sent Successfully",
-          description: `A confirmation email has been sent to ${formData.email}`,
-        })
+
+        toast(`A confirmation email has been sent to ${formData.email}`)
       } else {
-        toast({
-          title: "Failed to Send Email",
-          description: "There was an error sending the confirmation email. Please try again.",
-          variant: "destructive",
-        })
+        toast.error("There was an error sending the confirmation email. Please try again.")
       }
     } catch (error) {
       console.error("Error sending email:", error)
-      toast({
-        title: "Failed to Send Email",
-        description: "There was an error sending the confirmation email. Please try again.",
-        variant: "destructive",
-      })
+      toast.error("There was an error sending the confirmation email. Please try again.")
     } finally {
       setIsSendingEmail(false)
     }
