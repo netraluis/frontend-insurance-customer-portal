@@ -355,7 +355,7 @@ export default function CardTemplatesPage() {
         <h2 className="text-2xl font-semibold mb-4">Status Card</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <StatusCard
-            title="Auto Accident Claim"
+            title=" Claim"
             subtitle="Claim #CLM-001"
             status="in-progress"
             progress={65}
