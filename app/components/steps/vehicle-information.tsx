@@ -24,13 +24,13 @@ export default function VehicleInformation() {
     <Card className="border-none shadow-none">
       <CardContent className="p-0 space-y-6">
         <div className="space-y-2">
-          <h3 className="text-lg font-medium text-zinc-900">Vehicle Details</h3>
+          <h3 className="text-lg font-medium text-zinc-900">Detalls del vehicle</h3>
           <p className="text-sm text-zinc-500">Please provide information about your vehicle.</p>
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div className="space-y-2">
-            <Label htmlFor="vehicleMake">Vehicle Make</Label>
+            <Label htmlFor="vehicleMake">Marca del vehicle</Label>
             <Input
               id="vehicleMake"
               name="vehicleMake"
@@ -42,7 +42,7 @@ export default function VehicleInformation() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="vehicleModel">Vehicle Model</Label>
+            <Label htmlFor="vehicleModel">Model del vehicle</Label>
             <Input
               id="vehicleModel"
               name="vehicleModel"
@@ -54,7 +54,7 @@ export default function VehicleInformation() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="licensePlate">License Plate</Label>
+            <Label htmlFor="licensePlate">Matrícula</Label>
             <Input
               id="licensePlate"
               name="licensePlate"
@@ -67,7 +67,7 @@ export default function VehicleInformation() {
         </div>
 
         <div className="space-y-4">
-          <Label>Type of Coverage</Label>
+          <Label>Tipus de cobertura</Label>
           <RadioGroup
             value={formData.coverageType}
             onValueChange={handleCoverageChange as (value: string) => void}
@@ -76,13 +76,13 @@ export default function VehicleInformation() {
             <div className="flex items-center space-x-2 rounded-md border border-zinc-200 p-4 hover:border-zinc-300">
               <RadioGroupItem value="comprehensive" id="comprehensive" />
               <Label htmlFor="comprehensive" className="flex-1 cursor-pointer">
-                Comprehensive
+                A tot risc
               </Label>
             </div>
             <div className="flex items-center space-x-2 rounded-md border border-zinc-200 p-4 hover:border-zinc-300">
               <RadioGroupItem value="third-party" id="third-party" />
               <Label htmlFor="third-party" className="flex-1 cursor-pointer">
-                Third-Party
+                Tercers
               </Label>
             </div>
           </RadioGroup>

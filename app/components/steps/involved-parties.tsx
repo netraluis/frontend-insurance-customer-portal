@@ -146,22 +146,21 @@ export default function InvolvedParties() {
     <Card className="border-none shadow-none">
       <CardContent className="p-0 space-y-6">
         <div className="space-y-2">
-          <h3 className="text-lg font-medium text-zinc-900">Involved Parties</h3>
+          <h3 className="text-lg font-medium text-zinc-900">Parts Involucrades</h3>
           <p className="text-sm text-zinc-500">
-            Add information about other drivers and witnesses involved in the accident.
-          </p>
+          Afegiu informació sobre altres conductors i testimonis implicats en l'accident.          </p>
         </div>
 
         <Tabs defaultValue="drivers" value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="drivers">Other Drivers</TabsTrigger>
-            <TabsTrigger value="witnesses">Witnesses</TabsTrigger>
+            <TabsTrigger value="drivers">Altres conductors</TabsTrigger>
+            <TabsTrigger value="witnesses">Testimonis</TabsTrigger>
           </TabsList>
 
           {/* Drivers Tab */}
           <TabsContent value="drivers" className="space-y-4">
             <div className="flex justify-between items-center">
-              <h4 className="text-md font-medium">Involved Drivers</h4>
+              <h4 className="text-md font-medium">Conductors Implicats</h4>
               <Dialog open={driverDialogOpen} onOpenChange={setDriverDialogOpen}>
                 <DialogTrigger asChild>
                   <Button
@@ -172,14 +171,14 @@ export default function InvolvedParties() {
                     className="flex items-center gap-1"
                   >
                     <Plus className="h-4 w-4" />
-                    Add Driver
+                    Afegir conductor
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[600px]">
                   <DialogHeader>
-                    <DialogTitle>{editingDriverIndex !== null ? "Edit Driver" : "Add Driver"}</DialogTitle>
+                    <DialogTitle>{editingDriverIndex !== null ? "Editar conductor" : "Afegeix conductor"}</DialogTitle>
                     <DialogDescription>
-                      Enter the details of the other driver involved in the accident.
+                      Entra les dades de l'altre conductor implicat en l'accident.
                     </DialogDescription>
                   </DialogHeader>
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 py-4">
@@ -334,9 +333,9 @@ export default function InvolvedParties() {
               </div>
             ) : (
               <div className="text-center py-8 border border-dashed rounded-md border-zinc-300 bg-zinc-50">
-                <p className="text-zinc-500">No drivers added yet.</p>
+                <p className="text-zinc-500">No conductors afegits encara.</p>
                 <p className="text-sm text-zinc-400 mt-1">
-                  Click "Add Driver" to add information about other drivers involved.
+                  Clica "Afegeix conductor" per afegir informació sobre altres conductors implicats.
                 </p>
               </div>
             )}

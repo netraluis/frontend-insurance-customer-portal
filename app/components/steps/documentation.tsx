@@ -83,11 +83,11 @@ export default function Documentation() {
 
   const getDocumentIcon = (type: string) => {
     switch (type) {
-      case "photo":
+      case "Imatge":
         return <FileImage className="h-5 w-5 text-zinc-500" />
-      case "video":
+      case "Vídeo":
         return <FileVideo className="h-5 w-5 text-zinc-500" />
-      case "report":
+      case "Informe oficial":
         return <FileText className="h-5 w-5 text-zinc-500" />
       default:
         return <FileIcon className="h-5 w-5 text-zinc-500" />
@@ -98,52 +98,52 @@ export default function Documentation() {
     <Card className="border-none shadow-none">
       <CardContent className="p-0 space-y-6">
         <div className="space-y-2">
-          <h3 className="text-lg font-medium text-zinc-900">Documentation</h3>
-          <p className="text-sm text-zinc-500">Upload photos, videos, and official reports related to the accident.</p>
+          <h3 className="text-lg font-medium text-zinc-900">Documentació</h3>
+          <p className="text-sm text-zinc-500">Carrega imatges, vídeos i informes oficials relacionats amb el siniestri.</p>
         </div>
 
         <div className="space-y-4">
           <div className="flex justify-between items-center">
-            <h4 className="text-md font-medium">Uploaded Documents</h4>
+            <h4 className="text-md font-medium">Documents carregats</h4>
             <Dialog open={uploadDialogOpen} onOpenChange={setUploadDialogOpen}>
               <Button onClick={() => setUploadDialogOpen(true)} className="flex items-center gap-1">
                 <Upload className="h-4 w-4" />
-                Upload Document
+                Carregar document
               </Button>
               <DialogContent className="sm:max-w-[500px]">
                 <DialogHeader>
-                  <DialogTitle>Upload Document</DialogTitle>
+                  <DialogTitle>Carregar document</DialogTitle>
                   <DialogDescription>
-                    Upload photos, videos, or official reports related to your claim.
+                    Carrega imatges, vídeos o informes oficials relacionats amb la vostra reclamació.
                   </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-4 py-4">
                   <div className="space-y-2">
-                    <Label htmlFor="documentType">Document Type</Label>
+                    <Label htmlFor="documentType">Tipus de document</Label>
                     <Select value={documentType} onValueChange={setDocumentType}>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select document type" />
+                        <SelectValue placeholder="Selecciona el tipus de document" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="photo">Photo</SelectItem>
-                        <SelectItem value="video">Video</SelectItem>
-                        <SelectItem value="report">Official Report</SelectItem>
+                        <SelectItem value="Imatge">Imatge</SelectItem>
+                        <SelectItem value="Vídeo">Vídeo</SelectItem>
+                        <SelectItem value="Informe oficial">Informe oficial</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="documentName">Document Name</Label>
+                    <Label htmlFor="documentName">Nom del document</Label>
                     <Input
                       id="documentName"
                       value={documentName}
                       onChange={(e) => setDocumentName(e.target.value)}
-                      placeholder="Enter a name for this document"
+                      placeholder="Introdueix un nom per aquest document"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="fileUpload">File</Label>
+                    <Label htmlFor="fileUpload">Fitxer</Label>
                     <div className="flex items-center justify-center w-full">
                       <label
                         htmlFor="fileUpload"
@@ -160,7 +160,7 @@ export default function Documentation() {
                             <>
                               <Upload className="w-8 h-8 mb-2 text-zinc-500" />
                               <p className="mb-1 text-sm text-zinc-500">
-                                <span className="font-semibold">Click to upload</span> or drag and drop
+                                <span className="font-semibold">Clica per carregar</span> o arrossega i deixa anar
                               </p>
                               <p className="text-xs text-zinc-500">PNG, JPG, PDF, MP4 (MAX. 10MB)</p>
                             </>
@@ -180,7 +180,7 @@ export default function Documentation() {
                   {isUploading && (
                     <div className="space-y-2">
                       <div className="flex justify-between text-xs">
-                        <span>Uploading...</span>
+                        <span>Carregant...</span>
                         <span>{uploadProgress}%</span>
                       </div>
                       <div className="w-full bg-zinc-200 rounded-full h-2">
@@ -246,8 +246,8 @@ export default function Documentation() {
             </div>
           ) : (
             <div className="text-center py-8 border border-dashed rounded-md border-zinc-300 bg-zinc-50">
-              <p className="text-zinc-500">No documents uploaded yet.</p>
-              <p className="text-sm text-zinc-400 mt-1">Click "Upload Document" to add photos, videos, or reports.</p>
+                <p className="text-zinc-500">No hi ha documents carregats encara.</p>
+              <p className="text-sm text-zinc-400 mt-1">Clica "Carregar document" per afegir fotos, vídeos o informes.</p>
             </div>
           )}
         </div>

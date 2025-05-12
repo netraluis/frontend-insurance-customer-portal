@@ -114,26 +114,26 @@ export default function AccidentDetails() {
     <Card className="border-none shadow-none">
       <CardContent className="p-0 space-y-6">
         <div className="space-y-2">
-          <h3 className="text-lg font-medium text-zinc-900">Accident Details</h3>
-          <p className="text-sm text-zinc-500">Please provide detailed information about the accident.</p>
+          <h3 className="text-lg font-medium text-zinc-900">Detalls del siniestre</h3>
+          <p className="text-sm text-zinc-500">Si us plau, proporcioneu informació detallada sobre el siniestri.</p>
         </div>
 
         <div className="space-y-4">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="accidentLocation">Location of the Accident</Label>
+              <Label htmlFor="accidentLocation">Lloc del siniestre</Label>
               <Input
                 id="accidentLocation"
                 name="accidentLocation"
                 value={formData.accidentLocation}
                 onChange={handleChange}
-                placeholder="Enter the address or location where the accident occurred"
+                placeholder="Introdueix l'adreça o el lloc on ha ocorregut el siniestri"
                 required
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="incidentDate">Date of Incident</Label>
+              <Label htmlFor="incidentDate">Data del siniestre</Label>
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
@@ -161,13 +161,13 @@ export default function AccidentDetails() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="accidentDescription">Detailed Description of the Accident</Label>
+            <Label htmlFor="accidentDescription">Descripció detallada del siniestre</Label>
             <Textarea
               id="accidentDescription"
               name="accidentDescription"
               value={formData.accidentDescription}
               onChange={handleChange}
-              placeholder="Please describe what happened in detail..."
+              placeholder="Si us plau, descrigui en detall el que ha ocorregut..."
               rows={5}
               required
             />
@@ -175,11 +175,11 @@ export default function AccidentDetails() {
         </div>
 
         <div className="space-y-4">
-          <Label>Sketch of Material Damages</Label>
+          <Label>Dibuix del material danyat</Label>
           <Tabs defaultValue="draw" className="w-full">
             <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="draw">Draw Sketch</TabsTrigger>
-              <TabsTrigger value="upload">Upload Image</TabsTrigger>
+              <TabsTrigger value="draw">Dibuixar</TabsTrigger>
+              <TabsTrigger value="upload">Carregar imatge</TabsTrigger>
             </TabsList>
             <TabsContent value="draw" className="space-y-4">
               <div className="border border-zinc-200 rounded-md p-2">
@@ -199,7 +199,7 @@ export default function AccidentDetails() {
               </div>
               <div className="flex justify-end">
                 <Button variant="outline" onClick={clearCanvas} type="button" className="text-sm">
-                  Clear Sketch
+                  Netejar dibuix
                 </Button>
               </div>
             </TabsContent>
@@ -226,9 +226,9 @@ export default function AccidentDetails() {
                       />
                     </svg>
                     <p className="mb-2 text-sm text-zinc-500">
-                      <span className="font-semibold">Click to upload</span> or drag and drop
+                      <span className="font-semibold">Clica per carregar</span> o arrossega i deixa anar
                     </p>
-                    <p className="text-xs text-zinc-500">PNG, JPG or JPEG (MAX. 5MB)</p>
+                    <p className="text-xs text-zinc-500">PNG, JPG o JPEG (MAX. 5MB)</p>
                   </div>
                   <input id="sketch-upload" type="file" className="hidden" accept="image/*" />
                 </label>
@@ -238,13 +238,13 @@ export default function AccidentDetails() {
         </div>
 
         <div className="space-y-6">
-          <h4 className="text-md font-medium text-zinc-900">Additional Information</h4>
+          <h4 className="text-md font-medium text-zinc-900">Informació addicional</h4>
 
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div className="space-y-0.5">
-                <Label htmlFor="policeInvolved">Police Involvement</Label>
-                <p className="text-sm text-zinc-500">Was the police involved in the accident?</p>
+                <Label htmlFor="policeInvolved">Involucració de la policia</Label>
+                <p className="text-sm text-zinc-500">Va participar la policia en el siniestre?</p>
               </div>
               <Switch
                 id="policeInvolved"
@@ -255,8 +255,8 @@ export default function AccidentDetails() {
 
             <div className="flex items-center justify-between">
               <div className="space-y-0.5">
-                <Label htmlFor="trafficServiceInvolved">Traffic Service Involvement</Label>
-                <p className="text-sm text-zinc-500">Was the local traffic service involved?</p>
+                <Label htmlFor="trafficServiceInvolved">Servei de trafic involucrat</Label>
+                <p className="text-sm text-zinc-500">Va participar el servei de trafic local en el siniestre?</p>
               </div>
               <Switch
                 id="trafficServiceInvolved"
@@ -267,8 +267,8 @@ export default function AccidentDetails() {
 
             <div className="flex items-center justify-between">
               <div className="space-y-0.5">
-                <Label htmlFor="friendlyReport">Friendly Accident Report</Label>
-                <p className="text-sm text-zinc-500">Was a friendly accident report filed?</p>
+                <Label htmlFor="friendlyReport">Informe amistós del siniestre</Label>
+                <p className="text-sm text-zinc-500">Va ser informat un informe amistós del siniestre?</p>
               </div>
               <Switch
                 id="friendlyReport"
@@ -279,8 +279,8 @@ export default function AccidentDetails() {
 
             <div className="flex items-center justify-between">
               <div className="space-y-0.5">
-                <Label htmlFor="bodilyInjuries">Bodily Injuries</Label>
-                <p className="text-sm text-zinc-500">Were there any bodily injuries?</p>
+                <Label htmlFor="bodilyInjuries">Danys físics</Label>
+                <p className="text-sm text-zinc-500">Hi havia danys físics?</p>
               </div>
               <Switch
                 id="bodilyInjuries"

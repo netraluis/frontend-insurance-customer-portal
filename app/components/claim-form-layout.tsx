@@ -42,14 +42,14 @@ export default function ClaimFormLayout() {
     // Try to load saved progress when component mounts - only once
     const hasLoadedProgress = loadProgress()
     if (hasLoadedProgress) {
-      toast.success("Your previously saved form data has been loaded.")
+      toast.success("Les dades de la reclamació guardades anteriorment han estat carregades.")
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []) // Empty dependency array ensures this only runs once
 
   const handleSave = () => {
     saveProgress()
-    toast.success("Your form progress has been saved. You can return later to continue.")
+    toast.success("Les dades de la reclamació guardades anteriorment han estat carregades. Les pots veure mes endevant.")
   }
 
   const handleNext = () => {
@@ -88,19 +88,19 @@ export default function ClaimFormLayout() {
   const getStepTitle = () => {
     switch (currentStep) {
       case 1:
-        return "Policy Information"
+        return "Informació de la pòlissa"
       case 2:
-        return "Vehicle Information"
+        return "Informació del vehicle"
       case 3:
-        return "Accident Details"
+        return "Detalls de l'accident"
       case 4:
-        return "Involved Parties"
+        return "Parts involucrades"
       case 5:
-        return "Upload Documentation"
+        return "Càrrega de documents"
       case 6:
-        return "Review and Submit"
+        return "Revisar i enviar"
       default:
-        return "Auto Claim Form"
+        return "Formulari de reclamació"
     }
   }
 
@@ -135,14 +135,14 @@ export default function ClaimFormLayout() {
               {currentStep > 1 && (
                 <Button variant="outline" onClick={handlePrevious} className="flex items-center gap-2">
                   <ArrowLeft className="h-4 w-4" />
-                  Previous
+                  Anterior
                 </Button>
               )}
             </div>
             <div className="flex gap-2">
               <Button variant="outline" onClick={handleSave} className="flex items-center gap-2">
                 <Save className="h-4 w-4" />
-                Save Progress
+                Guardar dades
               </Button>
               {currentStep < 6 ? (
                 <Button
@@ -150,12 +150,12 @@ export default function ClaimFormLayout() {
                   disabled={!isStepComplete(currentStep)}
                   className="flex items-center gap-2"
                 >
-                  Next
+                  Següent
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               ) : (
                 <Button type="submit" form="review-form">
-                  Submit Claim
+                  Enviar reclamació
                 </Button>
               )}
             </div>

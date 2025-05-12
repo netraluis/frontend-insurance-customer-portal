@@ -142,8 +142,8 @@ export default function ReviewSubmit() {
     <Card className="border-none shadow-none">
       <CardContent className="p-0 space-y-6">
         <div className="space-y-2">
-          <h3 className="text-lg font-medium text-zinc-900">Review Your Claim</h3>
-          <p className="text-sm text-zinc-500">Please review all the information before submitting your claim.</p>
+          <h3 className="text-lg font-medium text-zinc-900">Revisar la seva reclamació</h3>
+          <p className="text-sm text-zinc-500">Reviseu totes les dades abans d'enviar la seva reclamació.</p>
         </div>
 
         <Accordion type="multiple" defaultValue={["policy"]}>
@@ -151,7 +151,7 @@ export default function ReviewSubmit() {
           <AccordionItem value="policy" className="border border-zinc-200 rounded-md mb-4">
             <AccordionTrigger className="px-4 hover:no-underline hover:bg-zinc-50">
               <div className="flex justify-between items-center w-full">
-                <span className="font-medium">Policy Information</span>
+                <span className="font-medium">Informació de la pòlissa</span>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -162,24 +162,24 @@ export default function ReviewSubmit() {
                   }}
                 >
                   <Edit className="h-4 w-4" />
-                  Edit
+                  Editar
                 </Button>
               </div>
             </AccordionTrigger>
             <AccordionContent className="px-4 pb-4 pt-2">
               <dl className="grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Full Name</dt>
+                  <dt className="text-sm font-medium text-zinc-500">Nom complet</dt>
                   <dd className="mt-1 text-sm text-zinc-900">
                     {formData.firstName} {formData.lastName}
                   </dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Email Address</dt>
+                  <dt className="text-sm font-medium text-zinc-500">Adreça email</dt>
                   <dd className="mt-1 text-sm text-zinc-900">{formData.email}</dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Phone Number</dt>
+                  <dt className="text-sm font-medium text-zinc-500">Número de telèfon</dt>
                   <dd className="mt-1 text-sm text-zinc-900">{formData.phone}</dd>
                 </div>
               </dl>
@@ -190,7 +190,7 @@ export default function ReviewSubmit() {
           <AccordionItem value="vehicle" className="border border-zinc-200 rounded-md mb-4">
             <AccordionTrigger className="px-4 hover:no-underline hover:bg-zinc-50">
               <div className="flex justify-between items-center w-full">
-                <span className="font-medium">Vehicle Information</span>
+                <span className="font-medium">Informació del vehicle</span>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -214,11 +214,11 @@ export default function ReviewSubmit() {
                   </dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">License Plate</dt>
+                  <dt className="text-sm font-medium text-zinc-500">Matrícula</dt>
                   <dd className="mt-1 text-sm text-zinc-900">{formData.licensePlate}</dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Coverage Type</dt>
+                  <dt className="text-sm font-medium text-zinc-500">Tipus de cobertura</dt>
                   <dd className="mt-1 text-sm text-zinc-900 capitalize">{formData.coverageType}</dd>
                 </div>
               </dl>
@@ -229,7 +229,7 @@ export default function ReviewSubmit() {
           <AccordionItem value="accident" className="border border-zinc-200 rounded-md mb-4">
             <AccordionTrigger className="px-4 hover:no-underline hover:bg-zinc-50">
               <div className="flex justify-between items-center w-full">
-                <span className="font-medium">Accident Details</span>
+                <span className="font-medium">Detalls de l'accident</span>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -247,34 +247,34 @@ export default function ReviewSubmit() {
             <AccordionContent className="px-4 pb-4 pt-2">
               <dl className="grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Location</dt>
+                  <dt className="text-sm font-medium text-zinc-500">Ubicació</dt>
                   <dd className="mt-1 text-sm text-zinc-900">{formData.accidentLocation}</dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Incident Date</dt>
+                  <dt className="text-sm font-medium text-zinc-500">Data de l'incident</dt>
                   <dd className="mt-1 text-sm text-zinc-900">
-                    {formData.incidentDate ? format(formData.incidentDate, "PPP") : "Not specified"}
+                    {formData.incidentDate ? format(formData.incidentDate, "PPP") : "No especificat"}
                   </dd>
                 </div>
                 <div className="sm:col-span-2">
-                  <dt className="text-sm font-medium text-zinc-500">Description</dt>
+                  <dt className="text-sm font-medium text-zinc-500">Descripció</dt>
                   <dd className="mt-1 text-sm text-zinc-900">{formData.accidentDescription}</dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Police Involved</dt>
-                  <dd className="mt-1 text-sm text-zinc-900">{formData.policeInvolved ? "Yes" : "No"}</dd>
+                  <dt className="text-sm font-medium text-zinc-500">Policia involucrada</dt>
+                  <dd className="mt-1 text-sm text-zinc-900">{formData.policeInvolved ? "Sí" : "No"}</dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Traffic Service Involved</dt>
-                  <dd className="mt-1 text-sm text-zinc-900">{formData.trafficServiceInvolved ? "Yes" : "No"}</dd>
+                  <dt className="text-sm font-medium text-zinc-500">Servei de trànsit involucrat</dt>
+                  <dd className="mt-1 text-sm text-zinc-900">{formData.trafficServiceInvolved ? "Sí" : "No"}</dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Friendly Accident Report</dt>
-                  <dd className="mt-1 text-sm text-zinc-900">{formData.friendlyReport ? "Yes" : "No"}</dd>
+                  <dt className="text-sm font-medium text-zinc-500">Informe d'accident amistós</dt>
+                  <dd className="mt-1 text-sm text-zinc-900">{formData.friendlyReport ? "Sí" : "No"}</dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Bodily Injuries</dt>
-                  <dd className="mt-1 text-sm text-zinc-900">{formData.bodilyInjuries ? "Yes" : "No"}</dd>
+                  <dt className="text-sm font-medium text-zinc-500">Incidències físiques</dt>
+                  <dd className="mt-1 text-sm text-zinc-900">{formData.bodilyInjuries ? "Sí" : "No"}</dd>
                 </div>
               </dl>
             </AccordionContent>
@@ -284,7 +284,7 @@ export default function ReviewSubmit() {
           <AccordionItem value="parties" className="border border-zinc-200 rounded-md mb-4">
             <AccordionTrigger className="px-4 hover:no-underline hover:bg-zinc-50">
               <div className="flex justify-between items-center w-full">
-                <span className="font-medium">Involved Parties</span>
+                <span className="font-medium">Parts involucrades</span>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -303,19 +303,19 @@ export default function ReviewSubmit() {
               <div className="space-y-4">
                 {formData.drivers.length > 0 ? (
                   <div>
-                    <h4 className="text-sm font-medium text-zinc-500 mb-2">Other Drivers</h4>
+                    <h4 className="text-sm font-medium text-zinc-500 mb-2">Altres conductors</h4>
                     <ul className="space-y-4">
                       {formData.drivers.map((driver, index) => (
                         <li key={index} className="border border-zinc-100 rounded-md p-3">
                           <div className="grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
                             <div className="sm:col-span-1">
-                              <dt className="text-sm font-medium text-zinc-500">Name</dt>
+                              <dt className="text-sm font-medium text-zinc-500">Nom</dt>
                               <dd className="mt-1 text-sm text-zinc-900">
                                 {driver.firstName} {driver.lastName}
                               </dd>
                             </div>
                             <div className="sm:col-span-1">
-                              <dt className="text-sm font-medium text-zinc-500">Contact</dt>
+                              <dt className="text-sm font-medium text-zinc-500">Contacte</dt>
                               <dd className="mt-1 text-sm text-zinc-900">
                                 {driver.email} / {driver.phone}
                               </dd>
@@ -327,7 +327,7 @@ export default function ReviewSubmit() {
                               </dd>
                             </div>
                             <div className="sm:col-span-1">
-                              <dt className="text-sm font-medium text-zinc-500">Insurance</dt>
+                              <dt className="text-sm font-medium text-zinc-500">Assistencia</dt>
                               <dd className="mt-1 text-sm text-zinc-900">
                                 {driver.insuranceCompany} - {driver.policyNumber}
                               </dd>
@@ -338,30 +338,30 @@ export default function ReviewSubmit() {
                     </ul>
                   </div>
                 ) : (
-                  <p className="text-sm text-zinc-500">No other drivers added.</p>
+                  <p className="text-sm text-zinc-500">No altres conductors afegits.</p>
                 )}
 
                 {formData.witnesses.length > 0 ? (
                   <div>
-                    <h4 className="text-sm font-medium text-zinc-500 mb-2">Witnesses</h4>
+                    <h4 className="text-sm font-medium text-zinc-500 mb-2">Testimonis</h4>
                     <ul className="space-y-4">
                       {formData.witnesses.map((witness, index) => (
                         <li key={index} className="border border-zinc-100 rounded-md p-3">
                           <div className="grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
                             <div className="sm:col-span-1">
-                              <dt className="text-sm font-medium text-zinc-500">Name</dt>
+                              <dt className="text-sm font-medium text-zinc-500">Nom</dt>
                               <dd className="mt-1 text-sm text-zinc-900">
                                 {witness.firstName} {witness.lastName}
                               </dd>
                             </div>
                             <div className="sm:col-span-1">
-                              <dt className="text-sm font-medium text-zinc-500">Contact</dt>
+                              <dt className="text-sm font-medium text-zinc-500">Contacte</dt>
                               <dd className="mt-1 text-sm text-zinc-900">
                                 {witness.email} / {witness.phone}
                               </dd>
                             </div>
                             <div className="sm:col-span-2">
-                              <dt className="text-sm font-medium text-zinc-500">Statement</dt>
+                              <dt className="text-sm font-medium text-zinc-500">Declaració</dt>
                               <dd className="mt-1 text-sm text-zinc-900">{witness.description}</dd>
                             </div>
                           </div>
@@ -370,7 +370,7 @@ export default function ReviewSubmit() {
                     </ul>
                   </div>
                 ) : (
-                  <p className="text-sm text-zinc-500">No witnesses added.</p>
+                  <p className="text-sm text-zinc-500">No testimonis afegits.</p>
                 )}
               </div>
             </AccordionContent>
@@ -380,7 +380,7 @@ export default function ReviewSubmit() {
           <AccordionItem value="documents" className="border border-zinc-200 rounded-md mb-4">
             <AccordionTrigger className="px-4 hover:no-underline hover:bg-zinc-50">
               <div className="flex justify-between items-center w-full">
-                <span className="font-medium">Documentation</span>
+                <span className="font-medium">Documentació</span>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -411,7 +411,7 @@ export default function ReviewSubmit() {
                   ))}
                 </ul>
               ) : (
-                <p className="text-sm text-zinc-500">No documents uploaded.</p>
+                <p className="text-sm text-zinc-500">No hi ha documents carregats.</p>
               )}
             </AccordionContent>
           </AccordionItem>
@@ -428,7 +428,7 @@ export default function ReviewSubmit() {
                 required
               />
               <label htmlFor="terms" className="ml-2 block text-sm text-zinc-500">
-                I confirm that all the information provided is accurate and complete to the best of my knowledge.
+                Confirmo que totes les dades proporcionades són exactes i completes al millor coneixement meu.
               </label>
             </div>
           </form>

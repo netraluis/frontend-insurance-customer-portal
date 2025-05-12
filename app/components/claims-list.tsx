@@ -117,7 +117,7 @@ function ClaimCard({ claim, view, getPolicyTypeIcon, getStatusIcon, getStatusCol
                 <span>{claim.amount}</span>
               </div>
               <div>
-                <span className="block text-xs uppercase text-zinc-400">Policy</span>
+                <span className="block text-xs uppercase text-zinc-400">Pòlissa</span>
                 <span>{claim.policyId}</span>
               </div>
             </div>
