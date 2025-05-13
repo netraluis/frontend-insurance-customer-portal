@@ -89,7 +89,7 @@ export function PhoneInput({
     if (selectedCountry) {
       const valid = validatePhoneNumber(newValue, selectedCountry)
       setIsValid(valid)
-      setErrorMessage(valid ? "" : "Please enter a valid phone number")
+      setErrorMessage(valid ? "" : "S'haurien de introduir un número de telèfon vàlid")
 
       if (onChange) {
         onChange(newValue, valid)

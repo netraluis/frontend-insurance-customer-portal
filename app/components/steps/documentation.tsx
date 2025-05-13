@@ -194,13 +194,13 @@ export default function Documentation() {
                 </div>
                 <DialogFooter>
                   <Button variant="outline" onClick={() => setUploadDialogOpen(false)}>
-                    Cancel
+                    Cancelar
                   </Button>
                   <Button
                     onClick={simulateUpload}
                     disabled={!selectedFile || !documentType || !documentName || isUploading}
                   >
-                    Upload
+                    Carregar
                   </Button>
                 </DialogFooter>
               </DialogContent>
@@ -212,9 +212,9 @@ export default function Documentation() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Type</TableHead>
-                    <TableHead>Name</TableHead>
-                    <TableHead className="w-[100px]">Actions</TableHead>
+                    <TableHead>Tipus</TableHead>
+                    <TableHead>Nom</TableHead>
+                    <TableHead className="w-[100px]">Accions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -235,7 +235,7 @@ export default function Documentation() {
                             onClick={() => handleDeleteDocument(doc.id)}
                           >
                             <Trash2 className="h-4 w-4" />
-                            <span className="sr-only">Delete</span>
+                            <span className="sr-only">Eliminar</span>
                           </Button>
                         </div>
                       </TableCell>

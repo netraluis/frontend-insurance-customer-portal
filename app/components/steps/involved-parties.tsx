@@ -204,7 +204,7 @@ export default function InvolvedParties() {
                   </DialogHeader>
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 py-4">
                     <div className="space-y-2">
-                      <Label htmlFor="driverFirstName">First Name</Label>
+                      <Label htmlFor="driverFirstName">Nom</Label>
                       <Input
                         id="driverFirstName"
                         name="firstName"
@@ -214,13 +214,13 @@ export default function InvolvedParties() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="driverLastName">Last Name</Label>
+                      <Label htmlFor="driverLastName">Cognom</Label>
                       <Input
                         id="driverLastName"
                         name="lastName"
                         value={driverFormData.lastName}
                         onChange={handleDriverChange}
-                        placeholder="Last name"
+                        placeholder="Cognom"
                       />
                     </div>
                     <div className="space-y-2">
@@ -235,17 +235,17 @@ export default function InvolvedParties() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="driverPhone">Phone</Label>
+                      <Label htmlFor="driverPhone">Telèfon</Label>
                       <Input
                         id="driverPhone"
                         name="phone"
                         value={driverFormData.phone}
                         onChange={handleDriverChange}
-                        placeholder="Phone number"
+                        placeholder="Telèfon"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="driverVehicleMake">Vehicle Make</Label>
+                      <Label htmlFor="driverVehicleMake">Marca</Label>
                       <Input
                         id="driverVehicleMake"
                         name="vehicleMake"
@@ -255,7 +255,7 @@ export default function InvolvedParties() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="driverVehicleModel">Vehicle Model</Label>
+                      <Label htmlFor="driverVehicleModel">Model del vehicle</Label>
                       <Input
                         id="driverVehicleModel"
                         name="vehicleModel"
@@ -265,33 +265,33 @@ export default function InvolvedParties() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="driverLicensePlate">License Plate</Label>
+                      <Label htmlFor="driverLicensePlate">Matrícula</Label>
                       <Input
                         id="driverLicensePlate"
                         name="licensePlate"
                         value={driverFormData.licensePlate}
                         onChange={handleDriverChange}
-                        placeholder="License plate number"
+                        placeholder="Matrícula"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="driverInsuranceCompany">Insurance Company</Label>
+                      <Label htmlFor="driverInsuranceCompany">Assistència</Label>
                       <Input
                         id="driverInsuranceCompany"
                         name="insuranceCompany"
                         value={driverFormData.insuranceCompany}
                         onChange={handleDriverChange}
-                        placeholder="Insurance company name"
+                        placeholder="Assistència"
                       />
                     </div>
                     <div className="space-y-2 sm:col-span-2">
-                      <Label htmlFor="driverPolicyNumber">Policy Number</Label>
+                      <Label htmlFor="driverPolicyNumber">Número de polissa</Label>
                       <Input
                         id="driverPolicyNumber"
                         name="policyNumber"
                         value={driverFormData.policyNumber}
                         onChange={handleDriverChange}
-                        placeholder="Insurance policy number"
+                        placeholder="Número de polissa"
                       />
                     </div>
                   </div>
@@ -341,11 +341,11 @@ export default function InvolvedParties() {
                         <div className="flex space-x-2">
                           <Button variant="ghost" size="icon" onClick={() => handleEditDriver(index)}>
                             <Edit2 className="h-4 w-4" />
-                            <span className="sr-only">Edit</span>
+                            <span className="sr-only">Editar</span>
                           </Button>
                           <Button variant="ghost" size="icon" onClick={() => handleDeleteDriver(index)}>
                             <Trash2 className="h-4 w-4" />
-                            <span className="sr-only">Delete</span>
+                            <span className="sr-only">Eliminar</span>
                           </Button>
                         </div>
                       </TableCell>
@@ -458,10 +458,10 @@ export default function InvolvedParties() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Name</TableHead>
-                      <TableHead>Contact</TableHead>
-                      <TableHead>Statement</TableHead>
-                      <TableHead className="w-[100px]">Actions</TableHead>
+                      <TableHead>Nom</TableHead>
+                      <TableHead>Contacte</TableHead>
+                      <TableHead>Declaració</TableHead>
+                      <TableHead className="w-[100px]">Accions</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -483,11 +483,11 @@ export default function InvolvedParties() {
                           <div className="flex space-x-2">
                             <Button variant="ghost" size="icon" onClick={() => handleEditWitness(index)}>
                               <Edit2 className="h-4 w-4" />
-                              <span className="sr-only">Edit</span>
+                              <span className="sr-only">Editar</span>
                             </Button>
                             <Button variant="ghost" size="icon" onClick={() => handleDeleteWitness(index)}>
                               <Trash2 className="h-4 w-4" />
-                              <span className="sr-only">Delete</span>
+                              <span className="sr-only">Eliminar</span>
                             </Button>
                           </div>
                         </TableCell>
@@ -498,9 +498,9 @@ export default function InvolvedParties() {
               </div>
             ) : (
               hasWitnesses && <div className="text-center py-8 border border-dashed rounded-md border-zinc-300 bg-zinc-50">
-                <p className="text-zinc-500">No witnesses added yet.</p>
+                <p className="text-zinc-500">No testimonis afegits encara.</p>
                 <p className="text-sm text-zinc-400 mt-1">
-                  Click &apos;Add Witness&apos; to add information about witnesses to the accident.
+                  Clica &apos;Afegeix testimoni&apos; per afegir informació sobre testimonis implicats.
                 </p>
               </div>
             )}
