@@ -8,6 +8,12 @@ import { ArrowRight, type LucideIcon } from "lucide-react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 
+export enum PolicyStatus {
+  active = "active",
+  pending = "pending",
+  expired = "expired"
+}
+
 interface Policy {
   id: string
   title: string
@@ -16,7 +22,7 @@ interface Policy {
   premium: string
   renewalDate: string
   startDate: string
-  status: "active" | "pending" | "expired"
+  status: PolicyStatus
   coverageAmount: string
 }
 

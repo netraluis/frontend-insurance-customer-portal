@@ -5,10 +5,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Badge } from "@/components/ui/badge"
 import { Car, HomeIcon, Plane, Heart, Plus, ArrowUpDown } from "lucide-react"
-import { PolicyList } from "@/app/components/policy-list"
+import { PolicyList, PolicyStatus } from "@/app/components/policy-list"
 
 // Sample policy data
-const policies = [
+const policies = [  
   {
     id: "POL-AUTO-001",
     title: "Auto Insurance",
@@ -17,7 +17,7 @@ const policies = [
     premium: "$128.45/month",
     renewalDate: "May 15, 2025",
     startDate: "May 15, 2023",
-    status: "active",
+    status: PolicyStatus.active,
     coverageAmount: "$500,000",
   },
   {
@@ -28,7 +28,7 @@ const policies = [
     premium: "$89.99/month",
     renewalDate: "August 22, 2025",
     startDate: "August 22, 2023",
-    status: "active",
+    status: PolicyStatus.active,
     coverageAmount: "$350,000",
   },
   {
@@ -39,7 +39,7 @@ const policies = [
     premium: "$45.00/trip",
     renewalDate: "December 10, 2025",
     startDate: "December 10, 2023",
-    status: "active",
+    status: PolicyStatus.active,
     coverageAmount: "$100,000",
   },
   {
@@ -50,7 +50,7 @@ const policies = [
     premium: "$210.50/month",
     renewalDate: "February 28, 2026",
     startDate: "February 28, 2024",
-    status: "active",
+    status: PolicyStatus.active,
     coverageAmount: "$1,000,000",
   },
   {
@@ -61,7 +61,7 @@ const policies = [
     premium: "$95.75/month",
     renewalDate: "June 30, 2025",
     startDate: "June 30, 2023",
-    status: "pending",
+    status: PolicyStatus.pending,
     coverageAmount: "$300,000",
   },
   {
@@ -72,7 +72,7 @@ const policies = [
     premium: "$65.00/trip",
     renewalDate: "October 15, 2024",
     startDate: "October 15, 2023",
-    status: "expired",
+    status: PolicyStatus.expired,
     coverageAmount: "$150,000",
   },
 ]

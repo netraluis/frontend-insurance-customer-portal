@@ -1,5 +1,5 @@
 import type React from "react"
-import { InsuranceCard } from "@/app/components/ui/insurance-card"
+import { InsuranceCard } from "@/app/components/insurance-card"
 
 interface DashboardMetricCardProps {
   title: string
