@@ -29,6 +29,25 @@ export type Document = {
   url: string
 }
 
+// Type for the friendly report document
+export type FriendlyReportDocument = {
+  id: string
+  name: string
+  type: string
+  url: string
+  size: number
+}
+
+// Types for damage photos and videos
+export type DamageMedia = {
+  id: string
+  name: string
+  type: string
+  url: string
+  size: number
+  thumbnail?: string // For video thumbnails
+}
+
 export type FormData = {
   // Step 1: Policy Information
   firstName: string
@@ -36,20 +55,33 @@ export type FormData = {
   email: string
   phone: string
 
+  // Additional driver information
+  hasDifferentDriver: boolean
+  driverFirstName: string
+  driverLastName: string
+  driverDateOfBirth: Date | null
+  driverPhone: string
+  driverEmail: string
+  driverID: string
+
   // Step 2: Vehicle Information
   vehicleMake: string
   vehicleModel: string
   licensePlate: string
-  coverageType: "comprehensive" | "third-party" | ""
+  // coverageType field removed
 
   // Step 3: Accident Details
-  incidentDate: Date | null // Moved from Step 2 to Step 3
+  incidentDate: Date | null
   accidentLocation: string
   accidentDescription: string
   policeInvolved: boolean
   trafficServiceInvolved: boolean
   friendlyReport: boolean
+  friendlyReportDocument: FriendlyReportDocument | null
   bodilyInjuries: boolean
+  bodilyInjuriesDescription: string
+  damageDescription: string
+  damagePhotos: DamageMedia[]
 
   // Step 4: Involved Parties
   drivers: Driver[]
@@ -77,10 +109,18 @@ const initialFormData: FormData = {
   email: "",
   phone: "",
 
+  hasDifferentDriver: false,
+  driverFirstName: "",
+  driverLastName: "",
+  driverDateOfBirth: null,
+  driverPhone: "",
+  driverEmail: "",
+  driverID: "",
+
   vehicleMake: "",
   vehicleModel: "",
   licensePlate: "",
-  coverageType: "",
+  // coverageType field removed
 
   incidentDate: null,
   accidentLocation: "",
@@ -88,7 +128,11 @@ const initialFormData: FormData = {
   policeInvolved: false,
   trafficServiceInvolved: false,
   friendlyReport: false,
+  friendlyReportDocument: null,
   bodilyInjuries: false,
+  bodilyInjuriesDescription: "",
+  damageDescription: "",
+  damagePhotos: [],
 
   drivers: [],
   witnesses: [],
@@ -110,12 +154,30 @@ export function ClaimFormProvider({ children }: { children: ReactNode }) {
   const isStepComplete = (step: number): boolean => {
     switch (step) {
       case 1:
+        if (formData.hasDifferentDriver) {
+          return (
+            !!formData.firstName &&
+            !!formData.lastName &&
+            !!formData.email &&
+            !!formData.phone &&
+            !!formData.driverFirstName &&
+            !!formData.driverLastName &&
+            !!formData.driverDateOfBirth
+          )
+        }
         return !!formData.firstName && !!formData.lastName && !!formData.email && !!formData.phone
       case 2:
-        return !!formData.vehicleMake && !!formData.vehicleModel && !!formData.licensePlate && !!formData.coverageType
+        // Updated validation - removed coverageType check
+        return !!formData.vehicleMake && !!formData.vehicleModel && !!formData.licensePlate
       case 3:
         return (
-          !!formData.accidentLocation && !!formData.accidentDescription && !!formData.incidentDate // Added incidentDate validation here
+          !!formData.accidentLocation &&
+          !!formData.accidentDescription &&
+          !!formData.incidentDate &&
+          !!formData.damageDescription && // Keep damage description required
+          (!formData.bodilyInjuries || !!formData.bodilyInjuriesDescription) &&
+          (!formData.friendlyReport || !!formData.friendlyReportDocument)
+          // Removed: formData.damagePhotos.length > 0
         )
       case 4:
         return true // Optional step, can proceed without adding drivers or witnesses
@@ -145,6 +207,9 @@ export function ClaimFormProvider({ children }: { children: ReactNode }) {
           if (parsedData.incidentDate) {
             parsedData.incidentDate = new Date(parsedData.incidentDate)
           }
+          if (parsedData.driverDateOfBirth) {
+            parsedData.driverDateOfBirth = new Date(parsedData.driverDateOfBirth)
+          }
 
           // Only update state if the data is different
           if (JSON.stringify(parsedData) !== JSON.stringify(formData)) {
@@ -163,7 +228,6 @@ export function ClaimFormProvider({ children }: { children: ReactNode }) {
     return false
   }
 
-  // Add this useEffect to the ClaimFormProvider component
   useEffect(() => {
     // Try to load saved progress when component mounts
     loadProgress()

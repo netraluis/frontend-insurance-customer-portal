@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useClaimForm } from "./claim-form-context"
-import { FormStepper } from "@/components/form-stepper"
+import { FormStepper } from "./form-stepper"
 import PolicyInformation from "./steps/policy-information"
 import VehicleInformation from "./steps/vehicle-information"
 import AccidentDetails from "./steps/accident-details"
@@ -11,8 +11,8 @@ import Documentation from "./steps/documentation"
 import ReviewSubmit from "./steps/review-submit"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { toast } from "@/components/ui/use-toast"
 import { ArrowLeft, ArrowRight, Save } from "lucide-react"
-import { toast } from "sonner"
 
 export default function ClaimFormLayout() {
   const { currentStep, setCurrentStep, isStepComplete, saveProgress, loadProgress, isSubmitted } = useClaimForm()
@@ -41,14 +41,20 @@ export default function ClaimFormLayout() {
     // Try to load saved progress when component mounts - only once
     const hasLoadedProgress = loadProgress()
     if (hasLoadedProgress) {
-      toast.success("Les dades de la reclamació guardades anteriorment han estat carregades.")
+      toast({
+        title: "Progress Restored",
+        description: "Your previously saved form data has been loaded.",
+      })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []) // Empty dependency array ensures this only runs once
 
   const handleSave = () => {
     saveProgress()
-    toast.success("Les dades de la reclamació guardades anteriorment han estat carregades. Les pots veure mes endevant.")
+    toast({
+      title: "Progress Saved",
+      description: "Your form progress has been saved. You can return later to continue.",
+    })
   }
 
   const handleNext = () => {
@@ -87,19 +93,19 @@ export default function ClaimFormLayout() {
   const getStepTitle = () => {
     switch (currentStep) {
       case 1:
-        return "Informació de la pòlissa"
+        return "Policy Information"
       case 2:
-        return "Informació del vehicle"
+        return "Vehicle Information"
       case 3:
-        return "Detalls de l'accident"
+        return "Accident Details"
       case 4:
-        return "Parts involucrades"
+        return "Involved Parties"
       case 5:
-        return "Càrrega de documents"
+        return "Upload Documentation"
       case 6:
-        return "Revisar i enviar"
+        return "Review and Submit"
       default:
-        return "Formulari de reclamació"
+        return "Auto Claim Form"
     }
   }
 
@@ -134,14 +140,14 @@ export default function ClaimFormLayout() {
               {currentStep > 1 && (
                 <Button variant="outline" onClick={handlePrevious} className="flex items-center gap-2">
                   <ArrowLeft className="h-4 w-4" />
-                  Anterior
+                  Previous
                 </Button>
               )}
             </div>
             <div className="flex gap-2">
               <Button variant="outline" onClick={handleSave} className="flex items-center gap-2">
                 <Save className="h-4 w-4" />
-                Guardar dades
+                Save Progress
               </Button>
               {currentStep < 6 ? (
                 <Button
@@ -149,12 +155,12 @@ export default function ClaimFormLayout() {
                   disabled={!isStepComplete(currentStep)}
                   className="flex items-center gap-2"
                 >
-                  Següent
+                  Next
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               ) : (
                 <Button type="submit" form="review-form">
-                  Enviar reclamació
+                  Submit Claim
                 </Button>
               )}
             </div>
