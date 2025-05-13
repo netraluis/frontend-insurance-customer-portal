@@ -34,7 +34,7 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
     doc.setFont("helvetica", "normal")
     autoTable(doc, {
       startY: 55,
-      head: [["Full Name", "Email", "Phone"]],
+      head: [["Nom", "Email", "Telèfon"]],
       body: [[`${formData.firstName} ${formData.lastName}`, formData.email, formData.phone]],
       theme: "grid",
       headStyles: { fillColor: [161, 161, 170], textColor: [255, 255, 255] }, // Zinc-400
@@ -44,19 +44,19 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
     // Add vehicle information
     doc.setFontSize(14)
     doc.setFont("helvetica", "bold")
-    doc.text("Vehicle Information", 14, doc.lastAutoTable.finalY + 15)
+    doc.text("Informació del vehicle", 14, doc.lastAutoTable.finalY + 15)
 
     doc.setFontSize(10)
     doc.setFont("helvetica", "normal")
     autoTable(doc, {
       startY: doc.lastAutoTable.finalY + 20,
-      head: [["Vehicle", "License Plate", "Coverage Type", "Incident Date"]],
+      head: [["Marca", "Matrícula", "Tipus de cobertura", "Data de l'incident"]],
       body: [
         [
           `${formData.vehicleMake} ${formData.vehicleModel}`,
           formData.licensePlate,
           formData.coverageType.charAt(0).toUpperCase() + formData.coverageType.slice(1),
-          formData.incidentDate ? format(formData.incidentDate, "PPP") : "Not specified",
+          formData.incidentDate ? format(formData.incidentDate, "PPP") : "No especificat",
         ],
       ],
       theme: "grid",
@@ -67,13 +67,13 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
     // Add accident details
     doc.setFontSize(14)
     doc.setFont("helvetica", "bold")
-    doc.text("Accident Details", 14, doc.lastAutoTable.finalY + 15)
+    doc.text("Detalls de l'accident", 14, doc.lastAutoTable.finalY + 15)
 
     doc.setFontSize(10)
     doc.setFont("helvetica", "normal")
     autoTable(doc, {
       startY: doc.lastAutoTable.finalY + 20,
-      head: [["Location", "Description"]],
+      head: [["Lloc", "Descripció"]],
       body: [[formData.accidentLocation, formData.accidentDescription]],
       theme: "grid",
       headStyles: { fillColor: [161, 161, 170], textColor: [255, 255, 255] }, // Zinc-400
@@ -86,13 +86,13 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
     // Add additional accident information
     autoTable(doc, {
       startY: doc.lastAutoTable.finalY + 5,
-      head: [["Police Involved", "Traffic Service", "Friendly Report", "Bodily Injuries"]],
+      head: [["Policia involucrada", "Servei de trànsit", "Reportatge amistós", "Víctimes físiques"]],
       body: [
         [
-          formData.policeInvolved ? "Yes" : "No",
-          formData.trafficServiceInvolved ? "Yes" : "No",
-          formData.friendlyReport ? "Yes" : "No",
-          formData.bodilyInjuries ? "Yes" : "No",
+          formData.policeInvolved ? "Sí" : "No",
+          formData.trafficServiceInvolved ? "Sí" : "No",
+          formData.friendlyReport ? "Sí" : "No",
+          formData.bodilyInjuries ? "Sí" : "No",
         ],
       ],
       theme: "grid",
@@ -104,7 +104,7 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
     if (formData.drivers.length > 0) {
       doc.setFontSize(14)
       doc.setFont("helvetica", "bold")
-      doc.text("Other Drivers", 14, doc.lastAutoTable.finalY + 15)
+      doc.text("Altres conductors", 14, doc.lastAutoTable.finalY + 15)
 
       doc.setFontSize(10)
       doc.setFont("helvetica", "normal")
@@ -120,7 +120,7 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
 
       autoTable(doc, {
         startY: doc.lastAutoTable.finalY + 20,
-        head: [["Name", "Email", "Vehicle", "License Plate", "Insurance", "Policy Number"]],
+        head: [["Nom", "Email", "Marca", "Matrícula", "Assistència", "Número de polissa"]],
         body: driversData,
         theme: "grid",
         headStyles: { fillColor: [161, 161, 170], textColor: [255, 255, 255] }, // Zinc-400
@@ -144,7 +144,7 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
       } else {
         doc.setFontSize(14)
         doc.setFont("helvetica", "bold")
-        doc.text("Witnesses", 14, doc.lastAutoTable.finalY + 15)
+        doc.text("Testimonis", 14, doc.lastAutoTable.finalY + 15)
       }
 
       doc.setFontSize(10)
@@ -159,7 +159,7 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
 
       autoTable(doc, {
         startY: doc.lastAutoTable.finalY + 20,
-        head: [["Name", "Email", "Phone", "Statement"]],
+        head: [["Nom", "Email", "Telèfon", "Declaració"]],
         body: witnessesData,
         theme: "grid",
         headStyles: { fillColor: [161, 161, 170], textColor: [255, 255, 255] }, // Zinc-400
@@ -178,7 +178,7 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
       } else {
         doc.setFontSize(14)
         doc.setFont("helvetica", "bold")
-        doc.text("Uploaded Documents", 14, doc.lastAutoTable.finalY + 15)
+        doc.text("Documents pujats", 14, doc.lastAutoTable.finalY + 15)
       }
 
       doc.setFontSize(10)
@@ -191,7 +191,7 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
 
       autoTable(doc, {
         startY: doc.lastAutoTable.finalY + 20,
-        head: [["Document Name", "Type"]],
+        head: [["Nom del document", "Tipus"]],
         body: documentsData,
         theme: "grid",
         headStyles: { fillColor: [161, 161, 170], textColor: [255, 255, 255] }, // Zinc-400
@@ -206,7 +206,7 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
       doc.setFontSize(8)
       doc.setTextColor(113, 113, 122) // Zinc-500
       doc.text(
-        `Page ${i} of ${pageCount} | Auto Claim Reference: ${claimNumber}`,
+        `Pàgina ${i} de ${pageCount} | Ref. Auto: ${claimNumber}`,
         pageWidth / 2,
         doc.internal.pageSize.getHeight() - 10,
         { align: "center" },
@@ -219,7 +219,7 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
       buffer: Buffer.from(doc.output("arraybuffer")),
     }
   } catch (error) {
-    console.error("Error generating PDF:", error)
+    console.error("Error al generar el PDF:", error)
     return {
       dataUrl: "",
       buffer: Buffer.from(""),
