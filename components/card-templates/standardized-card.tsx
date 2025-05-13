@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { cn } from "@/lib/utils"
-import { InsuranceCard } from "@/app/components/insurance-card"
+import { InsuranceCard } from "@/components/insurance-card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"

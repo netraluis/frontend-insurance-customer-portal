@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Badge } from "@/components/ui/badge"
 import { Car, HomeIcon, Plane, Heart, Plus, ArrowUpDown } from "lucide-react"
-import { PolicyList, PolicyStatus } from "@/app/components/policy-list"
+import { PolicyList, PolicyStatus } from "@/components/policy-list"
 
 // Sample policy data
 const policies = [  

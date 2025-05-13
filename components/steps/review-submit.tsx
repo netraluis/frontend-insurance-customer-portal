@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
-import { useClaimForm } from "@/app/components/claim-form-context"
+import { useClaimForm } from "@/components/claim-form-context"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"

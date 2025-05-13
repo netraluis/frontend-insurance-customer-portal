@@ -11,8 +11,8 @@ import {
   DocumentCardSkeleton,
   StatusCard,
   StatusCardSkeleton,
-} from "@/app/components/card-templates"
-import { PolicyListWithLoading } from "@/app/components/examples/policy-list-with-loading"
+} from "@/components/card-templates"
+import { PolicyListWithLoading } from "@/components/examples/policy-list-with-loading"
 import { FileText, Download, Eye, MoreHorizontal, Calendar, DollarSign } from "lucide-react"
 
 export default function LoadingStatesExamplePage() {

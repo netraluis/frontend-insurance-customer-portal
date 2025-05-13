@@ -4,7 +4,7 @@ import { Progress } from "@/components/ui/progress"
 import { ArrowRight, CheckCircle2, Clock, AlertCircle } from "lucide-react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
-import { InsuranceCard } from "@/app/components/insurance-card"
+import { InsuranceCard } from "@/components/insurance-card"
 
 interface ClaimCardProps {
   id: string

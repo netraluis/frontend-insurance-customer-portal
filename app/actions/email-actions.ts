@@ -1,7 +1,7 @@
 "use server"
 
 //import nodemailer from "nodemailer"
-import type { FormData } from "../components/claim-form-context"
+import type { FormData } from "../../components/claim-form-context"
 // import { format } from "date-fns"
 import { LoopsClient } from "loops";
 

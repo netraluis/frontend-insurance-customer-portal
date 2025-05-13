@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useClaimForm } from "./claim-form-context"
-import { FormStepper } from "@/app/components/form-stepper"
+import { FormStepper } from "@/components/form-stepper"
 import PolicyInformation from "./steps/policy-information"
 import VehicleInformation from "./steps/vehicle-information"
 import AccidentDetails from "./steps/accident-details"

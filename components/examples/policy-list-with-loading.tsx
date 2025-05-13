@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { ListItemCard, ListItemCardSkeleton } from "@/app/components/card-templates"
+import { ListItemCard, ListItemCardSkeleton } from "@/components/card-templates"
 import { Car, HomeIcon, ArrowRight } from "lucide-react"
 import Link from "next/link"
 

@@ -23,7 +23,7 @@ import {
   Grid,
   List,
 } from "lucide-react"
-import { ClaimsList } from "@/app/components/claims-list"
+import { ClaimsList } from "@/components/claims-list"
 import { useState } from "react"
 
 // Sample claims data

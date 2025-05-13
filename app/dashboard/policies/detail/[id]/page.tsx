@@ -7,8 +7,8 @@ import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Bell, Car, Shield, FileText, CreditCard, Download, ArrowLeft, CheckCircle2 } from "lucide-react"
 import Link from "next/link"
-import { ClaimCard } from "@/app/components/claim-card"
-import { DocumentCard } from "@/app/components/document-card"
+import { ClaimCard } from "@/components/claim-card"
+import { DocumentCard } from "@/components/document-card"
 import Image from 'next/image';
 import { use } from "react";
 export default function PolicyDetail({ params }: { params: Promise<{ id: string }> }) {

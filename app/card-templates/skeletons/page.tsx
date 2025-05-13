@@ -6,7 +6,7 @@ import {
     DocumentCardSkeleton,
     ProfileCardSkeleton,
     StatusCardSkeleton,
-  } from "@/app/components/card-templates"
+  } from "@/components/card-templates"
   
   export default function CardSkeletonsPage() {
     return (

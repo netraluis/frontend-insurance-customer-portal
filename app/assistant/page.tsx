@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Bell, Bot, FileText, ClipboardList, CreditCard, HelpCircle } from "lucide-react"
-import { FullChatAssistant } from "@/app/components/full-chat-assistant"
+import { FullChatAssistant } from "@/components/full-chat-assistant"
 
 export default function AssistantPage() {
   return (

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { FileText, Download, FileSpreadsheet, CreditCard } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { InsuranceCard } from "@/app/components/insurance-card"
+import { InsuranceCard } from "@/components/insurance-card"
 
 interface DocumentCardProps {
   id: string

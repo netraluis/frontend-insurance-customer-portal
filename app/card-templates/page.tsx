@@ -7,7 +7,7 @@ import {
   DocumentCard,
   ProfileCard,
   StatusCard,
-} from "@/app/components/card-templates"
+} from "@/components/card-templates"
 import {
   FileText,
   Download,

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { SidebarTrigger } from "@/components/ui/sidebar"
-import { BasicCard, MetricCard, ListItemCard, DocumentCard, StatusCard } from "@/app/components/card-templates"
+import { BasicCard, MetricCard, ListItemCard, DocumentCard, StatusCard } from "@/components/card-templates"
 import {
   Car,
   HomeIcon,

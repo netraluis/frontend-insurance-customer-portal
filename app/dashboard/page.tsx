@@ -3,13 +3,13 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ArrowRight, Calendar, Car, ClipboardList, Folder, Heart, HomeIcon, Link, Plane } from "lucide-react"
-import { DocumentCard } from "../components/card-templates/document-card"
+import { DocumentCard } from "../../components/card-templates/document-card"
 import { Button } from "@/components/ui/button"
-import { ClaimCard } from "../components/claim-card"
+import { ClaimCard } from "../../components/claim-card"
 import { Tabs, TabsContent } from "@/components/ui/tabs"
-import { PolicyCard } from "../components/policy-card"
-import { DashboardMetricCard } from "../components/dashboard-metric-card"
-import { CardPolisses } from "../components/card-polisses"
+import { PolicyCard } from "../../components/policy-card"
+import { DashboardMetricCard } from "../../components/dashboard-metric-card"
+import { CardPolisses } from "../../components/card-polisses"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 
 export default function Page() {

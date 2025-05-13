@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { PhoneInput } from "@/app/components/phone-input"
+import { PhoneInput } from "@/components/phone-input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export function PhoneInputExample() {
