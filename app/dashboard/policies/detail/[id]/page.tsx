@@ -10,11 +10,12 @@ import Link from "next/link"
 import { ClaimCard } from "@/app/components/claim-card"
 import { DocumentCard } from "@/app/components/document-card"
 import Image from 'next/image';
-
-export default function PolicyDetail({ params }: { params: { id: string } }) {
+import { use } from "react";
+export default function PolicyDetail({ params }: { params: Promise<{ id: string }> }) {
   // In a real app, you would fetch the policy details based on the ID
+  const { id } = use( params)
   const policy = {
-    id: params.id,
+    id: id,
     title: "Auto Insurance",
     type: "auto",
     status: "active",

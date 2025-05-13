@@ -24,14 +24,16 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
+import { use } from "react"
 
-export default function ClaimDetailPage({ params }: { params: { id: string } }) {
+export default function ClaimDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use( params)
   // In a real app, you would fetch the claim details based on the ID
   const claim = {
-    id: params.id,
-    title: "Reclamació d'accident de cotxe",
-    date: "10 d'abril de 2025",
-    status: "en curs",
+    id: id,
+    title: "Auto Accident Claim",
+    date: "April 10, 2025",
+    status: "in-progress",
     progress: 65,
     policyId: "POL-AUTO-001",
     policyType: "auto",
