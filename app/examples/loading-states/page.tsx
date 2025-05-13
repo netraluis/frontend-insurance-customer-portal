@@ -25,13 +25,13 @@ export default function LoadingStatesExamplePage() {
   return (
     <div className="container py-8">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold">Loading States Example</h1>
-        <Button onClick={toggleLoading}>{isLoading ? "Show Content" : "Show Loading States"}</Button>
+        <h1 className="text-3xl font-bold">Exemple de carregar estats</h1>
+        <Button onClick={toggleLoading}>{isLoading ? "Mostrar contingut" : "Mostrar estats de carrega"}</Button>
       </div>
 
       <div className="grid gap-8">
         <section>
-          <h2 className="text-2xl font-semibold mb-4">Dashboard Metrics</h2>
+          <h2 className="text-2xl font-semibold mb-4">Mètriques del dashboard</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {isLoading ? (
               <>
@@ -43,17 +43,17 @@ export default function LoadingStatesExamplePage() {
             ) : (
               <>
                 <MetricCard
-                  title="Active Policies"
+                  title="Polítiques actives"
                   value="4"
                   icon={FileText}
-                  description="All policies are active"
+                  description="Totes les polítiques estan actives"
                   trend="stable"
                 />
                 <MetricCard
-                  title="Open Claims"
+                  title="Reclamacions obertes"
                   value="1"
                   icon={FileText}
-                  description="1 claim in progress"
+                  description="1 reclamació en curs"
                   trend="up"
                   trendValue="1"
                 />
@@ -61,17 +61,17 @@ export default function LoadingStatesExamplePage() {
                   title="Documents"
                   value="12"
                   icon={FileText}
-                  description="2 require attention"
+                  description="2 requereix atenció"
                   trend="up"
                   trendValue="2"
                 />
                 <MetricCard
-                  title="Next Payment"
+                  title="Pròxim pagament"
                   value="$248.33"
                   icon={Calendar}
-                  description="Due in 14 days"
+                  description="Venc en 14 dies"
                   trend="down"
-                  trendValue="14 days"
+                  trendValue="14 dies"
                 />
               </>
             )}
@@ -79,12 +79,12 @@ export default function LoadingStatesExamplePage() {
         </section>
 
         <section>
-          <h2 className="text-2xl font-semibold mb-4">Policy List</h2>
+          <h2 className="text-2xl font-semibold mb-4">Llista de polítiques</h2>
           <PolicyListWithLoading />
         </section>
 
         <section>
-          <h2 className="text-2xl font-semibold mb-4">Recent Claims</h2>
+          <h2 className="text-2xl font-semibold mb-4">Reclamacions recents</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {isLoading ? (
               <>
@@ -94,34 +94,34 @@ export default function LoadingStatesExamplePage() {
             ) : (
               <>
                 <StatusCard
-                  title="Auto Accident Claim"
-                  subtitle="Claim #CLM-001"
+                  title="Reclamació d'accident de cotxe"
+                  subtitle="Reclamació #CLM-001"
                   status="in-progress"
                   progress={65}
                   details={[
-                    { label: "Filed", value: "April 10, 2025", icon: Calendar },
-                    { label: "Amount", value: "$3,450.00", icon: DollarSign },
+                    { label: "Inicialment presentada", value: "10 d'abril de 2025", icon: Calendar },
+                    { label: "Import", value: "3.450,00 €", icon: DollarSign },
                   ]}
-                  description="Collision damage to front bumper and hood"
+                  description="Col·lisió de front bumper i capota"
                   actions={
                     <Button variant="ghost" size="sm" className="gap-1">
-                      View Details
+                      Veure detalls
                     </Button>
                   }
                 />
                 <StatusCard
-                  title="Water Damage Claim"
-                  subtitle="Claim #CLM-002"
+                  title="Reclamació de danys d'aigua"
+                  subtitle="Reclamació #CLM-002"
                   status="completed"
                   progress={100}
                   details={[
-                    { label: "Filed", value: "March 5, 2025", icon: Calendar },
-                    { label: "Amount", value: "$2,800.00", icon: DollarSign },
+                    { label: "Inicialment presentada", value: "5 de març de 2025", icon: Calendar },
+                    { label: "Import", value: "2.800,00 €", icon: DollarSign },
                   ]}
-                  description="Water damage from burst pipe in basement"
+                  description="Danys d'aigua per ruptura de tub en el soterrani"
                   actions={
                     <Button variant="ghost" size="sm" className="gap-1">
-                      View Details
+                      Veure detalls
                     </Button>
                   }
                 />
@@ -154,73 +154,73 @@ export default function LoadingStatesExamplePage() {
                 ) : (
                   <>
                     <DocumentCard
-                      title="Auto Insurance Policy"
+                      title="Política d'assegurança de cotxe"
                       fileType="PDF"
                       fileSize="1.2 MB"
-                      date="April 15, 2025"
-                      category="Policy Document"
+                      date="15 d'abril de 2025"
+                      category="Document de política"
                       tags={["auto", "policy"]}
                       actions={
                         <>
                           <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                             <Eye className="h-4 w-4" />
-                            <span className="sr-only">Preview</span>
+                            <span className="sr-only">Previsualitzar</span>
                           </Button>
                           <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                             <Download className="h-4 w-4" />
-                            <span className="sr-only">Download</span>
+                            <span className="sr-only">Descarregar</span>
                           </Button>
                           <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                             <MoreHorizontal className="h-4 w-4" />
-                            <span className="sr-only">More options</span>
+                            <span className="sr-only">Més opcions</span>
                           </Button>
                         </>
                       }
                     />
                     <DocumentCard
-                      title="Auto Claim Report"
+                      title="Informe de reclamació d'assegurança de cotxe"
                       fileType="PDF"
                       fileSize="0.8 MB"
-                      date="April 10, 2025"
-                      category="Claim Document"
+                      date="10 d'abril de 2025"
+                      category="Document de reclamació"
                       tags={["auto", "claim"]}
                       actions={
                         <>
                           <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                             <Eye className="h-4 w-4" />
-                            <span className="sr-only">Preview</span>
+                            <span className="sr-only">Previsualitzar</span>
                           </Button>
                           <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                             <Download className="h-4 w-4" />
-                            <span className="sr-only">Download</span>
+                            <span className="sr-only">Descarregar</span>
                           </Button>
                           <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                             <MoreHorizontal className="h-4 w-4" />
-                            <span className="sr-only">More options</span>
+                            <span className="sr-only">Més opcions</span>
                           </Button>
                         </>
                       }
                     />
                     <DocumentCard
-                      title="Payment Receipt"
+                      title="Comprovat de pagament"
                       fileType="PDF"
                       fileSize="0.3 MB"
-                      date="April 1, 2025"
-                      category="Billing Document"
-                      tags={["payment", "receipt"]}
+                      date="1 de abril de 2025"
+                      category="Document de facturació"
+                      tags={["pagament", "comprovat"]}
                       actions={
                         <>
                           <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                             <Eye className="h-4 w-4" />
-                            <span className="sr-only">Preview</span>
+                            <span className="sr-only">Previsualitzar</span>
                           </Button>
                           <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                             <Download className="h-4 w-4" />
-                            <span className="sr-only">Download</span>
+                            <span className="sr-only">Descarregar</span>
                           </Button>
                           <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                             <MoreHorizontal className="h-4 w-4" />
-                            <span className="sr-only">More options</span>
+                            <span className="sr-only">Més opcions</span>
                           </Button>
                         </>
                       }

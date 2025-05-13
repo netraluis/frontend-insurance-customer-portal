@@ -121,9 +121,9 @@ export function UploadDocumentDialog({ open, onOpenChange }: UploadDocumentDialo
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[550px]">
         <DialogHeader>
-          <DialogTitle>Upload Document</DialogTitle>
+          <DialogTitle>Carregar document</DialogTitle>
           <DialogDescription>
-            Upload a document to your insurance portal. Supported formats: PDF, DOCX, JPG, PNG, ZIP.
+            Carrega un document al teu portal d'assegurances. Formats suportats: PDF, DOCX, JPG, PNG, ZIP.
           </DialogDescription>
         </DialogHeader>
 
@@ -143,9 +143,9 @@ export function UploadDocumentDialog({ open, onOpenChange }: UploadDocumentDialo
                 accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.zip"
               />
               <Upload className="h-10 w-10 mx-auto text-zinc-400 mb-4" />
-              <h3 className="text-lg font-medium mb-1">Drag and drop your file here</h3>
-              <p className="text-sm text-zinc-500 mb-4">or click to browse files</p>
-              <p className="text-xs text-zinc-400">Supported formats: PDF, DOCX, JPG, PNG, ZIP (Max 10MB)</p>
+              <h3 className="text-lg font-medium mb-1">Arrossega i deixa anar el teu document aquí</h3>
+              <p className="text-sm text-zinc-500 mb-4">o fes clic per navegar per arxius</p>
+              <p className="text-xs text-zinc-400">Formats suportats: PDF, DOCX, JPG, PNG, ZIP (Màx 10MB)</p>
             </div>
           ) : (
             <div className="border rounded-lg p-4">
@@ -157,55 +157,55 @@ export function UploadDocumentDialog({ open, onOpenChange }: UploadDocumentDialo
                 </div>
                 <Button variant="ghost" size="sm" onClick={handleRemoveFile}>
                   <X className="h-4 w-4" />
-                  <span className="sr-only">Remove file</span>
+                  <span className="sr-only">Elimina el document</span>
                 </Button>
               </div>
             </div>
           )}
 
           <div className="grid gap-2">
-            <Label htmlFor="title">Document Title</Label>
-            <Input id="title" placeholder="Enter document title" />
+            <Label htmlFor="title">Títol del document</Label>
+            <Input id="title" placeholder="Entra el títol del document" />
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="description">Description</Label>
-            <Textarea id="description" placeholder="Enter document description" />
+            <Label htmlFor="description">Descripció del document</Label>
+            <Textarea id="description" placeholder="Entra la descripció del document" />
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="category">Category</Label>
+            <Label htmlFor="category">Categoría</Label>
             <Select>
               <SelectTrigger id="category">
-                <SelectValue placeholder="Select category" />
+                <SelectValue placeholder="Selecciona la categoria" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="policy">Policy Document</SelectItem>
-                <SelectItem value="claim">Claim Document</SelectItem>
-                <SelectItem value="billing">Billing Document</SelectItem>
-                <SelectItem value="id">ID Document</SelectItem>
-                <SelectItem value="other">Other</SelectItem>
+                <SelectItem value="policy">Document de política</SelectItem>
+                <SelectItem value="claim">Document de reclamació</SelectItem>
+                <SelectItem value="billing">Document de facturació</SelectItem>
+                <SelectItem value="id">Document d'identificació</SelectItem>
+                <SelectItem value="other">Altres</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="policy">Related Policy</Label>
+            <Label htmlFor="policy">Política relacionada</Label>
             <Select>
               <SelectTrigger id="policy">
-                <SelectValue placeholder="Select policy" />
+                <SelectValue placeholder="Selecciona la política" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="POL-AUTO-001">Auto Insurance (POL-AUTO-001)</SelectItem>
-                <SelectItem value="POL-HOME-001">Home Insurance (POL-HOME-001)</SelectItem>
-                <SelectItem value="POL-TRAVEL-001">Travel Insurance (POL-TRAVEL-001)</SelectItem>
-                <SelectItem value="POL-HEALTH-001">Health Insurance (POL-HEALTH-001)</SelectItem>
+                <SelectItem value="POL-AUTO-001">Assigurance de cotxe (POL-AUTO-001)</SelectItem>
+                <SelectItem value="POL-HOME-001">Assigurance de casa (POL-HOME-001)</SelectItem>
+                <SelectItem value="POL-TRAVEL-001">Assigurance de viatge (POL-TRAVEL-001)</SelectItem>
+                <SelectItem value="POL-HEALTH-001">Assigurance de salut (POL-HEALTH-001)</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="tags">Tags</Label>
+            <Label htmlFor="tags">Etiquetes</Label>
             <div className="flex flex-wrap gap-2 mb-2">
               {tags.map((tag) => (
                 <div
@@ -221,25 +221,25 @@ export function UploadDocumentDialog({ open, onOpenChange }: UploadDocumentDialo
             </div>
             <Input
               id="tags"
-              placeholder="Add tags (press Enter to add)"
+              placeholder="Afegeix etiquetes (press Enter per afegir)"
               value={tagInput}
               onChange={(e) => setTagInput(e.target.value)}
               onKeyDown={handleAddTag}
             />
-            <p className="text-xs text-zinc-500">Press Enter to add multiple tags</p>
+            <p className="text-xs text-zinc-500">Press Enter per afegir múltiples etiquetes</p>
           </div>
         </div>
 
         <DialogFooter>
           <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancel
+            Cancel·lar
           </Button>
           <Button
             onClick={handleUpload}
             disabled={!selectedFile || isUploading}
             className={cn(isUploading && "opacity-80")}
           >
-            {isUploading ? "Uploading..." : "Upload Document"}
+            {isUploading ? "Carregant..." : "Carregar document"}
           </Button>
         </DialogFooter>
       </DialogContent>

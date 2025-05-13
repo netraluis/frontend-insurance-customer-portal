@@ -87,7 +87,7 @@ export default function PolicyDetail({ params }: { params: { id: string } }) {
         <Button variant="ghost" size="icon" asChild>
           <Link href="/dashboard">
             <ArrowLeft className="h-4 w-4" />
-            <span className="sr-only">Back</span>
+            <span className="sr-only">Enrere</span>
           </Link>
         </Button>
         <div className="flex items-center gap-2">
@@ -99,7 +99,7 @@ export default function PolicyDetail({ params }: { params: { id: string } }) {
         <div className="ml-auto flex items-center gap-4">
           <Button variant="outline" size="icon">
             <Bell className="h-4 w-4" />
-            <span className="sr-only">Notifications</span>
+            <span className="sr-only">Notificacions</span>
           </Button>
           <Avatar>
             <AvatarImage src="/vibrant-street-market.png" alt="User" />
@@ -112,35 +112,31 @@ export default function PolicyDetail({ params }: { params: { id: string } }) {
         <div className="grid gap-6">
           <Tabs defaultValue="overview">
             <TabsList className="mb-4">
-              <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="coverage">Coverage</TabsTrigger>
-              <TabsTrigger value="claims">Claims</TabsTrigger>
+              <TabsTrigger value="overview">Resum</TabsTrigger>
+              <TabsTrigger value="coverage">Cobertures</TabsTrigger>
+              <TabsTrigger value="claims">Reclamacions</TabsTrigger>
               <TabsTrigger value="documents">Documents</TabsTrigger>
-              <TabsTrigger value="billing">Billing</TabsTrigger>
+              <TabsTrigger value="billing">Facturació</TabsTrigger>
             </TabsList>
 
             <TabsContent value="overview" className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <Card className="md:col-span-2">
                   <CardHeader>
-                    <CardTitle>Policy Summary</CardTitle>
-                    <CardDescription>AI-generated summary of your policy coverage</CardDescription>
+                    <CardTitle>Resum de la política</CardTitle>
+                    <CardDescription>Resum de la cobertura de la teva política</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
                       <p className="text-sm text-zinc-600">
-                        This auto insurance policy provides comprehensive coverage for your 2022 Toyota Camry. It
-                        includes liability protection of $300,000 for bodily injury and property damage, collision
-                        coverage of $100,000 with a $500 deductible, and comprehensive coverage of $100,000.
+                        Aquesta política d'assegurança automòbil proporciona cobertura completa per al teu Toyota Camry de 2022. Inclou protecció de responsabilitat de 300.000 dòlars per a les víctimes de la malaltia i danys a la propietat, cobertura de col·lisió de 100.000 dòlars amb un deduïble de 500 dòlars i cobertura de danys a la propietat de 100.000 dòlars.
                       </p>
                       <p className="text-sm text-zinc-600">
-                        Additional coverages include $10,000 for medical payments and $300,000 for uninsured motorist
-                        protection. The policy is active and set to renew on May 15, 2025, with a monthly premium of
-                        $128.45.
+                        Les cobertures addicionals inclouen 10.000 dòlars per a pagaments mèdics i 300.000 dòlars per a la protecció de驾驶者 de vehicles sense assegurança. La política està activa i està programada per a renovar el 15 de maig de 2025, amb un preu mensual de 128,45 dòlars.
                       </p>
                       <div className="flex items-center gap-2 text-sm text-zinc-600">
                         <Shield className="h-4 w-4 text-green-600" />
-                        <span>Your policy meets all state minimum requirements and provides excellent protection.</span>
+                        <span>La teva política compleix amb tots els requisits mínims d'estat i proporciona una protecció excel·lent.</span>
                       </div>
                     </div>
                   </CardContent>
@@ -148,33 +144,33 @@ export default function PolicyDetail({ params }: { params: { id: string } }) {
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>Policy Details</CardTitle>
-                    <CardDescription>Key information about your policy</CardDescription>
+                    <CardTitle>Detalls de la política</CardTitle>
+                    <CardDescription>Informació clau sobre la teva política</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <dl className="space-y-3 text-sm">
                       <div className="flex justify-between">
-                        <dt className="text-zinc-500">Policy Number</dt>
+                        <dt className="text-zinc-500">Número de política</dt>
                         <dd className="font-medium">{policy.id}</dd>
                       </div>
                       <div className="flex justify-between">
-                        <dt className="text-zinc-500">Premium</dt>
+                        <dt className="text-zinc-500">Preu</dt>
                         <dd className="font-medium">{policy.premium}</dd>
                       </div>
                       <div className="flex justify-between">
-                        <dt className="text-zinc-500">Renewal Date</dt>
+                        <dt className="text-zinc-500">Data de renovació</dt>
                         <dd className="font-medium">{policy.renewalDate}</dd>
                       </div>
                       <div className="flex justify-between">
-                        <dt className="text-zinc-500">Start Date</dt>
+                        <dt className="text-zinc-500">Data d'inici</dt>
                         <dd className="font-medium">{policy.startDate}</dd>
                       </div>
                       <div className="flex justify-between">
-                        <dt className="text-zinc-500">Coverage Amount</dt>
+                        <dt className="text-zinc-500">Import de cobertura</dt>
                         <dd className="font-medium">{policy.coverageAmount}</dd>
                       </div>
                       <div className="flex justify-between">
-                        <dt className="text-zinc-500">Deductible</dt>
+                        <dt className="text-zinc-500">Deduïble</dt>
                         <dd className="font-medium">{policy.deductible}</dd>
                       </div>
                     </dl>
@@ -184,8 +180,8 @@ export default function PolicyDetail({ params }: { params: { id: string } }) {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Vehicle Information</CardTitle>
-                  <CardDescription>Details about the insured vehicle</CardDescription>
+                  <CardTitle>Informació del vehicle</CardTitle>
+                  <CardDescription>Detalls sobre el vehicle assegurat</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -198,7 +194,7 @@ export default function PolicyDetail({ params }: { params: { id: string } }) {
                           <h3 className="font-medium">
                             {policy.vehicle.year} {policy.vehicle.make} {policy.vehicle.model}
                           </h3>
-                          <p className="text-sm text-zinc-500">Primary Vehicle</p>
+                          <p className="text-sm text-zinc-500">Vehicle principal</p>
                         </div>
                       </div>
 
@@ -208,7 +204,7 @@ export default function PolicyDetail({ params }: { params: { id: string } }) {
                           <dd className="font-medium">{policy.vehicle.vin}</dd>
                         </div>
                         <div>
-                          <dt className="text-zinc-500">License Plate</dt>
+                          <dt className="text-zinc-500">Matrícula</dt>
                           <dd className="font-medium">{policy.vehicle.licensePlate}</dd>
                         </div>
                       </dl>
@@ -226,8 +222,8 @@ export default function PolicyDetail({ params }: { params: { id: string } }) {
             <TabsContent value="coverage" className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Coverage Details</CardTitle>
-                  <CardDescription>Breakdown of your policy coverage</CardDescription>
+                  <CardTitle>Detalls de la cobertura</CardTitle>
+                  <CardDescription>Desglossament de la cobertura de la teva política</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-6">
@@ -248,8 +244,8 @@ export default function PolicyDetail({ params }: { params: { id: string } }) {
             <TabsContent value="claims" className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Claims History</CardTitle>
-                  <CardDescription>History of claims filed under this policy</CardDescription>
+                  <CardTitle>Historial de reclamacions</CardTitle>
+                  <CardDescription>Historial de reclamacions presentades sota aquesta política</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
@@ -268,12 +264,11 @@ export default function PolicyDetail({ params }: { params: { id: string } }) {
                     {policy.claims.length === 0 && (
                       <div className="flex flex-col items-center justify-center py-8 text-center">
                         <CheckCircle2 className="h-12 w-12 text-green-500 mb-2" />
-                        <h3 className="text-lg font-medium">No Claims Filed</h3>
+                        <h3 className="text-lg font-medium">No hi ha reclamacions presentades</h3>
                         <p className="text-sm text-zinc-500 max-w-md mt-1">
-                          You haven&apos;t filed any claims under this policy. If you need to file a claim, please use the
-                          button below.
+                          No has presentat cap reclamació sota aquesta política. Si necessites presentar una reclamació, fes clic en el botó de sota.
                         </p>
-                        <Button className="mt-4">File a New Claim</Button>
+                        <Button className="mt-4">Presentar una nova reclamació</Button>
                       </div>
                     )}
                   </div>
@@ -285,12 +280,12 @@ export default function PolicyDetail({ params }: { params: { id: string } }) {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between">
                   <div>
-                    <CardTitle>Policy Documents</CardTitle>
-                    <CardDescription>Access and download your policy documents</CardDescription>
+                    <CardTitle>Documents de la política</CardTitle>
+                    <CardDescription>Accés i descàrrega dels documents de la teva política</CardDescription>
                   </div>
                   <Button>
                     <FileText className="mr-2 h-4 w-4" />
-                    Upload Document
+                    Carregar document
                   </Button>
                 </CardHeader>
                 <CardContent>
@@ -316,12 +311,12 @@ export default function PolicyDetail({ params }: { params: { id: string } }) {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between">
                   <div>
-                    <CardTitle>Payment History</CardTitle>
-                    <CardDescription>Record of your premium payments</CardDescription>
+                    <CardTitle>Historial de pagaments</CardTitle>
+                    <CardDescription>Registre dels teus pagaments de primes</CardDescription>
                   </div>
                   <Button>
                     <CreditCard className="mr-2 h-4 w-4" />
-                    Make a Payment
+                    Fer un pagament
                   </Button>
                 </CardHeader>
                 <CardContent>
@@ -329,11 +324,11 @@ export default function PolicyDetail({ params }: { params: { id: string } }) {
                     <table className="w-full border-collapse">
                       <thead>
                         <tr className="border-b">
-                          <th className="py-3 text-left font-medium text-zinc-500">Payment ID</th>
-                          <th className="py-3 text-left font-medium text-zinc-500">Date</th>
-                          <th className="py-3 text-left font-medium text-zinc-500">Amount</th>
-                          <th className="py-3 text-left font-medium text-zinc-500">Status</th>
-                          <th className="py-3 text-left font-medium text-zinc-500">Actions</th>
+                          <th className="py-3 text-left font-medium text-zinc-500">ID de pagament</th>
+                          <th className="py-3 text-left font-medium text-zinc-500">Data</th>
+                          <th className="py-3 text-left font-medium text-zinc-500">Import</th>
+                          <th className="py-3 text-left font-medium text-zinc-500">Estat</th>
+                          <th className="py-3 text-left font-medium text-zinc-500">Accions</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -369,25 +364,25 @@ export default function PolicyDetail({ params }: { params: { id: string } }) {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Payment Schedule</CardTitle>
-                  <CardDescription>Upcoming premium payments</CardDescription>
+                  <CardTitle>Programació de pagaments</CardTitle>
+                  <CardDescription>Pagaments de primes futurs</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
                     <div className="flex items-center justify-between border-b pb-4">
                       <div>
-                        <h3 className="font-medium">Next Payment</h3>
-                        <p className="text-sm text-zinc-500">May 1, 2025</p>
+                        <h3 className="font-medium">Pròxim pagament</h3>
+                        <p className="text-sm text-zinc-500">1 de maig de 2025</p>
                       </div>
                       <span className="font-semibold">$128.45</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="font-medium">Payment Method</h3>
-                        <p className="text-sm text-zinc-500">Visa ending in 4242</p>
+                        <h3 className="font-medium">Mètode de pagament</h3>
+                        <p className="text-sm text-zinc-500">Visa finalitzant en 4242</p>
                       </div>
                       <Button variant="outline" size="sm">
-                        Change
+                        Canviar
                       </Button>
                     </div>
                   </div>

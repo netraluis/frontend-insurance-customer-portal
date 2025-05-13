@@ -29,15 +29,15 @@ export default function ClaimDetailPage({ params }: { params: { id: string } }) 
   // In a real app, you would fetch the claim details based on the ID
   const claim = {
     id: params.id,
-    title: "Auto Accident Claim",
-    date: "April 10, 2025",
-    status: "in-progress",
+    title: "Reclamació d'accident de cotxe",
+    date: "10 d'abril de 2025",
+    status: "en curs",
     progress: 65,
     policyId: "POL-AUTO-001",
     policyType: "auto",
-    amount: "$3,450.00",
+    amount: "3.450,00 €",
     description:
-      "Collision damage to front bumper and hood. Accident occurred at intersection of Main St and 5th Ave. Other driver ran a red light and hit the front of my vehicle. Police report filed at the scene.",
+      "Danys a la part frontal del bumper i del capó. L'accident va ocórrer a l'intersecció de Main St i 5th Ave. L'altre conductor va circular a un llum vermell i va impactar frontalment el meu vehicle. El report de la policia va ser lliurat al lloc de l'accident.",
     submittedBy: "John Doe",
     assignedTo: "Sarah Johnson",
     lastUpdated: "April 15, 2025",
@@ -45,68 +45,68 @@ export default function ClaimDetailPage({ params }: { params: { id: string } }) 
       {
         date: "April 10, 2025",
         time: "09:15 AM",
-        title: "Claim Submitted",
-        description: "Claim was submitted through the online portal",
-        status: "completed",
+        title: "Reclamació presentada",
+        description: "La reclamació va ser presentada a través del portal en línia",
+        status: "completada",
       },
       {
         date: "April 11, 2025",
         time: "10:30 AM",
-        title: "Claim Assigned",
-        description: "Claim was assigned to Sarah Johnson",
-        status: "completed",
+        title: "Reclamació assignada",
+        description: "La reclamació va ser assignada a Sarah Johnson",
+        status: "completada",
       },
       {
         date: "April 12, 2025",
         time: "02:45 PM",
-        title: "Initial Assessment",
-        description: "Initial assessment completed by claims adjuster",
-        status: "completed",
+        title: "Assessament inicial",
+        description: "Assessament inicial completat per l'ajustador de reclamacions",
+        status: "completada",
       },
       {
         date: "April 15, 2025",
         time: "11:20 AM",
-        title: "Repair Estimate Requested",
-        description: "Repair estimate requested from approved auto shop",
-        status: "in-progress",
+        title: "Estimació de reparació sol·licitada",
+        description: "Estimació de reparació sol·licitada de la botiga d'autos aprovada",
+        status: "en curs",
       },
       {
         date: "April 18, 2025",
         time: "TBD",
-        title: "Repair Estimate Review",
-        description: "Review of repair estimate by claims adjuster",
-        status: "pending",
+        title: "Revisió de l'estimació de reparació",
+        description: "Revisió de l'estimació de reparació per l'ajustador de reclamacions",
+        status: "pendent",
       },
       {
         date: "April 22, 2025",
         time: "TBD",
-        title: "Payment Processing",
-        description: "Processing of payment for approved claim amount",
-        status: "pending",
+        title: "Processament de pagament",
+        description: "Processament de pagament per la quantitat de reclamació aprovada",
+        status: "pendent",
       },
     ],
     documents: [
       {
         id: "DOC-001",
-        title: "Accident Report",
-        type: "claim",
-        date: "April 10, 2025",
+        title: "Report de l'accident",
+        type: "reclamació",
+        date: "10 d'abril de 2025",
         fileSize: "1.2 MB",
         fileType: "PDF",
       },
       {
         id: "DOC-002",
-        title: "Vehicle Photos",
-        type: "claim",
-        date: "April 10, 2025",
+        title: "Fotos del vehicle",
+        type: "reclamació",
+        date: "10 d'abril de 2025",
         fileSize: "3.5 MB",
         fileType: "ZIP",
       },
       {
         id: "DOC-003",
-        title: "Police Report",
-        type: "claim",
-        date: "April 11, 2025",
+        title: "Report de la policia",
+        type: "reclamació",
+        date: "11 d'abril de 2025",
         fileSize: "0.8 MB",
         fileType: "PDF",
       },
@@ -116,7 +116,7 @@ export default function ClaimDetailPage({ params }: { params: { id: string } }) 
         id: "MSG-001",
         from: "Sarah Johnson",
         role: "Claims Adjuster",
-        date: "April 11, 2025",
+        date: "11 d'abril de 2025",
         time: "11:45 AM",
         content:
           "Hello Mr. Doe, I've been assigned to your claim. I've reviewed the initial information and will need some additional details about the accident. Could you please provide any photos you have of the damage?",
@@ -125,7 +125,7 @@ export default function ClaimDetailPage({ params }: { params: { id: string } }) 
         id: "MSG-002",
         from: "John Doe",
         role: "Policyholder",
-        date: "April 11, 2025",
+        date: "11 d'abril de 2025",
         time: "01:30 PM",
         content:
           "Hi Sarah, I've uploaded photos of the damage to my vehicle. Please let me know if you need anything else.",
@@ -134,7 +134,7 @@ export default function ClaimDetailPage({ params }: { params: { id: string } }) 
         id: "MSG-003",
         from: "Sarah Johnson",
         role: "Claims Adjuster",
-        date: "April 12, 2025",
+        date: "12 d'abril de 2025",
         time: "09:15 AM",
         content:
           "Thank you for the photos. I've scheduled an assessment with our approved auto shop. They will contact you directly to arrange a time for the inspection.",
@@ -197,7 +197,7 @@ export default function ClaimDetailPage({ params }: { params: { id: string } }) 
         <Button variant="ghost" size="icon" asChild>
           <Link href="/claims">
             <ArrowLeft className="h-4 w-4" />
-            <span className="sr-only">Back</span>
+            <span className="sr-only">Enrere</span>
           </Link>
         </Button>
         <div className="flex items-center gap-2">
@@ -210,7 +210,7 @@ export default function ClaimDetailPage({ params }: { params: { id: string } }) 
         <div className="ml-auto flex items-center gap-4">
           <Button variant="outline" size="icon">
             <Bell className="h-4 w-4" />
-            <span className="sr-only">Notifications</span>
+            <span className="sr-only">Notificacions</span>
           </Button>
           <Avatar>
             <AvatarImage src="/vibrant-street-market.png" alt="User" />
@@ -223,18 +223,18 @@ export default function ClaimDetailPage({ params }: { params: { id: string } }) 
         <div className="grid gap-6">
           <Tabs defaultValue="overview">
             <TabsList className="mb-4">
-              <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="timeline">Timeline</TabsTrigger>
+              <TabsTrigger value="overview">Resum</TabsTrigger>
+              <TabsTrigger value="timeline">Cronologia</TabsTrigger>
               <TabsTrigger value="documents">Documents</TabsTrigger>
-              <TabsTrigger value="messages">Messages</TabsTrigger>
+              <TabsTrigger value="messages">Missatges</TabsTrigger>
             </TabsList>
 
             <TabsContent value="overview" className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <Card className="md:col-span-2">
                   <CardHeader>
-                    <CardTitle>Claim Summary</CardTitle>
-                    <CardDescription>Details about your insurance claim</CardDescription>
+                    <CardTitle>Resum de la reclamació</CardTitle>
+                    <CardDescription>Detalls sobre la vostra reclamació d'assegurança</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
@@ -247,18 +247,18 @@ export default function ClaimDetailPage({ params }: { params: { id: string } }) 
                               {getPolicyTypeIcon()}
                             </div>
                             <div>
-                              <h3 className="font-medium">Policy Information</h3>
+                              <h3 className="font-medium">Informació de la política</h3>
                               <p className="text-sm text-zinc-500">{claim.policyId}</p>
                             </div>
                           </div>
 
                           <dl className="grid grid-cols-2 gap-3 text-sm">
                             <div>
-                              <dt className="text-zinc-500">Policy Type</dt>
+                              <dt className="text-zinc-500">Tipus de política</dt>
                               <dd className="font-medium capitalize">{claim.policyType}</dd>
                             </div>
                             <div>
-                              <dt className="text-zinc-500">Claim ID</dt>
+                              <dt className="text-zinc-500">ID de la reclamació</dt>
                               <dd className="font-medium">{claim.id}</dd>
                             </div>
                           </dl>
@@ -270,14 +270,14 @@ export default function ClaimDetailPage({ params }: { params: { id: string } }) 
                               <User className="h-5 w-5 text-zinc-700" />
                             </div>
                             <div>
-                              <h3 className="font-medium">Claims Adjuster</h3>
+                              <h3 className="font-medium">Ajustador de reclamacions</h3>
                               <p className="text-sm text-zinc-500">{claim.assignedTo}</p>
                             </div>
                           </div>
 
                           <div className="flex items-center gap-2 text-sm">
                             <Phone className="h-4 w-4 text-zinc-500" />
-                            <span>(555) 123-4567</span>
+                            <span>+34 666 666 666</span>
                           </div>
                           <div className="flex items-center gap-2 text-sm">
                             <Mail className="h-4 w-4 text-zinc-500" />
@@ -291,33 +291,33 @@ export default function ClaimDetailPage({ params }: { params: { id: string } }) 
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>Claim Details</CardTitle>
-                    <CardDescription>Key information about your claim</CardDescription>
+                    <CardTitle>Detalls de la reclamació</CardTitle>
+                    <CardDescription>Informació clau sobre la vostra reclamació</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <dl className="space-y-3 text-sm">
                       <div className="flex justify-between">
-                        <dt className="text-zinc-500">Claim Number</dt>
+                        <dt className="text-zinc-500">Número de reclamació</dt>
                         <dd className="font-medium">{claim.id}</dd>
                       </div>
                       <div className="flex justify-between">
-                        <dt className="text-zinc-500">Date Filed</dt>
+                        <dt className="text-zinc-500">Data presentada</dt>
                         <dd className="font-medium">{claim.date}</dd>
                       </div>
                       <div className="flex justify-between">
-                        <dt className="text-zinc-500">Last Updated</dt>
+                        <dt className="text-zinc-500">Data actualitzada</dt>
                         <dd className="font-medium">{claim.lastUpdated}</dd>
                       </div>
                       <div className="flex justify-between">
-                        <dt className="text-zinc-500">Claim Amount</dt>
+                        <dt className="text-zinc-500">Quantitat de la reclamació</dt>
                         <dd className="font-medium">{claim.amount}</dd>
                       </div>
                       <div className="flex justify-between">
-                        <dt className="text-zinc-500">Status</dt>
+                        <dt className="text-zinc-500">Estat</dt>
                         <dd className="font-medium capitalize">{claim.status.replace("-", " ")}</dd>
                       </div>
                       <div className="flex justify-between">
-                        <dt className="text-zinc-500">Progress</dt>
+                        <dt className="text-zinc-500">Progrés</dt>
                         <dd className="font-medium">{claim.progress}%</dd>
                       </div>
                     </dl>
@@ -327,8 +327,8 @@ export default function ClaimDetailPage({ params }: { params: { id: string } }) 
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Claim Progress</CardTitle>
-                  <CardDescription>Current status of your claim</CardDescription>
+                  <CardTitle>Progrés de la reclamació</CardTitle>
+                  <CardDescription>Estat actual de la vostra reclamació</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-6">
@@ -350,7 +350,7 @@ export default function ClaimDetailPage({ params }: { params: { id: string } }) 
                       ))}
                     </div>
                     <Button variant="outline" className="w-full">
-                      View Full Timeline
+                      Veure cronologia completa
                     </Button>
                   </div>
                 </CardContent>
@@ -360,8 +360,8 @@ export default function ClaimDetailPage({ params }: { params: { id: string } }) 
             <TabsContent value="timeline" className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Claim Timeline</CardTitle>
-                  <CardDescription>Complete history of your claim</CardDescription>
+                  <CardTitle>Cronologia de la reclamació</CardTitle>
+                  <CardDescription>Historial complet de la vostra reclamació</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="relative">
@@ -389,12 +389,12 @@ export default function ClaimDetailPage({ params }: { params: { id: string } }) 
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between">
                   <div>
-                    <CardTitle>Claim Documents</CardTitle>
-                    <CardDescription>Documents related to your claim</CardDescription>
+                    <CardTitle>Documents de la reclamació</CardTitle>
+                    <CardDescription>Documents relacionats amb la vostra reclamació</CardDescription>
                   </div>
                   <Button>
                     <FileText className="mr-2 h-4 w-4" />
-                    Upload Document
+                    Carregar document
                   </Button>
                 </CardHeader>
                 <CardContent>
@@ -412,10 +412,10 @@ export default function ClaimDetailPage({ params }: { params: { id: string } }) 
                                 {document.fileType} • {document.fileSize} • {document.date}
                               </p>
                               <div className="mt-2 flex items-center justify-between">
-                                <span className="text-xs text-zinc-500">Claim Document</span>
+                                <span className="text-xs text-zinc-500">Document de la reclamació</span>
                                 <Button variant="ghost" size="sm" className="h-8 gap-1">
                                   <FileText className="h-3.5 w-3.5" />
-                                  <span>View</span>
+                                  <span>Veure</span>
                                 </Button>
                               </div>
                             </div>
@@ -432,12 +432,12 @@ export default function ClaimDetailPage({ params }: { params: { id: string } }) 
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between">
                   <div>
-                    <CardTitle>Messages</CardTitle>
-                    <CardDescription>Communication about your claim</CardDescription>
+                    <CardTitle>Missatges</CardTitle>
+                    <CardDescription>Comunicació sobre la vostra reclamació</CardDescription>
                   </div>
                   <Button>
                     <MessageSquare className="mr-2 h-4 w-4" />
-                    New Message
+                    Nou missatge
                   </Button>
                 </CardHeader>
                 <CardContent>

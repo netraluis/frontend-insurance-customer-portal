@@ -92,7 +92,7 @@ export default function CardUsageExample() {
                     actions={
                       <Button variant="ghost" size="sm" className="gap-1" asChild>
                         <Link href="/dashboard/policies/detail/POL-AUTO-001">
-                          View Details
+                          Veure detalls
                           <ArrowRight className="ml-1 h-3 w-3" />
                         </Link>
                       </Button>
@@ -111,7 +111,7 @@ export default function CardUsageExample() {
                     actions={
                       <Button variant="ghost" size="sm" className="gap-1" asChild>
                         <Link href="/dashboard/policies/detail/POL-HOME-001">
-                          View Details
+                          Veure detalls
                           <ArrowRight className="ml-1 h-3 w-3" />
                         </Link>
                       </Button>
@@ -128,7 +128,7 @@ export default function CardUsageExample() {
                 headerAction={
                   <Button variant="ghost" size="sm" asChild>
                     <a href="/claims">
-                      View All
+                      Veure tots
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </a>
                   </Button>
@@ -148,7 +148,7 @@ export default function CardUsageExample() {
                     actions={
                       <Button variant="ghost" size="sm" className="gap-1" asChild>
                         <a href="/claims/detail/CLM-001">
-                          View Details
+                          Veure detalls
                           <ArrowRight className="ml-1 h-3 w-3" />
                         </a>
                       </Button>
@@ -167,7 +167,7 @@ export default function CardUsageExample() {
                     actions={
                       <Button variant="ghost" size="sm" className="gap-1" asChild>
                         <a href="/claims/detail/CLM-002">
-                          View Details
+                          Veure detalls
                           <ArrowRight className="ml-1 h-3 w-3" />
                         </a>
                       </Button>
@@ -185,7 +185,7 @@ export default function CardUsageExample() {
               headerAction={
                 <Button variant="ghost" size="sm" asChild>
                   <a href="/documents">
-                    View All
+                    Veure tots
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </a>
                 </Button>
@@ -203,15 +203,15 @@ export default function CardUsageExample() {
                     <>
                       <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                         <Eye className="h-4 w-4" />
-                        <span className="sr-only">Preview</span>
+                        <span className="sr-only">Previsualitzar</span>
                       </Button>
                       <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                         <Download className="h-4 w-4" />
-                        <span className="sr-only">Download</span>
+                        <span className="sr-only">Descarregar</span>
                       </Button>
                       <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                         <MoreHorizontal className="h-4 w-4" />
-                        <span className="sr-only">More options</span>
+                        <span className="sr-only">Més opcions</span>
                       </Button>
                     </>
                   }
@@ -228,15 +228,15 @@ export default function CardUsageExample() {
                     <>
                       <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                         <Eye className="h-4 w-4" />
-                        <span className="sr-only">Preview</span>
+                        <span className="sr-only">Previsualitzar</span>
                       </Button>
                       <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                         <Download className="h-4 w-4" />
-                        <span className="sr-only">Download</span>
+                        <span className="sr-only">Descarregar</span>
                       </Button>
                       <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                         <MoreHorizontal className="h-4 w-4" />
-                        <span className="sr-only">More options</span>
+                        <span className="sr-only">Més opcions</span>
                       </Button>
                     </>
                   }
@@ -253,15 +253,15 @@ export default function CardUsageExample() {
                     <>
                       <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                         <Eye className="h-4 w-4" />
-                        <span className="sr-only">Preview</span>
+                        <span className="sr-only">Previsualitzar</span>
                       </Button>
                       <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                         <Download className="h-4 w-4" />
-                        <span className="sr-only">Download</span>
+                        <span className="sr-only">Descarregar</span>
                       </Button>
                       <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                         <MoreHorizontal className="h-4 w-4" />
-                        <span className="sr-only">More options</span>
+                        <span className="sr-only">Més opcions</span>
                       </Button>
                     </>
                   }

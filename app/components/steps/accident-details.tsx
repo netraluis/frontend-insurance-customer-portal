@@ -256,7 +256,7 @@ export default function AccidentDetails() {
 
             <div className="flex items-center justify-between">
               <div className="space-y-0.5">
-                <Label htmlFor="trafficServiceInvolved">Servei de trafic involucrat</Label>
+                <Label htmlFor="trafficServiceInvolved">Intervenció del servei de circulació comunal</Label>
                 <p className="text-sm text-zinc-500">Va participar el servei de trafic local en el siniestre?</p>
               </div>
               <Switch

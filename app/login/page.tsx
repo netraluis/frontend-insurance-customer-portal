@@ -43,18 +43,18 @@ export default function LoginPage() {
       <div className="lg:p-8">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col space-y-2 text-center">
-            <h1 className="text-2xl font-semibold tracking-tight">Welcome back</h1>
-            <p className="text-sm text-muted-foreground">Enter your email to sign in to your account</p>
+            <h1 className="text-2xl font-semibold tracking-tight">Benvingut de nou</h1>
+            <p className="text-sm text-muted-foreground">Entra amb el teu email per accedir al teu compte</p>
           </div>
           <LoginForm />
           <p className="px-8 text-center text-xs text-muted-foreground">
-            By continuing, you agree to our{" "}
+            Continuant, acceptes els nostres{" "}
             <a href="/terms" className="underline underline-offset-4 hover:text-primary">
-              Terms of Service
+              Termes de servei
             </a>{" "}
-            and{" "}
+            i{" "}
             <a href="/privacy" className="underline underline-offset-4 hover:text-primary">
-              Privacy Policy
+              Política de privacitat
             </a>
             .
           </p>

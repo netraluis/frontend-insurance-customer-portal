@@ -30,143 +30,143 @@ import { useState } from "react"
 const claims = [
   {
     id: "CLM-001",
-    title: "Auto Accident Claim",
-    date: "April 10, 2025",
+    title: "Reclamació d'accident de cotxe",
+    date: "10 d'abril de 2025",
     status: "in-progress",
     progress: 65,
     policyId: "POL-AUTO-001",
     policyType: "auto",
     amount: "$3,450.00",
-    description: "Collision damage to front bumper and hood",
+    description: "Col·lisió de front bumper i capota",
     submittedBy: "John Doe",
     assignedTo: "Sarah Johnson",
-    lastUpdated: "April 15, 2025",
+    lastUpdated: "15 d'abril de 2025",
   },
   {
     id: "CLM-002",
-    title: "Water Damage Claim",
-    date: "March 5, 2025",
+    title: "Reclamació de danys d'aigua",
+    date: "5 de març de 2025",
     status: "completed",
     progress: 100,
     policyId: "POL-HOME-001",
     policyType: "home",
     amount: "$2,800.00",
-    description: "Water damage from burst pipe in basement",
+    description: "Danys d'aigua des d'un tub trencat al soterrani",
     submittedBy: "John Doe",
     assignedTo: "Michael Brown",
-    lastUpdated: "March 20, 2025",
+    lastUpdated: "20 de març de 2025",
   },
   {
     id: "CLM-003",
-    title: "Medical Expense Claim",
-    date: "February 18, 2025",
+    title: "Reclamació de despeses mèdiques",
+    date: "18 de febrer de 2025",
     status: "completed",
     progress: 100,
     policyId: "POL-HEALTH-001",
     policyType: "health",
     amount: "$1,250.00",
-    description: "Emergency room visit and follow-up care",
+    description: "Visita a l'hospital d'emergència i cura de seguiment",
     submittedBy: "John Doe",
     assignedTo: "Emily Wilson",
-    lastUpdated: "March 1, 2025",
+    lastUpdated: "1 de març de 2025",
   },
   {
     id: "CLM-004",
-    title: "Stolen Property Claim",
-    date: "January 25, 2025",
+    title: "Reclamació de propietat robada",
+    date: "25 de gener de 2025",
     status: "denied",
     progress: 100,
     policyId: "POL-HOME-001",
     policyType: "home",
     amount: "$1,800.00",
-    description: "Laptop and electronics stolen during break-in",
+    description: "Portàtil i electrònics robats durant el trencament",
     submittedBy: "John Doe",
     assignedTo: "Michael Brown",
-    lastUpdated: "February 10, 2025",
+    lastUpdated: "10 de febrer de 2025",
   },
   {
     id: "CLM-005",
-    title: "Windshield Replacement",
-    date: "April 2, 2025",
+    title: "Reclamació de substitució de vidre",
+    date: "2 de abril de 2025",
     status: "in-progress",
     progress: 30,
     policyId: "POL-AUTO-001",
     policyType: "auto",
     amount: "$850.00",
-    description: "Cracked windshield from road debris",
+    description: "Vidre trencat de carretera",
     submittedBy: "John Doe",
     assignedTo: "Sarah Johnson",
-    lastUpdated: "April 5, 2025",
+    lastUpdated: "5 d'abril de 2025",
   },
   {
     id: "CLM-006",
-    title: "Roof Damage Claim",
-    date: "March 15, 2025",
+    title: "Reclamació de danys a la teulada",
+    date: "15 de març de 2025",
     status: "in-progress",
     progress: 45,
     policyId: "POL-HOME-001",
     policyType: "home",
     amount: "$4,200.00",
-    description: "Storm damage to roof and gutters",
+    description: "Danys de tempestat a la teulada i gàbies",
     submittedBy: "John Doe",
     assignedTo: "Michael Brown",
-    lastUpdated: "March 25, 2025",
+    lastUpdated: "25 de març de 2025",
   },
   {
     id: "CLM-007",
-    title: "Prescription Medication",
-    date: "March 10, 2025",
+    title: "Reclamació de medicació prescrita",
+    date: "10 de març de 2025",
     status: "completed",
     progress: 100,
     policyId: "POL-HEALTH-001",
     policyType: "health",
     amount: "$350.00",
-    description: "Monthly prescription medication reimbursement",
+    description: "Reimbursement of monthly prescription medication",
     submittedBy: "John Doe",
     assignedTo: "Emily Wilson",
-    lastUpdated: "March 15, 2025",
+    lastUpdated: "15 de març de 2025",
   },
   {
     id: "CLM-008",
-    title: "Travel Cancellation",
-    date: "February 5, 2025",
+    title: "Reclamació de cancel·lació de viatge",
+    date: "5 de febrer de 2025",
     status: "completed",
     progress: 100,
     policyId: "POL-TRAVEL-001",
     policyType: "travel",
     amount: "$1,500.00",
-    description: "Trip cancellation due to illness",
+    description: "Cancel·lació de viatge degut a malaltia",
     submittedBy: "John Doe",
     assignedTo: "David Clark",
-    lastUpdated: "February 20, 2025",
+    lastUpdated: "20 de febrer de 2025",
   },
   {
     id: "CLM-009",
-    title: "Dental Procedure",
-    date: "April 8, 2025",
+    title: "Procediment dental",
+    date: "8 d'abril de 2025",
     status: "pending",
     progress: 10,
     policyId: "POL-HEALTH-001",
     policyType: "health",
     amount: "$950.00",
-    description: "Root canal and crown procedure",
+    description: "Procediment de canal i corona",
     submittedBy: "John Doe",
     assignedTo: "Unassigned",
-    lastUpdated: "April 8, 2025",
+    lastUpdated: "8 d'abril de 2025",
   },
   {
     id: "CLM-010",
-    title: "Lost Luggage",
-    date: "January 15, 2025",
+    title: "Bagatge perdut",
+    date: "15 de gener de 2025",
     status: "denied",
     progress: 100,
     policyId: "POL-TRAVEL-001",
     policyType: "travel",
     amount: "$800.00",
-    description: "Luggage lost during international flight",
+    description: "Bagatge perdut durant el vol internacional",
     submittedBy: "John Doe",
     assignedTo: "David Clark",
-    lastUpdated: "January 30, 2025",
+    lastUpdated: "30 de gener de 2025",
   },
 ]
 
@@ -258,7 +258,7 @@ export default function ClaimsPage() {
       <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-6">
         <SidebarTrigger />
         <div className="flex items-center gap-2">
-          <h1 className="text-xl font-semibold">Claims</h1>
+          <h1 className="text-xl font-semibold">Reclamacions</h1>
         </div>
         <div className="ml-auto"></div>
       </header>
@@ -267,12 +267,12 @@ export default function ClaimsPage() {
         <div className="grid gap-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h2 className="text-2xl font-semibold">Claims Overview</h2>
-              <p className="text-muted-foreground">Manage and track all your insurance claims</p>
+              <h2 className="text-2xl font-semibold">Resum de reclamacions</h2>
+              <p className="text-muted-foreground">Gestiona i segueix totes les teves reclamacions d'assegurança</p>
             </div>
             <Button className="w-full md:w-auto">
               <Plus className="mr-2 h-4 w-4" />
-              File New Claim
+              Crear nova reclamació
             </Button>
           </div>
 
@@ -281,7 +281,7 @@ export default function ClaimsPage() {
             <Card>
               <CardContent className="p-6">
                 <div className="flex flex-col gap-1">
-                  <span className="text-sm text-muted-foreground">Total Claims</span>
+                  <span className="text-sm text-muted-foreground">Total de reclamacions</span>
                   <span className="text-2xl font-semibold">{totalClaims}</span>
                   <span className="text-sm text-muted-foreground">${totalClaimAmount.toLocaleString()}</span>
                 </div>
@@ -290,11 +290,11 @@ export default function ClaimsPage() {
             <Card className="bg-blue-50">
               <CardContent className="p-6">
                 <div className="flex flex-col gap-1">
-                  <span className="text-sm text-blue-700">In Progress</span>
+                  <span className="text-sm text-blue-700">En curs</span>
                   <span className="text-2xl font-semibold text-blue-700">{inProgressClaims}</span>
                   <div className="flex items-center gap-1 text-sm text-blue-700">
                     <Clock className="h-3.5 w-3.5" />
-                    <span>Being processed</span>
+                    <span>En curs</span>
                   </div>
                 </div>
               </CardContent>
@@ -302,11 +302,11 @@ export default function ClaimsPage() {
             <Card className="bg-amber-50">
               <CardContent className="p-6">
                 <div className="flex flex-col gap-1">
-                  <span className="text-sm text-amber-700">Pending</span>
+                  <span className="text-sm text-amber-700">En espera</span>
                   <span className="text-2xl font-semibold text-amber-700">{pendingClaims}</span>
                   <div className="flex items-center gap-1 text-sm text-amber-700">
                     <AlertCircle className="h-3.5 w-3.5" />
-                    <span>Awaiting review</span>
+                    <span>En espera</span>
                   </div>
                 </div>
               </CardContent>
@@ -314,11 +314,11 @@ export default function ClaimsPage() {
             <Card className="bg-green-50">
               <CardContent className="p-6">
                 <div className="flex flex-col gap-1">
-                  <span className="text-sm text-green-700">Completed</span>
+                  <span className="text-sm text-green-700">Completades</span>
                   <span className="text-2xl font-semibold text-green-700">{completedClaims}</span>
                   <div className="flex items-center gap-1 text-sm text-green-700">
                     <CheckCircle2 className="h-3.5 w-3.5" />
-                    <span>Successfully processed</span>
+                    <span>Processades correctament</span>
                   </div>
                 </div>
               </CardContent>
@@ -326,11 +326,11 @@ export default function ClaimsPage() {
             <Card className="bg-red-50">
               <CardContent className="p-6">
                 <div className="flex flex-col gap-1">
-                  <span className="text-sm text-red-700">Denied</span>
+                  <span className="text-sm text-red-700">Denegades</span>
                   <span className="text-2xl font-semibold text-red-700">{deniedClaims}</span>
                   <div className="flex items-center gap-1 text-sm text-red-700">
                     <XCircle className="h-3.5 w-3.5" />
-                    <span>Not approved</span>
+                    <span>No aprovades</span>
                   </div>
                 </div>
               </CardContent>
@@ -341,13 +341,13 @@ export default function ClaimsPage() {
             <Card>
               <CardHeader className="pb-3">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <CardTitle>Claims List</CardTitle>
+                  <CardTitle>Llista de reclamacions</CardTitle>
                   <div className="flex flex-wrap items-center gap-2">
                     <div className="relative w-full sm:w-auto">
                       <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                       <Input
                         type="search"
-                        placeholder="Search claims..."
+                        placeholder="Cerca reclamacions..."
                         className="pl-8 w-full sm:w-[200px]"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
@@ -355,41 +355,41 @@ export default function ClaimsPage() {
                     </div>
                     <Select value={policyTypeFilter} onValueChange={setPolicyTypeFilter}>
                       <SelectTrigger className="w-full sm:w-[150px]">
-                        <SelectValue placeholder="Policy Type" />
+                        <SelectValue placeholder="Tipus de política" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="all">All Policies</SelectItem>
-                        <SelectItem value="auto">Auto</SelectItem>
-                        <SelectItem value="home">Home</SelectItem>
-                        <SelectItem value="health">Health</SelectItem>
-                        <SelectItem value="travel">Travel</SelectItem>
+                        <SelectItem value="all">Totes les polítiques</SelectItem>
+                        <SelectItem value="auto">Cotxe</SelectItem>
+                        <SelectItem value="home">Casa</SelectItem>
+                        <SelectItem value="health">Salut</SelectItem>
+                        <SelectItem value="travel">Viatge</SelectItem>
                       </SelectContent>
                     </Select>
                     <Select value={statusFilter} onValueChange={setStatusFilter}>
                       <SelectTrigger className="w-full sm:w-[150px]">
-                        <SelectValue placeholder="Status" />
+                        <SelectValue placeholder="Estat" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="all">All Statuses</SelectItem>
-                        <SelectItem value="in-progress">In Progress</SelectItem>
-                        <SelectItem value="pending">Pending</SelectItem>
-                        <SelectItem value="completed">Completed</SelectItem>
-                        <SelectItem value="denied">Denied</SelectItem>
+                        <SelectItem value="all">Tots els estats</SelectItem>
+                        <SelectItem value="in-progress">En curs</SelectItem>
+                        <SelectItem value="pending">En espera</SelectItem>
+                        <SelectItem value="completed">Completades</SelectItem>
+                        <SelectItem value="denied">Denegades</SelectItem>
                       </SelectContent>
                     </Select>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button variant="outline" size="sm">
                           <ArrowUpDown className="mr-2 h-3.5 w-3.5" />
-                          Sort By
+                          Ordenar per
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
-                        <DropdownMenuItem>Date (Newest)</DropdownMenuItem>
-                        <DropdownMenuItem>Date (Oldest)</DropdownMenuItem>
-                        <DropdownMenuItem>Amount (High-Low)</DropdownMenuItem>
-                        <DropdownMenuItem>Amount (Low-High)</DropdownMenuItem>
-                        <DropdownMenuItem>Status</DropdownMenuItem>
+                        <DropdownMenuItem>Data (Més recent)</DropdownMenuItem>
+                        <DropdownMenuItem>Data (Més antic)</DropdownMenuItem>
+                        <DropdownMenuItem>Import (Alt-Baix)</DropdownMenuItem>
+                        <DropdownMenuItem>Import (Baix-Alt)</DropdownMenuItem>
+                        <DropdownMenuItem>Estat</DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                     <div className="flex border rounded-md">
@@ -417,31 +417,31 @@ export default function ClaimsPage() {
                 <Tabs defaultValue="all">
                   <TabsList className="mb-4">
                     <TabsTrigger value="all">
-                      All Claims
+                      Totes les reclamacions
                       <Badge variant="outline" className="ml-2 bg-zinc-100">
                         {filteredClaims.length}
                       </Badge>
                     </TabsTrigger>
                     <TabsTrigger value="in-progress">
-                      In Progress
+                      En curs
                       <Badge variant="outline" className="ml-2 bg-blue-100 text-blue-700">
                         {filteredClaims.filter((claim) => claim.status === "in-progress").length}
                       </Badge>
                     </TabsTrigger>
                     <TabsTrigger value="pending">
-                      Pending
+                      En espera
                       <Badge variant="outline" className="ml-2 bg-amber-100 text-amber-700">
                         {filteredClaims.filter((claim) => claim.status === "pending").length}
                       </Badge>
                     </TabsTrigger>
                     <TabsTrigger value="completed">
-                      Completed
+                      Completades
                       <Badge variant="outline" className="ml-2 bg-green-100 text-green-700">
                         {filteredClaims.filter((claim) => claim.status === "completed").length}
                       </Badge>
                     </TabsTrigger>
                     <TabsTrigger value="denied">
-                      Denied
+                      Denegades
                       <Badge variant="outline" className="ml-2 bg-red-100 text-red-700">
                         {filteredClaims.filter((claim) => claim.status === "denied").length}
                       </Badge>
