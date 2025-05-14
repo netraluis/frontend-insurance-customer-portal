@@ -22,6 +22,7 @@ import { useIsMobile } from "@/hooks/use-mobile"
 import { Label } from "@/components/ui/label"
 import { MobileUploadDialog } from "@/components/ui/mobile-upload-dialog"
 import { toast } from "@/components/ui/use-toast"
+import Image from "next/image"
 
 export type FileObject = {
   id: string
@@ -33,7 +34,7 @@ export type FileObject = {
   relativePath?: string // For directory uploads
 }
 
-export interface UnifiedUploadProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrop"> {
+export interface UnifiedUploadProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange" | "onDrop"> {
   value?: FileObject | FileObject[] | null
   onChange?: (files: FileObject | FileObject[] | null) => void
   onDrop?: (acceptedFiles: File[]) => void
@@ -80,7 +81,7 @@ export function UnifiedUpload({
   mobileButtonText,
   errorMessage,
   showPreview = true,
-  previewSize = "medium",
+  // previewSize = "medium",
   emptyState,
   uploadingState,
   successMessage,
@@ -92,7 +93,12 @@ export function UnifiedUpload({
   ...props
 }: UnifiedUploadProps) {
   const [files, setFiles] = React.useState<FileObject[]>(
-    multiple ? (Array.isArray(value) ? value : value ? [value] : []) : value ? [value] : [],
+    !value ? 
+      [] : 
+      (Array.isArray(value) ? 
+        value : 
+        [value]
+      )
   )
   const [uploadProgress, setUploadProgress] = React.useState<number>(0)
   const [isUploading, setIsUploading] = React.useState<boolean>(false)
@@ -240,6 +246,7 @@ export function UnifiedUpload({
           url,
           size: file.size,
           thumbnail,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           relativePath: (file as any).webkitRelativePath || (file as any).relativePath || undefined,
         })
       }
@@ -334,17 +341,17 @@ export function UnifiedUpload({
   }
 
   // Get file icon based on file type
-  const getFileIcon = (type: string) => {
-    if (type.includes("image")) {
-      return <FileImage className="h-5 w-5 text-blue-500" />
-    } else if (type.includes("video")) {
-      return <FileVideo className="h-5 w-5 text-red-500" />
-    } else if (type.includes("pdf")) {
-      return <FileText className="h-5 w-5 text-amber-500" />
-    } else {
-      return <FileIcon className="h-5 w-5 text-zinc-500" />
-    }
-  }
+  // const getFileIcon = (type: string) => {
+  //   if (type.includes("image")) {
+  //     return <FileImage className="h-5 w-5 text-blue-500" />
+  //   } else if (type.includes("video")) {
+  //     return <FileVideo className="h-5 w-5 text-red-500" />
+  //   } else if (type.includes("pdf")) {
+  //     return <FileText className="h-5 w-5 text-amber-500" />
+  //   } else {
+  //     return <FileIcon className="h-5 w-5 text-zinc-500" />
+  //   }
+  // }
 
   // Format file size
   const formatFileSize = (bytes: number) => {
@@ -381,10 +388,11 @@ export function UnifiedUpload({
             })),
             multiple,
           }
-
-          // @ts-ignore - TypeScript doesn't know about this API yet
+          // @ts-expect-error - TypeScript doesn't know about this API yet
           const fileHandles = await window.showOpenFilePicker(pickerOpts)
-          const files = await Promise.all(fileHandles.map((handle: any) => handle.getFile()))
+          const files = await Promise.all(
+            fileHandles.map((handle: FileSystemFileHandle) => handle.getFile())
+          )
           handleFiles(files)
           return
         } catch (err) {
@@ -394,11 +402,11 @@ export function UnifiedUpload({
         }
       } else if (option === "directory" && supportsFileSystemAccess) {
         try {
-          // @ts-ignore - TypeScript doesn't know about this API yet
+          // @ts-expect-error TypeScript doesn't know about this API yet
           const dirHandle = await window.showDirectoryPicker()
           const files: File[] = []
 
-          // Recursive function to get all files in a directory
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           async function getFilesRecursively(dirHandle: any, path = "") {
             for await (const entry of dirHandle.values()) {
               if (entry.kind === "file") {
@@ -482,16 +490,16 @@ export function UnifiedUpload({
   }
 
   // Determine the preview size class
-  const getPreviewSizeClass = () => {
-    switch (previewSize) {
-      case "small":
-        return "h-16 w-16"
-      case "large":
-        return "h-24 w-24"
-      default:
-        return "h-20 w-20"
-    }
-  }
+  // const getPreviewSizeClass = () => {
+  //   switch (previewSize) {
+  //     case "small":
+  //       return "h-16 w-16"
+  //     case "large":
+  //       return "h-24 w-24"
+  //     default:
+  //       return "h-20 w-20"
+  //   }
+  // }
 
   // Determine if we should accept images
   const shouldAcceptImages = () => {
@@ -663,7 +671,7 @@ export function UnifiedUpload({
             ref={fileSystemInputRef}
             className="hidden"
             accept={Object.entries(accept)
-              .flatMap(([type, exts]) => exts)
+              .flatMap(([, exts]) => exts)
               .join(",")}
             multiple={multiple}
             onChange={(e) => {
@@ -678,7 +686,7 @@ export function UnifiedUpload({
             type="file"
             ref={directoryInputRef}
             className="hidden"
-            // @ts-ignore - TypeScript doesn't know about this attribute
+            // @ts-expect-error - TypeScript doesn't know about this attribute
             webkitdirectory=""
             directory=""
             multiple={true}
@@ -734,10 +742,12 @@ export function UnifiedUpload({
               <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                 {files[0].type.startsWith("image/") && showPreview ? (
                   <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-md overflow-hidden border border-zinc-200 flex-shrink-0">
-                    <img
+                    <Image
                       src={files[0].url || "/placeholder.svg"}
                       alt={files[0].name}
-                      className="h-full w-full object-cover"
+                      width={400}
+                      height={400}
+                      className="w-full h-full object-cover"
                     />
                   </div>
                 ) : (
@@ -809,15 +819,19 @@ export function UnifiedUpload({
                   {/* File Preview */}
                   <div className="aspect-square relative">
                     {file.type.startsWith("image/") && showPreview ? (
-                      <img
+                      <Image
                         src={file.url || "/placeholder.svg"}
                         alt={file.name}
+                        width={400}
+                        height={400}
                         className="w-full h-full object-cover"
                       />
                     ) : file.type.startsWith("video/") && file.thumbnail && showPreview ? (
-                      <img
+                      <Image
                         src={file.thumbnail || "/placeholder.svg"}
                         alt={file.name}
+                        width={400}
+                        height={400}
                         className="w-full h-full object-cover"
                       />
                     ) : (

@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils"
 import { FileIcon, X, Upload, FileText, FileImage, FileIcon as FilePdf, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
-
-export interface FileUploadProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrop"> {
+import Image from "next/image"
+export interface FileUploadProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrop" | "onChange"> {
   value?: File | null
   onChange?: (file: File | null) => void
   onDrop?: (acceptedFiles: File[]) => void
@@ -165,9 +165,11 @@ export function FileUpload({
           <div className="flex flex-col items-center justify-center p-4 w-full">
             {showPreview && preview && file?.type.includes("image") ? (
               <div className="relative w-full max-w-xs h-32 mb-2">
-                <img
+                <Image
                   src={preview || "/placeholder.svg"}
                   alt={file.name}
+                  width={400}
+                  height={400}
                   className="w-full h-full object-contain rounded border border-zinc-200"
                 />
               </div>

@@ -3,12 +3,12 @@
 import * as React from "react"
 import { useDropzone, type DropzoneOptions } from "react-dropzone"
 import { cn } from "@/lib/utils"
-import { FileIcon, Upload, FileImage, FileVideo, Loader2, Plus, Trash2, ExternalLink, Play } from "lucide-react"
+import { Upload, FileVideo, Loader2, Plus, Trash2, ExternalLink, Play } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import type { DamageMedia } from "../claim-form-context"
-
-export interface MediaUploadProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrop"> {
+import Image from "next/image"
+export interface MediaUploadProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrop" | "onChange"> {
   files?: DamageMedia[]
   onChange?: (files: DamageMedia[]) => void
   onDrop?: (acceptedFiles: File[]) => void
@@ -176,15 +176,15 @@ export function MediaUpload({
   }
 
   // Get file icon based on file type
-  const getFileIcon = (type: string) => {
-    if (type.includes("image")) {
-      return <FileImage className="h-5 w-5 text-blue-500" />
-    } else if (type.includes("video")) {
-      return <FileVideo className="h-5 w-5 text-red-500" />
-    } else {
-      return <FileIcon className="h-5 w-5 text-zinc-500" />
-    }
-  }
+  // const getFileIcon = (type: string) => {
+  //   if (type.includes("image")) {
+  //     return <FileImage className="h-5 w-5 text-blue-500" />
+  //   } else if (type.includes("video")) {
+  //     return <FileVideo className="h-5 w-5 text-red-500" />
+  //   } else {
+  //     return <FileIcon className="h-5 w-5 text-zinc-500" />
+  //   }
+  // }
 
   // Format file size
   const formatFileSize = (bytes: number) => {
@@ -260,13 +260,21 @@ export function MediaUpload({
                 {/* Preview */}
                 <div className="aspect-square relative">
                   {mediaType === "photo" ? (
-                    <img src={file.url || "/placeholder.svg"} alt={file.name} className="w-full h-full object-cover" />
+                    <Image
+                      src={file.url || "/placeholder.svg"}
+                      alt={file.name}
+                      width={400}
+                      height={400}
+                      className="w-full h-full object-cover"
+                    />
                   ) : (
                     <div className="w-full h-full relative">
                       {file.thumbnail ? (
-                        <img
+                        <Image
                           src={file.thumbnail || "/placeholder.svg"}
                           alt={file.name}
+                          width={400}
+                          height={400}
                           className="w-full h-full object-cover"
                         />
                       ) : (

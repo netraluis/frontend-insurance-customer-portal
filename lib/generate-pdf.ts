@@ -52,7 +52,7 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
     if (formData.hasDifferentDriver) {
       doc.setFontSize(14)
       doc.setFont("helvetica", "bold")
-      doc.text("Driver Information", 14, doc.lastAutoTable.finalY + 15)
+      doc.text("Driver Information", 14, (doc.lastAutoTable?.finalY || 0) + 15)
 
       doc.setFontSize(10)
       doc.setFont("helvetica", "normal")
@@ -66,7 +66,7 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
       ]
 
       autoTable(doc, {
-        startY: doc.lastAutoTable.finalY + 20,
+        startY: (doc.lastAutoTable?.finalY ?? 0) + 20,
         head: [["Driver Name", "Date of Birth", "Driver ID"]],
         body: driverData,
         theme: "grid",
@@ -87,7 +87,7 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
       if (driverContactData.length > 0) {
         const driverContact = driverContactData.join(" / ")
         autoTable(doc, {
-          startY: doc.lastAutoTable.finalY + 5,
+          startY: (doc.lastAutoTable?.finalY ?? 0) + 5,
           head: [["Contact Information"]],
           body: [[driverContact]],
           theme: "grid",
@@ -105,12 +105,12 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
     // Add vehicle information
     doc.setFontSize(14)
     doc.setFont("helvetica", "bold")
-    doc.text("Vehicle Information", 14, doc.lastAutoTable.finalY + 15)
+    doc.text("Vehicle Information", 14, (doc.lastAutoTable?.finalY ?? 0) + 15)
 
     doc.setFontSize(10)
     doc.setFont("helvetica", "normal")
     autoTable(doc, {
-      startY: doc.lastAutoTable.finalY + 20,
+      startY: (doc.lastAutoTable?.finalY ?? 0) + 20,
       head: [["Vehicle", "License Plate", "Incident Date"]],
       body: [
         [
@@ -132,12 +132,12 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
     // Add accident details
     doc.setFontSize(14)
     doc.setFont("helvetica", "bold")
-    doc.text("Accident Details", 14, doc.lastAutoTable.finalY + 15)
+    doc.text("Accident Details", 14, (doc.lastAutoTable?.finalY ?? 0) + 15)
 
     doc.setFontSize(10)
     doc.setFont("helvetica", "normal")
     autoTable(doc, {
-      startY: doc.lastAutoTable.finalY + 20,
+      startY: (doc.lastAutoTable?.finalY ?? 0) + 20,
       head: [["Location", "Description"]],
       body: [[formData.accidentLocation, formData.accidentDescription]],
       theme: "grid",
@@ -155,7 +155,7 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
 
     // Add additional accident information
     autoTable(doc, {
-      startY: doc.lastAutoTable.finalY + 5,
+      startY: (doc.lastAutoTable?.finalY ?? 0) + 5,
       head: [["Police Involved", "Traffic Service", "Friendly Report", "Bodily Injuries"]],
       body: [
         [
@@ -177,7 +177,7 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
 
     // Add damage description
     autoTable(doc, {
-      startY: doc.lastAutoTable.finalY + 5,
+      startY: (doc.lastAutoTable?.finalY ?? 0) + 5,
       head: [["Damage Description"]],
       body: [[formData.damageDescription]],
       theme: "grid",
@@ -193,7 +193,7 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
     // Add damage photos information if available
     if (formData.damagePhotos.length > 0) {
       autoTable(doc, {
-        startY: doc.lastAutoTable.finalY + 5,
+        startY: (doc.lastAutoTable?.finalY ?? 0) + 5,
         head: [["Damage Photos"]],
         body: [[`${formData.damagePhotos.length} photo${formData.damagePhotos.length > 1 ? "s" : ""} uploaded`]],
         theme: "grid",
@@ -210,7 +210,7 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
     // Add friendly report document information if available
     if (formData.friendlyReport && formData.friendlyReportDocument) {
       autoTable(doc, {
-        startY: doc.lastAutoTable.finalY + 5,
+        startY: (doc.lastAutoTable?.finalY ?? 0) + 5,
         head: [["Friendly Report Document"]],
         body: [
           [
@@ -231,7 +231,7 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
     // Add bodily injuries description if available
     if (formData.bodilyInjuries && formData.bodilyInjuriesDescription) {
       autoTable(doc, {
-        startY: doc.lastAutoTable.finalY + 5,
+        startY: (doc.lastAutoTable?.finalY ?? 0) + 5,
         head: [["Bodily Injuries Description"]],
         body: [[formData.bodilyInjuriesDescription]],
         theme: "grid",
@@ -246,7 +246,7 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
     }
 
     // Check if we need a new page before adding involved parties
-    if (doc.lastAutoTable.finalY > pageHeight - 100) {
+    if ((doc.lastAutoTable?.finalY ?? 0) > pageHeight - 100) {
       doc.addPage()
     }
 
@@ -254,7 +254,7 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
     if (formData.drivers.length > 0) {
       doc.setFontSize(14)
       doc.setFont("helvetica", "bold")
-      doc.text("Other Drivers", 14, doc.lastAutoTable.finalY + 15)
+      doc.text("Other Drivers", 14, (doc.lastAutoTable?.finalY ?? 0) + 15)
 
       doc.setFontSize(10)
       doc.setFont("helvetica", "normal")
@@ -264,13 +264,13 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
         const driver = formData.drivers[i]
 
         // Check if we need a new page
-        if (i > 0 && doc.lastAutoTable.finalY > pageHeight - 80) {
+        if (i > 0 && (doc.lastAutoTable?.finalY ?? 0) > pageHeight - 80) {
           doc.addPage()
         }
 
         // Driver basic info
         autoTable(doc, {
-          startY: i === 0 ? doc.lastAutoTable.finalY + 20 : doc.lastAutoTable.finalY + 10,
+          startY: i === 0 ? (doc.lastAutoTable?.finalY ?? 0) + 20 : (doc.lastAutoTable?.finalY ?? 0) + 10,
           head: [[`Driver ${i + 1}: ${driver.firstName} ${driver.lastName}`]],
           body: [
             [`Email: ${driver.email}`],
@@ -295,13 +295,13 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
     // Add witnesses if any
     if (formData.witnesses.length > 0) {
       // Check if we need a new page
-      if (doc.lastAutoTable.finalY > pageHeight - 100) {
+      if ((doc.lastAutoTable?.finalY ?? 0) > pageHeight - 100) {
         doc.addPage()
       }
 
       doc.setFontSize(14)
       doc.setFont("helvetica", "bold")
-      doc.text("Witnesses", 14, doc.lastAutoTable.finalY + 15)
+      doc.text("Witnesses", 14, (doc.lastAutoTable?.finalY ?? 0) + 15)
 
       doc.setFontSize(10)
       doc.setFont("helvetica", "normal")
@@ -311,13 +311,13 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
         const witness = formData.witnesses[i]
 
         // Check if we need a new page
-        if (i > 0 && doc.lastAutoTable.finalY > pageHeight - 80) {
+        if (i > 0 && (doc.lastAutoTable?.finalY ?? 0) > pageHeight - 80) {
           doc.addPage()
         }
 
         // Witness info
         autoTable(doc, {
-          startY: i === 0 ? doc.lastAutoTable.finalY + 20 : doc.lastAutoTable.finalY + 10,
+          startY: i === 0 ? (doc.lastAutoTable?.finalY ?? 0) + 20 : (doc.lastAutoTable?.finalY ?? 0) + 10,
           head: [[`Witness ${i + 1}: ${witness.firstName} ${witness.lastName}`]],
           body: [[`Contact: ${witness.email} / ${witness.phone}`], [`Statement: ${witness.description}`]],
           theme: "grid",
@@ -335,13 +335,13 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
     // Add documents if any
     if (formData.documents.length > 0) {
       // Check if we need a new page
-      if (doc.lastAutoTable.finalY > pageHeight - 100) {
+      if ((doc.lastAutoTable?.finalY ?? 0) > pageHeight - 100) {
         doc.addPage()
       }
 
       doc.setFontSize(14)
       doc.setFont("helvetica", "bold")
-      doc.text("Uploaded Documents", 14, doc.lastAutoTable.finalY + 15)
+      doc.text("Uploaded Documents", 14, (doc.lastAutoTable?.finalY ?? 0) + 15)
 
       doc.setFontSize(10)
       doc.setFont("helvetica", "normal")
@@ -352,7 +352,7 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
       ])
 
       autoTable(doc, {
-        startY: doc.lastAutoTable.finalY + 20,
+        startY: (doc.lastAutoTable?.finalY ?? 0) + 20,
         head: [["Document Name", "Type"]],
         body: documentsData,
         theme: "grid",
@@ -367,7 +367,7 @@ export function generateClaimPDF(formData: FormData, claimNumber: string): { dat
     }
 
     // Add footer with page numbers
-    const pageCount = doc.internal.getNumberOfPages()
+    const pageCount = doc.getNumberOfPages()
     for (let i = 1; i <= pageCount; i++) {
       doc.setPage(i)
       doc.setFontSize(8)

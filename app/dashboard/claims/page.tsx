@@ -268,7 +268,7 @@ export default function ClaimsPage() {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <h2 className="text-2xl font-semibold">Resum de reclamacions</h2>
-              <p className="text-muted-foreground">Gestiona i segueix totes les teves reclamacions d'assegurança</p>
+              <p className="text-muted-foreground">Gestiona i segueix totes les teves reclamacions d&lsquo;assegurança</p>
             </div>
             <Button className="w-full md:w-auto">
               <Plus className="mr-2 h-4 w-4" />

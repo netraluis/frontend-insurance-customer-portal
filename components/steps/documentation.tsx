@@ -2,7 +2,7 @@
 
 import { useClaimForm } from "../claim-form-context"
 import { Card, CardContent } from "@/components/ui/card"
-import { UnifiedUpload } from "@/components/ui/unified-upload"
+import { FileObject, UnifiedUpload } from "@/components/ui/unified-upload"
 import { FileIcon, FileText, FileImage, FileVideo } from "lucide-react"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
@@ -10,8 +10,8 @@ import { Button } from "@/components/ui/button"
 export default function Documentation() {
   const { formData, updateFormData } = useClaimForm()
 
-  const handleDocumentsChange = (files: any) => {
-    updateFormData({ documents: files || [] })
+  const handleDocumentsChange = (files: FileObject | FileObject[] | null) => {
+    updateFormData({ documents: Array.isArray(files) ? files : files ? [files] : [] })
   }
 
   // Handle document deletion

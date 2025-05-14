@@ -1,6 +1,5 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
 import type React from "react"
 import { useClaimForm } from "../claim-form-context"
 import { Input } from "@/components/ui/input"
@@ -18,7 +17,7 @@ import {
   Car,
 } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
-import { UnifiedUpload } from "@/components/ui/unified-upload"
+import { FileObject, UnifiedUpload } from "@/components/ui/unified-upload"
 import { DateTimePicker } from "../ui/custom-calendar"
 
 export default function AccidentDetails() {
@@ -49,14 +48,16 @@ export default function AccidentDetails() {
   }
 
   // Handle damage photos change
-  const handleDamagePhotosChange = (files: any) => {
-    updateFormData({ damagePhotos: files || [] })
+  const handleDamagePhotosChange = (files: FileObject | FileObject[] | null) => {
+    updateFormData({ damagePhotos: Array.isArray(files) ? files : files ? [files] : [] });
   }
 
   // Handle friendly report document change
-  const handleFriendlyReportChange = (file: any) => {
-    updateFormData({ friendlyReportDocument: file })
-  }
+  const handleFriendlyReportChange = (files: FileObject | FileObject[] | null) => {
+    // If files is an array, take the first file; if it's a single file, use it; if null, set null
+    const file = Array.isArray(files) ? files[0] ?? null : files ?? null;
+    updateFormData({ friendlyReportDocument: file });
+  };
 
   return (
     <Card className="border-none shadow-none">

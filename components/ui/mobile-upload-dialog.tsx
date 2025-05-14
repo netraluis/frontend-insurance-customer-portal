@@ -23,7 +23,7 @@ export function MobileUploadDialog({
   acceptImages = true,
   acceptFiles = true,
   acceptFolders = false,
-  captureMethod = "environment",
+  // captureMethod = "environment",
 }: MobileUploadDialogProps) {
   const [supportsFileSystem, setSupportsFileSystem] = useState(false)
 

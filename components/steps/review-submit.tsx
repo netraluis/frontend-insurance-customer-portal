@@ -23,6 +23,7 @@ import { toast } from "@/components/ui/use-toast"
 import { generateClaimPDF } from "@/lib/generate-pdf"
 import { sendConfirmationEmail } from "@/app/actions/email-actions"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
+import Image from "next/image"
 
 export default function ReviewSubmit() {
   const { formData, setCurrentStep, setIsSubmitted } = useClaimForm()
@@ -33,7 +34,7 @@ export default function ReviewSubmit() {
   const [pdfBuffer, setPdfBuffer] = useState<Buffer | null>(null)
   const [isEmailSent, setIsEmailSent] = useState(false)
   const [isSendingEmail, setIsSendingEmail] = useState(false)
-  const [selectedMedia, setSelectedMedia] = useState<string | null>(null)
+  // const [selectedMedia, setSelectedMedia] = useState<string | null>(null)
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false)
   const [pdfGenerationError, setPdfGenerationError] = useState<string | null>(null)
 
@@ -544,21 +545,25 @@ export default function ReviewSubmit() {
                             <DialogTrigger asChild>
                               <div
                                 className="aspect-square rounded-md overflow-hidden border border-zinc-200 cursor-pointer hover:opacity-90 transition-opacity"
-                                onClick={() => setSelectedMedia(photo.url)}
+                                // onClick={() => setSelectedMedia(photo.url)}
                               >
-                                <img
+                                <Image
                                   src={photo.url || "/placeholder.svg"}
                                   alt={photo.name}
+                                  width={400}
+                                  height={400}
                                   className="w-full h-full object-cover"
                                 />
                               </div>
                             </DialogTrigger>
                             <DialogContent className="sm:max-w-[800px] p-1">
                               <div className="w-full h-full flex items-center justify-center">
-                                <img
+                                <Image
                                   src={photo.url || "/placeholder.svg"}
                                   alt={photo.name}
                                   className="max-w-full max-h-[70vh] object-contain"
+                                  width={400}
+                                  height={400}
                                 />
                               </div>
                             </DialogContent>

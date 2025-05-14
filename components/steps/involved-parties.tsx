@@ -277,7 +277,7 @@ export default function InvolvedParties() {
               <div>
                 <h4 className="font-medium text-zinc-900">Were other drivers involved in the accident?</h4>
                 <p className="text-sm text-zinc-500">
-                  Select 'Yes' if there were other vehicles/drivers involved in the incident.
+                  Select &apo&apos;s;Yes&apos; if there were other vehicles/drivers involved in the incident.
                 </p>
               </div>
             </div>
@@ -520,7 +520,7 @@ export default function InvolvedParties() {
                 <div className="text-center py-6 border border-dashed rounded-md border-zinc-300 bg-zinc-50">
                   <p className="text-zinc-500">No drivers added yet.</p>
                   <p className="text-sm text-zinc-400 mt-1">
-                    Click "Add Driver" to add information about other drivers involved.
+                    Click &apos;Add Driver&apos; to add information about other drivers involved.
                   </p>
                 </div>
               )}
@@ -537,7 +537,7 @@ export default function InvolvedParties() {
               <div>
                 <h4 className="font-medium text-zinc-900">Were there any witnesses to the accident?</h4>
                 <p className="text-sm text-zinc-500">
-                  Select 'Yes' if anyone witnessed the accident and can provide a statement.
+                  Select &apos;Yes&apos; if anyone witnessed the accident and can provide a statement.
                 </p>
               </div>
             </div>
@@ -727,7 +727,7 @@ export default function InvolvedParties() {
                 <div className="text-center py-6 border border-dashed rounded-md border-zinc-300 bg-zinc-50">
                   <p className="text-zinc-500">No witnesses added yet.</p>
                   <p className="text-sm text-zinc-400 mt-1">
-                    Click "Add Witness" to add information about witnesses to the accident.
+                    Click &apos;Add Witness&apos; to add information about witnesses to the accident.
                   </p>
                 </div>
               )}

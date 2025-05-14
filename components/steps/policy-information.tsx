@@ -20,11 +20,11 @@ export default function PolicyInformation() {
     updateFormData({ [name]: value })
   }
 
-  const handlePhoneChange = (value: string, isValid: boolean) => {
+  const handlePhoneChange = (value: string) => {
     updateFormData({ phone: value })
   }
 
-  const handleDriverPhoneChange = (value: string, isValid: boolean) => {
+  const handleDriverPhoneChange = (value: string) => {
     updateFormData({ driverPhone: value })
   }
 

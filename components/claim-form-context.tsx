@@ -27,6 +27,7 @@ export type Document = {
   name: string
   type: string
   url: string
+  size: number
 }
 
 // Type for the friendly report document

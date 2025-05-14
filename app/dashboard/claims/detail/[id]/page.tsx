@@ -236,7 +236,7 @@ export default function ClaimDetailPage({ params }: { params: Promise<{ id: stri
                 <Card className="md:col-span-2">
                   <CardHeader>
                     <CardTitle>Resum de la reclamació</CardTitle>
-                    <CardDescription>Detalls sobre la vostra reclamació d'assegurança</CardDescription>
+                    <CardDescription>Detalls sobre la vostra reclamació d&lsquo;assegurança</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">

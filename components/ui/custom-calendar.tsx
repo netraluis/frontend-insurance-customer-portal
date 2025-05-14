@@ -1,31 +1,4 @@
 "use client"
-
-// import * as React from "react"
-// import { ChevronLeft, ChevronRight } from "lucide-react"
-// import { DayPicker, type DropdownProps } from "react-day-picker"
-// import { cn } from "@/lib/utils"
-// import { buttonVariants } from "@/components/ui/button"
-// import { Select } from "@/components/ui/select"
-// import 'react-day-picker/dist/style.css';
-
-// export type CalendarProps = React.ComponentProps<typeof DayPicker>
-
-// function CustomCalendar({ className, classNames, showOutsideDays = true, ...props }: CalendarProps) {
-//   return (
-//     <DayPicker
-//       // showOutsideDays={showOutsideDays}
-//       // captionLayout="dropdown"
-//       // mode="single"
-//       className={cn("p-3", className)}
-//       {...props}
-//     />
-//   )
-// }
-// CustomCalendar.displayName = "CustomCalendar"
-
-// export { CustomCalendar }
-
-
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -272,9 +245,11 @@ function Calendar({
       };
     }
     return genMonths(locale);
-  }, []);
+  }, [props.locale]);
 
-  const YEARS = React.useMemo(() => genYears(yearRange), []);
+  
+
+  const YEARS = React.useMemo(() => genYears(yearRange), [yearRange]);
   const disableLeftNavigation = () => {
     const today = new Date();
     const startDate = new Date(today.getFullYear() - yearRange, 0, 1);
@@ -367,7 +342,7 @@ function Calendar({
                   ))}
                 </SelectContent>
               </Select>
-              <Select
+            <Select
                 defaultValue={calendarMonth.date.getFullYear().toString()}
                 onValueChange={(value) => {
                   const newDate = new Date(calendarMonth.date);
@@ -385,7 +360,7 @@ function Calendar({
                     </SelectItem>
                   ))}
                 </SelectContent>
-              </Select>
+            </Select>
             </div>
           );
         },
