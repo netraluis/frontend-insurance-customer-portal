@@ -8,12 +8,9 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
 import { PhoneInput } from "@/components/ui/phone-input"
 import { Switch } from "@/components/ui/switch"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Button } from "@/components/ui/button"
-import { CalendarIcon, UserCog } from "lucide-react"
-import { format } from "date-fns"
-import { cn } from "@/lib/utils"
-import { CustomCalendar } from "@/components/ui/custom-calendar"
+import { DateTimePicker } from "../ui/custom-calendar"
+import { UserCog } from "lucide-react"
+
 
 export default function PolicyInformation() {
   const { formData, updateFormData } = useClaimForm()
@@ -162,38 +159,13 @@ export default function PolicyInformation() {
                   <Label htmlFor="driverDateOfBirth">
                     Date of Birth <span className="text-destructive">*</span>
                   </Label>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        id="driverDateOfBirth"
-                        variant="outline"
-                        className={cn(
-                          "w-full justify-start text-left font-normal",
-                          !formData.driverDateOfBirth && "text-muted-foreground",
-                        )}
-                      >
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        {formData.driverDateOfBirth ? (
-                          format(formData.driverDateOfBirth, "PPP")
-                        ) : (
-                          <span>Select date</span>
-                        )}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <CustomCalendar
-                        mode="single"
-                        selected={formData.driverDateOfBirth || undefined}
-                        onSelect={handleDriverDateChange}
-                        initialFocus
-                        disabled={(date) => date > new Date()}
-                        captionLayout="dropdown"
-                        fromYear={1940}
-                        toYear={new Date().getFullYear() - 16}
-                        defaultMonth={formData.driverDateOfBirth || new Date(new Date().getFullYear() - 30, 0, 1)}
-                      />
-                    </PopoverContent>
-                  </Popover>
+                  <DateTimePicker
+                    value={formData.driverDateOfBirth || undefined}
+                    onChange={handleDriverDateChange}
+                    granularity="day"
+                    displayFormat={{ hour24: "dd/MM/yyyy", hour12: "dd/MM/yyyy" }}
+                    yearRange={100}
+                  />
                 </div>
 
                 <div className="space-y-2">

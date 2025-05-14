@@ -9,7 +9,6 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
 import { Switch } from "@/components/ui/switch"
 import {
-  CalendarIcon,
   AlertCircle,
   FileText,
   Camera,
@@ -18,12 +17,9 @@ import {
   Activity,
   Car,
 } from "lucide-react"
-import { format } from "date-fns"
-import { cn } from "@/lib/utils"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { UnifiedUpload } from "@/components/ui/unified-upload"
-import { CustomCalendar } from "@/components/ui/custom-calendar"
+import { DateTimePicker } from "../ui/custom-calendar"
 
 export default function AccidentDetails() {
   const { formData, updateFormData } = useClaimForm()
@@ -86,34 +82,13 @@ export default function AccidentDetails() {
 
             <div className="space-y-2">
               <Label htmlFor="incidentDate">Date of Incident</Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    id="incidentDate"
-                    variant="outline"
-                    className={cn(
-                      "w-full justify-start text-left font-normal",
-                      !formData.incidentDate && "text-muted-foreground",
-                    )}
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {formData.incidentDate ? format(formData.incidentDate, "PPP") : <span>Select date</span>}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0">
-                  <CustomCalendar
-                    mode="single"
-                    selected={formData.incidentDate || undefined}
-                    onSelect={handleDateChange}
-                    initialFocus
-                    disabled={(date) => date > new Date()}
-                    captionLayout="dropdown"
-                    fromYear={new Date().getFullYear() - 10}
-                    toYear={new Date().getFullYear()}
-                    defaultMonth={formData.incidentDate || new Date()}
-                  />
-                </PopoverContent>
-              </Popover>
+              <DateTimePicker
+                value={formData.incidentDate || undefined}
+                onChange={handleDateChange}
+                granularity="day"
+                displayFormat={{ hour24: "dd/MM/yyyy", hour12: "dd/MM/yyyy" }}
+                yearRange={100}
+              />
             </div>
           </div>
 
