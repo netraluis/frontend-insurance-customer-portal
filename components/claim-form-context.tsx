@@ -27,7 +27,6 @@ export type Document = {
   name: string
   type: string
   url: string
-  size: number
 }
 
 // Type for the friendly report document
@@ -49,6 +48,7 @@ export type DamageMedia = {
   thumbnail?: string // For video thumbnails
 }
 
+// Update the FormData type to include vehicleType
 export type FormData = {
   // Step 1: Policy Information
   firstName: string
@@ -69,6 +69,7 @@ export type FormData = {
   vehicleMake: string
   vehicleModel: string
   licensePlate: string
+  vehicleType: string // Add this new field
   // coverageType field removed
 
   // Step 3: Accident Details
@@ -92,6 +93,8 @@ export type FormData = {
   documents: Document[]
 }
 
+// Update the isStepComplete function for step 2 to include vehicleType check
+
 type ClaimFormContextType = {
   formData: FormData
   updateFormData: (data: Partial<FormData>) => void
@@ -104,6 +107,7 @@ type ClaimFormContextType = {
   setIsSubmitted: (value: boolean) => void
 }
 
+// Update the FormData type to include vehicleType
 const initialFormData: FormData = {
   firstName: "",
   lastName: "",
@@ -121,6 +125,7 @@ const initialFormData: FormData = {
   vehicleMake: "",
   vehicleModel: "",
   licensePlate: "",
+  vehicleType: "", // Initialize with empty string
   // coverageType field removed
 
   incidentDate: null,
@@ -168,8 +173,8 @@ export function ClaimFormProvider({ children }: { children: ReactNode }) {
         }
         return !!formData.firstName && !!formData.lastName && !!formData.email && !!formData.phone
       case 2:
-        // Updated validation - removed coverageType check
-        return !!formData.vehicleMake && !!formData.vehicleModel && !!formData.licensePlate
+        // Updated validation - include vehicleType check
+        return !!formData.vehicleMake && !!formData.vehicleModel && !!formData.licensePlate && !!formData.vehicleType
       case 3:
         return (
           !!formData.accidentLocation &&

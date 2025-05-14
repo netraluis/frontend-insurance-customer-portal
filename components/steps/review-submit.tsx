@@ -432,6 +432,16 @@ export default function ReviewSubmit() {
                   <dt className="text-sm font-medium text-zinc-500">License Plate</dt>
                   <dd className="mt-1 text-sm text-zinc-900">{formData.licensePlate}</dd>
                 </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-sm font-medium text-zinc-500">Vehicle Type</p>
+                    <p className="text-sm">
+                      {formData.vehicleType
+                        ? formData.vehicleType.charAt(0).toUpperCase() + formData.vehicleType.slice(1)
+                        : "Not provided"}
+                    </p>
+                  </div>
+                </div>
               </dl>
             </AccordionContent>
           </AccordionItem>
