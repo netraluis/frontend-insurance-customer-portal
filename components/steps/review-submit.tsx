@@ -3,25 +3,39 @@
 import type React from "react"
 
 import { useState } from "react"
-import { useClaimForm } from "@/components/claim-form-context"
+import { useClaimForm } from "../claim-form-context"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { CheckCircle2, Edit, Download, Mail } from "lucide-react"
+import {
+  CheckCircle2,
+  Edit,
+  Download,
+  Mail,
+  FileText,
+  FileIcon as FilePdf,
+  FileImage,
+  FileVideo,
+  Loader2,
+} from "lucide-react"
 import { format } from "date-fns"
+import { toast } from "@/components/ui/use-toast"
 import { generateClaimPDF } from "@/lib/generate-pdf"
 import { sendConfirmationEmail } from "@/app/actions/email-actions"
-import { toast } from "sonner"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 
 export default function ReviewSubmit() {
   const { formData, setCurrentStep, setIsSubmitted } = useClaimForm()
-  // const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [isLocalSubmitted, setIsLocalSubmitted] = useState(false)
   const [claimNumber, setClaimNumber] = useState("")
   const [pdfUrl, setPdfUrl] = useState<string | null>(null)
   const [pdfBuffer, setPdfBuffer] = useState<Buffer | null>(null)
   const [isEmailSent, setIsEmailSent] = useState(false)
   const [isSendingEmail, setIsSendingEmail] = useState(false)
+  const [selectedMedia, setSelectedMedia] = useState<string | null>(null)
+  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false)
+  const [pdfGenerationError, setPdfGenerationError] = useState<string | null>(null)
 
   const handleEditSection = (step: number) => {
     setCurrentStep(step)
@@ -30,43 +44,119 @@ export default function ReviewSubmit() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // setIsSubmitting(true)
+    setIsSubmitting(true)
+    setPdfGenerationError(null)
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    try {
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 2000))
 
-    // Generate a random claim reference number
-    const generatedClaimNumber = Math.random().toString(36).substring(2, 10).toUpperCase()
+      // Generate a random claim reference number
+      const generatedClaimNumber = Math.random().toString(36).substring(2, 10).toUpperCase()
 
-    // Generate PDF - only do this once with the generated claim number
-    const { dataUrl, buffer } = generateClaimPDF(formData, generatedClaimNumber)
+      // Generate PDF - only do this once with the generated claim number
+      setIsGeneratingPdf(true)
+      const { dataUrl, buffer } = generateClaimPDF(formData, generatedClaimNumber)
 
-    // Update all state at once to prevent cascading renders
-    setClaimNumber(generatedClaimNumber)
-    setPdfUrl(dataUrl)
-    setPdfBuffer(buffer)
-    // setIsSubmitting(false)
-    setIsLocalSubmitted(true)
-    setIsSubmitted(true) // Update the context state
+      if (!dataUrl) {
+        throw new Error("Failed to generate PDF")
+      }
 
-    toast("Claim Submitted Successfully")
-    // Clear local storage
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("autoClaimFormData")
-      localStorage.removeItem("autoClaimFormStep")
+      // Update all state at once to prevent cascading renders
+      setClaimNumber(generatedClaimNumber)
+      setPdfUrl(dataUrl)
+      setPdfBuffer(buffer)
+      setIsLocalSubmitted(true)
+      setIsSubmitted(true) // Update the context state
+
+      toast({
+        title: "Claim Submitted Successfully",
+        description: "Your claim has been submitted. You will receive a confirmation email shortly.",
+      })
+
+      // Clear local storage
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("autoClaimFormData")
+        localStorage.removeItem("autoClaimFormStep")
+      }
+    } catch (error) {
+      console.error("Error during submission:", error)
+      setPdfGenerationError("There was an error generating your claim summary. Please try again.")
+      toast({
+        title: "Submission Error",
+        description: "There was an error submitting your claim. Please try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSubmitting(false)
+      setIsGeneratingPdf(false)
     }
   }
 
   const handleDownloadPdf = () => {
-    if (!pdfUrl) return
+    if (!pdfUrl) {
+      toast({
+        title: "Download Error",
+        description: "PDF is not available for download. Please try again.",
+        variant: "destructive",
+      })
+      return
+    }
 
-    // Create a link element and trigger download
-    const link = document.createElement("a")
-    link.href = pdfUrl
-    link.download = `Claim_Summary_${claimNumber}.pdf`
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
+    try {
+      // Create a link element and trigger download
+      const link = document.createElement("a")
+      link.href = pdfUrl
+      link.download = `Claim_Summary_${claimNumber}.pdf`
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+
+      toast({
+        title: "Download Started",
+        description: "Your claim summary PDF is being downloaded.",
+      })
+    } catch (error) {
+      console.error("Error downloading PDF:", error)
+      toast({
+        title: "Download Error",
+        description: "There was an error downloading your PDF. Please try again.",
+        variant: "destructive",
+      })
+    }
+  }
+
+  const handleRegeneratePdf = async () => {
+    if (!claimNumber) return
+
+    setIsGeneratingPdf(true)
+    setPdfGenerationError(null)
+
+    try {
+      const { dataUrl, buffer } = generateClaimPDF(formData, claimNumber)
+
+      if (!dataUrl) {
+        throw new Error("Failed to regenerate PDF")
+      }
+
+      setPdfUrl(dataUrl)
+      setPdfBuffer(buffer)
+
+      toast({
+        title: "PDF Regenerated",
+        description: "Your claim summary PDF has been regenerated successfully.",
+      })
+    } catch (error) {
+      console.error("Error regenerating PDF:", error)
+      setPdfGenerationError("There was an error regenerating your PDF. Please try again.")
+      toast({
+        title: "PDF Generation Error",
+        description: "There was an error regenerating your PDF. Please try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsGeneratingPdf(false)
+    }
   }
 
   const handleSendEmail = async () => {
@@ -79,17 +169,47 @@ export default function ReviewSubmit() {
 
       if (result.success) {
         setIsEmailSent(true)
-
-        toast(`A confirmation email has been sent to ${formData.email}`)
+        toast({
+          title: "Email Sent Successfully",
+          description: `A confirmation email has been sent to ${formData.email}`,
+        })
       } else {
-        toast.error("There was an error sending the confirmation email. Please try again.")
+        toast({
+          title: "Failed to Send Email",
+          description: "There was an error sending the confirmation email. Please try again.",
+          variant: "destructive",
+        })
       }
     } catch (error) {
       console.error("Error sending email:", error)
-      toast.error("There was an error sending the confirmation email. Please try again.")
+      toast({
+        title: "Failed to Send Email",
+        description: "There was an error sending the confirmation email. Please try again.",
+        variant: "destructive",
+      })
     } finally {
       setIsSendingEmail(false)
     }
+  }
+
+  // Helper function to get file icon based on file type
+  const getFileIcon = (type: string) => {
+    if (type.includes("pdf")) {
+      return <FilePdf className="h-5 w-5 text-red-500" />
+    } else if (type.includes("image")) {
+      return <FileImage className="h-5 w-5 text-blue-500" />
+    } else if (type.includes("video")) {
+      return <FileVideo className="h-5 w-5 text-purple-500" />
+    } else {
+      return <FileText className="h-5 w-5 text-zinc-500" />
+    }
+  }
+
+  // Format file size
+  const formatFileSize = (bytes: number) => {
+    if (bytes < 1024) return bytes + " bytes"
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB"
+    return (bytes / (1024 * 1024)).toFixed(1) + " MB"
   }
 
   if (isLocalSubmitted) {
@@ -112,27 +232,84 @@ export default function ReviewSubmit() {
             <strong>Submission Date:</strong> {format(new Date(), "PPP")}
           </p>
         </div>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button variant="outline" onClick={handleDownloadPdf} className="flex items-center gap-2" disabled={!pdfUrl}>
-            <Download className="h-4 w-4" />
-            Download Claim Summary
-          </Button>
 
-          <Button
-            onClick={handleSendEmail}
-            className="flex items-center gap-2"
-            disabled={isSendingEmail || isEmailSent || !pdfBuffer}
-          >
-            <Mail className="h-4 w-4" />
-            {isSendingEmail ? "Sending..." : isEmailSent ? "Email Sent" : "Send Confirmation Email"}
-          </Button>
-        </div>
+        {pdfGenerationError ? (
+          <div className="mb-6">
+            <p className="text-sm text-red-500 mb-2">{pdfGenerationError}</p>
+            <Button
+              variant="outline"
+              onClick={handleRegeneratePdf}
+              className="flex items-center gap-2"
+              disabled={isGeneratingPdf}
+            >
+              {isGeneratingPdf ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Regenerating PDF...
+                </>
+              ) : (
+                <>
+                  <Download className="h-4 w-4" />
+                  Regenerate PDF
+                </>
+              )}
+            </Button>
+          </div>
+        ) : (
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+            <Button
+              onClick={handleDownloadPdf}
+              className="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-900"
+              disabled={!pdfUrl || isGeneratingPdf}
+            >
+              {isGeneratingPdf ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Generating PDF...
+                </>
+              ) : (
+                <>
+                  <Download className="h-4 w-4" />
+                  Download Claim Summary
+                </>
+              )}
+            </Button>
+
+            <Button
+              onClick={handleSendEmail}
+              variant="outline"
+              className="flex items-center gap-2"
+              disabled={isSendingEmail || isEmailSent || !pdfBuffer || isGeneratingPdf}
+            >
+              {isSendingEmail ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Sending...
+                </>
+              ) : isEmailSent ? (
+                <>
+                  <Mail className="h-4 w-4" />
+                  Email Sent
+                </>
+              ) : (
+                <>
+                  <Mail className="h-4 w-4" />
+                  Send Confirmation Email
+                </>
+              )}
+            </Button>
+          </div>
+        )}
 
         {isEmailSent && (
           <p className="text-sm text-zinc-500 mt-4">
             A confirmation email with your claim details has been sent to {formData.email}
           </p>
         )}
+
+        <div className="mt-8 text-sm text-zinc-500">
+          <p>Need help? Contact our support team at support@example.com</p>
+        </div>
       </div>
     )
   }
@@ -141,8 +318,8 @@ export default function ReviewSubmit() {
     <Card className="border-none shadow-none">
       <CardContent className="p-0 space-y-6">
         <div className="space-y-2">
-          <h3 className="text-lg font-medium text-zinc-900">Revisar la seva reclamació</h3>
-          <p className="text-sm text-zinc-500">Reviseu totes les dades abans d&apos;enviar la seva reclamació.</p>
+          <h3 className="text-lg font-medium text-zinc-900">Review Your Claim</h3>
+          <p className="text-sm text-zinc-500">Please review all the information before submitting your claim.</p>
         </div>
 
         <Accordion type="multiple" defaultValue={["policy"]}>
@@ -150,7 +327,7 @@ export default function ReviewSubmit() {
           <AccordionItem value="policy" className="border border-zinc-200 rounded-md mb-4">
             <AccordionTrigger className="px-4 hover:no-underline hover:bg-zinc-50">
               <div className="flex justify-between items-center w-full">
-                <span className="font-medium">Informació de la pòlissa</span>
+                <span className="font-medium">Policy Information</span>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -161,27 +338,65 @@ export default function ReviewSubmit() {
                   }}
                 >
                   <Edit className="h-4 w-4" />
-                  Editar
+                  Edit
                 </Button>
               </div>
             </AccordionTrigger>
             <AccordionContent className="px-4 pb-4 pt-2">
               <dl className="grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Nom complet</dt>
+                  <dt className="text-sm font-medium text-zinc-500">Full Name</dt>
                   <dd className="mt-1 text-sm text-zinc-900">
                     {formData.firstName} {formData.lastName}
                   </dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Adreça email</dt>
+                  <dt className="text-sm font-medium text-zinc-500">Email Address</dt>
                   <dd className="mt-1 text-sm text-zinc-900">{formData.email}</dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Número de telèfon</dt>
+                  <dt className="text-sm font-medium text-zinc-500">Phone Number</dt>
                   <dd className="mt-1 text-sm text-zinc-900">{formData.phone}</dd>
                 </div>
               </dl>
+
+              {formData.hasDifferentDriver && (
+                <div className="mt-4 pt-4 border-t border-zinc-100">
+                  <h5 className="text-sm font-medium text-zinc-700 mb-2">Driver Information</h5>
+                  <dl className="grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
+                    <div className="sm:col-span-1">
+                      <dt className="text-sm font-medium text-zinc-500">Driver Name</dt>
+                      <dd className="mt-1 text-sm text-zinc-900">
+                        {formData.driverFirstName} {formData.driverLastName}
+                      </dd>
+                    </div>
+                    <div className="sm:col-span-1">
+                      <dt className="text-sm font-medium text-zinc-500">Date of Birth</dt>
+                      <dd className="mt-1 text-sm text-zinc-900">
+                        {formData.driverDateOfBirth ? format(formData.driverDateOfBirth, "PPP") : "Not provided"}
+                      </dd>
+                    </div>
+                    {formData.driverEmail && (
+                      <div className="sm:col-span-1">
+                        <dt className="text-sm font-medium text-zinc-500">Email Address</dt>
+                        <dd className="mt-1 text-sm text-zinc-900">{formData.driverEmail}</dd>
+                      </div>
+                    )}
+                    {formData.driverPhone && (
+                      <div className="sm:col-span-1">
+                        <dt className="text-sm font-medium text-zinc-500">Phone Number</dt>
+                        <dd className="mt-1 text-sm text-zinc-900">{formData.driverPhone}</dd>
+                      </div>
+                    )}
+                    {formData.driverID && (
+                      <div className="sm:col-span-1">
+                        <dt className="text-sm font-medium text-zinc-500">Driver ID</dt>
+                        <dd className="mt-1 text-sm text-zinc-900">{formData.driverID}</dd>
+                      </div>
+                    )}
+                  </dl>
+                </div>
+              )}
             </AccordionContent>
           </AccordionItem>
 
@@ -189,7 +404,7 @@ export default function ReviewSubmit() {
           <AccordionItem value="vehicle" className="border border-zinc-200 rounded-md mb-4">
             <AccordionTrigger className="px-4 hover:no-underline hover:bg-zinc-50">
               <div className="flex justify-between items-center w-full">
-                <span className="font-medium">Informació del vehicle</span>
+                <span className="font-medium">Vehicle Information</span>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -213,12 +428,8 @@ export default function ReviewSubmit() {
                   </dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Matrícula</dt>
+                  <dt className="text-sm font-medium text-zinc-500">License Plate</dt>
                   <dd className="mt-1 text-sm text-zinc-900">{formData.licensePlate}</dd>
-                </div>
-                <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Tipus de cobertura</dt>
-                  <dd className="mt-1 text-sm text-zinc-900 capitalize">{formData.coverageType}</dd>
                 </div>
               </dl>
             </AccordionContent>
@@ -228,7 +439,7 @@ export default function ReviewSubmit() {
           <AccordionItem value="accident" className="border border-zinc-200 rounded-md mb-4">
             <AccordionTrigger className="px-4 hover:no-underline hover:bg-zinc-50">
               <div className="flex justify-between items-center w-full">
-                <span className="font-medium">Detalls de l&apos;accident</span>
+                <span className="font-medium">Accident Details</span>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -246,35 +457,117 @@ export default function ReviewSubmit() {
             <AccordionContent className="px-4 pb-4 pt-2">
               <dl className="grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Ubicació</dt>
+                  <dt className="text-sm font-medium text-zinc-500">Location</dt>
                   <dd className="mt-1 text-sm text-zinc-900">{formData.accidentLocation}</dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Data de l&apos;incident</dt>
+                  <dt className="text-sm font-medium text-zinc-500">Incident Date</dt>
                   <dd className="mt-1 text-sm text-zinc-900">
-                    {formData.incidentDate ? format(formData.incidentDate, "PPP") : "No especificat"}
+                    {formData.incidentDate ? format(formData.incidentDate, "PPP") : "Not specified"}
                   </dd>
                 </div>
                 <div className="sm:col-span-2">
-                  <dt className="text-sm font-medium text-zinc-500">Descripció</dt>
+                  <dt className="text-sm font-medium text-zinc-500">Description</dt>
                   <dd className="mt-1 text-sm text-zinc-900">{formData.accidentDescription}</dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Policia involucrada</dt>
-                  <dd className="mt-1 text-sm text-zinc-900">{formData.policeInvolved ? "Sí" : "No"}</dd>
+                  <dt className="text-sm font-medium text-zinc-500">Police Involved</dt>
+                  <dd className="mt-1 text-sm text-zinc-900">{formData.policeInvolved ? "Yes" : "No"}</dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Servei de trànsit involucrat</dt>
-                  <dd className="mt-1 text-sm text-zinc-900">{formData.trafficServiceInvolved ? "Sí" : "No"}</dd>
+                  <dt className="text-sm font-medium text-zinc-500">Traffic Service Involved</dt>
+                  <dd className="mt-1 text-sm text-zinc-900">{formData.trafficServiceInvolved ? "Yes" : "No"}</dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Informe d&apos;accident amistós</dt>
-                  <dd className="mt-1 text-sm text-zinc-900">{formData.friendlyReport ? "Sí" : "No"}</dd>
+                  <dt className="text-sm font-medium text-zinc-500">Friendly Accident Report</dt>
+                  <dd className="mt-1 text-sm text-zinc-900">{formData.friendlyReport ? "Yes" : "No"}</dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Incidències físiques</dt>
-                  <dd className="mt-1 text-sm text-zinc-900">{formData.bodilyInjuries ? "Sí" : "No"}</dd>
+                  <dt className="text-sm font-medium text-zinc-500">Bodily Injuries</dt>
+                  <dd className="mt-1 text-sm text-zinc-900">{formData.bodilyInjuries ? "Yes" : "No"}</dd>
                 </div>
+
+                {/* Display friendly report document if available */}
+                {formData.friendlyReport && formData.friendlyReportDocument && (
+                  <div className="sm:col-span-2 mt-2">
+                    <dt className="text-sm font-medium text-zinc-500">Friendly Report Document</dt>
+                    <dd className="mt-1 text-sm text-zinc-900 p-3 bg-zinc-50 rounded-md border border-zinc-100">
+                      <div className="flex items-center gap-2">
+                        {getFileIcon(formData.friendlyReportDocument.type)}
+                        <div>
+                          <p className="font-medium">{formData.friendlyReportDocument.name}</p>
+                          <p className="text-xs text-zinc-500">
+                            {formatFileSize(formData.friendlyReportDocument.size)}
+                          </p>
+                        </div>
+                        <a
+                          href={formData.friendlyReportDocument.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="ml-auto text-xs text-zinc-600 hover:text-zinc-900 underline"
+                        >
+                          View
+                        </a>
+                      </div>
+                    </dd>
+                  </div>
+                )}
+
+                {/* Display bodily injuries description if available */}
+                {formData.bodilyInjuries && formData.bodilyInjuriesDescription && (
+                  <div className="sm:col-span-2 mt-2">
+                    <dt className="text-sm font-medium text-zinc-500">Injuries Description</dt>
+                    <dd className="mt-1 text-sm text-zinc-900 p-3 bg-zinc-50 rounded-md border border-zinc-100">
+                      {formData.bodilyInjuriesDescription}
+                    </dd>
+                  </div>
+                )}
+
+                {/* Display damage description */}
+                <div className="sm:col-span-2 mt-2">
+                  <dt className="text-sm font-medium text-zinc-500">Damage Description</dt>
+                  <dd className="mt-1 text-sm text-zinc-900 p-3 bg-zinc-50 rounded-md border border-zinc-100">
+                    {formData.damageDescription}
+                  </dd>
+                </div>
+
+                {/* Display damage photos if available */}
+                {formData.damagePhotos.length > 0 && (
+                  <div className="sm:col-span-2 mt-2">
+                    <dt className="text-sm font-medium text-zinc-500">
+                      Damage Photos ({formData.damagePhotos.length})
+                    </dt>
+                    <dd className="mt-1 text-sm text-zinc-900 p-3 bg-zinc-50 rounded-md border border-zinc-100">
+                      <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
+                        {formData.damagePhotos.map((photo) => (
+                          <Dialog key={photo.id}>
+                            <DialogTrigger asChild>
+                              <div
+                                className="aspect-square rounded-md overflow-hidden border border-zinc-200 cursor-pointer hover:opacity-90 transition-opacity"
+                                onClick={() => setSelectedMedia(photo.url)}
+                              >
+                                <img
+                                  src={photo.url || "/placeholder.svg"}
+                                  alt={photo.name}
+                                  className="w-full h-full object-cover"
+                                />
+                              </div>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-[800px] p-1">
+                              <div className="w-full h-full flex items-center justify-center">
+                                <img
+                                  src={photo.url || "/placeholder.svg"}
+                                  alt={photo.name}
+                                  className="max-w-full max-h-[70vh] object-contain"
+                                />
+                              </div>
+                            </DialogContent>
+                          </Dialog>
+                        ))}
+                      </div>
+                    </dd>
+                  </div>
+                )}
               </dl>
             </AccordionContent>
           </AccordionItem>
@@ -283,7 +576,7 @@ export default function ReviewSubmit() {
           <AccordionItem value="parties" className="border border-zinc-200 rounded-md mb-4">
             <AccordionTrigger className="px-4 hover:no-underline hover:bg-zinc-50">
               <div className="flex justify-between items-center w-full">
-                <span className="font-medium">Parts involucrades</span>
+                <span className="font-medium">Involved Parties</span>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -302,19 +595,19 @@ export default function ReviewSubmit() {
               <div className="space-y-4">
                 {formData.drivers.length > 0 ? (
                   <div>
-                    <h4 className="text-sm font-medium text-zinc-500 mb-2">Altres conductors</h4>
+                    <h4 className="text-sm font-medium text-zinc-500 mb-2">Other Drivers</h4>
                     <ul className="space-y-4">
                       {formData.drivers.map((driver, index) => (
                         <li key={index} className="border border-zinc-100 rounded-md p-3">
                           <div className="grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
                             <div className="sm:col-span-1">
-                              <dt className="text-sm font-medium text-zinc-500">Nom</dt>
+                              <dt className="text-sm font-medium text-zinc-500">Name</dt>
                               <dd className="mt-1 text-sm text-zinc-900">
                                 {driver.firstName} {driver.lastName}
                               </dd>
                             </div>
                             <div className="sm:col-span-1">
-                              <dt className="text-sm font-medium text-zinc-500">Contacte</dt>
+                              <dt className="text-sm font-medium text-zinc-500">Contact</dt>
                               <dd className="mt-1 text-sm text-zinc-900">
                                 {driver.email} / {driver.phone}
                               </dd>
@@ -326,7 +619,7 @@ export default function ReviewSubmit() {
                               </dd>
                             </div>
                             <div className="sm:col-span-1">
-                              <dt className="text-sm font-medium text-zinc-500">Assistencia</dt>
+                              <dt className="text-sm font-medium text-zinc-500">Insurance</dt>
                               <dd className="mt-1 text-sm text-zinc-900">
                                 {driver.insuranceCompany} - {driver.policyNumber}
                               </dd>
@@ -337,30 +630,30 @@ export default function ReviewSubmit() {
                     </ul>
                   </div>
                 ) : (
-                  <p className="text-sm text-zinc-500">No altres conductors afegits.</p>
+                  <p className="text-sm text-zinc-500">No other drivers added.</p>
                 )}
 
                 {formData.witnesses.length > 0 ? (
                   <div>
-                    <h4 className="text-sm font-medium text-zinc-500 mb-2">Testimonis</h4>
+                    <h4 className="text-sm font-medium text-zinc-500 mb-2">Witnesses</h4>
                     <ul className="space-y-4">
                       {formData.witnesses.map((witness, index) => (
                         <li key={index} className="border border-zinc-100 rounded-md p-3">
                           <div className="grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
                             <div className="sm:col-span-1">
-                              <dt className="text-sm font-medium text-zinc-500">Nom</dt>
+                              <dt className="text-sm font-medium text-zinc-500">Name</dt>
                               <dd className="mt-1 text-sm text-zinc-900">
                                 {witness.firstName} {witness.lastName}
                               </dd>
                             </div>
                             <div className="sm:col-span-1">
-                              <dt className="text-sm font-medium text-zinc-500">Contacte</dt>
+                              <dt className="text-sm font-medium text-zinc-500">Contact</dt>
                               <dd className="mt-1 text-sm text-zinc-900">
                                 {witness.email} / {witness.phone}
                               </dd>
                             </div>
                             <div className="sm:col-span-2">
-                              <dt className="text-sm font-medium text-zinc-500">Declaració</dt>
+                              <dt className="text-sm font-medium text-zinc-500">Statement</dt>
                               <dd className="mt-1 text-sm text-zinc-900">{witness.description}</dd>
                             </div>
                           </div>
@@ -369,7 +662,7 @@ export default function ReviewSubmit() {
                     </ul>
                   </div>
                 ) : (
-                  <p className="text-sm text-zinc-500">No testimonis afegits.</p>
+                  <p className="text-sm text-zinc-500">No witnesses added.</p>
                 )}
               </div>
             </AccordionContent>
@@ -379,7 +672,7 @@ export default function ReviewSubmit() {
           <AccordionItem value="documents" className="border border-zinc-200 rounded-md mb-4">
             <AccordionTrigger className="px-4 hover:no-underline hover:bg-zinc-50">
               <div className="flex justify-between items-center w-full">
-                <span className="font-medium">Documentació</span>
+                <span className="font-medium">Documentation</span>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -403,14 +696,23 @@ export default function ReviewSubmit() {
                       className="flex items-center justify-between py-2 border-b border-zinc-100 last:border-0"
                     >
                       <div className="flex items-center gap-2">
+                        {getFileIcon(doc.type)}
                         <span className="text-sm text-zinc-900">{doc.name}</span>
-                        <span className="text-xs text-zinc-500 capitalize">({doc.type})</span>
+                        <span className="text-xs text-zinc-500 capitalize">({doc.type.split("/")[1] || "file"})</span>
                       </div>
+                      <a
+                        href={doc.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-zinc-600 hover:text-zinc-900 underline"
+                      >
+                        View
+                      </a>
                     </li>
                   ))}
                 </ul>
               ) : (
-                <p className="text-sm text-zinc-500">No hi ha documents carregats.</p>
+                <p className="text-sm text-zinc-500">No documents uploaded.</p>
               )}
             </AccordionContent>
           </AccordionItem>
@@ -427,8 +729,21 @@ export default function ReviewSubmit() {
                 required
               />
               <label htmlFor="terms" className="ml-2 block text-sm text-zinc-500">
-                Confirmo que totes les dades proporcionades són exactes i completes al millor coneixement meu.
+                I confirm that all the information provided is accurate and complete to the best of my knowledge.
               </label>
+            </div>
+
+            <div className="flex justify-end">
+              <Button type="submit" className="w-full sm:w-auto bg-zinc-800 hover:bg-zinc-900" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <div className="flex items-center gap-2">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Submitting...
+                  </div>
+                ) : (
+                  "Submit Claim"
+                )}
+              </Button>
             </div>
           </form>
         </div>

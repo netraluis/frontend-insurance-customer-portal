@@ -1,29 +1,33 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-
 import type React from "react"
-
-import { useClaimForm } from "@/components/claim-form-context"
+import { useClaimForm } from "../claim-form-context"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
 import { Switch } from "@/components/ui/switch"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { useRef, useState } from "react"
-import { CalendarIcon } from "lucide-react"
+import {
+  CalendarIcon,
+  AlertCircle,
+  FileText,
+  Camera,
+  Shield,
+  FileCheckIcon as FileReport,
+  Activity,
+  Car,
+} from "lucide-react"
 import { format } from "date-fns"
 import { cn } from "@/lib/utils"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Calendar } from "@/components/ui/calendar"
+import { useIsMobile } from "@/hooks/use-mobile"
+import { UnifiedUpload } from "@/components/ui/unified-upload"
+import { CustomCalendar } from "@/components/ui/custom-calendar"
 
 export default function AccidentDetails() {
   const { formData, updateFormData } = useClaimForm()
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [isDrawing, setIsDrawing] = useState(false)
-  const [sketchDataURL, setSketchDataURL] = useState<string | null>(null)
-  console.log({sketchDataURL})
+  const isMobile = useIsMobile()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -32,112 +36,60 @@ export default function AccidentDetails() {
 
   const handleSwitchChange = (name: string, checked: boolean) => {
     updateFormData({ [name]: checked })
+
+    // If bodily injuries is turned off, clear the description
+    if (name === "bodilyInjuries" && !checked) {
+      updateFormData({ bodilyInjuriesDescription: "" })
+    }
+
+    // If friendly report is turned off, clear the document
+    if (name === "friendlyReport" && !checked) {
+      updateFormData({ friendlyReportDocument: null })
+    }
   }
 
   const handleDateChange = (date: Date | undefined) => {
     updateFormData({ incidentDate: date || null })
   }
 
-  // Canvas drawing functions
-  const startDrawing = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
-
-    setIsDrawing(true)
-
-    let clientX, clientY
-    if ("touches" in e) {
-      clientX = e.touches[0].clientX
-      clientY = e.touches[0].clientY
-    } else {
-      clientX = e.clientX
-      clientY = e.clientY
-    }
-
-    const rect = canvas.getBoundingClientRect()
-    ctx.beginPath()
-    ctx.moveTo(clientX - rect.left, clientY - rect.top)
+  // Handle damage photos change
+  const handleDamagePhotosChange = (files: any) => {
+    updateFormData({ damagePhotos: files || [] })
   }
 
-  const draw = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
-    if (!isDrawing) return
-
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
-
-    let clientX, clientY
-    if ("touches" in e) {
-      clientX = e.touches[0].clientX
-      clientY = e.touches[0].clientY
-      e.preventDefault() // Prevent scrolling when drawing on touch devices
-    } else {
-      clientX = e.clientX
-      clientY = e.clientY
-    }
-
-    const rect = canvas.getBoundingClientRect()
-    ctx.lineWidth = 2
-    ctx.lineCap = "round"
-    ctx.strokeStyle = "#000"
-
-    ctx.lineTo(clientX - rect.left, clientY - rect.top)
-    ctx.stroke()
-  }
-
-  const stopDrawing = () => {
-    if (isDrawing) {
-      setIsDrawing(false)
-      const canvas = canvasRef.current
-      if (canvas) {
-        setSketchDataURL(canvas.toDataURL())
-      }
-    }
-  }
-
-  const clearCanvas = () => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    setSketchDataURL(null)
+  // Handle friendly report document change
+  const handleFriendlyReportChange = (file: any) => {
+    updateFormData({ friendlyReportDocument: file })
   }
 
   return (
     <Card className="border-none shadow-none">
       <CardContent className="p-0 space-y-6">
         <div className="space-y-2">
-          <h3 className="text-lg font-medium text-zinc-900">Detalls del siniestre</h3>
-          <p className="text-sm text-zinc-500">Si us plau, proporcioneu informació detallada sobre el siniestri.</p>
+          <h3 className="text-lg font-medium text-zinc-900">Accident Details</h3>
+          <p className="text-sm text-zinc-500">Please provide detailed information about the accident.</p>
         </div>
 
         <div className="space-y-4">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="accidentLocation">Lloc del siniestre</Label>
+              <Label htmlFor="accidentLocation">Location of the Accident</Label>
               <Input
                 id="accidentLocation"
                 name="accidentLocation"
                 value={formData.accidentLocation}
                 onChange={handleChange}
-                placeholder="Introdueix l'adreça o el lloc on ha ocorregut el siniestri"
+                placeholder="Enter the address or location where the accident occurred"
                 required
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="incidentDate">Data del siniestre</Label>
+              <Label htmlFor="incidentDate">Date of Incident</Label>
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
+                    id="incidentDate"
                     variant="outline"
                     className={cn(
                       "w-full justify-start text-left font-normal",
@@ -149,12 +101,16 @@ export default function AccidentDetails() {
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0">
-                  <Calendar
+                  <CustomCalendar
                     mode="single"
                     selected={formData.incidentDate || undefined}
                     onSelect={handleDateChange}
                     initialFocus
                     disabled={(date) => date > new Date()}
+                    captionLayout="dropdown"
+                    fromYear={new Date().getFullYear() - 10}
+                    toYear={new Date().getFullYear()}
+                    defaultMonth={formData.incidentDate || new Date()}
                   />
                 </PopoverContent>
               </Popover>
@@ -162,90 +118,80 @@ export default function AccidentDetails() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="accidentDescription">Descripció detallada del siniestre</Label>
+            <Label htmlFor="accidentDescription">Detailed Description of the Accident</Label>
             <Textarea
               id="accidentDescription"
               name="accidentDescription"
               value={formData.accidentDescription}
               onChange={handleChange}
-              placeholder="Si us plau, descrigui en detall el que ha ocorregut..."
-              rows={5}
+              placeholder="Please describe what happened in detail..."
+              rows={isMobile ? 4 : 5}
               required
             />
           </div>
         </div>
 
-        <div className="space-y-4">
-          <Label>Dibuix del material danyat</Label>
-          <Tabs defaultValue="draw" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="draw">Dibuixar</TabsTrigger>
-              <TabsTrigger value="upload">Carregar imatge</TabsTrigger>
-            </TabsList>
-            <TabsContent value="draw" className="space-y-4">
-              <div className="border border-zinc-200 rounded-md p-2">
-                <canvas
-                  ref={canvasRef}
-                  width={600}
-                  height={300}
-                  className="w-full h-[300px] border border-zinc-100 rounded touch-none"
-                  onMouseDown={startDrawing}
-                  onMouseMove={draw}
-                  onMouseUp={stopDrawing}
-                  onMouseLeave={stopDrawing}
-                  onTouchStart={startDrawing}
-                  onTouchMove={draw}
-                  onTouchEnd={stopDrawing}
-                />
-              </div>
-              <div className="flex justify-end">
-                <Button variant="outline" onClick={clearCanvas} type="button" className="text-sm">
-                  Netejar dibuix
-                </Button>
-              </div>
-            </TabsContent>
-            <TabsContent value="upload">
-              <div className="flex items-center justify-center w-full">
-                <label
-                  htmlFor="sketch-upload"
-                  className="flex flex-col items-center justify-center w-full h-64 border-2 border-zinc-300 border-dashed rounded-lg cursor-pointer bg-zinc-50 hover:bg-zinc-100"
-                >
-                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                    <svg
-                      className="w-8 h-8 mb-4 text-zinc-500"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 20 16"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                      />
-                    </svg>
-                    <p className="mb-2 text-sm text-zinc-500">
-                      <span className="font-semibold">Clica per carregar</span> o arrossega i deixa anar
-                    </p>
-                    <p className="text-xs text-zinc-500">PNG, JPG o JPEG (MAX. 5MB)</p>
-                  </div>
-                  <input id="sketch-upload" type="file" className="hidden" accept="image/*" />
-                </label>
-              </div>
-            </TabsContent>
-          </Tabs>
+        {/* Damage Documentation Section */}
+        <div className="space-y-4 border border-zinc-200 rounded-md p-3 sm:p-5 bg-zinc-50">
+          <div className="space-y-2">
+            <h4 className="text-md font-medium text-zinc-900 flex items-center gap-2">
+              <Camera className="h-5 w-5 text-zinc-500" />
+              Damage Documentation
+            </h4>
+            <p className="text-sm text-zinc-500">
+              Please provide a detailed description of the vehicle damage and attach photos if available.
+            </p>
+          </div>
+
+          {/* Damage Description Text Area */}
+          <div className="space-y-2">
+            <Label htmlFor="damageDescription" className="text-zinc-900">
+              Damage Description <span className="text-destructive">*</span>
+            </Label>
+            <Textarea
+              id="damageDescription"
+              name="damageDescription"
+              value={formData.damageDescription}
+              onChange={handleChange}
+              placeholder="Describe the damage to your vehicle in detail..."
+              rows={isMobile ? 3 : 4}
+              className="w-full resize-y min-h-[80px] sm:min-h-[100px]"
+              required
+            />
+          </div>
+
+          {/* Damage Photos Upload - Using Enhanced UnifiedUpload */}
+          <UnifiedUpload
+            label="Damage Photos"
+            description="Upload clear photos showing the damage to your vehicle if available."
+            value={formData.damagePhotos}
+            onChange={handleDamagePhotosChange}
+            multiple={true}
+            maxSize={10}
+            maxFiles={10}
+            accept={{ "image/*": [".jpeg", ".jpg", ".png"] }}
+            placeholder="Upload damage photos"
+            buttonText="Select photos"
+            mobileButtonText="Add photos"
+            icon={<Camera className="w-7 h-7 sm:w-8 sm:h-8 mb-2 text-zinc-500" />}
+            successMessage="Photo uploaded successfully!"
+            mobileSuccessMessage="Photo added!"
+            captureMethod="environment"
+          />
         </div>
 
-        <div className="space-y-6">
-          <h4 className="text-md font-medium text-zinc-900">Informació addicional</h4>
+        <div className="space-y-4">
+          <h4 className="text-md font-medium text-zinc-900">Additional Information</h4>
 
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label htmlFor="policeInvolved">Involucració de la policia</Label>
-                <p className="text-sm text-zinc-500">Va participar la policia en el siniestre?</p>
+          {/* Police Involvement Section */}
+          <div className="border border-zinc-200 rounded-md overflow-hidden">
+            <div className="bg-zinc-50 px-3 sm:px-4 py-3 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Shield className="h-5 w-5 text-zinc-500" />
+                <div>
+                  <h4 className="text-md font-medium text-zinc-900">Police Involvement</h4>
+                  <p className="text-sm text-zinc-500">Was the police involved in the accident?</p>
+                </div>
               </div>
               <Switch
                 id="policeInvolved"
@@ -253,11 +199,17 @@ export default function AccidentDetails() {
                 onCheckedChange={(checked) => handleSwitchChange("policeInvolved", checked)}
               />
             </div>
+          </div>
 
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label htmlFor="trafficServiceInvolved">Intervenció del servei de circulació comunal</Label>
-                <p className="text-sm text-zinc-500">Va participar el servei de trafic local en el siniestre?</p>
+          {/* Traffic Service Involvement Section */}
+          <div className="border border-zinc-200 rounded-md overflow-hidden">
+            <div className="bg-zinc-50 px-3 sm:px-4 py-3 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Car className="h-5 w-5 text-zinc-500" />
+                <div>
+                  <h4 className="text-md font-medium text-zinc-900">Traffic Service Involvement</h4>
+                  <p className="text-sm text-zinc-500">Was the local traffic service involved?</p>
+                </div>
               </div>
               <Switch
                 id="trafficServiceInvolved"
@@ -265,11 +217,17 @@ export default function AccidentDetails() {
                 onCheckedChange={(checked) => handleSwitchChange("trafficServiceInvolved", checked)}
               />
             </div>
+          </div>
 
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label htmlFor="friendlyReport">Informe amistós del siniestre</Label>
-                <p className="text-sm text-zinc-500">Va ser informat un informe amistós del siniestre?</p>
+          {/* Friendly Accident Report Section */}
+          <div className="border border-zinc-200 rounded-md overflow-hidden">
+            <div className="bg-zinc-50 px-3 sm:px-4 py-3 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <FileReport className="h-5 w-5 text-zinc-500" />
+                <div>
+                  <h4 className="text-md font-medium text-zinc-900">Friendly Accident Report</h4>
+                  <p className="text-sm text-zinc-500">Was a friendly accident report filed?</p>
+                </div>
               </div>
               <Switch
                 id="friendlyReport"
@@ -278,10 +236,41 @@ export default function AccidentDetails() {
               />
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label htmlFor="bodilyInjuries">Danys físics</Label>
-                <p className="text-sm text-zinc-500">Hi havia danys físics?</p>
+            {formData.friendlyReport && (
+              <div className="p-3 sm:p-4 space-y-3 sm:space-y-4 animate-in fade-in duration-300">
+                {/* Friendly Report Upload - Using Enhanced UnifiedUpload */}
+                <UnifiedUpload
+                  label="Upload Friendly Accident Report"
+                  description="Please upload a scanned copy or photo of the friendly accident report."
+                  value={formData.friendlyReportDocument}
+                  onChange={handleFriendlyReportChange}
+                  multiple={false}
+                  maxSize={10}
+                  accept={{
+                    "image/*": [".jpeg", ".jpg", ".png"],
+                    "application/pdf": [".pdf"],
+                  }}
+                  placeholder="Upload report"
+                  buttonText="Select file"
+                  mobileButtonText="Add document"
+                  icon={<FileText className="h-7 w-7 sm:h-8 sm:h-8 text-zinc-500" />}
+                  successMessage="Report uploaded successfully!"
+                  mobileSuccessMessage="Report added!"
+                  captureMethod="environment"
+                />
+              </div>
+            )}
+          </div>
+
+          {/* Bodily Injuries Section */}
+          <div className="border border-zinc-200 rounded-md overflow-hidden">
+            <div className="bg-zinc-50 px-3 sm:px-4 py-3 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Activity className="h-5 w-5 text-zinc-500" />
+                <div>
+                  <h4 className="text-md font-medium text-zinc-900">Bodily Injuries</h4>
+                  <p className="text-sm text-zinc-500">Were there any bodily injuries?</p>
+                </div>
               </div>
               <Switch
                 id="bodilyInjuries"
@@ -289,6 +278,40 @@ export default function AccidentDetails() {
                 onCheckedChange={(checked) => handleSwitchChange("bodilyInjuries", checked)}
               />
             </div>
+
+            {formData.bodilyInjuries && (
+              <div className="p-3 sm:p-4 space-y-3 sm:space-y-4 animate-in fade-in duration-300">
+                <div className="space-y-2 sm:space-y-3">
+                  <div className="flex items-start gap-2">
+                    <AlertCircle className="h-5 w-5 text-zinc-500 mt-0.5" />
+                    <div>
+                      <Label htmlFor="bodilyInjuriesDescription" className="text-zinc-900">
+                        Bodily Injuries Description
+                      </Label>
+                      <p className="text-sm text-zinc-500 mb-2">
+                        {isMobile
+                          ? "Describe the injuries sustained."
+                          : "Please provide details about the injuries sustained in the accident."}
+                      </p>
+                    </div>
+                  </div>
+                  <Textarea
+                    id="bodilyInjuriesDescription"
+                    name="bodilyInjuriesDescription"
+                    value={formData.bodilyInjuriesDescription}
+                    onChange={handleChange}
+                    placeholder={
+                      isMobile
+                        ? "Describe injuries and medical attention received..."
+                        : "Describe the nature and extent of the injuries, who was injured, and any medical attention received..."
+                    }
+                    rows={isMobile ? 3 : 4}
+                    className="w-full resize-y min-h-[80px] sm:min-h-[100px]"
+                    required={formData.bodilyInjuries}
+                  />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </CardContent>

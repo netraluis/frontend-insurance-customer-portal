@@ -12,10 +12,10 @@ export function FormStepper({ currentStep }: FormStepperProps) {
   const isStepComplete = claimFormContext?.isStepComplete
 
   const steps = [
-    { id: 1, name: "Pòlissa" },
+    { id: 1, name: "Policy" },
     { id: 2, name: "Vehicle" },
     { id: 3, name: "Accident" },
-    { id: 4, name: "Parts Involucrades" },
+    { id: 4, name: "Parties" },
     { id: 5, name: "Documents" },
     { id: 6, name: "Review" },
   ]
@@ -29,8 +29,8 @@ export function FormStepper({ currentStep }: FormStepperProps) {
       <div className="hidden sm:block">
         {/* Percentage indicator */}
         <div className="flex justify-between items-center mb-2">
-          <h3 className="text-sm font-medium text-zinc-900">Progrès del formulari</h3>
-          <span className="text-sm font-medium text-zinc-600">{Math.round(completionPercentage)}% Completat</span>
+          <h3 className="text-sm font-medium text-zinc-900">Form Progress</h3>
+          <span className="text-sm font-medium text-zinc-600">{Math.round(completionPercentage)}% Complete</span>
         </div>
 
         {/* Main progress bar */}
@@ -62,9 +62,7 @@ export function FormStepper({ currentStep }: FormStepperProps) {
                     if (isClickable) {
                       // Access the setCurrentStep from context
                       const { setCurrentStep } = claimFormContext || {}
-                      if(setCurrentStep) {
-                        setCurrentStep(step.id)
-                      }
+                      setCurrentStep && setCurrentStep(step.id)
                       window.scrollTo(0, 0)
                     }
                   }}
