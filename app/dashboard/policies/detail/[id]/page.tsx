@@ -299,7 +299,6 @@ export default function PolicyDetail({ params }: { params: Promise<{ id: string 
                         title={document.title}
                         type={document.type as "policy" | "claim" | "billing"}
                         date={document.date}
-                        policyId={policy.id}
                         fileSize={document.fileSize}
                         fileType={document.fileType}
                       />

@@ -3,7 +3,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ArrowRight, Calendar, Car, ClipboardList, Folder, Heart, HomeIcon, Link, Plane } from "lucide-react"
-import { DocumentCard } from "../../components/card-templates/document-card"
+import { DocumentCard } from "../../components/document-card"
 import { Button } from "@/components/ui/button"
 import { ClaimCard } from "../../components/claim-card"
 import { Tabs, TabsContent } from "@/components/ui/tabs"
@@ -231,28 +231,36 @@ export default function Page() {
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <DocumentCard
+                  id="DOC-001"
                   title="Auto Insurance Policy"
                   date="April 15, 2025"
                   fileSize="1.2 MB"
                   fileType="PDF"
+                  type="policy" 
                 />
                 <DocumentCard
+                  id="DOC-002"
                   title="Home Insurance Policy"
                   date="April 10, 2025"
                   fileSize="1.5 MB"
                   fileType="PDF"
+                  type="policy"
                 />
                 <DocumentCard
+                  id="DOC-003"
                   title="Auto Claim Report"
                   date="April 10, 2025"
                   fileSize="0.8 MB"
                   fileType="PDF"
+                  type="claim"
                 />
                 <DocumentCard
+                  id="DOC-004"
                   title="Payment Receipt"
                   date="April 1, 2025"
                   fileSize="0.3 MB"
                   fileType="PDF"
+                  type="policy"
                 />
               </div>
             </CardContent>

@@ -1,24 +1,9 @@
 "use server"
-
-//import nodemailer from "nodemailer"
 import type { FormData } from "../../components/claim-form-context"
 import type { FormData as GeneralFormData } from "../../components/general-claim-form-context"
-// import { format } from "date-fns"
 import { LoopsClient } from "loops";
 
 const loops = new LoopsClient(process.env.LOOPS_API_KEY!);
-
-// Create a transporter using SMTP
-// For production, you would use your actual email service credentials
-/*const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST || "smtp.example.com",
-  port: Number.parseInt(process.env.EMAIL_PORT || "587"),
-  secure: process.env.EMAIL_SECURE === "true",
-  auth: {
-    user: process.env.EMAIL_USER || "user@example.com",
-    pass: process.env.EMAIL_PASSWORD || "password",
-  },
-})*/
 
 export async function sendConfirmationEmail(formData: FormData | GeneralFormData, claimNumber: string, pdfBuffer: Buffer) {
   console.log("Sending confirmation email...", pdfBuffer)

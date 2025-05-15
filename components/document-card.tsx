@@ -8,13 +8,12 @@ interface DocumentCardProps {
   title: string
   type: "policy" | "claim" | "billing"
   date: string
-  policyId: string
   fileSize: string
   fileType: string
 }
 
-export function DocumentCard({ id, title, type, date, policyId, fileSize, fileType }: DocumentCardProps) {
-  console.log({id, title, type, date, policyId, fileSize, fileType})
+export function DocumentCard({ id, title, type, date, fileSize, fileType }: DocumentCardProps) {
+  console.log({id,})
   const typeInfo = {
     policy: {
       icon: <FileText className="h-5 w-5 text-blue-700" />,
