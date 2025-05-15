@@ -20,7 +20,7 @@ import {
 } from "lucide-react"
 import { format } from "date-fns"
 import { toast } from "@/components/ui/use-toast"
-import { generateClaimPDF } from "@/lib/generate-pdf"
+import { generateClaimAutoPDF } from "@/lib/generate-pdf"
 import { sendConfirmationEmail } from "@/app/actions/email-actions"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import Image from "next/image"
@@ -57,7 +57,7 @@ export default function ReviewSubmit() {
 
       // Generate PDF - only do this once with the generated claim number
       setIsGeneratingPdf(true)
-      const { dataUrl, buffer } = generateClaimPDF(formData, generatedClaimNumber)
+      const { dataUrl, buffer } = generateClaimAutoPDF(formData, generatedClaimNumber)
 
       if (!dataUrl) {
         throw new Error("Failed to generate PDF")
@@ -134,7 +134,7 @@ export default function ReviewSubmit() {
     setPdfGenerationError(null)
 
     try {
-      const { dataUrl, buffer } = generateClaimPDF(formData, claimNumber)
+      const { dataUrl, buffer } = generateClaimAutoPDF(formData, claimNumber)
 
       if (!dataUrl) {
         throw new Error("Failed to regenerate PDF")
