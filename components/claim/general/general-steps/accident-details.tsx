@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Camera } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { UnifiedUpload, type MediaFile } from "@/components/ui/unified-upload"
-import { DateTimePicker } from "../ui/custom-calendar"
+import { DateTimePicker } from "../../../ui/custom-calendar"
 
 export default function AccidentDetails() {
   const { formData, updateFormData } = useGeneralClaimForm()

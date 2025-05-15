@@ -1,5 +1,5 @@
 "use client"
-import LoginForm from "@/components/login-form"
+import LoginForm from "@/components/auth/login-form"
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 

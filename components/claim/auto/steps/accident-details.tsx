@@ -18,7 +18,7 @@ import {
 } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { FileObject, UnifiedUpload } from "@/components/ui/unified-upload"
-import { DateTimePicker } from "../ui/custom-calendar"
+import { DateTimePicker } from "@/components/ui/custom-calendar"
 
 export default function AccidentDetails() {
   const { formData, updateFormData } = useClaimForm()

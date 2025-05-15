@@ -10,8 +10,8 @@ import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { toast } from "sonner"
-import OtpVerificationForm from "./otp-verification-form"
 import { sendMagicLink } from "@/lib/auth"
+import OtpVerificationForm from "./otp-verification-form"
 
 const formSchema = z.object({
   email: z.string().email({

@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState, useEffect, useRef } from "react"
-import { useClaimForm, type Driver, type Witness } from "../claim-form-context"
+
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
@@ -23,6 +23,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Plus, Trash2, Edit2, AlertCircle, Users, Eye } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
+import { Driver, useClaimForm, Witness } from "../claim-form-context"
 
 export default function InvolvedParties() {
   const { formData, updateFormData } = useClaimForm()

@@ -1,7 +1,7 @@
 import jsPDF from "jspdf"
 import autoTable from "jspdf-autotable"
-import type { FormData } from "@/components/claim-form-context"
-import type { FormData as GeneralFormData } from "@/components/general-claim-form-context"
+import type { FormData } from "@/components/claim/auto/claim-form-context"
+import type { FormData as GeneralFormData } from "@/components/claim/general/general-claim-form-context"
 import { format } from "date-fns"
 
 export function generateClaimPDF(formData: FormData | GeneralFormData, claimNumber: string): { dataUrl: string; buffer: Buffer } {

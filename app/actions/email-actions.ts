@@ -1,6 +1,6 @@
 "use server"
-import type { FormData } from "../../components/claim-form-context"
-import type { FormData as GeneralFormData } from "../../components/general-claim-form-context"
+import type { FormData } from "../../components/claim/auto/claim-form-context"
+import type { FormData as GeneralFormData } from "../../components/claim/general/general-claim-form-context"
 import { LoopsClient } from "loops";
 
 const loops = new LoopsClient(process.env.LOOPS_API_KEY!);

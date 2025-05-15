@@ -1,7 +1,7 @@
 "use client"
 
-import { GeneralClaimFormProvider } from "@/components/general-claim-form-context"
-import GeneralClaimFormLayout from "@/components/general-claim-form-layout"
+import { GeneralClaimFormProvider } from "@/components/claim/general/general-claim-form-context"
+import GeneralClaimFormLayout from "@/components/claim/general/general-claim-form-layout"
 
 export default function GeneralClaimPage() {
   return (

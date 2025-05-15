@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
 import { PhoneInput } from "@/components/ui/phone-input"
 import { Switch } from "@/components/ui/switch"
-import { DateTimePicker } from "../ui/custom-calendar"
+import { DateTimePicker } from "@/components/ui/custom-calendar"
 import { UserCog } from "lucide-react"
 
 
