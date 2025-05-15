@@ -37,7 +37,7 @@ export type MediaFile = {
 export type FileObject = MediaFile
 
 export interface UnifiedUploadProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange" | "onDrop"> {
-  value?: MediaFile | MediaFile[] | null
+  value?: MediaFile | MediaFile[] | null 
   onChange?: (files: MediaFile | MediaFile[] | null) => void
   onDrop?: (acceptedFiles: File[]) => void
   multiple?: boolean

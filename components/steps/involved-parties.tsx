@@ -86,7 +86,7 @@ export default function InvolvedParties() {
         updateFormData({ drivers: [] })
       }
     }
-  }, [hasDrivers, updateFormData])
+  }, [hasDrivers, updateFormData, formData.drivers.length])
 
   useEffect(() => {
     if (!hasWitnesses) {
@@ -94,7 +94,7 @@ export default function InvolvedParties() {
         updateFormData({ witnesses: [] })
       }
     }
-  }, [hasWitnesses, updateFormData])
+  }, [hasWitnesses, updateFormData, formData.witnesses.length])
 
   // Driver handlers
   const handleDriverChange = (e: React.ChangeEvent<HTMLInputElement>) => {

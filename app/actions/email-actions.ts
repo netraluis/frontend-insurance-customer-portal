@@ -2,6 +2,7 @@
 
 //import nodemailer from "nodemailer"
 import type { FormData } from "../../components/claim-form-context"
+import type { FormData as GeneralFormData } from "../../components/general-claim-form-context"
 // import { format } from "date-fns"
 import { LoopsClient } from "loops";
 
@@ -19,7 +20,7 @@ const loops = new LoopsClient(process.env.LOOPS_API_KEY!);
   },
 })*/
 
-export async function sendConfirmationEmail(formData: FormData, claimNumber: string, pdfBuffer: Buffer) {
+export async function sendConfirmationEmail(formData: FormData | GeneralFormData, claimNumber: string, pdfBuffer: Buffer) {
   console.log("Sending confirmation email...", pdfBuffer)
   try {
 
