@@ -24,7 +24,7 @@ import { MobileUploadDialog } from "@/components/ui/mobile-upload-dialog"
 import { toast } from "@/components/ui/use-toast"
 import Image from "next/image"
 
-export type FileObject = {
+export type MediaFile = {
   id: string
   name: string
   type: string
@@ -34,9 +34,11 @@ export type FileObject = {
   relativePath?: string // For directory uploads
 }
 
+export type FileObject = MediaFile
+
 export interface UnifiedUploadProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange" | "onDrop"> {
-  value?: FileObject | FileObject[] | null
-  onChange?: (files: FileObject | FileObject[] | null) => void
+  value?: MediaFile | MediaFile[] | null
+  onChange?: (files: MediaFile | MediaFile[] | null) => void
   onDrop?: (acceptedFiles: File[]) => void
   multiple?: boolean
   disabled?: boolean
@@ -59,6 +61,14 @@ export interface UnifiedUploadProps extends Omit<React.HTMLAttributes<HTMLDivEle
   captureMethod?: "user" | "environment" | boolean
   variant?: "default" | "compact" | "inline"
   allowDirectories?: boolean
+}
+
+function formatFileSize(bytes: number): string {
+  if (bytes === 0) return "0 B"
+  const k = 1024
+  const sizes = ["B", "KB", "MB", "GB", "TB"]
+  const i = Math.floor(Math.log(bytes) / Math.log(k))
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i]
 }
 
 export function UnifiedUpload({
@@ -92,14 +102,7 @@ export function UnifiedUpload({
   className,
   ...props
 }: UnifiedUploadProps) {
-  const [files, setFiles] = React.useState<FileObject[]>(
-    !value ? 
-      [] : 
-      (Array.isArray(value) ? 
-        value : 
-        [value]
-      )
-  )
+  const [files, setFiles] = React.useState<MediaFile[]>(!value ? [] : Array.isArray(value) ? value : [value])
   const [uploadProgress, setUploadProgress] = React.useState<number>(0)
   const [isUploading, setIsUploading] = React.useState<boolean>(false)
   const [error, setError] = React.useState<string | null>(errorMessage || null)
@@ -228,7 +231,7 @@ export function UnifiedUpload({
 
     try {
       // Process each file
-      const newFiles: FileObject[] = []
+      const newFiles: MediaFile[] = []
 
       for (const file of selectedFiles) {
         const id = Date.now().toString() + Math.random().toString(36).substring(2, 9)
@@ -257,7 +260,7 @@ export function UnifiedUpload({
         setIsUploading(false)
 
         // Update state with new files
-        let updatedFiles: FileObject[]
+        let updatedFiles: MediaFile[]
         if (multiple) {
           updatedFiles = [...files, ...newFiles]
         } else {
@@ -340,26 +343,6 @@ export function UnifiedUpload({
     }
   }
 
-  // Get file icon based on file type
-  // const getFileIcon = (type: string) => {
-  //   if (type.includes("image")) {
-  //     return <FileImage className="h-5 w-5 text-blue-500" />
-  //   } else if (type.includes("video")) {
-  //     return <FileVideo className="h-5 w-5 text-red-500" />
-  //   } else if (type.includes("pdf")) {
-  //     return <FileText className="h-5 w-5 text-amber-500" />
-  //   } else {
-  //     return <FileIcon className="h-5 w-5 text-zinc-500" />
-  //   }
-  // }
-
-  // Format file size
-  const formatFileSize = (bytes: number) => {
-    if (bytes < 1024) return bytes + " bytes"
-    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB"
-    return (bytes / (1024 * 1024)).toFixed(1) + " MB"
-  }
-
   // Handle button click
   const handleButtonClick = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -390,9 +373,7 @@ export function UnifiedUpload({
           }
           // @ts-expect-error - TypeScript doesn't know about this API yet
           const fileHandles = await window.showOpenFilePicker(pickerOpts)
-          const files = await Promise.all(
-            fileHandles.map((handle: FileSystemFileHandle) => handle.getFile())
-          )
+          const files = await Promise.all(fileHandles.map((handle: FileSystemFileHandle) => handle.getFile()))
           handleFiles(files)
           return
         } catch (err) {
@@ -467,7 +448,7 @@ export function UnifiedUpload({
         setError(rejection.errors[0].message)
       }
     }
-  }, [fileRejections, maxSize, maxFiles])
+  }, [fileRejections, maxSize])
 
   // Determine the height class based on variant
   const getHeightClass = () => {
@@ -740,14 +721,14 @@ export function UnifiedUpload({
           <div className="mt-2 border rounded-md overflow-hidden bg-white">
             <div className="flex items-center justify-between p-3 sm:p-4">
               <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-                {files[0].type.startsWith("image/") && showPreview ? (
+                {files[0].type.startsWith("image/") ? (
                   <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-md overflow-hidden border border-zinc-200 flex-shrink-0">
                     <Image
                       src={files[0].url || "/placeholder.svg"}
                       alt={files[0].name}
                       width={400}
                       height={400}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                     />
                   </div>
                 ) : (
@@ -765,10 +746,7 @@ export function UnifiedUpload({
                 )}
                 <div className="min-w-0">
                   <p className="text-sm font-medium truncate">{files[0].name}</p>
-                  <p className="text-xs text-zinc-500">
-                    {formatFileSize(files[0].size)}
-                    {files[0].relativePath && <span className="ml-1 text-zinc-400">({files[0].relativePath})</span>}
-                  </p>
+                  <p className="text-xs text-zinc-500">{formatFileSize(files[0].size)}</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">

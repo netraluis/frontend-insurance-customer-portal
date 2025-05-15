@@ -81,16 +81,20 @@ export default function InvolvedParties() {
 
   // Update form data when toggles change
   useEffect(() => {
-    // If user switches to "No" for drivers, clear the drivers array
-    if (!hasDrivers && formData.drivers.length > 0) {
-      updateFormData({ drivers: [] })
+    if (!hasDrivers) {
+      if (formData.drivers.length > 0) {
+        updateFormData({ drivers: [] })
+      }
     }
+  }, [hasDrivers, updateFormData])
 
-    // If user switches to "No" for witnesses, clear the witnesses array
-    if (!hasWitnesses && formData.witnesses.length > 0) {
-      updateFormData({ witnesses: [] })
+  useEffect(() => {
+    if (!hasWitnesses) {
+      if (formData.witnesses.length > 0) {
+        updateFormData({ witnesses: [] })
+      }
     }
-  }, [hasDrivers, hasWitnesses, formData.drivers.length, formData.witnesses.length, updateFormData])
+  }, [hasWitnesses, updateFormData])
 
   // Driver handlers
   const handleDriverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -277,7 +281,7 @@ export default function InvolvedParties() {
               <div>
                 <h4 className="font-medium text-zinc-900">Were other drivers involved in the accident?</h4>
                 <p className="text-sm text-zinc-500">
-                  Select &apo&apos;s;Yes&apos; if there were other vehicles/drivers involved in the incident.
+                  Select &apos;Yes&apos; if there were other vehicles/drivers involved in the incident.
                 </p>
               </div>
             </div>
