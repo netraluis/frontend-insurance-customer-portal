@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 
 /*export interface FileUploadProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrop"> {
+import Image from "next/image"
+export interface FileUploadProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onDrop" | "onChange"> {
   value?: File | null
   onChange?: (file: File | null) => void
   onDrop?: (acceptedFiles: File[]) => void

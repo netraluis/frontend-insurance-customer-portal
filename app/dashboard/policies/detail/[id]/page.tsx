@@ -1,3 +1,4 @@
+"use client"
 import { cn } from "@/lib/utils"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -130,14 +131,14 @@ export default function PolicyDetail({ params }: { params: Promise<{ id: string 
                   <CardContent>
                     <div className="space-y-4">
                       <p className="text-sm text-zinc-600">
-                        Aquesta política d'assegurança automòbil proporciona cobertura completa per al teu Toyota Camry de 2022. Inclou protecció de responsabilitat de 300.000 dòlars per a les víctimes de la malaltia i danys a la propietat, cobertura de col·lisió de 100.000 dòlars amb un deduïble de 500 dòlars i cobertura de danys a la propietat de 100.000 dòlars.
+                        Aquesta política d&lsquo;assegurança automòbil proporciona cobertura completa per al teu Toyota Camry de 2022. Inclou protecció de responsabilitat de 300.000 dòlars per a les víctimes de la malaltia i danys a la propietat, cobertura de col·lisió de 100.000 dòlars amb un deduïble de 500 dòlars i cobertura de danys a la propietat de 100.000 dòlars.
                       </p>
                       <p className="text-sm text-zinc-600">
                         Les cobertures addicionals inclouen 10.000 dòlars per a pagaments mèdics i 300.000 dòlars per a la protecció de驾驶者 de vehicles sense assegurança. La política està activa i està programada per a renovar el 15 de maig de 2025, amb un preu mensual de 128,45 dòlars.
                       </p>
                       <div className="flex items-center gap-2 text-sm text-zinc-600">
                         <Shield className="h-4 w-4 text-green-600" />
-                        <span>La teva política compleix amb tots els requisits mínims d'estat i proporciona una protecció excel·lent.</span>
+                        <span>La teva política compleix amb tots els requisits mínims d&lsquo;estat i proporciona una protecció excel·lent.</span>
                       </div>
                     </div>
                   </CardContent>
@@ -163,7 +164,7 @@ export default function PolicyDetail({ params }: { params: Promise<{ id: string 
                         <dd className="font-medium">{policy.renewalDate}</dd>
                       </div>
                       <div className="flex justify-between">
-                        <dt className="text-zinc-500">Data d'inici</dt>
+                        <dt className="text-zinc-500">Data d&lsquo;inici</dt>
                         <dd className="font-medium">{policy.startDate}</dd>
                       </div>
                       <div className="flex justify-between">

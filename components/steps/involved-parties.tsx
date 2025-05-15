@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useClaimForm, type Driver, type Witness } from "../claim-form-context"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -21,9 +21,13 @@ import {
 } from "@/components/ui/dialog"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Plus, Trash2, Edit2, AlertCircle, Users, Eye } from "lucide-react"
+import { useIsMobile } from "@/hooks/use-mobile"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 export default function InvolvedParties() {
   const { formData, updateFormData } = useClaimForm()
+  const isMobile = useIsMobile()
+
 
   // State for the initial questions
   const [hasDrivers, setHasDrivers] = useState(formData.drivers.length > 0)
@@ -54,6 +58,27 @@ export default function InvolvedParties() {
     phone: "",
     description: "",
   })
+
+  // Refs for focusing first input in modals
+  const driverFirstNameRef = useRef<HTMLInputElement>(null)
+  const witnessFirstNameRef = useRef<HTMLInputElement>(null)
+
+  // Focus first input when modal opens
+  useEffect(() => {
+    if (driverDialogOpen) {
+      setTimeout(() => {
+        driverFirstNameRef.current?.focus()
+      }, 100)
+    }
+  }, [driverDialogOpen])
+
+  useEffect(() => {
+    if (witnessDialogOpen) {
+      setTimeout(() => {
+        witnessFirstNameRef.current?.focus()
+      }, 100)
+    }
+  }, [witnessDialogOpen])
 
   // Update form data when toggles change
   useEffect(() => {
@@ -158,6 +183,82 @@ export default function InvolvedParties() {
     setEditingWitnessIndex(null)
   }
 
+  // Render mobile card view for drivers
+  const renderDriverCard = (driver: Driver, index: number) => (
+    <div key={index} className="border rounded-md overflow-hidden mb-3">
+      <div className="bg-zinc-50 p-3 flex justify-between items-center">
+        <div className="font-medium">
+          {driver.firstName} {driver.lastName}
+        </div>
+        <div className="flex gap-1">
+          <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => handleEditDriver(index)}>
+            <Edit2 className="h-4 w-4" />
+            <span className="sr-only">Edit</span>
+          </Button>
+          <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => handleDeleteDriver(index)}>
+            <Trash2 className="h-4 w-4" />
+            <span className="sr-only">Delete</span>
+          </Button>
+        </div>
+      </div>
+      <div className="p-3 space-y-2">
+        <div className="flex justify-between">
+          <span className="text-sm text-zinc-500">Vehicle:</span>
+          <span className="text-sm text-right">
+            {driver.vehicleMake} {driver.vehicleModel}
+          </span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-sm text-zinc-500">License Plate:</span>
+          <span className="text-sm">{driver.licensePlate}</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-sm text-zinc-500">Contact:</span>
+          <span className="text-sm text-right">{driver.email || driver.phone || "Not provided"}</span>
+        </div>
+        {(driver.insuranceCompany || driver.policyNumber) && (
+          <div className="flex justify-between">
+            <span className="text-sm text-zinc-500">Insurance:</span>
+            <span className="text-sm text-right">
+              {driver.insuranceCompany} {driver.policyNumber ? `(${driver.policyNumber})` : ""}
+            </span>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+
+  // Render mobile card view for witnesses
+  const renderWitnessCard = (witness: Witness, index: number) => (
+    <div key={index} className="border rounded-md overflow-hidden mb-3">
+      <div className="bg-zinc-50 p-3 flex justify-between items-center">
+        <div className="font-medium">
+          {witness.firstName} {witness.lastName}
+        </div>
+        <div className="flex gap-1">
+          <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => handleEditWitness(index)}>
+            <Edit2 className="h-4 w-4" />
+            <span className="sr-only">Edit</span>
+          </Button>
+          <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => handleDeleteWitness(index)}>
+            <Trash2 className="h-4 w-4" />
+            <span className="sr-only">Delete</span>
+          </Button>
+        </div>
+      </div>
+      <div className="p-3 space-y-2">
+        <div className="flex justify-between">
+          <span className="text-sm text-zinc-500">Contact:</span>
+          <span className="text-sm text-right">{witness.email || witness.phone || "Not provided"}</span>
+        </div>
+        <div className="pt-1">
+          <span className="text-sm text-zinc-500 block mb-1">Statement:</span>
+          <p className="text-sm bg-zinc-50 p-2 rounded-md">{witness.description}</p>
+        </div>
+      </div>
+    </div>
+  )
+
   return (
     <Card className="border-none shadow-none">
       <CardContent className="p-0 space-y-6">
@@ -178,6 +279,7 @@ export default function InvolvedParties() {
                 <h4 className="font-medium text-zinc-900">Were other drivers involved in the accident?</h4>
                 <p className="text-sm text-zinc-500">
                   Select 'Yes' if there were other vehicles/drivers involved in the incident.
+                  Select &apo&apos;s;Yes&apos; if there were other vehicles/drivers involved in the incident.
                 </p>
               </div>
             </div>
@@ -192,7 +294,13 @@ export default function InvolvedParties() {
             <div className="p-4 space-y-4">
               <div className="flex justify-between items-center">
                 <h5 className="text-sm font-medium text-zinc-900">Other Drivers</h5>
-                <Dialog open={driverDialogOpen} onOpenChange={setDriverDialogOpen}>
+                <Dialog
+                  open={driverDialogOpen}
+                  onOpenChange={(open) => {
+                    setDriverDialogOpen(open)
+                    if (!open) resetDriverForm()
+                  }}
+                >
                   <DialogTrigger asChild>
                     <Button
                       onClick={() => {
@@ -206,128 +314,135 @@ export default function InvolvedParties() {
                       Add Driver
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[600px]">
-                    <DialogHeader>
+                  <DialogContent
+                    className={isMobile ? "w-[calc(100%-32px)] p-0 h-[90vh] max-h-[600px]" : "sm:max-w-[600px]"}
+                  >
+                    <DialogHeader className={isMobile ? "px-4 py-3 border-b" : ""}>
                       <DialogTitle>{editingDriverIndex !== null ? "Edit Driver" : "Add Driver"}</DialogTitle>
-                      <DialogDescription>
+                      <DialogDescription className={isMobile ? "text-sm" : ""}>
                         Enter the details of the other driver involved in the accident.
                       </DialogDescription>
                     </DialogHeader>
-                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 py-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="driverFirstName">
-                          First Name <span className="text-red-500">*</span>
-                        </Label>
-                        <Input
-                          id="driverFirstName"
-                          name="firstName"
-                          value={driverFormData.firstName}
-                          onChange={handleDriverChange}
-                          placeholder="First name"
-                          required
-                        />
+
+                    <ScrollArea className={isMobile ? "h-[calc(90vh-130px)] max-h-[470px]" : ""}>
+                      <div className={`grid grid-cols-1 gap-4 sm:grid-cols-2 ${isMobile ? "p-4" : "py-4"}`}>
+                        <div className="space-y-2">
+                          <Label htmlFor="driverFirstName">
+                            First Name <span className="text-red-500">*</span>
+                          </Label>
+                          <Input
+                            id="driverFirstName"
+                            name="firstName"
+                            value={driverFormData.firstName}
+                            onChange={handleDriverChange}
+                            placeholder="First name"
+                            required
+                            ref={driverFirstNameRef}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="driverLastName">
+                            Last Name <span className="text-red-500">*</span>
+                          </Label>
+                          <Input
+                            id="driverLastName"
+                            name="lastName"
+                            value={driverFormData.lastName}
+                            onChange={handleDriverChange}
+                            placeholder="Last name"
+                            required
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="driverEmail">Email</Label>
+                          <Input
+                            id="driverEmail"
+                            name="email"
+                            type="email"
+                            value={driverFormData.email}
+                            onChange={handleDriverChange}
+                            placeholder="Email address"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="driverPhone">Phone</Label>
+                          <Input
+                            id="driverPhone"
+                            name="phone"
+                            value={driverFormData.phone}
+                            onChange={handleDriverChange}
+                            placeholder="Phone number"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="driverVehicleMake">
+                            Vehicle Make <span className="text-red-500">*</span>
+                          </Label>
+                          <Input
+                            id="driverVehicleMake"
+                            name="vehicleMake"
+                            value={driverFormData.vehicleMake}
+                            onChange={handleDriverChange}
+                            placeholder="e.g., Toyota, Honda"
+                            required
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="driverVehicleModel">
+                            Vehicle Model <span className="text-red-500">*</span>
+                          </Label>
+                          <Input
+                            id="driverVehicleModel"
+                            name="vehicleModel"
+                            value={driverFormData.vehicleModel}
+                            onChange={handleDriverChange}
+                            placeholder="e.g., Corolla, Civic"
+                            required
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="driverLicensePlate">
+                            License Plate <span className="text-red-500">*</span>
+                          </Label>
+                          <Input
+                            id="driverLicensePlate"
+                            name="licensePlate"
+                            value={driverFormData.licensePlate}
+                            onChange={handleDriverChange}
+                            placeholder="License plate number"
+                            required
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="driverInsuranceCompany">Insurance Company</Label>
+                          <Input
+                            id="driverInsuranceCompany"
+                            name="insuranceCompany"
+                            value={driverFormData.insuranceCompany}
+                            onChange={handleDriverChange}
+                            placeholder="Insurance company name"
+                          />
+                        </div>
+                        <div className="space-y-2 sm:col-span-2">
+                          <Label htmlFor="driverPolicyNumber">Policy Number</Label>
+                          <Input
+                            id="driverPolicyNumber"
+                            name="policyNumber"
+                            value={driverFormData.policyNumber}
+                            onChange={handleDriverChange}
+                            placeholder="Insurance policy number"
+                          />
+                        </div>
                       </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="driverLastName">
-                          Last Name <span className="text-red-500">*</span>
-                        </Label>
-                        <Input
-                          id="driverLastName"
-                          name="lastName"
-                          value={driverFormData.lastName}
-                          onChange={handleDriverChange}
-                          placeholder="Last name"
-                          required
-                        />
+                      <div className={`text-sm text-zinc-500 flex items-center gap-1 mb-4 ${isMobile ? "px-4" : ""}`}>
+                        <AlertCircle className="h-4 w-4" />
+                        <span>
+                          Fields marked with <span className="text-red-500">*</span> are required
+                        </span>
                       </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="driverEmail">Email</Label>
-                        <Input
-                          id="driverEmail"
-                          name="email"
-                          type="email"
-                          value={driverFormData.email}
-                          onChange={handleDriverChange}
-                          placeholder="Email address"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="driverPhone">Phone</Label>
-                        <Input
-                          id="driverPhone"
-                          name="phone"
-                          value={driverFormData.phone}
-                          onChange={handleDriverChange}
-                          placeholder="Phone number"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="driverVehicleMake">
-                          Vehicle Make <span className="text-red-500">*</span>
-                        </Label>
-                        <Input
-                          id="driverVehicleMake"
-                          name="vehicleMake"
-                          value={driverFormData.vehicleMake}
-                          onChange={handleDriverChange}
-                          placeholder="e.g., Toyota, Honda"
-                          required
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="driverVehicleModel">
-                          Vehicle Model <span className="text-red-500">*</span>
-                        </Label>
-                        <Input
-                          id="driverVehicleModel"
-                          name="vehicleModel"
-                          value={driverFormData.vehicleModel}
-                          onChange={handleDriverChange}
-                          placeholder="e.g., Corolla, Civic"
-                          required
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="driverLicensePlate">
-                          License Plate <span className="text-red-500">*</span>
-                        </Label>
-                        <Input
-                          id="driverLicensePlate"
-                          name="licensePlate"
-                          value={driverFormData.licensePlate}
-                          onChange={handleDriverChange}
-                          placeholder="License plate number"
-                          required
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="driverInsuranceCompany">Insurance Company</Label>
-                        <Input
-                          id="driverInsuranceCompany"
-                          name="insuranceCompany"
-                          value={driverFormData.insuranceCompany}
-                          onChange={handleDriverChange}
-                          placeholder="Insurance company name"
-                        />
-                      </div>
-                      <div className="space-y-2 sm:col-span-2">
-                        <Label htmlFor="driverPolicyNumber">Policy Number</Label>
-                        <Input
-                          id="driverPolicyNumber"
-                          name="policyNumber"
-                          value={driverFormData.policyNumber}
-                          onChange={handleDriverChange}
-                          placeholder="Insurance policy number"
-                        />
-                      </div>
-                    </div>
-                    <div className="text-sm text-zinc-500 flex items-center gap-1 mb-4">
-                      <AlertCircle className="h-4 w-4" />
-                      <span>
-                        Fields marked with <span className="text-red-500">*</span> are required
-                      </span>
-                    </div>
-                    <DialogFooter>
+                    </ScrollArea>
+
+                    <DialogFooter className={isMobile ? "flex p-4 border-t bg-zinc-50" : ""}>
                       <Button variant="outline" onClick={() => setDriverDialogOpen(false)}>
                         Cancel
                       </Button>
@@ -349,57 +464,66 @@ export default function InvolvedParties() {
               </div>
 
               {formData.drivers.length > 0 ? (
-                <div className="border rounded-md">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Name</TableHead>
-                        <TableHead>Vehicle</TableHead>
-                        <TableHead>Insurance</TableHead>
-                        <TableHead className="w-[100px]">Actions</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {formData.drivers.map((driver, index) => (
-                        <TableRow key={index}>
-                          <TableCell>
-                            <div className="font-medium">
-                              {driver.firstName} {driver.lastName}
-                            </div>
-                            <div className="text-sm text-zinc-500">{driver.email}</div>
-                          </TableCell>
-                          <TableCell>
-                            <div>
-                              {driver.vehicleMake} {driver.vehicleModel}
-                            </div>
-                            <div className="text-sm text-zinc-500">{driver.licensePlate}</div>
-                          </TableCell>
-                          <TableCell>
-                            <div>{driver.insuranceCompany || "Not provided"}</div>
-                            <div className="text-sm text-zinc-500">{driver.policyNumber || "No policy number"}</div>
-                          </TableCell>
-                          <TableCell>
-                            <div className="flex space-x-2">
-                              <Button variant="ghost" size="icon" onClick={() => handleEditDriver(index)}>
-                                <Edit2 className="h-4 w-4" />
-                                <span className="sr-only">Edit</span>
-                              </Button>
-                              <Button variant="ghost" size="icon" onClick={() => handleDeleteDriver(index)}>
-                                <Trash2 className="h-4 w-4" />
-                                <span className="sr-only">Delete</span>
-                              </Button>
-                            </div>
-                          </TableCell>
+                <>
+                  {/* Desktop table view */}
+                  <div className="hidden sm:block border rounded-md">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Name</TableHead>
+                          <TableHead>Vehicle</TableHead>
+                          <TableHead>Insurance</TableHead>
+                          <TableHead className="w-[100px]">Actions</TableHead>
                         </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </div>
+                      </TableHeader>
+                      <TableBody>
+                        {formData.drivers.map((driver, index) => (
+                          <TableRow key={index}>
+                            <TableCell>
+                              <div className="font-medium">
+                                {driver.firstName} {driver.lastName}
+                              </div>
+                              <div className="text-sm text-zinc-500">{driver.email}</div>
+                            </TableCell>
+                            <TableCell>
+                              <div>
+                                {driver.vehicleMake} {driver.vehicleModel}
+                              </div>
+                              <div className="text-sm text-zinc-500">{driver.licensePlate}</div>
+                            </TableCell>
+                            <TableCell>
+                              <div>{driver.insuranceCompany || "Not provided"}</div>
+                              <div className="text-sm text-zinc-500">{driver.policyNumber || "No policy number"}</div>
+                            </TableCell>
+                            <TableCell>
+                              <div className="flex space-x-2">
+                                <Button variant="ghost" size="icon" onClick={() => handleEditDriver(index)}>
+                                  <Edit2 className="h-4 w-4" />
+                                  <span className="sr-only">Edit</span>
+                                </Button>
+                                <Button variant="ghost" size="icon" onClick={() => handleDeleteDriver(index)}>
+                                  <Trash2 className="h-4 w-4" />
+                                  <span className="sr-only">Delete</span>
+                                </Button>
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+
+                  {/* Mobile card view */}
+                  <div className="sm:hidden">
+                    {formData.drivers.map((driver, index) => renderDriverCard(driver, index))}
+                  </div>
+                </>
               ) : (
                 <div className="text-center py-6 border border-dashed rounded-md border-zinc-300 bg-zinc-50">
                   <p className="text-zinc-500">No drivers added yet.</p>
                   <p className="text-sm text-zinc-400 mt-1">
                     Click "Add Driver" to add information about other drivers involved.
+                    Click &apos;Add Driver&apos; to add information about other drivers involved.
                   </p>
                 </div>
               )}
@@ -417,6 +541,7 @@ export default function InvolvedParties() {
                 <h4 className="font-medium text-zinc-900">Were there any witnesses to the accident?</h4>
                 <p className="text-sm text-zinc-500">
                   Select 'Yes' if anyone witnessed the accident and can provide a statement.
+                  Select &apos;Yes&apos; if anyone witnessed the accident and can provide a statement.
                 </p>
               </div>
             </div>
@@ -431,7 +556,13 @@ export default function InvolvedParties() {
             <div className="p-4 space-y-4">
               <div className="flex justify-between items-center">
                 <h5 className="text-sm font-medium text-zinc-900">Witnesses</h5>
-                <Dialog open={witnessDialogOpen} onOpenChange={setWitnessDialogOpen}>
+                <Dialog
+                  open={witnessDialogOpen}
+                  onOpenChange={(open) => {
+                    setWitnessDialogOpen(open)
+                    if (!open) resetWitnessForm()
+                  }}
+                >
                   <DialogTrigger asChild>
                     <Button
                       onClick={() => {
@@ -520,6 +651,92 @@ export default function InvolvedParties() {
                       </span>
                     </div>
                     <DialogFooter>
+                  </DialogFooter>
+                  </DialogContent>
+                  <DialogContent
+                    className={isMobile ? "w-[calc(100%-32px)] p-0 h-[90vh] max-h-[600px]" : "sm:max-w-[600px]"}
+                  >
+                    <DialogHeader className={isMobile ? "px-4 py-3 border-b" : ""}>
+                      <DialogTitle>{editingWitnessIndex !== null ? "Edit Witness" : "Add Witness"}</DialogTitle>
+                      <DialogDescription className={isMobile ? "text-sm" : ""}>
+                        Enter the details of a witness to the accident.
+                      </DialogDescription>
+                    </DialogHeader>
+
+                    <ScrollArea className={isMobile ? "h-[calc(90vh-130px)] max-h-[470px]" : ""}>
+                      <div className={`grid grid-cols-1 gap-4 sm:grid-cols-2 ${isMobile ? "p-4" : "py-4"}`}>
+                        <div className="space-y-2">
+                          <Label htmlFor="witnessFirstName">
+                            First Name <span className="text-red-500">*</span>
+                          </Label>
+                          <Input
+                            id="witnessFirstName"
+                            name="firstName"
+                            value={witnessFormData.firstName}
+                            onChange={handleWitnessChange}
+                            placeholder="First name"
+                            required
+                            ref={witnessFirstNameRef}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="witnessLastName">
+                            Last Name <span className="text-red-500">*</span>
+                          </Label>
+                          <Input
+                            id="witnessLastName"
+                            name="lastName"
+                            value={witnessFormData.lastName}
+                            onChange={handleWitnessChange}
+                            placeholder="Last name"
+                            required
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="witnessEmail">Email</Label>
+                          <Input
+                            id="witnessEmail"
+                            name="email"
+                            type="email"
+                            value={witnessFormData.email}
+                            onChange={handleWitnessChange}
+                            placeholder="Email address"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="witnessPhone">Phone</Label>
+                          <Input
+                            id="witnessPhone"
+                            name="phone"
+                            value={witnessFormData.phone}
+                            onChange={handleWitnessChange}
+                            placeholder="Phone number"
+                          />
+                        </div>
+                        <div className="space-y-2 sm:col-span-2">
+                          <Label htmlFor="witnessDescription">
+                            Statement <span className="text-red-500">*</span>
+                          </Label>
+                          <Textarea
+                            id="witnessDescription"
+                            name="description"
+                            value={witnessFormData.description}
+                            onChange={handleWitnessChange}
+                            placeholder="Witness statement or description of what they saw"
+                            rows={4}
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div className={`text-sm text-zinc-500 flex items-center gap-1 mb-4 ${isMobile ? "px-4" : ""}`}>
+                        <AlertCircle className="h-4 w-4" />
+                        <span>
+                          Fields marked with <span className="text-red-500">*</span> are required
+                        </span>
+                      </div>
+                    </ScrollArea>
+
+                    <DialogFooter className={isMobile ? "flex p-4 border-t bg-zinc-50" : ""}>
                       <Button variant="outline" onClick={() => setWitnessDialogOpen(false)}>
                         Cancel
                       </Button>
@@ -537,53 +754,61 @@ export default function InvolvedParties() {
               </div>
 
               {formData.witnesses.length > 0 ? (
-                <div className="border rounded-md">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Name</TableHead>
-                        <TableHead>Contact</TableHead>
-                        <TableHead>Statement</TableHead>
-                        <TableHead className="w-[100px]">Actions</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {formData.witnesses.map((witness, index) => (
-                        <TableRow key={index}>
-                          <TableCell>
-                            <div className="font-medium">
-                              {witness.firstName} {witness.lastName}
-                            </div>
-                          </TableCell>
-                          <TableCell>
-                            <div>{witness.email || "No email provided"}</div>
-                            <div className="text-sm text-zinc-500">{witness.phone || "No phone provided"}</div>
-                          </TableCell>
-                          <TableCell>
-                            <div className="max-w-[200px] truncate">{witness.description}</div>
-                          </TableCell>
-                          <TableCell>
-                            <div className="flex space-x-2">
-                              <Button variant="ghost" size="icon" onClick={() => handleEditWitness(index)}>
-                                <Edit2 className="h-4 w-4" />
-                                <span className="sr-only">Edit</span>
-                              </Button>
-                              <Button variant="ghost" size="icon" onClick={() => handleDeleteWitness(index)}>
-                                <Trash2 className="h-4 w-4" />
-                                <span className="sr-only">Delete</span>
-                              </Button>
-                            </div>
-                          </TableCell>
+                <>
+                  {/* Desktop table view */}
+                  <div className="hidden sm:block border rounded-md">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Name</TableHead>
+                          <TableHead>Contact</TableHead>
+                          <TableHead>Statement</TableHead>
+                          <TableHead className="w-[100px]">Actions</TableHead>
                         </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </div>
+                      </TableHeader>
+                      <TableBody>
+                        {formData.witnesses.map((witness, index) => (
+                          <TableRow key={index}>
+                            <TableCell>
+                              <div className="font-medium">
+                                {witness.firstName} {witness.lastName}
+                              </div>
+                            </TableCell>
+                            <TableCell>
+                              <div>{witness.email || "No email provided"}</div>
+                              <div className="text-sm text-zinc-500">{witness.phone || "No phone provided"}</div>
+                            </TableCell>
+                            <TableCell>
+                              <div className="max-w-[200px] truncate">{witness.description}</div>
+                            </TableCell>
+                            <TableCell>
+                              <div className="flex space-x-2">
+                                <Button variant="ghost" size="icon" onClick={() => handleEditWitness(index)}>
+                                  <Edit2 className="h-4 w-4" />
+                                  <span className="sr-only">Edit</span>
+                                </Button>
+                                <Button variant="ghost" size="icon" onClick={() => handleDeleteWitness(index)}>
+                                  <Trash2 className="h-4 w-4" />
+                                  <span className="sr-only">Delete</span>
+                                </Button>
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+
+                  {/* Mobile card view */}
+                  <div className="sm:hidden">
+                    {formData.witnesses.map((witness, index) => renderWitnessCard(witness, index))}
+                  </div>
+                </>
               ) : (
                 <div className="text-center py-6 border border-dashed rounded-md border-zinc-300 bg-zinc-50">
                   <p className="text-zinc-500">No witnesses added yet.</p>
                   <p className="text-sm text-zinc-400 mt-1">
-                    Click "Add Witness" to add information about witnesses to the accident.
+                    Click &apos;Add Witness&apos; to add information about witnesses to the accident.
                   </p>
                 </div>
               )}

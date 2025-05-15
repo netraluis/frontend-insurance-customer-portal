@@ -27,6 +27,26 @@ export type Document = {
   name: string
   type: string
   url: string
+  size: number
+}
+
+// Type for the friendly report document
+export type FriendlyReportDocument = {
+  id: string
+  name: string
+  type: string
+  url: string
+  size: number
+}
+
+// Types for damage photos and videos
+export type DamageMedia = {
+  id: string
+  name: string
+  type: string
+  url: string
+  size: number
+  thumbnail?: string // For video thumbnails
 }
 
 // Type for the friendly report document

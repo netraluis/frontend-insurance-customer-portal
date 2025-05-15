@@ -227,7 +227,7 @@ export default function DocumentsPage() {
                   <TabsTrigger value="policy">Polítiques</TabsTrigger>
                   <TabsTrigger value="claim">Reclamacions</TabsTrigger>
                   <TabsTrigger value="billing">Pagaments</TabsTrigger>
-                  <TabsTrigger value="id">Documents d'identificació</TabsTrigger>
+                  <TabsTrigger value="id">Documents d&apos;identificació</TabsTrigger>
                 </TabsList>
                 <TabsContent value="all">
                   <DocumentList documents={documents} view={viewMode} searchTerm={searchTerm} />

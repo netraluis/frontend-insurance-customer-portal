@@ -14,6 +14,8 @@ import { CalendarIcon, UserCog } from "lucide-react"
 import { Calendar } from "@/components/ui/calendar"
 import { format } from "date-fns"
 import { cn } from "@/lib/utils"
+import { DateTimePicker } from "../ui/custom-calendar"
+
 
 export default function PolicyInformation() {
   const { formData, updateFormData } = useClaimForm()
@@ -23,11 +25,11 @@ export default function PolicyInformation() {
     updateFormData({ [name]: value })
   }
 
-  const handlePhoneChange = (value: string, isValid: boolean) => {
+  const handlePhoneChange = (value: string) => {
     updateFormData({ phone: value })
   }
 
-  const handleDriverPhoneChange = (value: string, isValid: boolean) => {
+  const handleDriverPhoneChange = (value: string) => {
     updateFormData({ driverPhone: value })
   }
 
@@ -186,12 +188,19 @@ export default function PolicyInformation() {
                         onSelect={handleDriverDateChange}
                         initialFocus
                         disabled={(date) => date > new Date()}
-                        captionLayout="dropdown-buttons"
+                        captionLayout="dropdown-months"
                         fromYear={1940}
                         toYear={new Date().getFullYear() - 16}
                       />
                     </PopoverContent>
                   </Popover>
+                  <DateTimePicker
+                    value={formData.driverDateOfBirth || undefined}
+                    onChange={handleDriverDateChange}
+                    granularity="day"
+                    displayFormat={{ hour24: "dd/MM/yyyy", hour12: "dd/MM/yyyy" }}
+                    yearRange={100}
+                  />
                 </div>
 
                 <div className="space-y-2">

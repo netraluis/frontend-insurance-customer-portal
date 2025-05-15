@@ -123,7 +123,7 @@ export function UploadDocumentDialog({ open, onOpenChange }: UploadDocumentDialo
         <DialogHeader>
           <DialogTitle>Carregar document</DialogTitle>
           <DialogDescription>
-            Carrega un document al teu portal d'assegurances. Formats suportats: PDF, DOCX, JPG, PNG, ZIP.
+            Carrega un document al teu portal d&aposassegurances. Formats suportats: PDF, DOCX, JPG, PNG, ZIP.
           </DialogDescription>
         </DialogHeader>
 
@@ -183,7 +183,7 @@ export function UploadDocumentDialog({ open, onOpenChange }: UploadDocumentDialo
                 <SelectItem value="policy">Document de política</SelectItem>
                 <SelectItem value="claim">Document de reclamació</SelectItem>
                 <SelectItem value="billing">Document de facturació</SelectItem>
-                <SelectItem value="id">Document d'identificació</SelectItem>
+                <SelectItem value="id">Document d&aposidentificació</SelectItem>
                 <SelectItem value="other">Altres</SelectItem>
               </SelectContent>
             </Select>

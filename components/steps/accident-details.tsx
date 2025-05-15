@@ -1,9 +1,6 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-
 import type React from "react"
-
 import { useClaimForm } from "../claim-form-context"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -27,9 +24,14 @@ import { cn } from "@/lib/utils"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Calendar } from "@/components/ui/calendar"
 import { FileUpload } from "@/components/ui/file-upload"
+import { useIsMobile } from "@/hooks/use-mobile"
+import { FileObject, UnifiedUpload } from "@/components/ui/unified-upload"
+import { DateTimePicker } from "../ui/custom-calendar"
+import { Button } from "../ui/button"
 
 export default function AccidentDetails() {
   const { formData, updateFormData } = useClaimForm()
+  const isMobile = useIsMobile()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -100,6 +102,17 @@ export default function AccidentDetails() {
       e.target.value = ""
     }
   }
+  // Handle damage photos change
+  const handleDamagePhotosChange = (files: FileObject | FileObject[] | null) => {
+    updateFormData({ damagePhotos: Array.isArray(files) ? files : files ? [files] : [] });
+  }
+
+  // Handle friendly report document change
+  const handleFriendlyReportChange = (files: FileObject | FileObject[] | null) => {
+    // If files is an array, take the first file; if it's a single file, use it; if null, set null
+    const file = Array.isArray(files) ? files[0] ?? null : files ?? null;
+    updateFormData({ friendlyReportDocument: file });
+  };
 
   return (
     <Card className="border-none shadow-none">
@@ -148,6 +161,13 @@ export default function AccidentDetails() {
                   />
                 </PopoverContent>
               </Popover>
+              <DateTimePicker
+                value={formData.incidentDate || undefined}
+                onChange={handleDateChange}
+                granularity="day"
+                displayFormat={{ hour24: "dd/MM/yyyy", hour12: "dd/MM/yyyy" }}
+                yearRange={100}
+              />
             </div>
           </div>
 
@@ -159,14 +179,14 @@ export default function AccidentDetails() {
               value={formData.accidentDescription}
               onChange={handleChange}
               placeholder="Please describe what happened in detail..."
-              rows={5}
+              rows={isMobile ? 4 : 5}
               required
             />
           </div>
         </div>
 
         {/* Damage Documentation Section */}
-        <div className="space-y-4 border border-zinc-200 rounded-md p-5 bg-zinc-50">
+        <div className="space-y-4 border border-zinc-200 rounded-md p-3 sm:p-5 bg-zinc-50">
           <div className="space-y-2">
             <h4 className="text-md font-medium text-zinc-900 flex items-center gap-2">
               <Camera className="h-5 w-5 text-zinc-500" />
@@ -187,9 +207,9 @@ export default function AccidentDetails() {
               name="damageDescription"
               value={formData.damageDescription}
               onChange={handleChange}
-              placeholder="Describe the damage to your vehicle in detail (e.g., front bumper dented, driver's side door scratched, broken headlight)..."
-              rows={4}
-              className="w-full resize-y min-h-[100px]"
+              placeholder="Describe the damage to your vehicle in detail..."
+              rows={isMobile ? 3 : 4}
+              className="w-full resize-y min-h-[80px] sm:min-h-[100px]"
               required
             />
           </div>
@@ -267,6 +287,24 @@ export default function AccidentDetails() {
               </div>
             )}
           </div>
+          {/* Damage Photos Upload - Using Enhanced UnifiedUpload */}
+          <UnifiedUpload
+            label="Damage Photos"
+            description="Upload clear photos showing the damage to your vehicle if available."
+            value={formData.damagePhotos}
+            onChange={handleDamagePhotosChange}
+            multiple={true}
+            maxSize={10}
+            maxFiles={10}
+            accept={{ "image/*": [".jpeg", ".jpg", ".png"] }}
+            placeholder="Upload damage photos"
+            buttonText="Select photos"
+            mobileButtonText="Add photos"
+            icon={<Camera className="w-7 h-7 sm:w-8 sm:h-8 mb-2 text-zinc-500" />}
+            successMessage="Photo uploaded successfully!"
+            mobileSuccessMessage="Photo added!"
+            captureMethod="environment"
+          />
         </div>
 
         <div className="space-y-4">
@@ -274,7 +312,7 @@ export default function AccidentDetails() {
 
           {/* Police Involvement Section */}
           <div className="border border-zinc-200 rounded-md overflow-hidden">
-            <div className="bg-zinc-50 px-4 py-3 flex items-center justify-between">
+            <div className="bg-zinc-50 px-3 sm:px-4 py-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Shield className="h-5 w-5 text-zinc-500" />
                 <div>
@@ -289,78 +327,101 @@ export default function AccidentDetails() {
               />
             </div>
           </div>
+        </div>
 
-          {/* Traffic Service Involvement Section - Now as a separate box */}
-          <div className="border border-zinc-200 rounded-md overflow-hidden">
-            <div className="bg-zinc-50 px-4 py-3 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Car className="h-5 w-5 text-zinc-500" />
-                <div>
-                  <h4 className="text-md font-medium text-zinc-900">Traffic Service Involvement</h4>
-                  <p className="text-sm text-zinc-500">Was the local traffic service involved?</p>
-                </div>
+        {/* Traffic Service Involvement Section */}
+        <div className="border border-zinc-200 rounded-md overflow-hidden">
+          <div className="bg-zinc-50 px-3 sm:px-4 py-3 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Car className="h-5 w-5 text-zinc-500" />
+              <div>
+                <h4 className="text-md font-medium text-zinc-900">Traffic Service Involvement</h4>
+                <p className="text-sm text-zinc-500">Was the local traffic service involved?</p>
               </div>
-              <Switch
-                id="trafficServiceInvolved"
-                checked={formData.trafficServiceInvolved}
-                onCheckedChange={(checked) => handleSwitchChange("trafficServiceInvolved", checked)}
-              />
             </div>
+            <Switch
+              id="trafficServiceInvolved"
+              checked={formData.trafficServiceInvolved}
+              onCheckedChange={(checked) => handleSwitchChange("trafficServiceInvolved", checked)}
+            />
+          </div>
+        </div>
+
+        {/* Friendly Accident Report Section */}
+        <div className="border border-zinc-200 rounded-md overflow-hidden">
+          <div className="bg-zinc-50 px-3 sm:px-4 py-3 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <FileReport className="h-5 w-5 text-zinc-500" />
+              <div>
+                <h4 className="text-md font-medium text-zinc-900">Friendly Accident Report</h4>
+                <p className="text-sm text-zinc-500">Was a friendly accident report filed?</p>
+              </div>
+            </div>
+            <Switch
+              id="friendlyReport"
+              checked={formData.friendlyReport}
+              onCheckedChange={(checked) => handleSwitchChange("friendlyReport", checked)}
+            />
           </div>
 
-          {/* Friendly Accident Report Section */}
-          <div className="border border-zinc-200 rounded-md overflow-hidden">
-            <div className="bg-zinc-50 px-4 py-3 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <FileReport className="h-5 w-5 text-zinc-500" />
-                <div>
-                  <h4 className="text-md font-medium text-zinc-900">Friendly Accident Report</h4>
-                  <p className="text-sm text-zinc-500">Was a friendly accident report filed?</p>
-                </div>
-              </div>
-              <Switch
-                id="friendlyReport"
-                checked={formData.friendlyReport}
-                onCheckedChange={(checked) => handleSwitchChange("friendlyReport", checked)}
-              />
-            </div>
-
-            {formData.friendlyReport && (
-              <div className="p-4 space-y-4 animate-in fade-in duration-300">
-                <div className="space-y-3">
-                  <div className="flex items-start gap-2">
-                    <FileText className="h-5 w-5 text-zinc-500 mt-0.5" />
-                    <div>
-                      <Label htmlFor="friendlyReportDocument" className="text-zinc-900">
-                        Upload Friendly Accident Report
-                      </Label>
-                      <p className="text-sm text-zinc-500 mb-2">
-                        Please upload a scanned copy or photo of the friendly accident report.
-                      </p>
-                    </div>
+          {formData.friendlyReport && (
+            <div className="p-4 space-y-4 animate-in fade-in duration-300">
+              <div className="space-y-3">
+                <div className="flex items-start gap-2">
+                  <FileText className="h-5 w-5 text-zinc-500 mt-0.5" />
+                  <div>
+                    <Label htmlFor="friendlyReportDocument" className="text-zinc-900">
+                      Upload Friendly Accident Report
+                    </Label>
+                    <p className="text-sm text-zinc-500 mb-2">
+                      Please upload a scanned copy or photo of the friendly accident report.
+                    </p>
                   </div>
-                  <FileUpload
-                    id="friendlyReportDocument"
-                    onChange={handleFriendlyReportUpload}
-                    maxSize={10} // 10MB max size
-                    accept={{
-                      "image/*": [".jpeg", ".jpg", ".png"],
-                      "application/pdf": [".pdf"],
-                    }}
-                    previewUrl={formData.friendlyReportDocument?.url}
-                    previewName={formData.friendlyReportDocument?.name}
-                    previewType={formData.friendlyReportDocument?.type}
-                    previewSize={formData.friendlyReportDocument?.size}
-                    required={formData.friendlyReport}
-                  />
                 </div>
+                <FileUpload
+                  id="friendlyReportDocument"
+                  onChange={handleFriendlyReportUpload}
+                  maxSize={10} // 10MB max size
+                  accept={{
+                    "image/*": [".jpeg", ".jpg", ".png"],
+                    "application/pdf": [".pdf"],
+                  }}
+                  previewUrl={formData.friendlyReportDocument?.url}
+                  previewName={formData.friendlyReportDocument?.name}
+                  previewType={formData.friendlyReportDocument?.type}
+                  previewSize={formData.friendlyReportDocument?.size}
+                  required={formData.friendlyReport}
+                />
               </div>
+              <div className="p-3 sm:p-4 space-y-3 sm:space-y-4 animate-in fade-in duration-300">
+                {/* Friendly Report Upload - Using Enhanced UnifiedUpload */}
+                <UnifiedUpload
+                  label="Upload Friendly Accident Report"
+                  description="Please upload a scanned copy or photo of the friendly accident report."
+                  value={formData.friendlyReportDocument}
+                  onChange={handleFriendlyReportChange}
+                  multiple={false}
+                  maxSize={10}
+                  accept={{
+                    "image/*": [".jpeg", ".jpg", ".png"],
+                    "application/pdf": [".pdf"],
+                  }}
+                  placeholder="Upload report"
+                  buttonText="Select file"
+                  mobileButtonText="Add document"
+                  icon={<FileText className="h-7 w-7 sm:h-8 sm:h-8 text-zinc-500" />}
+                  successMessage="Report uploaded successfully!"
+                  mobileSuccessMessage="Report added!"
+                  captureMethod="environment"
+                />
+              </div>
+            </div>
             )}
-          </div>
+
 
           {/* Bodily Injuries Section */}
           <div className="border border-zinc-200 rounded-md overflow-hidden">
-            <div className="bg-zinc-50 px-4 py-3 flex items-center justify-between">
+            <div className="bg-zinc-50 px-3 sm:px-4 py-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Activity className="h-5 w-5 text-zinc-500" />
                 <div>
@@ -376,8 +437,8 @@ export default function AccidentDetails() {
             </div>
 
             {formData.bodilyInjuries && (
-              <div className="p-4 space-y-4 animate-in fade-in duration-300">
-                <div className="space-y-3">
+              <div className="p-3 sm:p-4 space-y-3 sm:space-y-4 animate-in fade-in duration-300">
+                <div className="space-y-2 sm:space-y-3">
                   <div className="flex items-start gap-2">
                     <AlertCircle className="h-5 w-5 text-zinc-500 mt-0.5" />
                     <div>
@@ -385,7 +446,9 @@ export default function AccidentDetails() {
                         Bodily Injuries Description
                       </Label>
                       <p className="text-sm text-zinc-500 mb-2">
-                        Please provide details about the injuries sustained in the accident.
+                        {isMobile
+                          ? "Describe the injuries sustained."
+                          : "Please provide details about the injuries sustained in the accident."}
                       </p>
                     </div>
                   </div>
@@ -394,9 +457,13 @@ export default function AccidentDetails() {
                     name="bodilyInjuriesDescription"
                     value={formData.bodilyInjuriesDescription}
                     onChange={handleChange}
-                    placeholder="Describe the nature and extent of the injuries, who was injured, and any medical attention received..."
-                    rows={4}
-                    className="w-full resize-y min-h-[100px]"
+                    placeholder={
+                      isMobile
+                        ? "Describe injuries and medical attention received..."
+                        : "Describe the nature and extent of the injuries, who was injured, and any medical attention received..."
+                    }
+                    rows={isMobile ? 3 : 4}
+                    className="w-full resize-y min-h-[80px] sm:min-h-[100px]"
                     required={formData.bodilyInjuries}
                   />
                 </div>

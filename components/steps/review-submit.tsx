@@ -1,18 +1,27 @@
 "use client"
 
-import type React from "react"
-
-import { useState } from "react"
+import React, { useState } from "react"
 import { useClaimForm } from "../claim-form-context"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { CheckCircle2, Edit, Download, Mail, FileText, FileIcon as FilePdf, FileImage, FileVideo } from "lucide-react"
+import {
+  CheckCircle2,
+  Edit,
+  Download,
+  Mail,
+  FileText,
+  FileIcon as FilePdf,
+  FileImage,
+  FileVideo,
+  Loader2,
+} from "lucide-react"
 import { format } from "date-fns"
-import { toast } from "@/components/ui/use-toast"
+import { toast } from "@/components/ui/use-toast" 
 import { generateClaimPDF } from "@/lib/generate-pdf"
 import { sendConfirmationEmail } from "@/app/actions/email-actions"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
+import Image from "next/image"
 
 export default function ReviewSubmit() {
   const { formData, setCurrentStep, setIsSubmitted } = useClaimForm()
@@ -20,10 +29,14 @@ export default function ReviewSubmit() {
   const [isLocalSubmitted, setIsLocalSubmitted] = useState(false)
   const [claimNumber, setClaimNumber] = useState("")
   const [pdfUrl, setPdfUrl] = useState<string | null>(null)
-  const [pdfBuffer, setPdfBuffer] = useState<Buffer | null>(null)
+  // Cambiar Buffer a Uint8Array para compatibilidad navegador
+  const [pdfBuffer, setPdfBuffer] = useState<Uint8Array | null>(null)
   const [isEmailSent, setIsEmailSent] = useState(false)
   const [isSendingEmail, setIsSendingEmail] = useState(false)
   const [selectedMedia, setSelectedMedia] = useState<string | null>(null)
+  // const [selectedMedia, setSelectedMedia] = useState<string | null>(null)
+  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false)
+  const [pdfGenerationError, setPdfGenerationError] = useState<string | null>(null)
 
   const handleEditSection = (step: number) => {
     setCurrentStep(step)
@@ -31,48 +44,128 @@ export default function ReviewSubmit() {
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
+    setIsSubmitting(true);
+    setPdfGenerationError(null);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    try {
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    // Generate a random claim reference number
-    const generatedClaimNumber = Math.random().toString(36).substring(2, 10).toUpperCase()
+      // Generate a random claim reference number
+      const generatedClaimNumber = Math.random().toString(36).substring(2, 10).toUpperCase();
 
-    // Generate PDF - only do this once with the generated claim number
-    const { dataUrl, buffer } = generateClaimPDF(formData, generatedClaimNumber)
+      // Generate PDF - solo una vez con numero generado, await porque es probablemente async
+      setIsGeneratingPdf(true);
+      const { dataUrl, buffer } = await generateClaimPDF(formData, generatedClaimNumber);
 
-    // Update all state at once to prevent cascading renders
-    setClaimNumber(generatedClaimNumber)
-    setPdfUrl(dataUrl)
-    setPdfBuffer(buffer)
-    setIsSubmitting(false)
-    setIsLocalSubmitted(true)
-    setIsSubmitted(true) // Update the context state
+      if (!dataUrl) {
+        throw new Error("Failed to generate PDF");
+      }
 
-    toast({
-      title: "Claim Submitted Successfully",
-      description: "Your claim has been submitted. You will receive a confirmation email shortly.",
-    })
+      // Actualizar estado una vez con todos valores para evitar renderizados múltiples
+      setClaimNumber(generatedClaimNumber);
+      setPdfUrl(dataUrl);
+      setPdfBuffer(buffer);
+      setIsSubmitting(false);
+      setIsLocalSubmitted(true);
+      setIsSubmitted(true); // Actualizar estado contexto
 
-    // Clear local storage
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("autoClaimFormData")
-      localStorage.removeItem("autoClaimFormStep")
+      toast({
+        title: "Claim Submitted Successfully",
+        description: "Your claim has been submitted. You will receive a confirmation email shortly.",
+      });
+
+      // Limpiar localStorage
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("autoClaimFormData");
+        localStorage.removeItem("autoClaimFormStep");
+      }
+    } catch (error) {
+      console.error("Error during submission:", error);
+      setPdfGenerationError("There was an error generating your claim summary. Please try again.");
+      toast({
+        title: "Submission Error",
+        description: "There was an error submitting your claim. Please try again.",
+        variant: "destructive",
+      });
+      setIsSubmitting(false);
+      setIsGeneratingPdf(false);
+    } finally {
+      setIsGeneratingPdf(false);
     }
-  }
+  };
 
   const handleDownloadPdf = () => {
-    if (!pdfUrl) return
+    if (!pdfUrl) {
+      toast({
+        title: "Download Error",
+        description: "PDF is not available for download. Please try again.",
+        variant: "destructive",
+      });
+      return;
+    }
+  
+    try {
+      const link = document.createElement("a") as HTMLAnchorElement;
+  
+      // Aseguramos que la URL esté bien formada
+      link.href = pdfUrl;
+      link.setAttribute("download", `Claim_Summary_${claimNumber}.pdf`);
+      link.setAttribute("target", "_blank");
+      document.body.appendChild(link);
+  
+      // Simulamos el clic para descargar
+      link.click();
+  
+      // Eliminamos el enlace tras descargar
+      document.body.removeChild(link);
+  
+      toast({
+        title: "Download Started",
+        description: "Your claim summary PDF is being downloaded.",
+      });
+    } catch (error) {
+      console.error("Error downloading PDF:", error);
+      toast({
+        title: "Download Error",
+        description: "There was an error downloading your PDF. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+  
+  const handleRegeneratePdf = async () => {
+    if (!claimNumber) return
 
-    // Create a link element and trigger download
-    const link = document.createElement("a")
-    link.href = pdfUrl
-    link.download = `Claim_Summary_${claimNumber}.pdf`
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
+    setIsGeneratingPdf(true)
+    setPdfGenerationError(null)
+
+    try {
+      const { dataUrl, buffer } = await generateClaimPDF(formData, claimNumber)
+
+      if (!dataUrl) {
+        throw new Error("Failed to regenerate PDF")
+      }
+
+      setPdfUrl(dataUrl)
+      setPdfBuffer(buffer)
+
+      toast({
+        title: "PDF Regenerated",
+        description: "Your claim summary PDF has been regenerated successfully.",
+      })
+    } catch (error) {
+      console.error("Error regenerating PDF:", error)
+      setPdfGenerationError("There was an error regenerating your PDF. Please try again.")
+      toast({
+        title: "PDF Generation Error",
+        description: "There was an error regenerating your PDF. Please try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsGeneratingPdf(false)
+    }
   }
 
   const handleSendEmail = async () => {
@@ -81,7 +174,7 @@ export default function ReviewSubmit() {
     setIsSendingEmail(true)
 
     try {
-      const result = await sendConfirmationEmail(formData, claimNumber, pdfBuffer)
+      const result = await sendConfirmationEmail(formData, claimNumber, pdfBuffer) 
 
       if (result.success) {
         setIsEmailSent(true)
@@ -148,27 +241,84 @@ export default function ReviewSubmit() {
             <strong>Submission Date:</strong> {format(new Date(), "PPP")}
           </p>
         </div>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button variant="outline" onClick={handleDownloadPdf} className="flex items-center gap-2" disabled={!pdfUrl}>
-            <Download className="h-4 w-4" />
-            Download Claim Summary
-          </Button>
 
-          <Button
-            onClick={handleSendEmail}
-            className="flex items-center gap-2"
-            disabled={isSendingEmail || isEmailSent || !pdfBuffer}
-          >
-            <Mail className="h-4 w-4" />
-            {isSendingEmail ? "Sending..." : isEmailSent ? "Email Sent" : "Send Confirmation Email"}
-          </Button>
-        </div>
+        {pdfGenerationError ? (
+          <div className="mb-6">
+            <p className="text-sm text-red-500 mb-2">{pdfGenerationError}</p>
+            <Button
+              variant="outline"
+              onClick={handleRegeneratePdf}
+              className="flex items-center gap-2"
+              disabled={isGeneratingPdf}
+            >
+              {isGeneratingPdf ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Regenerating PDF...
+                </>
+              ) : (
+                <>
+                  <Download className="h-4 w-4" />
+                  Regenerate PDF
+                </>
+              )}
+            </Button>
+          </div>
+        ) : (
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+            <Button
+              onClick={handleDownloadPdf}
+              className="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-900"
+              disabled={!pdfUrl || isGeneratingPdf}
+            >
+              {isGeneratingPdf ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Generating PDF...
+                </>
+              ) : (
+                <>
+                  <Download className="h-4 w-4" />
+                  Download Claim Summary
+                </>
+              )}
+            </Button>
+
+            <Button
+              onClick={handleSendEmail}
+              variant="outline"
+              className="flex items-center gap-2"
+              disabled={isSendingEmail || isEmailSent || !pdfBuffer || isGeneratingPdf}
+            >
+              {isSendingEmail ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Sending...
+                </>
+              ) : isEmailSent ? (
+                <>
+                  <Mail className="h-4 w-4" />
+                  Email Sent
+                </>
+              ) : (
+                <>
+                  <Mail className="h-4 w-4" />
+                  Send Confirmation Email
+                </>
+              )}
+            </Button>
+          </div>
+        )}
 
         {isEmailSent && (
           <p className="text-sm text-zinc-500 mt-4">
             A confirmation email with your claim details has been sent to {formData.email}
           </p>
         )}
+
+        <div className="mt-8 text-sm text-zinc-500">
+          <p>Need help? Contact our support team at support@example.com</p>
+        </div>
       </div>
     )
   }
@@ -403,21 +553,25 @@ export default function ReviewSubmit() {
                             <DialogTrigger asChild>
                               <div
                                 className="aspect-square rounded-md overflow-hidden border border-zinc-200 cursor-pointer hover:opacity-90 transition-opacity"
-                                onClick={() => setSelectedMedia(photo.url)}
+                                // onClick={() => setSelectedMedia(photo.url)}
                               >
-                                <img
+                                <Image
                                   src={photo.url || "/placeholder.svg"}
                                   alt={photo.name}
+                                  width={400}
+                                  height={400}
                                   className="w-full h-full object-cover"
                                 />
                               </div>
                             </DialogTrigger>
                             <DialogContent className="sm:max-w-[800px] p-1">
                               <div className="w-full h-full flex items-center justify-center">
-                                <img
+                                <Image
                                   src={photo.url || "/placeholder.svg"}
                                   alt={photo.name}
                                   className="max-w-full max-h-[70vh] object-contain"
+                                  width={400}
+                                  height={400}
                                 />
                               </div>
                             </DialogContent>
@@ -591,9 +745,23 @@ export default function ReviewSubmit() {
                 I confirm that all the information provided is accurate and complete to the best of my knowledge.
               </label>
             </div>
+
+            <div className="flex justify-end">
+              <Button type="submit" className="w-full sm:w-auto bg-zinc-800 hover:bg-zinc-900" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <div className="flex items-center gap-2">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Submitting...
+                  </div>
+                ) : (
+                  "Submit Claim"
+                )}
+              </Button>
+            </div>
           </form>
         </div>
       </CardContent>
     </Card>
   )
 }
+
