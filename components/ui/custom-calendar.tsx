@@ -673,7 +673,6 @@ type DateTimePickerProps = {
   /**
    * Si es true, usa el input nativo type="date" en vez del Popover custom.
    **/
-  useNativeInput?: boolean;
 } & Pick<DayPickerProps, 'locale' | 'weekStartsOn' | 'showWeekNumber' | 'showOutsideDays'>;
 
 type DateTimePickerRef = {
@@ -695,7 +694,6 @@ const DateTimePicker = React.forwardRef<Partial<DateTimePickerRef>, DateTimePick
       granularity = 'second',
       placeholder = ' ',
       className,
-      useNativeInput = false,
       ...props
     },
     ref,
