@@ -5,8 +5,8 @@ import { LoopsClient } from "loops";
 
 const loops = new LoopsClient(process.env.LOOPS_API_KEY!);
 
-export async function sendConfirmationEmail(formData: FormData | GeneralFormData, claimNumber: string, pdfBuffer: Buffer) {
-  console.log("Sending confirmation email...", pdfBuffer)
+export async function sendConfirmationEmail(formData: FormData | GeneralFormData, claimNumber: string, pdfBase64: string) {
+  console.log("Sending confirmation email... (base64 length)", pdfBase64.length)
   try {
 
      await loops.sendTransactionalEmail({
@@ -15,13 +15,13 @@ export async function sendConfirmationEmail(formData: FormData | GeneralFormData
       dataVariables: {
         loginUrl: "https://myapp.com/login/",
       },
-      // attachments: [
-      //   {
-      //     filename: "presentation.pdf",
-      //     contentType: "application/pdf",
-      //     data: pdfBuffer.toString('base64'),
-      //   },
-      // ],
+      attachments: [
+        {
+          filename: "presentation.pdf",
+          contentType: "application/pdf",
+          data: pdfBase64,
+        },
+      ],
     });
     
     // // Please contact us to enable attachments on your account.

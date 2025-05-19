@@ -166,7 +166,9 @@ export default function ReviewSubmit() {
     setIsSendingEmail(true)
 
     try {
-      const result = await sendConfirmationEmail(formData, claimNumber, pdfBuffer)
+      // Convert pdfBuffer to base64 before sending
+      const base64 = Buffer.from(pdfBuffer).toString("base64");
+      const result = await sendConfirmationEmail(formData, claimNumber, base64)
 
       if (result.success) {
         setIsEmailSent(true)
