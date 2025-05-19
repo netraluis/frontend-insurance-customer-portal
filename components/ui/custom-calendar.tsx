@@ -670,6 +670,10 @@ type DateTimePickerProps = {
    * Show the default month and time when popup the calendar. Default is the current Date().
    **/
   defaultPopupValue?: Date;
+  /**
+   * Si es true, usa el input nativo type="date" en vez del Popover custom.
+   **/
+  useNativeInput?: boolean;
 } & Pick<DayPickerProps, 'locale' | 'weekStartsOn' | 'showWeekNumber' | 'showOutsideDays'>;
 
 type DateTimePickerRef = {
@@ -691,6 +695,7 @@ const DateTimePicker = React.forwardRef<Partial<DateTimePickerRef>, DateTimePick
       granularity = 'second',
       placeholder = ' ',
       className,
+      useNativeInput = false,
       ...props
     },
     ref,
@@ -772,6 +777,37 @@ const DateTimePicker = React.forwardRef<Partial<DateTimePickerRef>, DateTimePick
       };
     }
 
+    if (process.env.NEXT_PUBLIC_V0 === 'true') {
+      return (
+        <Input
+          type="date"
+          className={cn(
+            "w-full font-normal",
+            !displayDate && "text-muted-foreground",
+            className
+          )}
+          value={displayDate ? format(displayDate, "yyyy-MM-dd") : ""}
+          onChange={e => {
+            const val = e.target.value;
+            if (val) {
+              // Mantén la hora/minuto/segundo si es necesario
+              const [year, monthNum, day] = val.split("-").map(Number);
+              const newDate = new Date(displayDate ?? new Date());
+              newDate.setFullYear(year, monthNum - 1, day);
+              onChange?.(newDate);
+              setDisplayDate(newDate);
+              setMonth(newDate);
+            } else {
+              onChange?.(undefined);
+              setDisplayDate(undefined);
+            }
+          }}
+          disabled={disabled}
+          placeholder={placeholder}
+        />
+      );
+    }
+
     return (
       <Popover>
         <PopoverTrigger asChild disabled={disabled}>
@@ -787,7 +823,7 @@ const DateTimePicker = React.forwardRef<Partial<DateTimePickerRef>, DateTimePick
             <CalendarIcon className="mr-2 h-4 w-4" />
             {displayDate ? (
               format(
-                displayDate,
+                displayDate ?? new Date(),
                 hourCycle === 24 ? initHourFormat.hour24 : initHourFormat.hour12,
                 {
                   locale: loc,
