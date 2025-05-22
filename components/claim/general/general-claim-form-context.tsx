@@ -43,6 +43,18 @@ export type FormData = {
   phone: string
   policyNumber: string
 
+  // Step 1.5: Driver Information (si es diferente al asegurado)
+  hasDifferentDriver: boolean
+  driverFirstName: string
+  driverLastName: string
+  driverDateOfBirth: Date | null
+  driverID: string
+
+    // Step 2: Vehicle Information
+    vehicleMake: string
+    vehicleModel: string
+    licensePlate: string
+    vehicleType: string // Add this new field
   // Step 2: Accident Details
   accidentLocation: string
   accidentDate: Date | null
@@ -53,6 +65,7 @@ export type FormData = {
   // Step 3: Additional Information
   policeInvolved: boolean
   trafficServiceInvolved: boolean
+  friendlyReport: boolean
   firefightersInvolved: boolean
   policeReport: boolean
   policeReportDocument: MediaFile | null
@@ -90,6 +103,17 @@ const initialFormData: FormData = {
   phone: "",
   policyNumber: "",
 
+  hasDifferentDriver: false,
+  driverFirstName: "",
+  driverLastName: "",
+  driverDateOfBirth: null,
+  driverID: "",
+
+  vehicleMake: "",
+  vehicleModel: "",
+  licensePlate: "",
+  vehicleType: "",
+
   accidentLocation: "",
   accidentDate: null,
   accidentDescription: "",
@@ -98,6 +122,7 @@ const initialFormData: FormData = {
 
   policeInvolved: false,
   trafficServiceInvolved: false,
+  friendlyReport: false,
   firefightersInvolved: false,
   policeReport: false,
   policeReportDocument: null,

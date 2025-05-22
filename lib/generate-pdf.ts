@@ -50,58 +50,58 @@ export function generateClaimAutoPDF(formData: FormData , claimNumber: string): 
     })
 
     // Add driver information if different from policy owner
-    // if (formData.hasDifferentDriver) {
-    //   doc.setFontSize(14)
-    //   doc.setFont("helvetica", "bold")
-    //   doc.text("Driver Information", 14, (doc.lastAutoTable?.finalY || 0) + 15)
+    if (formData.hasDifferentDriver) {
+      doc.setFontSize(14)
+      doc.setFont("helvetica", "bold")
+      doc.text("Driver Information", 14, (doc.lastAutoTable?.finalY || 0) + 15)
 
-    //   doc.setFontSize(10)
-    //   doc.setFont("helvetica", "normal")
+      doc.setFontSize(10)
+      doc.setFont("helvetica", "normal")
 
-    //   const driverData = [
-    //     [
-    //       `${formData.driverFirstName} ${formData.driverLastName}`,
-    //       formData.driverDateOfBirth ? format(formData.driverDateOfBirth, "PPP") : "Not provided",
-    //       formData.driverID || "Not provided",
-    //     ],
-    //   ]
+      const driverData = [
+        [
+          `${formData.driverFirstName} ${formData.driverLastName}`,
+          formData.driverDateOfBirth ? format(formData.driverDateOfBirth, "PPP") : "Not provided",
+          formData.driverID || "Not provided",
+        ],
+      ]
 
-    //   autoTable(doc, {
-    //     startY: (doc.lastAutoTable?.finalY ?? 0) + 20,
-    //     head: [["Driver Name", "Date of Birth", "Driver ID"]],
-    //     body: driverData,
-    //     theme: "grid",
-    //     headStyles: {
-    //       fillColor: [161, 161, 170],
-    //       textColor: [255, 255, 255],
-    //       fontStyle: "bold",
-    //     }, // Zinc-400
-    //     styles: { fontSize: 10 },
-    //     margin: { left: 14, right: 14 },
-    //   })
+      autoTable(doc, {
+        startY: (doc.lastAutoTable?.finalY ?? 0) + 20,
+        head: [["Driver Name", "Date of Birth", "Driver ID"]],
+        body: driverData,
+        theme: "grid",
+        headStyles: {
+          fillColor: [161, 161, 170],
+          textColor: [255, 255, 255],
+          fontStyle: "bold",
+        }, // Zinc-400
+        styles: { fontSize: 10 },
+        margin: { left: 14, right: 14 },
+      })
 
-    //   // Add driver contact information if available
-    //   const driverContactData = []
-    //   // if (formData.driverEmail) driverContactData.push(formData.driverEmail)
-    //   // if (formData.driverPhone) driverContactData.push(formData.driverPhone)
+      // Add driver contact information if available
+      const driverContactData = [] as string[]
+      // if (formData.driverEmail) driverContactData.push(formData.driverEmail)
+      // if (formData.driverPhone) driverContactData.push(formData.driverPhone)
 
-    //   if (driverContactData.length > 0) {
-    //     const driverContact = driverContactData.join(" / ")
-    //     autoTable(doc, {
-    //       startY: (doc.lastAutoTable?.finalY ?? 0) + 5,
-    //       head: [["Contact Information"]],
-    //       body: [[driverContact]],
-    //       theme: "grid",
-    //       headStyles: {
-    //         fillColor: [161, 161, 170],
-    //         textColor: [255, 255, 255],
-    //         fontStyle: "bold",
-    //       }, // Zinc-400
-    //       styles: { fontSize: 10 },
-    //       margin: { left: 14, right: 14 },
-    //     })
-    //   }
-    // }
+      if (driverContactData.length > 0) {
+        const driverContact = driverContactData.join(" / ")
+        autoTable(doc, {
+          startY: (doc.lastAutoTable?.finalY ?? 0) + 5,
+          head: [["Contact Information"]],
+          body: [[driverContact]],
+          theme: "grid",
+          headStyles: {
+            fillColor: [161, 161, 170],
+            textColor: [255, 255, 255],
+            fontStyle: "bold",
+          }, // Zinc-400
+          styles: { fontSize: 10 },
+          margin: { left: 14, right: 14 },
+        })
+      }
+    }
 
     // Add vehicle information
     doc.setFontSize(14)
@@ -115,9 +115,9 @@ export function generateClaimAutoPDF(formData: FormData , claimNumber: string): 
       head: [["Vehicle", "License Plate", "Incident Date"]],
       body: [
         [
-          // `${formData.vehicleMake} ${formData.vehicleModel}`,
-          // formData.licensePlate,
-          // formData.incidentDate ? format(formData.incidentDate, "PPP") : "Not specified",
+          (formData.vehicleMake && formData.vehicleModel) ? `${formData.vehicleMake} ${formData.vehicleModel}` : "N/A",
+          formData.licensePlate || "N/A",
+          formData.incidentDate ? format(formData.incidentDate, "PPP") : "Not specified",
         ],
       ],
       theme: "grid",
@@ -162,7 +162,7 @@ export function generateClaimAutoPDF(formData: FormData , claimNumber: string): 
         [
           formData.policeInvolved ? "Yes" : "No",
           formData.trafficServiceInvolved ? "Yes" : "No",
-          // formData.friendlyReport ? "Yes" : "No",
+          formData.friendlyReport ? "Yes" : "No",
           formData.bodilyInjuries ? "Yes" : "No",
         ],
       ],
@@ -247,125 +247,126 @@ export function generateClaimAutoPDF(formData: FormData , claimNumber: string): 
     }
 
     // Check if we need a new page before adding involved parties
-    if ((doc.lastAutoTable?.finalY ?? 0) > pageHeight - 100) {
-      doc.addPage()
-    }
+    // Eliminado salto de página automático para evitar página extra en blanco
+    // if ((doc.lastAutoTable?.finalY ?? 0) > pageHeight - 100) {
+    //   doc.addPage()
+    // }
 
     // Add involved parties if any
-    // if (formData.drivers.length > 0) {
-    //   doc.setFontSize(14)
-    //   doc.setFont("helvetica", "bold")
-    //   doc.text("Other Drivers", 14, (doc.lastAutoTable?.finalY ?? 0) + 15)
+    if (formData.drivers.length > 0) {
+      doc.setFontSize(14)
+      doc.setFont("helvetica", "bold")
+      doc.text("Other Drivers", 14, (doc.lastAutoTable?.finalY ?? 0) + 15)
 
-    //   doc.setFontSize(10)
-    //   doc.setFont("helvetica", "normal")
+      doc.setFontSize(10)
+      doc.setFont("helvetica", "normal")
 
-    //   // Process each driver individually for better formatting
-    //   for (let i = 0; i < formData.drivers.length; i++) {
-    //     const driver = formData.drivers[i]
+      // Process each driver individually for better formatting
+      for (let i = 0; i < formData.drivers.length; i++) {
+        const driver = formData.drivers[i]
 
-    //     // Check if we need a new page
-    //     if (i > 0 && (doc.lastAutoTable?.finalY ?? 0) > pageHeight - 80) {
-    //       doc.addPage()
-    //     }
+        // Check if we need a new page
+        if (i > 0 && (doc.lastAutoTable?.finalY ?? 0) > pageHeight - 80) {
+          doc.addPage()
+        }
 
-    //     // Driver basic info
-    //     autoTable(doc, {
-    //       startY: i === 0 ? (doc.lastAutoTable?.finalY ?? 0) + 20 : (doc.lastAutoTable?.finalY ?? 0) + 10,
-    //       head: [[`Driver ${i + 1}: ${driver.firstName} ${driver.lastName}`]],
-    //       body: [
-    //         [`Email: ${driver.email}`],
-    //         [`Phone: ${driver.phone}`],
-    //         [`Vehicle: ${driver.vehicleMake} ${driver.vehicleModel}`],
-    //         [`License Plate: ${driver.licensePlate}`],
-    //         [`Insurance: ${driver.insuranceCompany}`],
-    //         [`Policy Number: ${driver.policyNumber}`],
-    //       ],
-    //       theme: "grid",
-    //       headStyles: {
-    //         fillColor: [161, 161, 170],
-    //         textColor: [255, 255, 255],
-    //         fontStyle: "bold",
-    //       },
-    //       styles: { fontSize: 10 },
-    //       margin: { left: 14, right: 14 },
-    //     })
-    //   }
-    // }
+        // Driver basic info
+        autoTable(doc, {
+          startY: i === 0 ? (doc.lastAutoTable?.finalY ?? 0) + 20 : (doc.lastAutoTable?.finalY ?? 0) + 10,
+          head: [[`Driver ${i + 1}: ${driver.firstName} ${driver.lastName}`]],
+          body: [
+            [`Email: ${driver.email}`],
+            [`Phone: ${driver.phone}`],
+            [`Vehicle: ${driver.vehicleMake} ${driver.vehicleModel}`],
+            [`License Plate: ${driver.licensePlate}`],
+            [`Insurance: ${driver.insuranceCompany}`],
+            [`Policy Number: ${driver.policyNumber}`],
+          ],
+          theme: "grid",
+          headStyles: {
+            fillColor: [161, 161, 170],
+            textColor: [255, 255, 255],
+            fontStyle: "bold",
+          },
+          styles: { fontSize: 10 },
+          margin: { left: 14, right: 14 },
+        })
+      }
+    }
 
     // Add witnesses if any
-    // if (formData.witnesses.length > 0) {
-    //   // Check if we need a new page
-    //   if ((doc.lastAutoTable?.finalY ?? 0) > pageHeight - 100) {
-    //     doc.addPage()
-    //   }
+    if (formData.witnesses.length > 0) {
+      // Check if we need a new page
+      if ((doc.lastAutoTable?.finalY ?? 0) > pageHeight - 100) {
+        doc.addPage()
+      }
 
-    //   doc.setFontSize(14)
-    //   doc.setFont("helvetica", "bold")
-    //   doc.text("Witnesses", 14, (doc.lastAutoTable?.finalY ?? 0) + 15)
+      doc.setFontSize(14)
+      doc.setFont("helvetica", "bold")
+      doc.text("Witnesses", 14, (doc.lastAutoTable?.finalY ?? 0) + 15)
 
-    //   doc.setFontSize(10)
-    //   doc.setFont("helvetica", "normal")
+      doc.setFontSize(10)
+      doc.setFont("helvetica", "normal")
 
-    //   // Process each witness individually for better formatting
-    //   for (let i = 0; i < formData.witnesses.length; i++) {
-    //     const witness = formData.witnesses[i]
+      // Process each witness individually for better formatting
+      for (let i = 0; i < formData.witnesses.length; i++) {
+        const witness = formData.witnesses[i]
 
-    //     // Check if we need a new page
-    //     if (i > 0 && (doc.lastAutoTable?.finalY ?? 0) > pageHeight - 80) {
-    //       doc.addPage()
-    //     }
+        // Check if we need a new page
+        if (i > 0 && (doc.lastAutoTable?.finalY ?? 0) > pageHeight - 80) {
+          doc.addPage()
+        }
 
-    //     // Witness info
-    //     autoTable(doc, {
-    //       startY: i === 0 ? (doc.lastAutoTable?.finalY ?? 0) + 20 : (doc.lastAutoTable?.finalY ?? 0) + 10,
-    //       head: [[`Witness ${i + 1}: ${witness.firstName} ${witness.lastName}`]],
-    //       body: [[`Contact: ${witness.email} / ${witness.phone}`], [`Statement: ${witness.description}`]],
-    //       theme: "grid",
-    //       headStyles: {
-    //         fillColor: [161, 161, 170],
-    //         textColor: [255, 255, 255],
-    //         fontStyle: "bold",
-    //       },
-    //       styles: { fontSize: 10 },
-    //       margin: { left: 14, right: 14 },
-    //     })
-    //   }
-    // }
+        // Witness info
+        autoTable(doc, {
+          startY: i === 0 ? (doc.lastAutoTable?.finalY ?? 0) + 20 : (doc.lastAutoTable?.finalY ?? 0) + 10,
+          head: [[`Witness ${i + 1}: ${witness.firstName} ${witness.lastName}`]],
+          body: [[`Contact: ${witness.email} / ${witness.phone}`], [`Statement: ${witness.description}`]],
+          theme: "grid",
+          headStyles: {
+            fillColor: [161, 161, 170],
+            textColor: [255, 255, 255],
+            fontStyle: "bold",
+          },
+          styles: { fontSize: 10 },
+          margin: { left: 14, right: 14 },
+        })
+      }
+    }
 
-    // // Add documents if any
-    // if (formData.documents.length > 0) {
-    //   // Check if we need a new page
-    //   if ((doc.lastAutoTable?.finalY ?? 0) > pageHeight - 100) {
-    //     doc.addPage()
-    //   }
+    // Add documents if any
+    if (formData.documents.length > 0) {
+      // Check if we need a new page
+      if ((doc.lastAutoTable?.finalY ?? 0) > pageHeight - 100) {
+        doc.addPage()
+      }
 
-    //   doc.setFontSize(14)
-    //   doc.setFont("helvetica", "bold")
-    //   doc.text("Uploaded Documents", 14, (doc.lastAutoTable?.finalY ?? 0) + 15)
+      doc.setFontSize(14)
+      doc.setFont("helvetica", "bold")
+      doc.text("Uploaded Documents", 14, (doc.lastAutoTable?.finalY ?? 0) + 15)
 
-    //   doc.setFontSize(10)
-    //   doc.setFont("helvetica", "normal")
+      doc.setFontSize(10)
+      doc.setFont("helvetica", "normal")
 
-    //   const documentsData = formData.documents.map((doc) => [
-    //     doc.name,
-    //     doc.type.split("/")[1] ? doc.type.split("/")[1].toUpperCase() : "File",
-    //   ])
+      const documentsData = formData.documents.map((doc) => [
+        doc.name,
+        doc.type.split("/")[1] ? doc.type.split("/")[1].toUpperCase() : "File",
+      ])
 
-    //   autoTable(doc, {
-    //     startY: (doc.lastAutoTable?.finalY ?? 0) + 20,
-    //     head: [["Document Name", "Type"]],
-    //     body: documentsData,
-    //     theme: "grid",
-    //     headStyles: {
-    //       fillColor: [161, 161, 170],
-    //       textColor: [255, 255, 255],
-    //       fontStyle: "bold",
-    //     }, // Zinc-400
-    //     styles: { fontSize: 10 },
-    //     margin: { left: 14, right: 14 },
-    //   })
-    // }
+      autoTable(doc, {
+        startY: (doc.lastAutoTable?.finalY ?? 0) + 20,
+        head: [["Document Name", "Type"]],
+        body: documentsData,
+        theme: "grid",
+        headStyles: {
+          fillColor: [161, 161, 170],
+          textColor: [255, 255, 255],
+          fontStyle: "bold",
+        }, // Zinc-400
+        styles: { fontSize: 10 },
+        margin: { left: 14, right: 14 },
+      })
+    }
 
     // Add footer with page numbers
     const pageCount = doc.getNumberOfPages()
@@ -439,58 +440,58 @@ export function generateClaimGeneralPDF(formData: GeneralFormData, claimNumber: 
     })
 
     // Add driver information if different from policy owner
-    // if (formData.hasDifferentDriver) {
-    //   doc.setFontSize(14)
-    //   doc.setFont("helvetica", "bold")
-    //   doc.text("Driver Information", 14, (doc.lastAutoTable?.finalY || 0) + 15)
+    if (formData.hasDifferentDriver) {
+      doc.setFontSize(14)
+      doc.setFont("helvetica", "bold")
+      doc.text("Driver Information", 14, (doc.lastAutoTable?.finalY || 0) + 15)
 
-    //   doc.setFontSize(10)
-    //   doc.setFont("helvetica", "normal")
+      doc.setFontSize(10)
+      doc.setFont("helvetica", "normal")
 
-    //   const driverData = [
-    //     [
-    //       `${formData.driverFirstName} ${formData.driverLastName}`,
-    //       formData.driverDateOfBirth ? format(formData.driverDateOfBirth, "PPP") : "Not provided",
-    //       formData.driverID || "Not provided",
-    //     ],
-    //   ]
+      const driverData = [
+        [
+          `${formData.driverFirstName} ${formData.driverLastName}`,
+          formData.driverDateOfBirth ? format(formData.driverDateOfBirth, "PPP") : "Not provided",
+          formData.driverID || "Not provided",
+        ],
+      ]
 
-    //   autoTable(doc, {
-    //     startY: (doc.lastAutoTable?.finalY ?? 0) + 20,
-    //     head: [["Driver Name", "Date of Birth", "Driver ID"]],
-    //     body: driverData,
-    //     theme: "grid",
-    //     headStyles: {
-    //       fillColor: [161, 161, 170],
-    //       textColor: [255, 255, 255],
-    //       fontStyle: "bold",
-    //     }, // Zinc-400
-    //     styles: { fontSize: 10 },
-    //     margin: { left: 14, right: 14 },
-    //   })
+      autoTable(doc, {
+        startY: (doc.lastAutoTable?.finalY ?? 0) + 20,
+        head: [["Driver Name", "Date of Birth", "Driver ID"]],
+        body: driverData,
+        theme: "grid",
+        headStyles: {
+          fillColor: [161, 161, 170],
+          textColor: [255, 255, 255],
+          fontStyle: "bold",
+        }, // Zinc-400
+        styles: { fontSize: 10 },
+        margin: { left: 14, right: 14 },
+      })
 
-    //   // Add driver contact information if available
-    //   const driverContactData = []
-    //   // if (formData.driverEmail) driverContactData.push(formData.driverEmail)
-    //   // if (formData.driverPhone) driverContactData.push(formData.driverPhone)
+      // Add driver contact information if available
+      const driverContactData = [] as string[]
+      // if (formData.driverEmail) driverContactData.push(formData.driverEmail)
+      // if (formData.driverPhone) driverContactData.push(formData.driverPhone)
 
-    //   if (driverContactData.length > 0) {
-    //     const driverContact = driverContactData.join(" / ")
-    //     autoTable(doc, {
-    //       startY: (doc.lastAutoTable?.finalY ?? 0) + 5,
-    //       head: [["Contact Information"]],
-    //       body: [[driverContact]],
-    //       theme: "grid",
-    //       headStyles: {
-    //         fillColor: [161, 161, 170],
-    //         textColor: [255, 255, 255],
-    //         fontStyle: "bold",
-    //       }, // Zinc-400
-    //       styles: { fontSize: 10 },
-    //       margin: { left: 14, right: 14 },
-    //     })
-    //   }
-    // }
+      if (driverContactData.length > 0) {
+        const driverContact = driverContactData.join(" / ")
+        autoTable(doc, {
+          startY: (doc.lastAutoTable?.finalY ?? 0) + 5,
+          head: [["Contact Information"]],
+          body: [[driverContact]],
+          theme: "grid",
+          headStyles: {
+            fillColor: [161, 161, 170],
+            textColor: [255, 255, 255],
+            fontStyle: "bold",
+          }, // Zinc-400
+          styles: { fontSize: 10 },
+          margin: { left: 14, right: 14 },
+        })
+      }
+    }
 
     // Add vehicle information
     doc.setFontSize(14)
@@ -504,9 +505,9 @@ export function generateClaimGeneralPDF(formData: GeneralFormData, claimNumber: 
       head: [["Vehicle", "License Plate", "Incident Date"]],
       body: [
         [
-          // `${formData.vehicleMake} ${formData.vehicleModel}`,
-          // formData.licensePlate,
-          // formData.incidentDate ? format(formData.incidentDate, "PPP") : "Not specified",
+          (formData.driverDateOfBirth && formData.vehicleModel) ? `${formData.vehicleMake} ${formData.vehicleModel}` : "N/A",
+          formData.licensePlate || "N/A",
+          formData.accidentDate ? format(formData.accidentDate, "PPP") : "Not specified",
         ],
       ],
       theme: "grid",
@@ -542,7 +543,7 @@ export function generateClaimGeneralPDF(formData: GeneralFormData, claimNumber: 
       },
       margin: { left: 14, right: 14 },
     })
-
+    
     // Add additional accident information
     autoTable(doc, {
       startY: (doc.lastAutoTable?.finalY ?? 0) + 5,
@@ -551,7 +552,7 @@ export function generateClaimGeneralPDF(formData: GeneralFormData, claimNumber: 
         [
           formData.policeInvolved ? "Yes" : "No",
           formData.trafficServiceInvolved ? "Yes" : "No",
-          // formData.friendlyReport ? "Yes" : "No",
+          formData.friendlyReport ? "Yes" : "No",
           formData.bodilyInjuries ? "Yes" : "No",
         ],
       ],
@@ -636,9 +637,10 @@ export function generateClaimGeneralPDF(formData: GeneralFormData, claimNumber: 
     }
 
     // Check if we need a new page before adding involved parties
-    if ((doc.lastAutoTable?.finalY ?? 0) > pageHeight - 100) {
-      doc.addPage()
-    }
+    // Eliminado salto de página automático para evitar página extra en blanco
+    // if ((doc.lastAutoTable?.finalY ?? 0) > pageHeight - 100) {
+    //   doc.addPage()
+    // }
 
     // Add involved parties if any
     // if (formData.drivers.length > 0) {
