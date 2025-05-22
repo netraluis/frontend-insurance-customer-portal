@@ -599,25 +599,25 @@ export function generateClaimGeneralPDF(formData: GeneralFormData, claimNumber: 
     }
 
     // Add friendly report document information if available
-    // if (formData.friendlyReport && formData.friendlyReportDocument) {
-    //   autoTable(doc, {
-    //     startY: (doc.lastAutoTable?.finalY ?? 0) + 5,
-    //     head: [["Friendly Report Document"]],
-    //     body: [
-    //       [
-    //         `Document: ${formData.friendlyReportDocument.name} (${formData.friendlyReportDocument.type.split("/")[1] || "file"})`,
-    //       ],
-    //     ],
-    //     theme: "grid",
-    //     headStyles: {
-    //       fillColor: [161, 161, 170],
-    //       textColor: [255, 255, 255],
-    //       fontStyle: "bold",
-    //     }, // Zinc-400
-    //     styles: { fontSize: 10 },
-    //     margin: { left: 14, right: 14 },
-    //   })
-    // }
+    if (formData.friendlyReport && formData.friendlyReportDocument) {
+      autoTable(doc, {
+        startY: (doc.lastAutoTable?.finalY ?? 0) + 5,
+        head: [["Friendly Report Document"]],
+        body: [
+          [
+            `Document: ${formData.friendlyReportDocument.name} (${formData.friendlyReportDocument.type.split("/")[1] || "file"})`,
+          ],
+        ],
+        theme: "grid",
+        headStyles: {
+          fillColor: [161, 161, 170],
+          textColor: [255, 255, 255],
+          fontStyle: "bold",
+        }, // Zinc-400
+        styles: { fontSize: 10 },
+        margin: { left: 14, right: 14 },
+      })
+    }
 
     // Add bodily injuries description if available
     if (formData.bodilyInjuries && formData.bodilyInjuriesDescription) {

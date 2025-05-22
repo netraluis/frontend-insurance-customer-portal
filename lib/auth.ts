@@ -18,7 +18,6 @@ export async function sendMagicLink(email: string): Promise<{ success: boolean }
         if (!response.ok) {
             return { success: false }
         }
-        console.log(response)
         const res = await response.json()
         return { success: res?.data?.otp_sent }
     } catch (error) {

@@ -12,8 +12,7 @@ interface DocumentCardProps {
   fileType: string
 }
 
-export function DocumentCard({ id, title, type, date, fileSize, fileType }: DocumentCardProps) {
-  console.log({id,})
+export function DocumentCard({ title, type, date, fileSize, fileType }: DocumentCardProps) {
   const typeInfo = {
     policy: {
       icon: <FileText className="h-5 w-5 text-blue-700" />,

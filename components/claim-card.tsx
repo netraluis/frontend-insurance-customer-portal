@@ -16,8 +16,7 @@ interface ClaimCardProps {
   amount: string
 }
 
-export function ClaimCard({ id, title, date, status, progress, policyId, amount }: ClaimCardProps) {
-  console.log({policyId})
+export function ClaimCard({ id, title, date, status, progress, amount }: ClaimCardProps) {
   const statusInfo = {
     completed: {
       icon: <CheckCircle2 className="h-3 w-3" />,

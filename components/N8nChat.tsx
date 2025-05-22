@@ -30,6 +30,7 @@ export function N8nChat() {
           footer: '',
           getStarted: 'New Conversation',
           inputPlaceholder: 'Type your question..',
+          closeButtonTooltip: 'Close chat',
         },
       },
     });

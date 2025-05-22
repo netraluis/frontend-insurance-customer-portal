@@ -50,17 +50,18 @@ export type FormData = {
   driverDateOfBirth: Date | null
   driverID: string
 
-    // Step 2: Vehicle Information
-    vehicleMake: string
-    vehicleModel: string
-    licensePlate: string
-    vehicleType: string // Add this new field
+  // Step 2: Vehicle Information
+  vehicleMake: string
+  vehicleModel: string
+  licensePlate: string
+  vehicleType: string // Add this new field
   // Step 2: Accident Details
   accidentLocation: string
   accidentDate: Date | null
   accidentDescription: string
   damageDescription: string
   damagePhotos: MediaFile[]
+  friendlyReportDocument: MediaFile | null
 
   // Step 3: Additional Information
   policeInvolved: boolean
@@ -119,6 +120,7 @@ const initialFormData: FormData = {
   accidentDescription: "",
   damageDescription: "",
   damagePhotos: [],
+  friendlyReportDocument: null,
 
   policeInvolved: false,
   trafficServiceInvolved: false,
