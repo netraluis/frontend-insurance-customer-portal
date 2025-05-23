@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { toast } from "sonner"
 import { verifyOtp, resendOtp } from "@/lib/auth"
 import { useRouter } from "next/navigation"
+import { useTranslations } from 'next-intl';
 
 interface OtpVerificationFormProps {
   email: string
@@ -21,6 +22,7 @@ export default function OtpVerificationForm({ email, onSuccess, onBack }: OtpVer
   const [otp, setOtp] = useState(["", "", "", "", "", ""])
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
   const router = useRouter()
+  const t = useTranslations('LoginPage');
 
   // Redirect to dashboard if access_token exists
   useEffect(() => {
@@ -147,8 +149,8 @@ export default function OtpVerificationForm({ email, onSuccess, onBack }: OtpVer
   return (
     <div className="grid gap-6">
       <div className="flex flex-col space-y-2">
-        <h2 className="text-xl font-semibold tracking-tight">Verify your email</h2>
-        <p className="text-sm text-muted-foreground">Enter the 6-digit code sent to {email}</p>
+        <h2 className="text-xl font-semibold tracking-tight">{t('verifyTitle')}</h2>
+        <p className="text-sm text-muted-foreground">{t('verifySubtitle', { email })}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -189,21 +191,21 @@ export default function OtpVerificationForm({ email, onSuccess, onBack }: OtpVer
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 ></path>
               </svg>
-              Verifying...
+              {t('sendingVerification')}
             </>
           ) : (
-            "Verify and Sign In"
+            t('verifyButton')
           )}
         </Button>
       </form>
 
       <div className="flex items-center justify-between">
         <Button variant="ghost" size="sm" onClick={onBack} disabled={isLoading || isResending}>
-          Back to login
+          {t('backToLogin')}
         </Button>
 
         <Button variant="link" size="sm" onClick={handleResendCode} disabled={isLoading || isResending}>
-          {isResending ? "Sending..." : "Resend code"}
+          {isResending ? t('sendingVerification') : t('resendCode')}
         </Button>
       </div>
     </div>

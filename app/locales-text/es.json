@@ -23,6 +23,16 @@
       "subtitle": "Entra con tu email para acceder a tu cuenta",
       "terms": "Al continuar, aceptas nuestros",
       "termsOfService": "Términos de servicio",
-      "privacyPolicy": "Política de privacidad"
+      "privacyPolicy": "Política de privacidad",
+      "emailLabel": "Correo electrónico",
+      "emailPlaceholder": "nombre@ejemplo.com",
+      "emailHelp": "Te enviaremos un código de verificación a este correo.",
+      "continueWithEmail": "Continuar con correo",
+      "sendingVerification": "Enviando código de verificación...",
+      "verifyTitle": "Verifica tu correo",
+      "verifySubtitle": "Introduce el código de 6 dígitos enviado a {email}",
+      "verifyButton": "Verificar y acceder",
+      "backToLogin": "Volver al inicio de sesión",
+      "resendCode": "Reenviar código"
     }
   }

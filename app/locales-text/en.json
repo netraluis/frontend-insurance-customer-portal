@@ -23,6 +23,16 @@
       "subtitle": "Sign in with your email to access your account",
       "terms": "By continuing, you accept our",
       "termsOfService": "Terms of Service",
-      "privacyPolicy": "Privacy Policy"
+      "privacyPolicy": "Privacy Policy",
+      "emailLabel": "Email",
+      "emailPlaceholder": "name@example.com",
+      "emailHelp": "We'll send you a verification code to this email.",
+      "continueWithEmail": "Continue with Email",
+      "sendingVerification": "Sending verification code...",
+      "verifyTitle": "Verify your email",
+      "verifySubtitle": "Enter the 6-digit code sent to {email}",
+      "verifyButton": "Verify and Sign In",
+      "backToLogin": "Back to login",
+      "resendCode": "Resend code"
     }
   }

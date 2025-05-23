@@ -11,6 +11,16 @@
       "subtitle": "Entra amb el teu email per accedir al teu compte",
       "terms": "Continuant, acceptes els nostres",
       "termsOfService": "Termes de servei",
-      "privacyPolicy": "Política de privacitat"
+      "privacyPolicy": "Política de privacitat",
+      "emailLabel": "E-mail",
+      "emailPlaceholder": "nom@exemple.com",
+      "emailHelp": "T'enviarem un codi de verificació a aquest correu.",
+      "continueWithEmail": "Continua amb el correu",
+      "sendingVerification": "Enviant codi de verificació...",
+      "verifyTitle": "Verifica el teu correu",
+      "verifySubtitle": "Introdueix el codi de 6 dígits enviat a {email}",
+      "verifyButton": "Verifica i accedeix",
+      "backToLogin": "Torna a l'inici de sessió",
+      "resendCode": "Reenviar codi"
     }
   }

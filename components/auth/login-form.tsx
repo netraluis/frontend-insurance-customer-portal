@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { useTranslations } from 'next-intl'
 
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
@@ -24,6 +25,7 @@ export default function LoginForm() {
   const [showOtpForm, setShowOtpForm] = useState(false)
   const [email, setEmail] = useState("")
   const router = useRouter()
+  const t = useTranslations('LoginPage')
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -78,17 +80,17 @@ export default function LoginForm() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>{t('emailLabel')}</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="name@example.com"
+                    placeholder={t('emailPlaceholder')}
                     {...field}
                     type="email"
                     autoComplete="email"
                     disabled={isLoading}
                   />
                 </FormControl>
-                <FormDescription>We&apos;ll send you a verification code to this email.</FormDescription>
+                <FormDescription>{t('emailHelp')}</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -109,10 +111,10 @@ export default function LoginForm() {
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   ></path>
                 </svg>
-                Sending verification code...
+                {t('sendingVerification')}
               </>
             ) : (
-              "Continue with Email"
+              t('continueWithEmail')
             )}
           </Button>
         </form>
