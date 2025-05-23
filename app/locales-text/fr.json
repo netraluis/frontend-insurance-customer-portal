@@ -2,5 +2,15 @@
     "HomePage": {
       "title": "Hello world!",
       "about": "Go to the about page"
+    },
+    "LoginPage": {
+      "company": "Acme Inc",
+      "testimonial": "Acme Inc a transformé la façon dont nous gérons notre entreprise, offrant une sécurité et une efficacité inégalées.",
+      "testimonialAuthor": "Sofia Davis, PDG de Davis Enterprises",
+      "welcome": "Bon retour",
+      "subtitle": "Connectez-vous avec votre email pour accéder à votre compte",
+      "terms": "En continuant, vous acceptez nos",
+      "termsOfService": "Conditions d'utilisation",
+      "privacyPolicy": "Politique de confidentialité"
     }
   }

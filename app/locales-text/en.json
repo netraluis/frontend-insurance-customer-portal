@@ -14,5 +14,15 @@
       "open": "Open Chat Widget",
       "close": "Close chat",
       "title": "Globalrisc Chat"
+    },
+    "LoginPage": {
+      "company": "Acme Inc",
+      "testimonial": "Acme Inc has transformed how we manage our business operations, providing unparalleled security and efficiency.",
+      "testimonialAuthor": "Sofia Davis, CEO of Davis Enterprises",
+      "welcome": "Welcome back",
+      "subtitle": "Sign in with your email to access your account",
+      "terms": "By continuing, you accept our",
+      "termsOfService": "Terms of Service",
+      "privacyPolicy": "Privacy Policy"
     }
   }

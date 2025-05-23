@@ -1,5 +1,5 @@
-import { AppSidebar } from "../../components/sidebar/app-sidebar";
-import ProtectedRoute from "../../components/auth/protected-route";
+import ProtectedRoute from "@/components/auth/protected-route"
+import { AppSidebar } from "@/components/sidebar/app-sidebar"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 
 

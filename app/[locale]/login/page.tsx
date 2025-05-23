@@ -2,10 +2,11 @@
 import LoginForm from "@/components/auth/login-form"
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
-
+import { useTranslations } from 'next-intl';
 
 export default function LoginPage() {
   const router = useRouter()
+  const t = useTranslations('LoginPage');
   useEffect(() => {
     if (typeof window !== "undefined" && localStorage.getItem("access_token")) {
       router.push("/dashboard")
@@ -28,33 +29,32 @@ export default function LoginPage() {
           >
             <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
           </svg>
-          Acme Inc
+          {t('company')}
         </div>
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
             <p className="text-lg">
-              Acme Inc has transformed how we manage our business operations, providing unparalleled security and
-              efficiency.
+              {t('testimonial')}
             </p>
-            <footer className="text-sm">Sofia Davis, CEO of Davis Enterprises</footer>
+            <footer className="text-sm">{t('testimonialAuthor')}</footer>
           </blockquote>
         </div>
       </div>
       <div className="lg:p-8">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col space-y-2 text-center">
-            <h1 className="text-2xl font-semibold tracking-tight">Benvingut de nou</h1>
-            <p className="text-sm text-muted-foreground">Entra amb el teu email per accedir al teu compte</p>
+            <h1 className="text-2xl font-semibold tracking-tight">{t('welcome')}</h1>
+            <p className="text-sm text-muted-foreground">{t('subtitle')}</p>
           </div>
           <LoginForm />
           <p className="px-8 text-center text-xs text-muted-foreground">
-            Continuant, acceptes els nostres{" "}
+            {t('terms')}
             {/* <a href="/terms" className="underline underline-offset-4 hover:text-primary">
-              Termes de servei
+              {t('termsOfService')}
             </a>{" "}
-            i{" "}
+            {t('and')} {" "}
             <a href="/privacy" className="underline underline-offset-4 hover:text-primary">
-              Política de privacitat
+              {t('privacyPolicy')}
             </a> */}
             .
           </p>
