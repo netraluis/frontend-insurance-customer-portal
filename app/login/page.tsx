@@ -49,13 +49,13 @@ export default function LoginPage() {
           <LoginForm />
           <p className="px-8 text-center text-xs text-muted-foreground">
             Continuant, acceptes els nostres{" "}
-            <a href="/terms" className="underline underline-offset-4 hover:text-primary">
+            {/* <a href="/terms" className="underline underline-offset-4 hover:text-primary">
               Termes de servei
             </a>{" "}
             i{" "}
             <a href="/privacy" className="underline underline-offset-4 hover:text-primary">
               Política de privacitat
-            </a>
+            </a> */}
             .
           </p>
         </div>

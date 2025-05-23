@@ -1,0 +1,18 @@
+{
+    "HomePage": {
+      "title": "Hello world!",
+      "about": "Go to the about page",
+      "getStarted": "Get started by editing",
+      "saveChanges": "Save and see your changes instantly.",
+      "deploy": "Deploy now",
+      "readDocs": "Read our docs",
+      "learn": "Learn",
+      "examples": "Examples",
+      "goToNextjs": "Go to nextjs.org →"
+    },
+    "ChatWidget": {
+      "open": "Open Chat Widget",
+      "close": "Close chat",
+      "title": "Globalrisc Chat"
+    }
+  }
