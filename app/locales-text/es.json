@@ -11,9 +11,13 @@
       "goToNextjs": "Ir a nextjs.org →"
     },
     "ChatWidget": {
-      "open": "Abrir Chat Widget",
+      "open": "Abrir Chat",
       "close": "Cerrar chat",
-      "title": "Globalrisc Chat"
+      "title": "Chat Globalrisc",
+      "placeholder": "Escribe tu mensaje...",
+      "send": "Enviar",
+      "loading": "Cargando...",
+      "welcome": "¿En qué podemos ayudarte hoy?"
     },
     "LoginPage": {
       "company": "Acme Inc",

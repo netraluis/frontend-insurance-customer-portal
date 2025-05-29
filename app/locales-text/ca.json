@@ -22,5 +22,14 @@
       "verifyButton": "Verifica i accedeix",
       "backToLogin": "Torna a l'inici de sessió",
       "resendCode": "Reenviar codi"
+    },
+    "ChatWidget": {
+      "open": "Obrir el xat",
+      "close": "Tancar xat",
+      "title": "Xat Globalrisc",
+      "placeholder": "Escriu el teu missatge...",
+      "send": "Envia",
+      "loading": "Carregant...",
+      "welcome": "En què et podem ajudar avui?"
     }
   }

@@ -13,7 +13,11 @@
     "ChatWidget": {
       "open": "Open Chat Widget",
       "close": "Close chat",
-      "title": "Globalrisc Chat"
+      "title": "Globalrisc Chat",
+      "placeholder": "Type your message...",
+      "send": "Send",
+      "loading": "Loading...",
+      "welcome": "How can we help you today?"
     },
     "LoginPage": {
       "company": "Acme Inc",

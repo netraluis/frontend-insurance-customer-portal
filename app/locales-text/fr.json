@@ -1,7 +1,8 @@
 {
     "HomePage": {
       "title": "Hello world!",
-      "about": "Go to the about page"
+      "about": "Go to the about page",
+      "examples": "Exemples"
     },
     "LoginPage": {
       "company": "Acme Inc",
@@ -22,5 +23,14 @@
       "verifyButton": "Vérifier et se connecter",
       "backToLogin": "Retour à la connexion",
       "resendCode": "Renvoyer le code"
+    },
+    "ChatWidget": {
+      "open": "Ouvrir le chat",
+      "close": "Fermer le chat",
+      "title": "Chat Globalrisc",
+      "placeholder": "Écrivez votre message...",
+      "send": "Envoyer",
+      "loading": "Chargement...",
+      "welcome": "Comment pouvons-nous vous aider aujourd'hui ?"
     }
   }
