@@ -70,6 +70,14 @@
       "driverEmail": "Email del conductor",
       "driverEmailPlaceholder": "conductor.email@exemple.com (opcional)",
       "driverPhone": "Telèfon del conductor",
-      "driverPhonePlaceholder": "Número de telèfon (opcional)"
+      "driverPhonePlaceholder": "Número de telèfon (opcional)",
+      "formProgress": "Progrés del formulari",
+      "complete": "{percent}% Completat",
+      "stepPolicy": "Pòlissa",
+      "stepVehicle": "Vehicle",
+      "stepAccident": "Accident",
+      "stepParties": "Implicats",
+      "stepDocuments": "Documents",
+      "stepReview": "Revisió"
     }
   }

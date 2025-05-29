@@ -77,6 +77,14 @@
       "driverEmail": "Driver's Email",
       "driverEmailPlaceholder": "driver.email@example.com (optional)",
       "driverPhone": "Driver's Phone",
-      "driverPhonePlaceholder": "Phone number (optional)"
+      "driverPhonePlaceholder": "Phone number (optional)",
+      "formProgress": "Form Progress",
+      "complete": "{percent}% Complete",
+      "stepPolicy": "Policy",
+      "stepVehicle": "Vehicle",
+      "stepAccident": "Accident",
+      "stepParties": "Parties",
+      "stepDocuments": "Documents",
+      "stepReview": "Review"
     }
   }

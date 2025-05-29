@@ -2,6 +2,7 @@
 
 import { useClaimForm } from "./claim-form-context"
 import { cn } from "@/lib/utils"
+import { useTranslations } from 'next-intl'
 
 interface FormStepperProps {
   currentStep: number
@@ -10,14 +11,15 @@ interface FormStepperProps {
 export function FormStepper({ currentStep }: FormStepperProps) {
   const claimFormContext = useClaimForm()
   const isStepComplete = claimFormContext?.isStepComplete
+  const t = useTranslations('ClaimAuto')
 
   const steps = [
-    { id: 1, name: "Policy" },
-    { id: 2, name: "Vehicle" },
-    { id: 3, name: "Accident" },
-    { id: 4, name: "Parties" },
-    { id: 5, name: "Documents" },
-    { id: 6, name: "Review" },
+    { id: 1, name: t('stepPolicy') },
+    { id: 2, name: t('stepVehicle') },
+    { id: 3, name: t('stepAccident') },
+    { id: 4, name: t('stepParties') },
+    { id: 5, name: t('stepDocuments') },
+    { id: 6, name: t('stepReview') },
   ]
 
   // Calculate completion percentage
@@ -29,8 +31,8 @@ export function FormStepper({ currentStep }: FormStepperProps) {
       <div className="hidden sm:block">
         {/* Percentage indicator */}
         <div className="flex justify-between items-center mb-2">
-          <h3 className="text-sm font-medium text-zinc-900">Form Progress</h3>
-          <span className="text-sm font-medium text-zinc-600">{Math.round(completionPercentage)}% Complete</span>
+          <h3 className="text-sm font-medium text-zinc-900">{t('formProgress')}</h3>
+          <span className="text-sm font-medium text-zinc-600">{t('complete', { percent: Math.round(completionPercentage) })}</span>
         </div>
 
         {/* Main progress bar */}

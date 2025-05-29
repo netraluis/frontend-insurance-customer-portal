@@ -71,6 +71,14 @@
       "driverEmail": "E-mail du conducteur",
       "driverEmailPlaceholder": "conducteur.email@exemple.com (optionnel)",
       "driverPhone": "Téléphone du conducteur",
-      "driverPhonePlaceholder": "Numéro de téléphone (optionnel)"
+      "driverPhonePlaceholder": "Numéro de téléphone (optionnel)",
+      "formProgress": "Progression du formulaire",
+      "complete": "{percent}% Terminé",
+      "stepPolicy": "Police",
+      "stepVehicle": "Véhicule",
+      "stepAccident": "Accident",
+      "stepParties": "Parties",
+      "stepDocuments": "Documents",
+      "stepReview": "Vérification"
     }
   }
