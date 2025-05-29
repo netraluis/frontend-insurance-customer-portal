@@ -79,6 +79,16 @@
       "stepAccident": "Accident",
       "stepParties": "Parties",
       "stepDocuments": "Documents",
-      "stepReview": "Vérification"
+      "stepReview": "Vérification",
+      "vehicleType": {
+        "car": "Voiture",
+        "motorbike": "Moto",
+        "truck": "Camion",
+        "suv": "SUV",
+        "bus": "Bus",
+        "boat": "Bateau",
+        "agricultural": "Véhicule agricole",
+        "other": "Autre"
+      }
     }
   }

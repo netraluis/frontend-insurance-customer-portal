@@ -1,5 +1,6 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { LocaleSwitcher } from "@/components/locale-switcher";
+import ChatWidget from '@/components/chat-widget';
 
 export default async function LocaleLayout({ children, params }: { children: React.ReactNode, params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -12,6 +13,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
         <div className="fixed top-4 right-4 z-50">
           <LocaleSwitcher />
         </div>
+        <ChatWidget />
       </div>
     </NextIntlClientProvider>
   );

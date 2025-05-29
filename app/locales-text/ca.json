@@ -78,6 +78,16 @@
       "stepAccident": "Accident",
       "stepParties": "Implicats",
       "stepDocuments": "Documents",
-      "stepReview": "Revisió"
+      "stepReview": "Revisió",
+      "vehicleType": {
+        "car": "Cotxe",
+        "motorbike": "Moto",
+        "truck": "Camió",
+        "suv": "SUV",
+        "bus": "Autobús",
+        "boat": "Vaixell",
+        "agricultural": "Vehicle agrícola",
+        "other": "Altres"
+      }
     }
   }

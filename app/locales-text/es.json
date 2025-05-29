@@ -85,6 +85,16 @@
       "stepAccident": "Accidente",
       "stepParties": "Implicados",
       "stepDocuments": "Documentos",
-      "stepReview": "Revisión"
+      "stepReview": "Revisión",
+      "vehicleType": {
+        "car": "Coche",
+        "motorbike": "Moto",
+        "truck": "Camión",
+        "suv": "SUV",
+        "bus": "Autobús",
+        "boat": "Barco",
+        "agricultural": "Vehículo agrícola",
+        "other": "Otro"
+      }
     }
   }

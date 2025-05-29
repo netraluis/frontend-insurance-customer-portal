@@ -2,6 +2,7 @@
 
 import type React from "react"
 import { Car, Bike, Truck, CarIcon as Suv, Bus, Sailboat, Tractor, HelpCircle } from "lucide-react"
+import { useTranslations } from 'next-intl'
 
 import { useClaimForm } from "../claim-form-context"
 import { Input } from "@/components/ui/input"
@@ -11,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 export default function VehicleInformation() {
   const { formData, updateFormData } = useClaimForm()
+  const t = useTranslations('ClaimAuto.vehicleType')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -23,14 +25,14 @@ export default function VehicleInformation() {
 
   // Vehicle type options with icons
   const vehicleTypes = [
-    { value: "car", label: "Car", icon: <Car className="mr-2 h-4 w-4" /> },
-    { value: "motorbike", label: "Motorbike", icon: <Bike className="mr-2 h-4 w-4" /> },
-    { value: "truck", label: "Truck", icon: <Truck className="mr-2 h-4 w-4" /> },
-    { value: "suv", label: "SUV", icon: <Suv className="mr-2 h-4 w-4" /> },
-    { value: "bus", label: "Bus", icon: <Bus className="mr-2 h-4 w-4" /> },
-    { value: "boat", label: "Boat", icon: <Sailboat className="mr-2 h-4 w-4" /> },
-    { value: "agricultural", label: "Agricultural Vehicle", icon: <Tractor className="mr-2 h-4 w-4" /> },
-    { value: "other", label: "Other", icon: <HelpCircle className="mr-2 h-4 w-4" /> },
+    { value: "car", label: t("car"), icon: <Car className="mr-2 h-4 w-4" /> },
+    { value: "motorbike", label: t("motorbike"), icon: <Bike className="mr-2 h-4 w-4" /> },
+    { value: "truck", label: t("truck"), icon: <Truck className="mr-2 h-4 w-4" /> },
+    { value: "suv", label: t("suv"), icon: <Suv className="mr-2 h-4 w-4" /> },
+    { value: "bus", label: t("bus"), icon: <Bus className="mr-2 h-4 w-4" /> },
+    { value: "boat", label: t("boat"), icon: <Sailboat className="mr-2 h-4 w-4" /> },
+    { value: "agricultural", label: t("agricultural"), icon: <Tractor className="mr-2 h-4 w-4" /> },
+    { value: "other", label: t("other"), icon: <HelpCircle className="mr-2 h-4 w-4" /> },
   ]
 
   return (
