@@ -34,11 +34,87 @@
       "welcome": "Comment pouvons-nous vous aider aujourd'hui ?"
     },
     "ClaimAuto": {
+      "PolicyInformation": {
+        "title": "Informations sur la police",
+        "description": "Veuillez fournir les détails de votre police.",
+        "policyNumberLabel": "Numéro de police",
+        "policyNumberPlaceholder": "Entrez votre numéro de police",
+        "companyLabel": "Compagnie d'assurance",
+        "companyPlaceholder": "Entrez le nom de la compagnie d'assurance"
+      },
+      "VehicleInformation": {
+        "title": "Informations sur le véhicule",
+        "description": "Veuillez fournir des informations sur votre véhicule.",
+        "vehicleTypeLabel": "Type de véhicule",
+        "vehicleTypePlaceholder": "Sélectionnez le type de véhicule",
+        "vehicleMakeLabel": "Marque du véhicule",
+        "vehicleMakePlaceholder": "Ex : Toyota, Honda, BMW",
+        "vehicleModelLabel": "Modèle du véhicule",
+        "vehicleModelPlaceholder": "Ex : Corolla, Civic, X5",
+        "licensePlateLabel": "Plaque d'immatriculation",
+        "licensePlatePlaceholder": "Entrez le numéro de plaque"
+      },
+      "AccidentDetails": {
+        "title": "Détails de l'accident",
+        "description": "Veuillez fournir des informations détaillées sur l'accident.",
+        "locationLabel": "Lieu de l'accident",
+        "locationPlaceholder": "Entrez l'adresse ou le lieu où l'accident s'est produit",
+        "dateLabel": "Date de l'accident",
+        "descriptionLabel": "Description détaillée de l'accident",
+        "descriptionPlaceholder": "Veuillez décrire ce qui s'est passé en détail...",
+        "additionalInfoTitle": "Informations supplémentaires",
+        "damagePhotosPlaceholder": "Téléchargez des photos des dommages",
+        "damagePhotosButtonText": "Sélectionner des photos",
+        "damagePhotosMobileButtonText": "Ajouter des photos",
+        "damagePhotosSuccessMessage": "Photo téléchargée avec succès !",
+        "damagePhotosMobileSuccessMessage": "Photo ajoutée !",
+        "friendlyReportLabel": "Télécharger le constat amiable",
+        "friendlyReportDescription": "Veuillez télécharger une copie scannée ou une photo du constat amiable.",
+        "friendlyReportPlaceholder": "Télécharger le constat",
+        "friendlyReportButtonText": "Sélectionner le fichier",
+        "friendlyReportMobileButtonText": "Ajouter un document",
+        "friendlyReportSuccessMessage": "Constat téléchargé avec succès !",
+        "friendlyReportMobileSuccessMessage": "Constat ajouté !",
+        "bodilyInjuriesLabel": "Blessures corporelles",
+        "bodilyInjuriesQuestion": "Y a-t-il eu des blessures corporelles ?",
+        "bodilyInjuriesDescriptionShort": "Décrivez les blessures subies.",
+        "bodilyInjuriesDescriptionLong": "Veuillez fournir des détails sur les blessures subies lors de l'accident.",
+        "bodilyInjuriesPlaceholderShort": "Décrivez les blessures et les soins médicaux reçus...",
+        "bodilyInjuriesPlaceholderLong": "Décrivez la nature et l'étendue des blessures, qui a été blessé et les soins médicaux reçus..."
+      },
+      "DamageDocumentation": {
+        "title": "Documentation des dommages",
+        "description": "Veuillez fournir une description détaillée des dommages au véhicule et joindre des photos si possible.",
+        "damageDescriptionLabel": "Description des dommages",
+        "damageDescriptionPlaceholder": "Décrivez les dommages à votre véhicule en détail...",
+        "damagePhotosLabel": "Photos des dommages",
+        "damagePhotosDescription": "Téléchargez des photos claires montrant les dommages à votre véhicule si possible."
+      },
+      "InvolvedParties": {
+        "title": "Parties impliquées",
+        "description": "Listez toutes les parties impliquées dans l'accident."
+      },
+      "UploadDocumentation": {
+        "title": "Télécharger la documentation",
+        "description": "Joignez tous les documents ou photos pertinents."
+      },
+      "ReviewAndSubmit": {
+        "title": "Vérifier et soumettre",
+        "description": "Vérifiez votre déclaration avant de la soumettre."
+      },
       "policyInformation": "Informations sur la police",
       "vehicleInformation": "Informations sur le véhicule",
       "accidentDetails": "Détails de l'accident",
+      "accidentDetailsTitle": "Détails de l'accident",
+      "accidentDetailsDescription": "Veuillez fournir des informations détaillées sur l'accident.",
       "involvedParties": "Personnes impliquées",
       "uploadDocumentation": "Télécharger la documentation",
+      "damageDocumentationTitle": "Documentation des dommages",
+      "damageDocumentationDescription": "Veuillez fournir une description détaillée des dommages au véhicule et joindre des photos si possible.",
+      "damageDescriptionLabel": "Description des dommages",
+      "damageDescriptionPlaceholder": "Décrivez les dommages à votre véhicule en détail...",
+      "damagePhotosLabel": "Photos des dommages",
+      "damagePhotosDescription": "Téléchargez des photos claires montrant les dommages à votre véhicule si possible.",
       "reviewAndSubmit": "Vérifier et soumettre",
       "autoClaimForm": "Déclaration d'auto",
       "previous": "Précédent",
@@ -89,6 +165,64 @@
         "boat": "Bateau",
         "agricultural": "Véhicule agricole",
         "other": "Autre"
+      },
+      "Documentation": {
+        "title": "Documentation",
+        "description": "Téléchargez des photos, des vidéos et des rapports officiels liés à l'accident.",
+        "uploadLabel": "Documents téléchargés",
+        "uploadDescription": "Téléchargez tout document pertinent tel que des rapports de police, des documents d'assurance ou d'autres preuves.",
+        "placeholder": "Télécharger des documents",
+        "buttonText": "Sélectionner des fichiers",
+        "mobileButtonText": "Ajouter des documents",
+        "successMessage": "Document téléchargé avec succès !",
+        "mobileSuccessMessage": "Document ajouté !",
+        "tableType": "Type",
+        "tableName": "Nom",
+        "tableActions": "Actions",
+        "deleteAction": "Supprimer"
       }
+    },
+    "GeneralClaimAuto": {
+      "PolicyInformation": {
+        "title": "Informations sur la police",
+        "description": "Veuillez fournir les détails de votre police."
+      },
+      "AccidentDetails": {
+        "title": "Détails de l'accident",
+        "description": "Veuillez fournir des informations détaillées sur l'accident.",
+        "locationLabel": "Lieu de l'accident",
+        "locationPlaceholder": "Entrez l'adresse ou le lieu où l'accident s'est produit",
+        "dateLabel": "Date de l'accident",
+        "descriptionLabel": "Description détaillée de l'accident",
+        "descriptionPlaceholder": "Veuillez décrire ce qui s'est passé en détail..."
+      },
+      "AdditionalInformation": {
+        "title": "Informations supplémentaires",
+        "description": "Fournissez toute information supplémentaire pertinente à votre déclaration."
+      },
+      "InvolvedParties": {
+        "title": "Parties impliquées",
+        "description": "Listez toutes les parties impliquées dans l'accident."
+      },
+      "AdditionalDocumentation": {
+        "title": "Documentation supplémentaire",
+        "description": "Joignez tous les documents ou photos supplémentaires."
+      },
+      "ReviewAndSubmit": {
+        "title": "Vérifier et soumettre",
+        "description": "Vérifiez votre déclaration avant de la soumettre."
+      }
+    },
+    "PoliceInvolvement": {
+      "title": "Intervention de la police",
+      "question": "La police est-elle intervenue lors de l'accident ?"
+    },
+    "TrafficServiceInvolvement": {
+      "title": "Intervention du service de circulation",
+      "question": "Le service de circulation local est-il intervenu ?"
+    },
+    "FriendlyAccidentReport": {
+      "title": "Constat amiable",
+      "question": "Un constat amiable a-t-il été rempli ?"
     }
   }

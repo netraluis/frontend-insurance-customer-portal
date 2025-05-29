@@ -95,19 +95,19 @@ export default function GeneralClaimFormLayout() {
   const getStepTitle = () => {
     switch (currentStep) {
       case 1:
-        return "Policy Information"
+        return t('policyInformation')
       case 2:
-        return "Accident Details"
+        return t('accidentDetails')
       case 3:
-        return "Additional Information"
+        return t('additionalInformation')
       case 4:
-        return "Involved Parties"
+        return t('involvedParties')
       case 5:
-        return "Additional Documentation"
+        return t('additionalDocumentation')
       case 6:
-        return "Review and Submit"
+        return t('reviewAndSubmit')
       default:
-        return "General Claim Form"
+        return t('generalClaimForm')
     }
   }
 

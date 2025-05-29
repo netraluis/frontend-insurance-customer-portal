@@ -40,6 +40,74 @@
       "resendCode": "Reenviar código"
     },
     "ClaimAuto": {
+      "PolicyInformation": {
+        "title": "Información de la póliza",
+        "description": "Por favor, proporciona los datos de tu póliza.",
+        "policyNumberLabel": "Número de póliza",
+        "policyNumberPlaceholder": "Introduce tu número de póliza",
+        "companyLabel": "Compañía aseguradora",
+        "companyPlaceholder": "Introduce el nombre de la aseguradora"
+      },
+      "VehicleInformation": {
+        "title": "Información del vehículo",
+        "description": "Por favor, proporciona información sobre tu vehículo.",
+        "vehicleTypeLabel": "Tipo de vehículo",
+        "vehicleTypePlaceholder": "Selecciona el tipo de vehículo",
+        "vehicleMakeLabel": "Marca del vehículo",
+        "vehicleMakePlaceholder": "Ej: Toyota, Honda, BMW",
+        "vehicleModelLabel": "Modelo del vehículo",
+        "vehicleModelPlaceholder": "Ej: Corolla, Civic, X5",
+        "licensePlateLabel": "Matrícula",
+        "licensePlatePlaceholder": "Introduce la matrícula"
+      },
+      "AccidentDetails": {
+        "title": "Detalles del accidente",
+        "description": "Por favor, proporciona información detallada sobre el accidente.",
+        "locationLabel": "Lugar del accidente",
+        "locationPlaceholder": "Introduce la dirección o lugar donde ocurrió el accidente",
+        "dateLabel": "Fecha del incidente",
+        "descriptionLabel": "Descripción detallada del accidente",
+        "descriptionPlaceholder": "Describe lo sucedido con detalle...",
+        "additionalInfoTitle": "Información adicional",
+        "damagePhotosPlaceholder": "Sube fotos de los daños",
+        "damagePhotosButtonText": "Seleccionar fotos",
+        "damagePhotosMobileButtonText": "Añadir fotos",
+        "damagePhotosSuccessMessage": "¡Foto subida con éxito!",
+        "damagePhotosMobileSuccessMessage": "¡Foto añadida!",
+        "friendlyReportLabel": "Subir parte amistoso",
+        "friendlyReportDescription": "Por favor, sube una copia escaneada o foto del parte amistoso.",
+        "friendlyReportPlaceholder": "Subir parte",
+        "friendlyReportButtonText": "Seleccionar archivo",
+        "friendlyReportMobileButtonText": "Añadir documento",
+        "friendlyReportSuccessMessage": "¡Parte subido con éxito!",
+        "friendlyReportMobileSuccessMessage": "¡Parte añadido!",
+        "bodilyInjuriesLabel": "Lesiones corporales",
+        "bodilyInjuriesQuestion": "¿Hubo lesiones corporales?",
+        "bodilyInjuriesDescriptionShort": "Describe las lesiones sufridas.",
+        "bodilyInjuriesDescriptionLong": "Por favor, proporciona detalles sobre las lesiones sufridas en el accidente.",
+        "bodilyInjuriesPlaceholderShort": "Describe las lesiones y la atención médica recibida...",
+        "bodilyInjuriesPlaceholderLong": "Describe la naturaleza y el alcance de las lesiones, quién resultó herido y cualquier atención médica recibida..."
+      },
+      "DamageDocumentation": {
+        "title": "Documentación de daños",
+        "description": "Por favor, proporciona una descripción detallada de los daños del vehículo y adjunta fotos si es posible.",
+        "damageDescriptionLabel": "Descripción de los daños",
+        "damageDescriptionPlaceholder": "Describe los daños de tu vehículo en detalle...",
+        "damagePhotosLabel": "Fotos de daños",
+        "damagePhotosDescription": "Sube fotos claras que muestren los daños de tu vehículo si es posible."
+      },
+      "InvolvedParties": {
+        "title": "Implicados",
+        "description": "Enumera todas las partes implicadas en el accidente."
+      },
+      "UploadDocumentation": {
+        "title": "Subir documentación",
+        "description": "Adjunta cualquier documento o foto relevante."
+      },
+      "ReviewAndSubmit": {
+        "title": "Revisar y enviar",
+        "description": "Revisa tu parte antes de enviarlo."
+      },
       "policyInformation": "Información de la póliza",
       "vehicleInformation": "Información del vehículo",
       "accidentDetails": "Detalles del accidente",
@@ -95,6 +163,68 @@
         "boat": "Barco",
         "agricultural": "Vehículo agrícola",
         "other": "Otro"
+      },
+      "accidentDetailsTitle": "Detalles del accidente",
+      "accidentDetailsDescription": "Por favor, proporciona información detallada sobre el accidente.",
+      "damageDocumentationTitle": "Documentación de daños",
+      "damageDocumentationDescription": "Por favor, proporciona una descripción detallada de los daños del vehículo y adjunta fotos si es posible.",
+      "Documentation": {
+        "title": "Documentación",
+        "description": "Sube fotos, vídeos e informes oficiales relacionados con el accidente.",
+        "uploadLabel": "Documentos subidos",
+        "uploadDescription": "Sube cualquier documento relevante como informes policiales, pólizas de seguro u otras pruebas.",
+        "placeholder": "Subir documentos",
+        "buttonText": "Seleccionar archivos",
+        "mobileButtonText": "Añadir documentos",
+        "successMessage": "¡Documento subido con éxito!",
+        "mobileSuccessMessage": "¡Documento añadido!",
+        "tableType": "Tipo",
+        "tableName": "Nombre",
+        "tableActions": "Acciones",
+        "deleteAction": "Eliminar"
       }
+    },
+    "GeneralClaimAuto": {
+      "PolicyInformation": {
+        "title": "Información de la póliza",
+        "description": "Por favor, proporciona los datos de tu póliza."
+      },
+      "AccidentDetails": {
+        "title": "Detalles del accidente",
+        "description": "Por favor, proporciona información detallada sobre el accidente.",
+        "locationLabel": "Lugar del accidente",
+        "locationPlaceholder": "Introduce la dirección o lugar donde ocurrió el accidente",
+        "dateLabel": "Fecha del accidente",
+        "descriptionLabel": "Descripción detallada del accidente",
+        "descriptionPlaceholder": "Describe lo sucedido con detalle..."
+      },
+      "AdditionalInformation": {
+        "title": "Información adicional",
+        "description": "Proporciona cualquier información adicional relevante para tu parte."
+      },
+      "InvolvedParties": {
+        "title": "Implicados",
+        "description": "Enumera todas las partes implicadas en el accidente."
+      },
+      "AdditionalDocumentation": {
+        "title": "Documentación adicional",
+        "description": "Adjunta cualquier documento o foto adicional."
+      },
+      "ReviewAndSubmit": {
+        "title": "Revisar y enviar",
+        "description": "Revisa tu parte antes de enviarlo."
+      }
+    },
+    "PoliceInvolvement": {
+      "title": "Intervención policial",
+      "question": "¿Intervino la policía en el accidente?"
+    },
+    "TrafficServiceInvolvement": {
+      "title": "Intervención de tráfico",
+      "question": "¿Intervino el servicio de tráfico local?"
+    },
+    "FriendlyAccidentReport": {
+      "title": "Parte amistoso",
+      "question": "¿Se realizó un parte amistoso?"
     }
   }

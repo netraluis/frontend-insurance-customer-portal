@@ -6,9 +6,11 @@ import { FileObject, UnifiedUpload } from "@/components/ui/unified-upload"
 import { FileIcon, FileText, FileImage, FileVideo } from "lucide-react"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
+import { useTranslations } from 'next-intl'
 
 export default function Documentation() {
   const { formData, updateFormData } = useClaimForm()
+  const tDocumentation = useTranslations('ClaimAuto.Documentation')
 
   const handleDocumentsChange = (files: FileObject | FileObject[] | null) => {
     updateFormData({ documents: Array.isArray(files) ? files : files ? [files] : [] })
@@ -37,15 +39,15 @@ export default function Documentation() {
     <Card className="border-none shadow-none">
       <CardContent className="p-0 space-y-6">
         <div className="space-y-2">
-          <h3 className="text-lg font-medium text-zinc-900">Documentation</h3>
-          <p className="text-sm text-zinc-500">Upload photos, videos, and official reports related to the accident.</p>
+          <h3 className="text-lg font-medium text-zinc-900">{tDocumentation('title')}</h3>
+          <p className="text-sm text-zinc-500">{tDocumentation('description')}</p>
         </div>
 
         <div className="space-y-4">
           {/* Using Enhanced UnifiedUpload for documents with directory support */}
           <UnifiedUpload
-            label="Uploaded Documents"
-            description="Upload any relevant documents such as police reports, insurance documents, or other evidence."
+            label={tDocumentation('uploadLabel')}
+            description={tDocumentation('uploadDescription')}
             value={formData.documents}
             onChange={handleDocumentsChange}
             multiple={true}
@@ -61,11 +63,11 @@ export default function Documentation() {
               "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [".xlsx"],
               "text/plain": [".txt"],
             }}
-            placeholder="Upload documents"
-            buttonText="Select files"
-            mobileButtonText="Add documents"
-            successMessage="Document uploaded successfully!"
-            mobileSuccessMessage="Document added!"
+            placeholder={tDocumentation('placeholder')}
+            buttonText={tDocumentation('buttonText')}
+            mobileButtonText={tDocumentation('mobileButtonText')}
+            successMessage={tDocumentation('successMessage')}
+            mobileSuccessMessage={tDocumentation('mobileSuccessMessage')}
             allowDirectories={true}
           />
 
@@ -77,9 +79,9 @@ export default function Documentation() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Type</TableHead>
-                      <TableHead>Name</TableHead>
-                      <TableHead className="w-[100px]">Actions</TableHead>
+                      <TableHead>{tDocumentation('tableType')}</TableHead>
+                      <TableHead>{tDocumentation('tableName')}</TableHead>
+                      <TableHead className="w-[100px]">{tDocumentation('tableActions')}</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -95,7 +97,7 @@ export default function Documentation() {
                         <TableCell>
                           <div className="flex space-x-2">
                             <Button variant="ghost" size="icon" onClick={() => handleDeleteDocument(doc.id)}>
-                              <span className="sr-only">Delete</span>
+                              <span className="sr-only">{tDocumentation('deleteAction')}</span>
                             </Button>
                           </div>
                         </TableCell>
@@ -123,7 +125,7 @@ export default function Documentation() {
                         className="h-8 w-8 p-0 rounded-full"
                         onClick={() => handleDeleteDocument(doc.id)}
                       >
-                        <span className="sr-only">Delete</span>
+                        <span className="sr-only">{tDocumentation('deleteAction')}</span>
                       </Button>
                     </li>
                   ))}

@@ -33,6 +33,74 @@
       "welcome": "En què et podem ajudar avui?"
     },
     "ClaimAuto": {
+      "PolicyInformation": {
+        "title": "Informació de la pòlissa",
+        "description": "Si us plau, proporciona les dades de la teva pòlissa.",
+        "policyNumberLabel": "Número de pòlissa",
+        "policyNumberPlaceholder": "Introdueix el teu número de pòlissa",
+        "companyLabel": "Companyia asseguradora",
+        "companyPlaceholder": "Introdueix el nom de la companyia asseguradora"
+      },
+      "VehicleInformation": {
+        "title": "Informació del vehicle",
+        "description": "Si us plau, proporciona informació sobre el teu vehicle.",
+        "vehicleTypeLabel": "Tipus de vehicle",
+        "vehicleTypePlaceholder": "Selecciona el tipus de vehicle",
+        "vehicleMakeLabel": "Marca del vehicle",
+        "vehicleMakePlaceholder": "Ex: Toyota, Honda, BMW",
+        "vehicleModelLabel": "Model del vehicle",
+        "vehicleModelPlaceholder": "Ex: Corolla, Civic, X5",
+        "licensePlateLabel": "Matrícula",
+        "licensePlatePlaceholder": "Introdueix la matrícula"
+      },
+      "AccidentDetails": {
+        "title": "Detalls de l'accident",
+        "description": "Si us plau, proporciona informació detallada sobre l'accident.",
+        "locationLabel": "Lloc de l'accident",
+        "locationPlaceholder": "Introdueix l'adreça o lloc on va ocórrer l'accident",
+        "dateLabel": "Data de l'accident",
+        "descriptionLabel": "Descripció detallada de l'accident",
+        "descriptionPlaceholder": "Descriu el que ha passat amb detall...",
+        "additionalInfoTitle": "Informació addicional",
+        "damagePhotosPlaceholder": "Puja fotos dels danys",
+        "damagePhotosButtonText": "Selecciona fotos",
+        "damagePhotosMobileButtonText": "Afegeix fotos",
+        "damagePhotosSuccessMessage": "Foto pujada amb èxit!",
+        "damagePhotosMobileSuccessMessage": "Foto afegida!",
+        "friendlyReportLabel": "Pujar part amistós",
+        "friendlyReportDescription": "Si us plau, puja una còpia escanejada o foto del part amistós.",
+        "friendlyReportPlaceholder": "Pujar part",
+        "friendlyReportButtonText": "Selecciona fitxer",
+        "friendlyReportMobileButtonText": "Afegeix document",
+        "friendlyReportSuccessMessage": "Part pujat amb èxit!",
+        "friendlyReportMobileSuccessMessage": "Part afegit!",
+        "bodilyInjuriesLabel": "Lesions corporals",
+        "bodilyInjuriesQuestion": "Hi va haver lesions corporals?",
+        "bodilyInjuriesDescriptionShort": "Descriu les lesions sofertes.",
+        "bodilyInjuriesDescriptionLong": "Si us plau, proporciona detalls sobre les lesions sofertes en l'accident.",
+        "bodilyInjuriesPlaceholderShort": "Descriu les lesions i l'atenció mèdica rebuda...",
+        "bodilyInjuriesPlaceholderLong": "Descriu la naturalesa i l'abast de les lesions, qui va resultar ferit i qualsevol atenció mèdica rebuda..."
+      },
+      "DamageDocumentation": {
+        "title": "Documentació de danys",
+        "description": "Si us plau, proporciona una descripció detallada dels danys del vehicle i adjunta fotos si és possible.",
+        "damageDescriptionLabel": "Descripció dels danys",
+        "damageDescriptionPlaceholder": "Descriu els danys del teu vehicle en detall...",
+        "damagePhotosLabel": "Fotos dels danys",
+        "damagePhotosDescription": "Puja fotos clares que mostrin els danys del teu vehicle si és possible."
+      },
+      "InvolvedParties": {
+        "title": "Implicats",
+        "description": "Enumera totes les parts implicades en l'accident."
+      },
+      "UploadDocumentation": {
+        "title": "Pujar documentació",
+        "description": "Adjunta qualsevol document o foto rellevant."
+      },
+      "ReviewAndSubmit": {
+        "title": "Revisar i enviar",
+        "description": "Revisa el teu part abans d'enviar-lo."
+      },
       "policyInformation": "Informació de la pòlissa",
       "vehicleInformation": "Informació del vehicle",
       "accidentDetails": "Detalls de l'accident",
@@ -88,6 +156,63 @@
         "boat": "Vaixell",
         "agricultural": "Vehicle agrícola",
         "other": "Altres"
+      },
+      "accidentDetailsTitle": "Detalls de l'accident",
+      "accidentDetailsDescription": "Si us plau, proporciona informació detallada sobre l'accident.",
+      "damageDocumentationTitle": "Documentació de danys",
+      "damageDocumentationDescription": "Si us plau, proporciona una descripció detallada dels danys del vehicle i adjunta fotos si és possible.",
+      "PoliceInvolvement": {
+        "title": "Intervenció policial",
+        "question": "Va intervenir la policia en l'accident?"
+      },
+      "TrafficServiceInvolvement": {
+        "title": "Intervenció de trànsit",
+        "question": "Va intervenir el servei de trànsit local?"
+      },
+      "FriendlyAccidentReport": {
+        "title": "Part amistós",
+        "question": "Es va fer un part amistós?"
+      },
+      "Documentation": {
+        "title": "Documentació",
+        "description": "Puja fotos, vídeos i informes oficials relacionats amb l'accident.",
+        "uploadLabel": "Documents pujats",
+        "uploadDescription": "Puja qualsevol document rellevant com informes policials, pòlisses d'assegurança o altres proves.",
+        "placeholder": "Pujar documents",
+        "buttonText": "Selecciona fitxers",
+        "mobileButtonText": "Afegeix documents",
+        "successMessage": "Document pujat amb èxit!",
+        "mobileSuccessMessage": "Document afegit!",
+        "tableType": "Tipus",
+        "tableName": "Nom",
+        "tableActions": "Accions",
+        "deleteAction": "Eliminar"
+      }
+    },
+    "GeneralClaimAuto": {
+      "PolicyInformation": {
+        "title": "Informació de la pòlissa",
+        "description": "Si us plau, proporciona les dades de la teva pòlissa."
+      },
+      "AccidentDetails": {
+        "title": "Detalls de l'accident",
+        "description": "Si us plau, proporciona informació detallada sobre l'accident."
+      },
+      "AdditionalInformation": {
+        "title": "Informació addicional",
+        "description": "Proporciona qualsevol informació addicional rellevant per al teu part."
+      },
+      "InvolvedParties": {
+        "title": "Implicats",
+        "description": "Enumera totes les parts implicades en l'accident."
+      },
+      "AdditionalDocumentation": {
+        "title": "Documentació addicional",
+        "description": "Adjunta qualsevol document o foto addicional."
+      },
+      "ReviewAndSubmit": {
+        "title": "Revisar i enviar",
+        "description": "Revisa el teu part abans d'enviar-lo."
       }
     }
   }

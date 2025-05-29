@@ -40,12 +40,74 @@
       "resendCode": "Resend code"
     },
     "ClaimAuto": {
-      "policyInformation": "Policy Information",
-      "vehicleInformation": "Vehicle Information",
-      "accidentDetails": "Accident Details",
-      "involvedParties": "Involved Parties",
-      "uploadDocumentation": "Upload Documentation",
-      "reviewAndSubmit": "Review and Submit",
+      "PolicyInformation": {
+        "title": "Policy Information",
+        "description": "Please provide your policy details.",
+        "policyNumberLabel": "Policy Number",
+        "policyNumberPlaceholder": "Enter your policy number",
+        "companyLabel": "Insurance Company",
+        "companyPlaceholder": "Enter the insurance company name"
+      },
+      "VehicleInformation": {
+        "title": "Vehicle Information",
+        "description": "Please provide information about your vehicle.",
+        "vehicleTypeLabel": "Vehicle Type",
+        "vehicleTypePlaceholder": "Select vehicle type",
+        "vehicleMakeLabel": "Vehicle Make",
+        "vehicleMakePlaceholder": "e.g., Toyota, Honda, BMW",
+        "vehicleModelLabel": "Vehicle Model",
+        "vehicleModelPlaceholder": "e.g., Corolla, Civic, X5",
+        "licensePlateLabel": "License Plate",
+        "licensePlatePlaceholder": "Enter license plate number"
+      },
+      "AccidentDetails": {
+        "title": "Accident Details",
+        "description": "Please provide detailed information about the accident.",
+        "locationLabel": "Location of the Accident",
+        "locationPlaceholder": "Enter the address or location where the accident occurred",
+        "dateLabel": "Date of Incident",
+        "descriptionLabel": "Detailed Description of the Accident",
+        "descriptionPlaceholder": "Please describe what happened in detail...",
+        "additionalInfoTitle": "Additional Information",
+        "damagePhotosPlaceholder": "Upload damage photos",
+        "damagePhotosButtonText": "Select photos",
+        "damagePhotosMobileButtonText": "Add photos",
+        "damagePhotosSuccessMessage": "Photo uploaded successfully!",
+        "damagePhotosMobileSuccessMessage": "Photo added!",
+        "friendlyReportLabel": "Upload Friendly Accident Report",
+        "friendlyReportDescription": "Please upload a scanned copy or photo of the friendly accident report.",
+        "friendlyReportPlaceholder": "Upload report",
+        "friendlyReportButtonText": "Select file",
+        "friendlyReportMobileButtonText": "Add document",
+        "friendlyReportSuccessMessage": "Report uploaded successfully!",
+        "friendlyReportMobileSuccessMessage": "Report added!",
+        "bodilyInjuriesLabel": "Bodily Injuries",
+        "bodilyInjuriesQuestion": "Were there any bodily injuries?",
+        "bodilyInjuriesDescriptionShort": "Describe the injuries sustained.",
+        "bodilyInjuriesDescriptionLong": "Please provide details about the injuries sustained in the accident.",
+        "bodilyInjuriesPlaceholderShort": "Describe injuries and medical attention received...",
+        "bodilyInjuriesPlaceholderLong": "Describe the nature and extent of the injuries, who was injured, and any medical attention received..."
+      },
+      "DamageDocumentation": {
+        "title": "Damage Documentation",
+        "description": "Please provide a detailed description of the vehicle damage and attach photos if available.",
+        "damageDescriptionLabel": "Damage Description",
+        "damageDescriptionPlaceholder": "Describe the damage to your vehicle in detail...",
+        "damagePhotosLabel": "Damage Photos",
+        "damagePhotosDescription": "Upload clear photos showing the damage to your vehicle if available."
+      },
+      "InvolvedParties": {
+        "title": "Involved Parties",
+        "description": "List all parties involved in the accident."
+      },
+      "UploadDocumentation": {
+        "title": "Upload Documentation",
+        "description": "Attach any relevant documents or photos."
+      },
+      "ReviewAndSubmit": {
+        "title": "Review and Submit",
+        "description": "Review your claim before submitting."
+      },
       "autoClaimForm": "Auto Claim Form",
       "previous": "Previous",
       "saveProgress": "Save Progress",
@@ -95,6 +157,64 @@
         "boat": "Boat",
         "agricultural": "Agricultural Vehicle",
         "other": "Other"
+      },
+      "PoliceInvolvement": {
+        "title": "Police Involvement",
+        "question": "Was the police involved in the accident?"
+      },
+      "TrafficServiceInvolvement": {
+        "title": "Traffic Service Involvement",
+        "question": "Was the local traffic service involved?"
+      },
+      "FriendlyAccidentReport": {
+        "title": "Friendly Accident Report",
+        "question": "Was a friendly accident report filed?"
+      },
+      "Documentation": {
+        "title": "Documentation",
+        "description": "Upload photos, videos, and official reports related to the accident.",
+        "uploadLabel": "Uploaded Documents",
+        "uploadDescription": "Upload any relevant documents such as police reports, insurance documents, or other evidence.",
+        "placeholder": "Upload documents",
+        "buttonText": "Select files",
+        "mobileButtonText": "Add documents",
+        "successMessage": "Document uploaded successfully!",
+        "mobileSuccessMessage": "Document added!",
+        "tableType": "Type",
+        "tableName": "Name",
+        "tableActions": "Actions",
+        "deleteAction": "Delete"
+      }
+    },
+    "GeneralClaimAuto": {
+      "PolicyInformation": {
+        "title": "Policy Information",
+        "description": "Please provide your policy details."
+      },
+      "AccidentDetails": {
+        "title": "Accident Details",
+        "description": "Please provide detailed information about the accident.",
+        "locationLabel": "Location of the Accident",
+        "locationPlaceholder": "Enter the address or location where the accident occurred",
+        "dateLabel": "Date of the Accident",
+        "descriptionLabel": "Detailed Description of the Accident",
+        "descriptionPlaceholder": "Please describe what happened in detail..."
+      },
+      "AdditionalInformation": {
+        "title": "Additional Information",
+        "description": "Provide any additional information relevant to your claim."
+      },
+      "InvolvedParties": {
+        "title": "Involved Parties",
+        "description": "List all parties involved in the accident."
+      },
+      "AdditionalDocumentation": {
+        "title": "Additional Documentation",
+        "description": "Attach any additional documents or photos."
+      },
+      "ReviewAndSubmit": {
+        "title": "Review and Submit",
+        "description": "Review your claim before submitting."
       }
     }
   }

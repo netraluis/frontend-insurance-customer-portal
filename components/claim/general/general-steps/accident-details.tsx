@@ -10,10 +10,12 @@ import { Camera } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { UnifiedUpload, type MediaFile } from "@/components/ui/unified-upload"
 import { DateTimePicker } from "../../../ui/custom-calendar"
+import { useTranslations } from 'next-intl'
 
 export default function AccidentDetails() {
   const { formData, updateFormData } = useGeneralClaimForm()
   const isMobile = useIsMobile()
+  const t = useTranslations('ClaimAuto')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -33,26 +35,26 @@ export default function AccidentDetails() {
     <Card className="border-none shadow-none">
       <CardContent className="p-0 space-y-6">
         <div className="space-y-2">
-          <h3 className="text-lg font-medium text-zinc-900">Accident Details</h3>
-          <p className="text-sm text-zinc-500">Please provide detailed information about the accident.</p>
+          <h3 className="text-lg font-medium text-zinc-900">{t('accidentDetailsTitle')}</h3>
+          <p className="text-sm text-zinc-500">{t('accidentDetailsDescription')}</p>
         </div>
 
         <div className="space-y-4">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="accidentLocation">Location of the Accident</Label>
+              <Label htmlFor="accidentLocation">{t('locationLabel')}</Label>
               <Input
                 id="accidentLocation"
                 name="accidentLocation"
                 value={formData.accidentLocation}
                 onChange={handleChange}
-                placeholder="Enter the address or location where the accident occurred"
+                placeholder={t('locationPlaceholder')}
                 required
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="accidentDate">Date of the Accident</Label>
+              <Label htmlFor="accidentDate">{t('dateLabel')}</Label>
               <DateTimePicker
                 value={formData.accidentDate || undefined}
                 onChange={handleDateChange}
@@ -64,13 +66,13 @@ export default function AccidentDetails() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="accidentDescription">Detailed Description of the Accident</Label>
+            <Label htmlFor="accidentDescription">{t('descriptionLabel')}</Label>
             <Textarea
               id="accidentDescription"
               name="accidentDescription"
               value={formData.accidentDescription}
               onChange={handleChange}
-              placeholder="Please describe what happened in detail..."
+              placeholder={t('descriptionPlaceholder')}
               rows={isMobile ? 4 : 5}
               required
             />
@@ -82,24 +84,24 @@ export default function AccidentDetails() {
           <div className="space-y-2">
             <h4 className="text-md font-medium text-zinc-900 flex items-center gap-2">
               <Camera className="h-5 w-5 text-zinc-500" />
-              Damage Documentation
+              {t('damageDocumentationTitle')}
             </h4>
             <p className="text-sm text-zinc-500">
-              Please provide a detailed description of the damages and attach photos if available.
+              {t('damageDocumentationDescription')}
             </p>
           </div>
 
           {/* Damage Description Text Area */}
           <div className="space-y-2">
             <Label htmlFor="damageDescription" className="text-zinc-900">
-              Damage Description <span className="text-destructive">*</span>
+              {t('damageDescriptionLabel')} <span className="text-destructive">*</span>
             </Label>
             <Textarea
               id="damageDescription"
               name="damageDescription"
               value={formData.damageDescription}
               onChange={handleChange}
-              placeholder="Describe the damages in detail..."
+              placeholder={t('damageDescriptionPlaceholder')}
               rows={isMobile ? 3 : 4}
               className="w-full resize-y min-h-[80px] sm:min-h-[100px]"
               required
@@ -108,8 +110,8 @@ export default function AccidentDetails() {
 
           {/* Damage Photos Upload - Using Enhanced UnifiedUpload */}
           <UnifiedUpload
-            label="Damage Photos"
-            description="Upload clear photos showing the damages if available."
+            label={t('damagePhotosLabel')}
+            description={t('damagePhotosDescription')}
             value={formData.damagePhotos}
             onChange={handleDamagePhotosChange}
             multiple={true}
