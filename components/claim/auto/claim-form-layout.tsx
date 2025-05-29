@@ -95,19 +95,19 @@ export default function ClaimFormLayout() {
   const getStepTitle = () => {
     switch (currentStep) {
       case 1:
-        return "Policy Information"
+        return t('policyInformation')
       case 2:
-        return "Vehicle Information"
+        return t('vehicleInformation')
       case 3:
-        return "Accident Details"
+        return t('accidentDetails')
       case 4:
-        return "Involved Parties"
+        return t('involvedParties')
       case 5:
-        return "Upload Documentation"
+        return t('uploadDocumentation')
       case 6:
-        return "Review and Submit"
+        return t('reviewAndSubmit')
       default:
-        return "Auto Claim Form"
+        return t('autoClaimForm')
     }
   }
 
