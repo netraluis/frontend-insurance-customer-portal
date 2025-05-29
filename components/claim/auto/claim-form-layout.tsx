@@ -13,10 +13,12 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { toast } from "@/components/ui/use-toast"
 import { ArrowLeft, ArrowRight, Save } from "lucide-react"
+import { useTranslations } from 'next-intl'
 
 export default function ClaimFormLayout() {
   const { currentStep, setCurrentStep, isStepComplete, saveProgress, loadProgress, isSubmitted } = useClaimForm()
   const [isFormSubmitted, setIsFormSubmitted] = useState(false)
+  const t = useTranslations('ClaimAuto')
 
   // Listen for changes in the DOM to detect when the form has been submitted
   useEffect(() => {
@@ -140,14 +142,14 @@ export default function ClaimFormLayout() {
               {currentStep > 1 && (
                 <Button variant="outline" onClick={handlePrevious} className="flex items-center gap-2">
                   <ArrowLeft className="h-4 w-4" />
-                  Previous
+                  {t('previous')}
                 </Button>
               )}
             </div>
             <div className="flex gap-2">
               <Button variant="outline" onClick={handleSave} className="flex items-center gap-2">
                 <Save className="h-4 w-4" />
-                Save Progress
+                {t('saveProgress')}
               </Button>
               {currentStep < 6 ? (
                 <Button
@@ -155,12 +157,12 @@ export default function ClaimFormLayout() {
                   disabled={!isStepComplete(currentStep)}
                   className="flex items-center gap-2"
                 >
-                  Next
+                  {t('next')}
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               ) : (
                 <Button type="submit" form="review-form">
-                  Submit Claim
+                  {t('submitClaim')}
                 </Button>
               )}
             </div>
