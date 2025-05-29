@@ -1,8 +1,7 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { LocaleSwitcher } from "@/components/locale-switcher";
 
-export default async function LocaleLayout({ children, params }: { children: React.ReactNode, params: { locale: string } }) {
-  const { locale } = await params;
+export default async function LocaleLayout({ children, params: { locale } }: { children: React.ReactNode, params: { locale: string } }) {
   const messages = (await import(`@/app/locales-text/${locale}.json`)).default;
 
   return (
