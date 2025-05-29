@@ -10,10 +10,12 @@ import { PhoneInput } from "@/components/ui/phone-input"
 import { Switch } from "@/components/ui/switch"
 import { DateTimePicker } from "@/components/ui/custom-calendar"
 import { UserCog } from "lucide-react"
+import { useTranslations } from 'next-intl'
 
 
 export default function PolicyInformation() {
   const { formData, updateFormData } = useClaimForm()
+  const t = useTranslations('ClaimAuto')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -52,44 +54,44 @@ export default function PolicyInformation() {
     <Card className="border-none shadow-none">
       <CardContent className="p-0 space-y-6">
         <div className="space-y-2">
-          <h3 className="text-lg font-medium text-zinc-900">Personal Information</h3>
-          <p className="text-sm text-zinc-500">Please provide your contact details so we can process your claim.</p>
+          <h3 className="text-lg font-medium text-zinc-900">{t('personalInformation')}</h3>
+          <p className="text-sm text-zinc-500">{t('personalInformationDesc')}</p>
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div className="space-y-2">
-            <Label htmlFor="firstName">First Name</Label>
+            <Label htmlFor="firstName">{t('firstName')}</Label>
             <Input
               id="firstName"
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
-              placeholder="Enter your first name"
+              placeholder={t('firstNamePlaceholder')}
               required
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="lastName">Last Name</Label>
+            <Label htmlFor="lastName">{t('lastName')}</Label>
             <Input
               id="lastName"
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
-              placeholder="Enter your last name"
+              placeholder={t('lastNamePlaceholder')}
               required
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email">Email Address</Label>
+            <Label htmlFor="email">{t('email')}</Label>
             <Input
               id="email"
               name="email"
               type="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="your.email@example.com"
+              placeholder={t('emailPlaceholder')}
               required
             />
           </div>
@@ -100,8 +102,8 @@ export default function PolicyInformation() {
               value={formData.phone}
               onChange={handlePhoneChange}
               defaultCountry="AD"
-              label="Phone Number"
-              placeholder="Phone number"
+              label={t('phone')}
+              placeholder={t('phonePlaceholder')}
               required
             />
           </div>
@@ -113,8 +115,8 @@ export default function PolicyInformation() {
             <div className="flex items-center gap-2">
               <UserCog className="h-5 w-5 text-zinc-500" />
               <div>
-                <h4 className="text-md font-medium text-zinc-900">Different Driver</h4>
-                <p className="text-sm text-zinc-500">Is the driver different from the policy owner?</p>
+                <h4 className="text-md font-medium text-zinc-900">{t('differentDriver')}</h4>
+                <p className="text-sm text-zinc-500">{t('differentDriverDesc')}</p>
               </div>
             </div>
             <Switch
@@ -129,35 +131,35 @@ export default function PolicyInformation() {
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="driverFirstName">
-                    First Name <span className="text-destructive">*</span>
+                    {t('driverFirstName')} <span className="text-destructive">*</span>
                   </Label>
                   <Input
                     id="driverFirstName"
                     name="driverFirstName"
                     value={formData.driverFirstName}
                     onChange={handleChange}
-                    placeholder="Enter driver's first name"
+                    placeholder={t('driverFirstNamePlaceholder')}
                     required
                   />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="driverLastName">
-                    Last Name <span className="text-destructive">*</span>
+                    {t('driverLastName')} <span className="text-destructive">*</span>
                   </Label>
                   <Input
                     id="driverLastName"
                     name="driverLastName"
                     value={formData.driverLastName}
                     onChange={handleChange}
-                    placeholder="Enter driver's last name"
+                    placeholder={t('driverLastNamePlaceholder')}
                     required
                   />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="driverDateOfBirth">
-                    Date of Birth <span className="text-destructive">*</span>
+                    {t('driverDateOfBirth')} <span className="text-destructive">*</span>
                   </Label>
                   <DateTimePicker
                     value={formData.driverDateOfBirth || undefined}
@@ -169,25 +171,25 @@ export default function PolicyInformation() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="driverID">Driver ID</Label>
+                  <Label htmlFor="driverID">{t('driverID')}</Label>
                   <Input
                     id="driverID"
                     name="driverID"
                     value={formData.driverID}
                     onChange={handleChange}
-                    placeholder="Enter driver's ID (optional)"
+                    placeholder={t('driverIDPlaceholder')}
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="driverEmail">Email Address</Label>
+                  <Label htmlFor="driverEmail">{t('driverEmail')}</Label>
                   <Input
                     id="driverEmail"
                     name="driverEmail"
                     type="email"
                     value={formData.driverEmail}
                     onChange={handleChange}
-                    placeholder="driver.email@example.com (optional)"
+                    placeholder={t('driverEmailPlaceholder')}
                   />
                 </div>
 
@@ -197,8 +199,8 @@ export default function PolicyInformation() {
                     value={formData.driverPhone}
                     onChange={handleDriverPhoneChange}
                     defaultCountry="AD"
-                    label="Phone Number"
-                    placeholder="Phone number (optional)"
+                    label={t('driverPhone')}
+                    placeholder={t('driverPhonePlaceholder')}
                   />
                 </div>
               </div>
