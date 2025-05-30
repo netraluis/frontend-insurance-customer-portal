@@ -9,10 +9,12 @@ import { Switch } from "@/components/ui/switch"
 import { AlertCircle, FileText, Shield, Activity, Flame } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { type MediaFile, UnifiedUpload } from "@/components/ui/unified-upload"
+import { useTranslations } from 'next-intl'
 
 export default function AdditionalInformation() {
   const { formData, updateFormData } = useGeneralClaimForm()
   const isMobile = useIsMobile()
+  const t = useTranslations('GeneralClaimAuto.AdditionalInformation')
 
   const handleSwitchChange = (name: string, checked: boolean) => {
     updateFormData({ [name]: checked })
@@ -51,8 +53,8 @@ export default function AdditionalInformation() {
     <Card className="border-none shadow-none">
       <CardContent className="p-0 space-y-6">
         <div className="space-y-2">
-          <h3 className="text-lg font-medium text-zinc-900">Additional Information</h3>
-          <p className="text-sm text-zinc-500">Please provide additional details about the incident.</p>
+          <h3 className="text-lg font-medium text-zinc-900">{t('title')}</h3>
+          <p className="text-sm text-zinc-500">{t('description')}</p>
         </div>
 
         <div className="space-y-4">
@@ -62,8 +64,8 @@ export default function AdditionalInformation() {
               <div className="flex items-center gap-2">
                 <Shield className="h-5 w-5 text-zinc-500" />
                 <div>
-                  <h4 className="text-md font-medium text-zinc-900">Police Involvement</h4>
-                  <p className="text-sm text-zinc-500">Was the police involved in the incident?</p>
+                  <h4 className="text-md font-medium text-zinc-900">{t('policeInvolvement')}</h4>
+                  <p className="text-sm text-zinc-500">{t('policeInvolvementQuestion')}</p>
                 </div>
               </div>
               <Switch
@@ -80,8 +82,8 @@ export default function AdditionalInformation() {
               <div className="flex items-center gap-2">
                 <Shield className="h-5 w-5 text-zinc-500" />
                 <div>
-                  <h4 className="text-md font-medium text-zinc-900">Municipal Traffic Service Involvement</h4>
-                  <p className="text-sm text-zinc-500">Was the municipal traffic service involved?</p>
+                  <h4 className="text-md font-medium text-zinc-900">{t('trafficServiceInvolvement')}</h4>
+                  <p className="text-sm text-zinc-500">{t('trafficServiceInvolvementQuestion')}</p>
                 </div>
               </div>
               <Switch
@@ -98,8 +100,8 @@ export default function AdditionalInformation() {
               <div className="flex items-center gap-2">
                 <Flame className="h-5 w-5 text-zinc-500" />
                 <div>
-                  <h4 className="text-md font-medium text-zinc-900">Firefighters Involvement</h4>
-                  <p className="text-sm text-zinc-500">Were the firefighters involved?</p>
+                  <h4 className="text-md font-medium text-zinc-900">{t('firefightersInvolvement')}</h4>
+                  <p className="text-sm text-zinc-500">{t('firefightersInvolvementQuestion')}</p>
                 </div>
               </div>
               <Switch
@@ -116,8 +118,8 @@ export default function AdditionalInformation() {
               <div className="flex items-center gap-2">
                 <FileText className="h-5 w-5 text-zinc-500" />
                 <div>
-                  <h4 className="text-md font-medium text-zinc-900">Police Report</h4>
-                  <p className="text-sm text-zinc-500">Did you report the incident to the police?</p>
+                  <h4 className="text-md font-medium text-zinc-900">{t('policeReport')}</h4>
+                  <p className="text-sm text-zinc-500">{t('policeReportQuestion')}</p>
                 </div>
               </div>
               <Switch
@@ -131,8 +133,8 @@ export default function AdditionalInformation() {
               <div className="p-3 sm:p-4 space-y-3 sm:space-y-4 animate-in fade-in duration-300">
                 {/* Police Report Upload - Using Enhanced UnifiedUpload */}
                 <UnifiedUpload
-                  label="Upload Police Report"
-                  description="Please upload a scanned copy or photo of the police report."
+                  label={t('uploadPoliceReport')}
+                  description={t('policeReportDescription')}
                   value={formData.policeReportDocument}
                   onChange={handlePoliceReportChange}
                   multiple={false}
@@ -141,12 +143,12 @@ export default function AdditionalInformation() {
                     "image/*": [".jpeg", ".jpg", ".png"],
                     "application/pdf": [".pdf"],
                   }}
-                  placeholder="Upload report"
-                  buttonText="Select file"
-                  mobileButtonText="Add document"
+                  placeholder={t('uploadReportPlaceholder')}
+                  buttonText={t('buttonText')}
+                  mobileButtonText={t('mobileButtonText')}
                   icon={<FileText className="h-7 w-7 sm:h-8 sm:h-8 text-zinc-500" />}
-                  successMessage="Report uploaded successfully!"
-                  mobileSuccessMessage="Report added!"
+                  successMessage={t('successMessage')}
+                  mobileSuccessMessage={t('mobileSuccessMessage')}
                   captureMethod="environment"
                 />
               </div>
@@ -159,8 +161,8 @@ export default function AdditionalInformation() {
               <div className="flex items-center gap-2">
                 <Activity className="h-5 w-5 text-zinc-500" />
                 <div>
-                  <h4 className="text-md font-medium text-zinc-900">Bodily Injuries</h4>
-                  <p className="text-sm text-zinc-500">Are there any bodily injuries?</p>
+                  <h4 className="text-md font-medium text-zinc-900">{t('bodilyInjuries')}</h4>
+                  <p className="text-sm text-zinc-500">{t('bodilyInjuriesQuestion')}</p>
                 </div>
               </div>
               <Switch
@@ -177,12 +179,10 @@ export default function AdditionalInformation() {
                     <AlertCircle className="h-5 w-5 text-zinc-500 mt-0.5" />
                     <div>
                       <Label htmlFor="bodilyInjuriesDescription" className="text-zinc-900">
-                        Bodily Injuries Description
+                        {t('bodilyInjuriesDescriptionLabel')}
                       </Label>
                       <p className="text-sm text-zinc-500 mb-2">
-                        {isMobile
-                          ? "Describe the injuries sustained."
-                          : "Please provide details about the injuries sustained in the incident."}
+                        {isMobile ? t('bodilyInjuriesDescriptionShort') : t('bodilyInjuriesDescriptionLong')}
                       </p>
                     </div>
                   </div>
@@ -191,11 +191,7 @@ export default function AdditionalInformation() {
                     name="bodilyInjuriesDescription"
                     value={formData.bodilyInjuriesDescription}
                     onChange={handleChange}
-                    placeholder={
-                      isMobile
-                        ? "Describe injuries and medical attention received..."
-                        : "Describe the nature and extent of the injuries, who was injured, and any medical attention received..."
-                    }
+                    placeholder={isMobile ? t('bodilyInjuriesPlaceholderShort') : t('bodilyInjuriesPlaceholderLong')}
                     rows={isMobile ? 3 : 4}
                     className="w-full resize-y min-h-[80px] sm:min-h-[100px]"
                     required={formData.bodilyInjuries}
@@ -204,8 +200,8 @@ export default function AdditionalInformation() {
 
                 {/* Medical Report Upload */}
                 <UnifiedUpload
-                  label="Upload Medical Report"
-                  description="Please upload a scanned copy or photo of the medical report if available."
+                  label={t('uploadMedicalReport')}
+                  description={t('medicalReportDescription')}
                   value={formData.medicalReportDocument}
                   onChange={handleMedicalReportChange}
                   multiple={false}
@@ -214,12 +210,12 @@ export default function AdditionalInformation() {
                     "image/*": [".jpeg", ".jpg", ".png"],
                     "application/pdf": [".pdf"],
                   }}
-                  placeholder="Upload medical report"
-                  buttonText="Select file"
-                  mobileButtonText="Add document"
+                  placeholder={t('uploadMedicalReportPlaceholder')}
+                  buttonText={t('medicalButtonText')}
+                  mobileButtonText={t('medicalMobileButtonText')}
                   icon={<FileText className="h-7 w-7 sm:h-8 sm:h-8 text-zinc-500" />}
-                  successMessage="Medical report uploaded successfully!"
-                  mobileSuccessMessage="Report added!"
+                  successMessage={t('medicalSuccessMessage')}
+                  mobileSuccessMessage={t('medicalMobileSuccessMessage')}
                   captureMethod="environment"
                 />
               </div>
