@@ -24,10 +24,12 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Plus, Trash2, Edit2, AlertCircle, Users, Eye } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { Driver, useClaimForm, Witness } from "../claim-form-context"
+import { useTranslations } from "use-intl"
 
 export default function InvolvedParties() {
   const { formData, updateFormData } = useClaimForm()
   const isMobile = useIsMobile()
+  const tInvolved = useTranslations('ClaimAuto.InvolvedParties')
 
   // State for the initial questions
   const [hasDrivers, setHasDrivers] = useState(formData.drivers.length > 0)
@@ -197,32 +199,32 @@ export default function InvolvedParties() {
         <div className="flex gap-1">
           <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => handleEditDriver(index)}>
             <Edit2 className="h-4 w-4" />
-            <span className="sr-only">Edit</span>
+            <span className="sr-only">{tInvolved('edit')}</span>
           </Button>
           <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => handleDeleteDriver(index)}>
             <Trash2 className="h-4 w-4" />
-            <span className="sr-only">Delete</span>
+            <span className="sr-only">{tInvolved('delete')}</span>
           </Button>
         </div>
       </div>
       <div className="p-3 space-y-2">
         <div className="flex justify-between">
-          <span className="text-sm text-zinc-500">Vehicle:</span>
+          <span className="text-sm text-zinc-500">{tInvolved('vehicle')}:</span>
           <span className="text-sm text-right">
             {driver.vehicleMake} {driver.vehicleModel}
           </span>
         </div>
         <div className="flex justify-between">
-          <span className="text-sm text-zinc-500">License Plate:</span>
+          <span className="text-sm text-zinc-500">{tInvolved('licensePlate')}:</span>
           <span className="text-sm">{driver.licensePlate}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-sm text-zinc-500">Contact:</span>
-          <span className="text-sm text-right">{driver.email || driver.phone || "Not provided"}</span>
+          <span className="text-sm text-zinc-500">{tInvolved('contact')}:</span>
+          <span className="text-sm text-right">{driver.email || driver.phone || tInvolved('notProvided')}</span>
         </div>
         {(driver.insuranceCompany || driver.policyNumber) && (
           <div className="flex justify-between">
-            <span className="text-sm text-zinc-500">Insurance:</span>
+            <span className="text-sm text-zinc-500">{tInvolved('insurance')}:</span>
             <span className="text-sm text-right">
               {driver.insuranceCompany} {driver.policyNumber ? `(${driver.policyNumber})` : ""}
             </span>
@@ -242,21 +244,21 @@ export default function InvolvedParties() {
         <div className="flex gap-1">
           <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => handleEditWitness(index)}>
             <Edit2 className="h-4 w-4" />
-            <span className="sr-only">Edit</span>
+            <span className="sr-only">{tInvolved('edit')}</span>
           </Button>
           <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => handleDeleteWitness(index)}>
             <Trash2 className="h-4 w-4" />
-            <span className="sr-only">Delete</span>
+            <span className="sr-only">{tInvolved('delete')}</span>
           </Button>
         </div>
       </div>
       <div className="p-3 space-y-2">
         <div className="flex justify-between">
-          <span className="text-sm text-zinc-500">Contact:</span>
-          <span className="text-sm text-right">{witness.email || witness.phone || "Not provided"}</span>
+          <span className="text-sm text-zinc-500">{tInvolved('contact')}:</span>
+          <span className="text-sm text-right">{witness.email || witness.phone || tInvolved('notProvided')}</span>
         </div>
         <div className="pt-1">
-          <span className="text-sm text-zinc-500 block mb-1">Statement:</span>
+          <span className="text-sm text-zinc-500 block mb-1">{tInvolved('statement')}:</span>
           <p className="text-sm bg-zinc-50 p-2 rounded-md">{witness.description}</p>
         </div>
       </div>
@@ -267,9 +269,9 @@ export default function InvolvedParties() {
     <Card className="border-none shadow-none">
       <CardContent className="p-0 space-y-6">
         <div className="space-y-2">
-          <h3 className="text-lg font-medium text-zinc-900">Involved Parties</h3>
+          <h3 className="text-lg font-medium text-zinc-900">{tInvolved('title')}</h3>
           <p className="text-sm text-zinc-500">
-            Provide information about other parties involved in or witnessing the accident.
+            {tInvolved('description')}
           </p>
         </div>
 
@@ -280,15 +282,15 @@ export default function InvolvedParties() {
             <div className="flex items-start gap-3">
               <Users className="h-5 w-5 text-zinc-700 mt-0.5" />
               <div>
-                <h4 className="font-medium text-zinc-900">Were other drivers involved in the accident?</h4>
+                <h4 className="font-medium text-zinc-900">{tInvolved('driversQuestion')}</h4>
                 <p className="text-sm text-zinc-500">
-                  Select &apos;Yes&apos; if there were other vehicles/drivers involved in the incident.
+                  {tInvolved('driversHint')}
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-zinc-500">{hasDrivers ? "Yes" : "No"}</span>
-              <Switch checked={hasDrivers} onCheckedChange={setHasDrivers} aria-label="Toggle drivers involved" />
+              <span className="text-sm font-medium text-zinc-500">{hasDrivers ? tInvolved('yes') : tInvolved('no')}</span>
+              <Switch checked={hasDrivers} onCheckedChange={setHasDrivers} aria-label={tInvolved('toggleDrivers')} />
             </div>
           </div>
 
@@ -296,7 +298,7 @@ export default function InvolvedParties() {
           {hasDrivers && (
             <div className="p-4 space-y-4">
               <div className="flex justify-between items-center">
-                <h5 className="text-sm font-medium text-zinc-900">Other Drivers</h5>
+                <h5 className="text-sm font-medium text-zinc-900">{tInvolved('otherDrivers')}</h5>
                 <Dialog
                   open={driverDialogOpen}
                   onOpenChange={(open) => {
@@ -314,16 +316,16 @@ export default function InvolvedParties() {
                       className="flex items-center gap-1"
                     >
                       <Plus className="h-4 w-4" />
-                      Add Driver
+                      {tInvolved('addDriver')}
                     </Button>
                   </DialogTrigger>
                   <DialogContent
                     className={isMobile ? "w-[calc(100%-32px)] p-0 h-[90vh] max-h-[600px]" : "sm:max-w-[600px]"}
                   >
                     <DialogHeader className={isMobile ? "px-4 py-3 border-b" : ""}>
-                      <DialogTitle>{editingDriverIndex !== null ? "Edit Driver" : "Add Driver"}</DialogTitle>
+                      <DialogTitle>{editingDriverIndex !== null ? tInvolved('editDriver') : tInvolved('addDriver')}</DialogTitle>
                       <DialogDescription className={isMobile ? "text-sm" : ""}>
-                        Enter the details of the other driver involved in the accident.
+                        {tInvolved('driverDialogDescription')}
                       </DialogDescription>
                     </DialogHeader>
 
@@ -331,123 +333,123 @@ export default function InvolvedParties() {
                       <div className={`grid grid-cols-1 gap-4 sm:grid-cols-2 ${isMobile ? "p-4" : "py-4"}`}>
                         <div className="space-y-2">
                           <Label htmlFor="driverFirstName">
-                            First Name <span className="text-red-500">*</span>
+                            {tInvolved('firstName')} <span className="text-red-500">*</span>
                           </Label>
                           <Input
                             id="driverFirstName"
                             name="firstName"
                             value={driverFormData.firstName}
                             onChange={handleDriverChange}
-                            placeholder="First name"
+                            placeholder={tInvolved('firstNamePlaceholder')}
                             required
                             ref={driverFirstNameRef}
                           />
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="driverLastName">
-                            Last Name <span className="text-red-500">*</span>
+                            {tInvolved('lastName')} <span className="text-red-500">*</span>
                           </Label>
                           <Input
                             id="driverLastName"
                             name="lastName"
                             value={driverFormData.lastName}
                             onChange={handleDriverChange}
-                            placeholder="Last name"
+                            placeholder={tInvolved('lastNamePlaceholder')}
                             required
                           />
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="driverEmail">Email</Label>
+                          <Label htmlFor="driverEmail">{tInvolved('email')}</Label>
                           <Input
                             id="driverEmail"
                             name="email"
                             type="email"
                             value={driverFormData.email}
                             onChange={handleDriverChange}
-                            placeholder="Email address"
+                            placeholder={tInvolved('emailPlaceholder')}
                           />
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="driverPhone">Phone</Label>
+                          <Label htmlFor="driverPhone">{tInvolved('phone')}</Label>
                           <Input
                             id="driverPhone"
                             name="phone"
                             value={driverFormData.phone}
                             onChange={handleDriverChange}
-                            placeholder="Phone number"
+                            placeholder={tInvolved('phonePlaceholder')}
                           />
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="driverVehicleMake">
-                            Vehicle Make <span className="text-red-500">*</span>
+                            {tInvolved('vehicleMake')} <span className="text-red-500">*</span>
                           </Label>
                           <Input
                             id="driverVehicleMake"
                             name="vehicleMake"
                             value={driverFormData.vehicleMake}
                             onChange={handleDriverChange}
-                            placeholder="e.g., Toyota, Honda"
+                            placeholder={tInvolved('vehicleMakePlaceholder')}
                             required
                           />
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="driverVehicleModel">
-                            Vehicle Model <span className="text-red-500">*</span>
+                            {tInvolved('vehicleModel')} <span className="text-red-500">*</span>
                           </Label>
                           <Input
                             id="driverVehicleModel"
                             name="vehicleModel"
                             value={driverFormData.vehicleModel}
                             onChange={handleDriverChange}
-                            placeholder="e.g., Corolla, Civic"
+                            placeholder={tInvolved('vehicleModelPlaceholder')}
                             required
                           />
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="driverLicensePlate">
-                            License Plate <span className="text-red-500">*</span>
+                            {tInvolved('licensePlate')} <span className="text-red-500">*</span>
                           </Label>
                           <Input
                             id="driverLicensePlate"
                             name="licensePlate"
                             value={driverFormData.licensePlate}
                             onChange={handleDriverChange}
-                            placeholder="License plate number"
+                            placeholder={tInvolved('licensePlatePlaceholder')}
                             required
                           />
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="driverInsuranceCompany">Insurance Company</Label>
+                          <Label htmlFor="driverInsuranceCompany">{tInvolved('insuranceCompany')}</Label>
                           <Input
                             id="driverInsuranceCompany"
                             name="insuranceCompany"
                             value={driverFormData.insuranceCompany}
                             onChange={handleDriverChange}
-                            placeholder="Insurance company name"
+                            placeholder={tInvolved('insuranceCompanyPlaceholder')}
                           />
                         </div>
                         <div className="space-y-2 sm:col-span-2">
-                          <Label htmlFor="driverPolicyNumber">Policy Number</Label>
+                          <Label htmlFor="driverPolicyNumber">{tInvolved('policyNumber')}</Label>
                           <Input
                             id="driverPolicyNumber"
                             name="policyNumber"
                             value={driverFormData.policyNumber}
                             onChange={handleDriverChange}
-                            placeholder="Insurance policy number"
+                            placeholder={tInvolved('policyNumberPlaceholder')}
                           />
                         </div>
                       </div>
                       <div className={`text-sm text-zinc-500 flex items-center gap-1 mb-4 ${isMobile ? "px-4" : ""}`}>
                         <AlertCircle className="h-4 w-4" />
                         <span>
-                          Fields marked with <span className="text-red-500">*</span> are required
+                          {tInvolved('requiredFields')}
                         </span>
                       </div>
                     </ScrollArea>
 
                     <DialogFooter className={isMobile ? "flex p-4 border-t bg-zinc-50" : ""}>
                       <Button variant="outline" onClick={() => setDriverDialogOpen(false)}>
-                        Cancel
+                        {tInvolved('cancel')}
                       </Button>
                       <Button
                         onClick={handleAddDriver}
@@ -459,7 +461,7 @@ export default function InvolvedParties() {
                           !driverFormData.licensePlate
                         }
                       >
-                        {editingDriverIndex !== null ? "Update" : "Add"} Driver
+                        {editingDriverIndex !== null ? tInvolved('updateDriver') : tInvolved('addDriver')}
                       </Button>
                     </DialogFooter>
                   </DialogContent>
@@ -473,10 +475,10 @@ export default function InvolvedParties() {
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead>Name</TableHead>
-                          <TableHead>Vehicle</TableHead>
-                          <TableHead>Insurance</TableHead>
-                          <TableHead className="w-[100px]">Actions</TableHead>
+                          <TableHead>{tInvolved('name')}</TableHead>
+                          <TableHead>{tInvolved('vehicle')}</TableHead>
+                          <TableHead>{tInvolved('insurance')}</TableHead>
+                          <TableHead className="w-[100px]">{tInvolved('actions')}</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -495,18 +497,18 @@ export default function InvolvedParties() {
                               <div className="text-sm text-zinc-500">{driver.licensePlate}</div>
                             </TableCell>
                             <TableCell>
-                              <div>{driver.insuranceCompany || "Not provided"}</div>
-                              <div className="text-sm text-zinc-500">{driver.policyNumber || "No policy number"}</div>
+                              <div>{driver.insuranceCompany || tInvolved('notProvided')}</div>
+                              <div className="text-sm text-zinc-500">{driver.policyNumber || tInvolved('noPolicyNumber')}</div>
                             </TableCell>
                             <TableCell>
                               <div className="flex space-x-2">
                                 <Button variant="ghost" size="icon" onClick={() => handleEditDriver(index)}>
                                   <Edit2 className="h-4 w-4" />
-                                  <span className="sr-only">Edit</span>
+                                  <span className="sr-only">{tInvolved('edit')}</span>
                                 </Button>
                                 <Button variant="ghost" size="icon" onClick={() => handleDeleteDriver(index)}>
                                   <Trash2 className="h-4 w-4" />
-                                  <span className="sr-only">Delete</span>
+                                  <span className="sr-only">{tInvolved('delete')}</span>
                                 </Button>
                               </div>
                             </TableCell>
@@ -523,9 +525,9 @@ export default function InvolvedParties() {
                 </>
               ) : (
                 <div className="text-center py-6 border border-dashed rounded-md border-zinc-300 bg-zinc-50">
-                  <p className="text-zinc-500">No drivers added yet.</p>
+                  <p className="text-zinc-500">{tInvolved('noDrivers')}</p>
                   <p className="text-sm text-zinc-400 mt-1">
-                    Click &apos;Add Driver&apos; to add information about other drivers involved.
+                    {tInvolved('addDriverHint')}
                   </p>
                 </div>
               )}
@@ -540,15 +542,15 @@ export default function InvolvedParties() {
             <div className="flex items-start gap-3">
               <Eye className="h-5 w-5 text-zinc-700 mt-0.5" />
               <div>
-                <h4 className="font-medium text-zinc-900">Were there any witnesses to the accident?</h4>
+                <h4 className="font-medium text-zinc-900">{tInvolved('witnessesQuestion')}</h4>
                 <p className="text-sm text-zinc-500">
-                  Select &apos;Yes&apos; if anyone witnessed the accident and can provide a statement.
+                  {tInvolved('witnessesHint')}
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-zinc-500">{hasWitnesses ? "Yes" : "No"}</span>
-              <Switch checked={hasWitnesses} onCheckedChange={setHasWitnesses} aria-label="Toggle witnesses present" />
+              <span className="text-sm font-medium text-zinc-500">{hasWitnesses ? tInvolved('yes') : tInvolved('no')}</span>
+              <Switch checked={hasWitnesses} onCheckedChange={setHasWitnesses} aria-label={tInvolved('toggleWitnesses')} />
             </div>
           </div>
 
@@ -556,7 +558,7 @@ export default function InvolvedParties() {
           {hasWitnesses && (
             <div className="p-4 space-y-4">
               <div className="flex justify-between items-center">
-                <h5 className="text-sm font-medium text-zinc-900">Witnesses</h5>
+                <h5 className="text-sm font-medium text-zinc-900">{tInvolved('witnesses')}</h5>
                 <Dialog
                   open={witnessDialogOpen}
                   onOpenChange={(open) => {
@@ -574,16 +576,16 @@ export default function InvolvedParties() {
                       className="flex items-center gap-1"
                     >
                       <Plus className="h-4 w-4" />
-                      Add Witness
+                      {tInvolved('addWitness')}
                     </Button>
                   </DialogTrigger>
                   <DialogContent
                     className={isMobile ? "w-[calc(100%-32px)] p-0 h-[90vh] max-h-[600px]" : "sm:max-w-[600px]"}
                   >
                     <DialogHeader className={isMobile ? "px-4 py-3 border-b" : ""}>
-                      <DialogTitle>{editingWitnessIndex !== null ? "Edit Witness" : "Add Witness"}</DialogTitle>
+                      <DialogTitle>{editingWitnessIndex !== null ? tInvolved('editWitness') : tInvolved('addWitness')}</DialogTitle>
                       <DialogDescription className={isMobile ? "text-sm" : ""}>
-                        Enter the details of a witness to the accident.
+                        {tInvolved('witnessDialogDescription')}
                       </DialogDescription>
                     </DialogHeader>
 
@@ -591,62 +593,62 @@ export default function InvolvedParties() {
                       <div className={`grid grid-cols-1 gap-4 sm:grid-cols-2 ${isMobile ? "p-4" : "py-4"}`}>
                         <div className="space-y-2">
                           <Label htmlFor="witnessFirstName">
-                            First Name <span className="text-red-500">*</span>
+                            {tInvolved('firstName')} <span className="text-red-500">*</span>
                           </Label>
                           <Input
                             id="witnessFirstName"
                             name="firstName"
                             value={witnessFormData.firstName}
                             onChange={handleWitnessChange}
-                            placeholder="First name"
+                            placeholder={tInvolved('firstNamePlaceholder')}
                             required
                             ref={witnessFirstNameRef}
                           />
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="witnessLastName">
-                            Last Name <span className="text-red-500">*</span>
+                            {tInvolved('lastName')} <span className="text-red-500">*</span>
                           </Label>
                           <Input
                             id="witnessLastName"
                             name="lastName"
                             value={witnessFormData.lastName}
                             onChange={handleWitnessChange}
-                            placeholder="Last name"
+                            placeholder={tInvolved('lastNamePlaceholder')}
                             required
                           />
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="witnessEmail">Email</Label>
+                          <Label htmlFor="witnessEmail">{tInvolved('email')}</Label>
                           <Input
                             id="witnessEmail"
                             name="email"
                             type="email"
                             value={witnessFormData.email}
                             onChange={handleWitnessChange}
-                            placeholder="Email address"
+                            placeholder={tInvolved('emailPlaceholder')}
                           />
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="witnessPhone">Phone</Label>
+                          <Label htmlFor="witnessPhone">{tInvolved('phone')}</Label>
                           <Input
                             id="witnessPhone"
                             name="phone"
                             value={witnessFormData.phone}
                             onChange={handleWitnessChange}
-                            placeholder="Phone number"
+                            placeholder={tInvolved('phonePlaceholder')}
                           />
                         </div>
                         <div className="space-y-2 sm:col-span-2">
                           <Label htmlFor="witnessDescription">
-                            Statement <span className="text-red-500">*</span>
+                            {tInvolved('statement')} <span className="text-red-500">*</span>
                           </Label>
                           <Textarea
                             id="witnessDescription"
                             name="description"
                             value={witnessFormData.description}
                             onChange={handleWitnessChange}
-                            placeholder="Witness statement or description of what they saw"
+                            placeholder={tInvolved('statementPlaceholder')}
                             rows={4}
                             required
                           />
@@ -655,14 +657,14 @@ export default function InvolvedParties() {
                       <div className={`text-sm text-zinc-500 flex items-center gap-1 mb-4 ${isMobile ? "px-4" : ""}`}>
                         <AlertCircle className="h-4 w-4" />
                         <span>
-                          Fields marked with <span className="text-red-500">*</span> are required
+                          {tInvolved('requiredFields')}
                         </span>
                       </div>
                     </ScrollArea>
 
                     <DialogFooter className={isMobile ? "flex p-4 border-t bg-zinc-50" : ""}>
                       <Button variant="outline" onClick={() => setWitnessDialogOpen(false)}>
-                        Cancel
+                        {tInvolved('cancel')}
                       </Button>
                       <Button
                         onClick={handleAddWitness}
@@ -670,7 +672,7 @@ export default function InvolvedParties() {
                           !witnessFormData.firstName || !witnessFormData.lastName || !witnessFormData.description
                         }
                       >
-                        {editingWitnessIndex !== null ? "Update" : "Add"} Witness
+                        {editingWitnessIndex !== null ? tInvolved('updateWitness') : tInvolved('addWitness')}
                       </Button>
                     </DialogFooter>
                   </DialogContent>
@@ -684,10 +686,10 @@ export default function InvolvedParties() {
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead>Name</TableHead>
-                          <TableHead>Contact</TableHead>
-                          <TableHead>Statement</TableHead>
-                          <TableHead className="w-[100px]">Actions</TableHead>
+                          <TableHead>{tInvolved('name')}</TableHead>
+                          <TableHead>{tInvolved('contact')}</TableHead>
+                          <TableHead>{tInvolved('statement')}</TableHead>
+                          <TableHead className="w-[100px]">{tInvolved('actions')}</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -699,8 +701,8 @@ export default function InvolvedParties() {
                               </div>
                             </TableCell>
                             <TableCell>
-                              <div>{witness.email || "No email provided"}</div>
-                              <div className="text-sm text-zinc-500">{witness.phone || "No phone provided"}</div>
+                              <div>{witness.email || tInvolved('noEmail')}</div>
+                              <div className="text-sm text-zinc-500">{witness.phone || tInvolved('noPhone')}</div>
                             </TableCell>
                             <TableCell>
                               <div className="max-w-[200px] truncate">{witness.description}</div>
@@ -709,11 +711,11 @@ export default function InvolvedParties() {
                               <div className="flex space-x-2">
                                 <Button variant="ghost" size="icon" onClick={() => handleEditWitness(index)}>
                                   <Edit2 className="h-4 w-4" />
-                                  <span className="sr-only">Edit</span>
+                                  <span className="sr-only">{tInvolved('edit')}</span>
                                 </Button>
                                 <Button variant="ghost" size="icon" onClick={() => handleDeleteWitness(index)}>
                                   <Trash2 className="h-4 w-4" />
-                                  <span className="sr-only">Delete</span>
+                                  <span className="sr-only">{tInvolved('delete')}</span>
                                 </Button>
                               </div>
                             </TableCell>
@@ -730,9 +732,9 @@ export default function InvolvedParties() {
                 </>
               ) : (
                 <div className="text-center py-6 border border-dashed rounded-md border-zinc-300 bg-zinc-50">
-                  <p className="text-zinc-500">No witnesses added yet.</p>
+                  <p className="text-zinc-500">{tInvolved('noWitnesses')}</p>
                   <p className="text-sm text-zinc-400 mt-1">
-                    Click &apos;Add Witness&apos; to add information about witnesses to the accident.
+                    {tInvolved('addWitnessHint')}
                   </p>
                 </div>
               )}
