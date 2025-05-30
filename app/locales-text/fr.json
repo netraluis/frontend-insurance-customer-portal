@@ -349,7 +349,16 @@
       },
       "AdditionalDocumentation": {
         "title": "Documentation supplémentaire",
-        "description": "Joignez tous les documents ou photos supplémentaires."
+        "description": "Téléchargez tout document supplémentaire pouvant être pertinent pour votre déclaration et fournissez tout commentaire supplémentaire.",
+        "documentsLabel": "Documents supplémentaires",
+        "documentsDescription": "Téléchargez tout document supplémentaire pouvant soutenir votre déclaration (reçus, contrats, etc.).",
+        "uploadPlaceholder": "Télécharger des documents",
+        "buttonText": "Sélectionner des fichiers",
+        "mobileButtonText": "Ajouter des fichiers",
+        "successMessage": "Documents téléchargés avec succès !",
+        "mobileSuccessMessage": "Documents ajoutés !",
+        "commentsLabel": "Commentaires supplémentaires",
+        "commentsPlaceholder": "Fournissez toute information ou commentaire supplémentaire pouvant être pertinent pour votre déclaration..."
       },
       "ReviewAndSubmit": {
         "title": "Vérifier et soumettre",

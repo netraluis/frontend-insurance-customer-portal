@@ -374,7 +374,16 @@
       },
       "AdditionalDocumentation": {
         "title": "Documentació addicional",
-        "description": "Adjunta qualsevol document o foto addicional."
+        "description": "Puja qualsevol document addicional que pugui ser rellevant per al teu part i proporciona comentaris addicionals.",
+        "documentsLabel": "Documents addicionals",
+        "documentsDescription": "Puja qualsevol document addicional que pugui donar suport al teu part (rebuts, contractes, etc.).",
+        "uploadPlaceholder": "Pujar documents",
+        "buttonText": "Selecciona fitxers",
+        "mobileButtonText": "Afegeix fitxers",
+        "successMessage": "Documents pujats amb èxit!",
+        "mobileSuccessMessage": "Documents afegits!",
+        "commentsLabel": "Comentaris addicionals",
+        "commentsPlaceholder": "Proporciona qualsevol informació o comentari addicional que pugui ser rellevant per al teu part..."
       },
       "ReviewAndSubmit": {
         "title": "Revisar i enviar",

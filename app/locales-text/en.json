@@ -345,7 +345,16 @@
       },
       "AdditionalDocumentation": {
         "title": "Additional Documentation",
-        "description": "Attach any additional documents or photos."
+        "description": "Upload any additional documents that may be relevant to your claim and provide any additional comments.",
+        "documentsLabel": "Additional Documents",
+        "documentsDescription": "Upload any additional documents that may support your claim (receipts, contracts, etc.).",
+        "uploadPlaceholder": "Upload documents",
+        "buttonText": "Select files",
+        "mobileButtonText": "Add files",
+        "successMessage": "Documents uploaded successfully!",
+        "mobileSuccessMessage": "Documents added!",
+        "commentsLabel": "Additional Comments",
+        "commentsPlaceholder": "Provide any additional information or comments that may be relevant to your claim..."
       },
       "ReviewAndSubmit": {
         "title": "Review and Submit",

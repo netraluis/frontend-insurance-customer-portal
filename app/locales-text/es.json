@@ -374,7 +374,16 @@
       },
       "AdditionalDocumentation": {
         "title": "Documentación adicional",
-        "description": "Adjunta cualquier documento o foto adicional."
+        "description": "Sube cualquier documento adicional que pueda ser relevante para tu parte y proporciona comentarios adicionales.",
+        "documentsLabel": "Documentos adicionales",
+        "documentsDescription": "Sube cualquier documento adicional que pueda respaldar tu parte (recibos, contratos, etc.).",
+        "uploadPlaceholder": "Subir documentos",
+        "buttonText": "Seleccionar archivos",
+        "mobileButtonText": "Añadir archivos",
+        "successMessage": "¡Documentos subidos con éxito!",
+        "mobileSuccessMessage": "¡Documentos añadidos!",
+        "commentsLabel": "Comentarios adicionales",
+        "commentsPlaceholder": "Proporciona cualquier información o comentario adicional que pueda ser relevante para tu parte..."
       },
       "ReviewAndSubmit": {
         "title": "Revisar y enviar",
