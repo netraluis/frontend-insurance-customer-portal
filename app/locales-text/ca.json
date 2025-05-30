@@ -542,6 +542,16 @@
         "confirmInfo": "Confirmo que tota la informació proporcionada és precisa i completa segons el meu millor coneixement.",
         "submitting": "Enviant...",
         "submitClaim": "Enviar part"
-      }
+      },
+      "stepPolicy": "Pòlissa",
+      "stepAccident": "Accident",
+      "stepAdditional": "Addicional",
+      "stepParties": "Implicats",
+      "stepDocuments": "Documents",
+      "stepReview": "Revisió",
+      "formProgress": "Progrés del formulari",
+      "complete": "{percent}% Completat",
+      "step": "Pas {current}/{total}",
+      "goToStep": "Ves al pas {step}"
     }
   }

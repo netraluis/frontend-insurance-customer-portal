@@ -513,6 +513,16 @@
         "confirmInfo": "I confirm that all the information provided is accurate and complete to the best of my knowledge.",
         "submitting": "Submitting...",
         "submitClaim": "Submit Claim"
-      }
+      },
+      "stepPolicy": "Policy",
+      "stepAccident": "Accident",
+      "stepAdditional": "Additional",
+      "stepParties": "Parties",
+      "stepDocuments": "Documents",
+      "stepReview": "Review",
+      "formProgress": "Form Progress",
+      "complete": "{percent}% Complete",
+      "step": "Step {current}/{total}",
+      "goToStep": "Go to {step} step"
     }
   }

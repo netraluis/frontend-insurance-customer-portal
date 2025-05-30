@@ -542,7 +542,17 @@
         "confirmInfo": "Confirmo que toda la información proporcionada es precisa y completa según mi leal saber y entender.",
         "submitting": "Enviando...",
         "submitClaim": "Enviar parte"
-      }
+      },
+      "stepPolicy": "Póliza",
+      "stepAccident": "Accidente",
+      "stepAdditional": "Adicional",
+      "stepParties": "Implicados",
+      "stepDocuments": "Documentos",
+      "stepReview": "Revisión",
+      "formProgress": "Progreso del formulario",
+      "complete": "{percent}% Completado",
+      "step": "Paso {current}/{total}",
+      "goToStep": "Ir al paso {step}"
     },
     "PoliceInvolvement": {
       "title": "Intervención policial",

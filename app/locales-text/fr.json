@@ -447,7 +447,17 @@
       "ReviewSubmit": {
         "title": "Vérifier et soumettre",
         "description": "Vérifiez votre déclaration avant de la soumettre."
-      }
+      },
+      "stepPolicy": "Police",
+      "stepAccident": "Accident",
+      "stepAdditional": "Supplémentaire",
+      "stepParties": "Parties",
+      "stepDocuments": "Documents",
+      "stepReview": "Vérification",
+      "formProgress": "Progression du formulaire",
+      "complete": "{percent}% Terminé",
+      "step": "Étape {current}/{total}",
+      "goToStep": "Aller à l'étape {step}"
     },
     "PoliceInvolvement": {
       "title": "Intervention de la police",

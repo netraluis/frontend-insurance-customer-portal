@@ -2,6 +2,7 @@
 
 import { useGeneralClaimForm } from "./general-claim-form-context"
 import { cn } from "@/lib/utils"
+import { useTranslations } from 'next-intl'
 
 interface FormStepperProps {
   currentStep: number
@@ -10,14 +11,15 @@ interface FormStepperProps {
 export function GeneralFormStepper({ currentStep }: FormStepperProps) {
   const claimFormContext = useGeneralClaimForm()
   const isStepComplete = claimFormContext?.isStepComplete
+  const t = useTranslations('GeneralClaimAuto')
 
   const steps = [
-    { id: 1, name: "Policy" },
-    { id: 2, name: "Accident" },
-    { id: 3, name: "Additional" },
-    { id: 4, name: "Parties" },
-    { id: 5, name: "Documents" },
-    { id: 6, name: "Review" },
+    { id: 1, name: t('stepPolicy') },
+    { id: 2, name: t('stepAccident') },
+    { id: 3, name: t('stepAdditional') },
+    { id: 4, name: t('stepParties') },
+    { id: 5, name: t('stepDocuments') },
+    { id: 6, name: t('stepReview') },
   ]
 
   // Calculate completion percentage
@@ -29,8 +31,8 @@ export function GeneralFormStepper({ currentStep }: FormStepperProps) {
       <div className="hidden sm:block">
         {/* Percentage indicator */}
         <div className="flex justify-between items-center mb-2">
-          <h3 className="text-sm font-medium text-zinc-900">Form Progress</h3>
-          <span className="text-sm font-medium text-zinc-600">{Math.round(completionPercentage)}% Complete</span>
+          <h3 className="text-sm font-medium text-zinc-900">{t('formProgress')}</h3>
+          <span className="text-sm font-medium text-zinc-600">{t('complete', { percent: Math.round(completionPercentage) })}</span>
         </div>
 
         {/* Main progress bar */}
@@ -68,7 +70,7 @@ export function GeneralFormStepper({ currentStep }: FormStepperProps) {
                   }}
                   role={isClickable ? "button" : undefined}
                   tabIndex={isClickable ? 0 : undefined}
-                  aria-label={isClickable ? `Go to ${step.name} step` : undefined}
+                  aria-label={isClickable ? t('goToStep', { step: step.name }) : undefined}
                 >
                   <div
                     className={cn(
@@ -96,7 +98,7 @@ export function GeneralFormStepper({ currentStep }: FormStepperProps) {
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center">
             <span className="text-sm font-medium text-zinc-900">
-              Step {currentStep}/{steps.length}
+              {t('step', { current: currentStep, total: steps.length })}
             </span>
             <span className="ml-2 text-sm font-medium text-zinc-600">{steps[currentStep - 1].name}</span>
           </div>
