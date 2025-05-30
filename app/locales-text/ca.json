@@ -1,7 +1,14 @@
 {
     "HomePage": {
       "title": "Hello world!",
-      "about": "Go to the about page"
+      "about": "Ves a la pàgina d'informació",
+      "getStarted": "Comença editant",
+      "saveChanges": "Desa i veu els teus canvis a l'instant.",
+      "deploy": "Desplega ara",
+      "readDocs": "Llegeix la documentació",
+      "learn": "Aprèn",
+      "examples": "Exemples",
+      "goToNextjs": "Ves a nextjs.org →"
     },
     "LoginPage": {
       "company": "Acme Inc",

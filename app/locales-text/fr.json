@@ -1,8 +1,14 @@
 {
     "HomePage": {
       "title": "Hello world!",
-      "about": "Go to the about page",
-      "examples": "Exemples"
+      "about": "Aller à la page d'information",
+      "getStarted": "Commencez en modifiant",
+      "saveChanges": "Enregistrez et voyez vos modifications instantanément.",
+      "deploy": "Déployer maintenant",
+      "readDocs": "Lire la documentation",
+      "learn": "Apprendre",
+      "examples": "Exemples",
+      "goToNextjs": "Aller sur nextjs.org →"
     },
     "LoginPage": {
       "company": "Acme Inc",
