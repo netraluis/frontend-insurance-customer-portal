@@ -24,6 +24,7 @@ import { generateClaimAutoPDF } from "@/lib/generate-pdf"
 import { sendConfirmationEmail } from "@/app/actions/email-actions"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import Image from "next/image"
+import { useTranslations } from 'next-intl'
 
 export default function ReviewSubmit() {
   const { formData, setCurrentStep, setIsSubmitted } = useClaimForm()
@@ -37,6 +38,7 @@ export default function ReviewSubmit() {
   // const [selectedMedia, setSelectedMedia] = useState<string | null>(null)
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false)
   const [pdfGenerationError, setPdfGenerationError] = useState<string | null>(null)
+  const tReview = useTranslations('ClaimAuto.ReviewSubmit')
 
   const handleEditSection = (step: number) => {
     setCurrentStep(step)
@@ -222,17 +224,16 @@ export default function ReviewSubmit() {
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-zinc-100 mb-4">
           <CheckCircle2 className="h-8 w-8 text-zinc-600" />
         </div>
-        <h3 className="text-xl font-medium text-zinc-900 mb-2">Claim Submitted Successfully</h3>
+        <h3 className="text-xl font-medium text-zinc-900 mb-2">{tReview('claimSubmittedTitle')}</h3>
         <p className="text-zinc-500 mb-6">
-          Your claim has been submitted. You will receive a confirmation email shortly with your claim number and next
-          steps.
+          {tReview('claimSubmittedDesc')}
         </p>
         <div className="p-4 bg-zinc-50 rounded-md border border-zinc-200 mb-6 text-left">
           <p className="text-sm text-zinc-500">
-            <strong>Reference Number:</strong> {claimNumber}
+            <strong>{tReview('referenceNumber')}</strong> {claimNumber}
           </p>
           <p className="text-sm text-zinc-500">
-            <strong>Submission Date:</strong> {format(new Date(), "PPP")}
+            <strong>{tReview('submissionDate')}</strong> {format(new Date(), "PPP")}
           </p>
         </div>
 
@@ -248,12 +249,12 @@ export default function ReviewSubmit() {
               {isGeneratingPdf ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  Regenerating PDF...
+                  {tReview('regeneratingPdf')}
                 </>
               ) : (
                 <>
                   <Download className="h-4 w-4" />
-                  Regenerate PDF
+                  {tReview('regeneratePdf')}
                 </>
               )}
             </Button>
@@ -268,12 +269,12 @@ export default function ReviewSubmit() {
               {isGeneratingPdf ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  Generating PDF...
+                  {tReview('generatingPdf')}
                 </>
               ) : (
                 <>
                   <Download className="h-4 w-4" />
-                  Download Claim Summary
+                  {tReview('downloadClaimSummary')}
                 </>
               )}
             </Button>
@@ -287,17 +288,17 @@ export default function ReviewSubmit() {
               {isSendingEmail ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  Sending...
+                  {tReview('sending')}
                 </>
               ) : isEmailSent ? (
                 <>
                   <Mail className="h-4 w-4" />
-                  Email Sent
+                  {tReview('emailSent')}
                 </>
               ) : (
                 <>
                   <Mail className="h-4 w-4" />
-                  Send Confirmation Email
+                  {tReview('sendConfirmationEmail')}
                 </>
               )}
             </Button>
@@ -306,12 +307,12 @@ export default function ReviewSubmit() {
 
         {isEmailSent && (
           <p className="text-sm text-zinc-500 mt-4">
-            A confirmation email with your claim details has been sent to {formData.email}
+            {tReview('emailSentDesc', { email: formData.email })}
           </p>
         )}
 
         <div className="mt-8 text-sm text-zinc-500">
-          <p>Need help? Contact our support team at support@example.com</p>
+          <p>{tReview('needHelp')}</p>
         </div>
       </div>
     )
@@ -321,8 +322,8 @@ export default function ReviewSubmit() {
     <Card className="border-none shadow-none">
       <CardContent className="p-0 space-y-6">
         <div className="space-y-2">
-          <h3 className="text-lg font-medium text-zinc-900">Review Your Claim</h3>
-          <p className="text-sm text-zinc-500">Please review all the information before submitting your claim.</p>
+          <h3 className="text-lg font-medium text-zinc-900">{tReview('reviewYourClaim')}</h3>
+          <p className="text-sm text-zinc-500">{tReview('reviewYourClaimDesc')}</p>
         </div>
 
         <Accordion type="multiple" defaultValue={["policy"]}>
@@ -330,7 +331,7 @@ export default function ReviewSubmit() {
           <AccordionItem value="policy" className="border border-zinc-200 rounded-md mb-4">
             <AccordionTrigger className="px-4 hover:no-underline hover:bg-zinc-50">
               <div className="flex justify-between items-center w-full">
-                <span className="font-medium">Policy Information</span>
+                <span className="font-medium">{tReview('policyInformation')}</span>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -341,59 +342,59 @@ export default function ReviewSubmit() {
                   }}
                 >
                   <Edit className="h-4 w-4" />
-                  Edit
+                  {tReview('edit')}
                 </Button>
               </div>
             </AccordionTrigger>
             <AccordionContent className="px-4 pb-4 pt-2">
               <dl className="grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Full Name</dt>
+                  <dt className="text-sm font-medium text-zinc-500">{tReview('fullName')}</dt>
                   <dd className="mt-1 text-sm text-zinc-900">
                     {formData.firstName} {formData.lastName}
                   </dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Email Address</dt>
+                  <dt className="text-sm font-medium text-zinc-500">{tReview('emailAddress')}</dt>
                   <dd className="mt-1 text-sm text-zinc-900">{formData.email}</dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Phone Number</dt>
+                  <dt className="text-sm font-medium text-zinc-500">{tReview('phoneNumber')}</dt>
                   <dd className="mt-1 text-sm text-zinc-900">{formData.phone}</dd>
                 </div>
               </dl>
 
               {formData.hasDifferentDriver && (
                 <div className="mt-4 pt-4 border-t border-zinc-100">
-                  <h5 className="text-sm font-medium text-zinc-700 mb-2">Driver Information</h5>
+                  <h5 className="text-sm font-medium text-zinc-700 mb-2">{tReview('driverInformation')}</h5>
                   <dl className="grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
                     <div className="sm:col-span-1">
-                      <dt className="text-sm font-medium text-zinc-500">Driver Name</dt>
+                      <dt className="text-sm font-medium text-zinc-500">{tReview('driverName')}</dt>
                       <dd className="mt-1 text-sm text-zinc-900">
                         {formData.driverFirstName} {formData.driverLastName}
                       </dd>
                     </div>
                     <div className="sm:col-span-1">
-                      <dt className="text-sm font-medium text-zinc-500">Date of Birth</dt>
+                      <dt className="text-sm font-medium text-zinc-500">{tReview('dateOfBirth')}</dt>
                       <dd className="mt-1 text-sm text-zinc-900">
                         {formData.driverDateOfBirth ? format(formData.driverDateOfBirth, "PPP") : "Not provided"}
                       </dd>
                     </div>
                     {formData.driverEmail && (
                       <div className="sm:col-span-1">
-                        <dt className="text-sm font-medium text-zinc-500">Email Address</dt>
+                        <dt className="text-sm font-medium text-zinc-500">{tReview('emailAddress')}</dt>
                         <dd className="mt-1 text-sm text-zinc-900">{formData.driverEmail}</dd>
                       </div>
                     )}
                     {formData.driverPhone && (
                       <div className="sm:col-span-1">
-                        <dt className="text-sm font-medium text-zinc-500">Phone Number</dt>
+                        <dt className="text-sm font-medium text-zinc-500">{tReview('phoneNumber')}</dt>
                         <dd className="mt-1 text-sm text-zinc-900">{formData.driverPhone}</dd>
                       </div>
                     )}
                     {formData.driverID && (
                       <div className="sm:col-span-1">
-                        <dt className="text-sm font-medium text-zinc-500">Driver ID</dt>
+                        <dt className="text-sm font-medium text-zinc-500">{tReview('driverID')}</dt>
                         <dd className="mt-1 text-sm text-zinc-900">{formData.driverID}</dd>
                       </div>
                     )}
@@ -407,7 +408,7 @@ export default function ReviewSubmit() {
           <AccordionItem value="vehicle" className="border border-zinc-200 rounded-md mb-4">
             <AccordionTrigger className="px-4 hover:no-underline hover:bg-zinc-50">
               <div className="flex justify-between items-center w-full">
-                <span className="font-medium">Vehicle Information</span>
+                <span className="font-medium">{tReview('vehicleInformation')}</span>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -418,29 +419,29 @@ export default function ReviewSubmit() {
                   }}
                 >
                   <Edit className="h-4 w-4" />
-                  Edit
+                  {tReview('edit')}
                 </Button>
               </div>
             </AccordionTrigger>
             <AccordionContent className="px-4 pb-4 pt-2">
               <dl className="grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Vehicle</dt>
+                  <dt className="text-sm font-medium text-zinc-500">{tReview('vehicle')}</dt>
                   <dd className="mt-1 text-sm text-zinc-900">
                     {formData.vehicleMake} {formData.vehicleModel}
                   </dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">License Plate</dt>
+                  <dt className="text-sm font-medium text-zinc-500">{tReview('licensePlate')}</dt>
                   <dd className="mt-1 text-sm text-zinc-900">{formData.licensePlate}</dd>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="text-sm font-medium text-zinc-500">Vehicle Type</p>
+                    <p className="text-sm font-medium text-zinc-500">{tReview('vehicleType')}</p>
                     <p className="text-sm">
                       {formData.vehicleType
                         ? formData.vehicleType.charAt(0).toUpperCase() + formData.vehicleType.slice(1)
-                        : "Not provided"}
+                        : tReview('notProvided')}
                     </p>
                   </div>
                 </div>
@@ -452,7 +453,7 @@ export default function ReviewSubmit() {
           <AccordionItem value="accident" className="border border-zinc-200 rounded-md mb-4">
             <AccordionTrigger className="px-4 hover:no-underline hover:bg-zinc-50">
               <div className="flex justify-between items-center w-full">
-                <span className="font-medium">Accident Details</span>
+                <span className="font-medium">{tReview('accidentDetails')}</span>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -463,47 +464,47 @@ export default function ReviewSubmit() {
                   }}
                 >
                   <Edit className="h-4 w-4" />
-                  Edit
+                  {tReview('edit')}
                 </Button>
               </div>
             </AccordionTrigger>
             <AccordionContent className="px-4 pb-4 pt-2">
               <dl className="grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Location</dt>
+                  <dt className="text-sm font-medium text-zinc-500">{tReview('location')}</dt>
                   <dd className="mt-1 text-sm text-zinc-900">{formData.accidentLocation}</dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Incident Date</dt>
+                  <dt className="text-sm font-medium text-zinc-500">{tReview('incidentDate')}</dt>
                   <dd className="mt-1 text-sm text-zinc-900">
-                    {formData.incidentDate ? format(formData.incidentDate, "PPP") : "Not specified"}
+                    {formData.incidentDate ? format(formData.incidentDate, "PPP") : tReview('notSpecified')}
                   </dd>
                 </div>
                 <div className="sm:col-span-2">
-                  <dt className="text-sm font-medium text-zinc-500">Description</dt>
+                  <dt className="text-sm font-medium text-zinc-500">{tReview('description')}</dt>
                   <dd className="mt-1 text-sm text-zinc-900">{formData.accidentDescription}</dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Police Involved</dt>
-                  <dd className="mt-1 text-sm text-zinc-900">{formData.policeInvolved ? "Yes" : "No"}</dd>
+                  <dt className="text-sm font-medium text-zinc-500">{tReview('policeInvolved')}</dt>
+                  <dd className="mt-1 text-sm text-zinc-900">{formData.policeInvolved ? tReview('yes') : tReview('no')}</dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Traffic Service Involved</dt>
-                  <dd className="mt-1 text-sm text-zinc-900">{formData.trafficServiceInvolved ? "Yes" : "No"}</dd>
+                  <dt className="text-sm font-medium text-zinc-500">{tReview('trafficServiceInvolved')}</dt>
+                  <dd className="mt-1 text-sm text-zinc-900">{formData.trafficServiceInvolved ? tReview('yes') : tReview('no')}</dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Friendly Accident Report</dt>
-                  <dd className="mt-1 text-sm text-zinc-900">{formData.friendlyReport ? "Yes" : "No"}</dd>
+                  <dt className="text-sm font-medium text-zinc-500">{tReview('friendlyAccidentReport')}</dt>
+                  <dd className="mt-1 text-sm text-zinc-900">{formData.friendlyReport ? tReview('yes') : tReview('no')}</dd>
                 </div>
                 <div className="sm:col-span-1">
-                  <dt className="text-sm font-medium text-zinc-500">Bodily Injuries</dt>
-                  <dd className="mt-1 text-sm text-zinc-900">{formData.bodilyInjuries ? "Yes" : "No"}</dd>
+                  <dt className="text-sm font-medium text-zinc-500">{tReview('bodilyInjuries')}</dt>
+                  <dd className="mt-1 text-sm text-zinc-900">{formData.bodilyInjuries ? tReview('yes') : tReview('no')}</dd>
                 </div>
 
                 {/* Display friendly report document if available */}
                 {formData.friendlyReport && formData.friendlyReportDocument && (
                   <div className="sm:col-span-2 mt-2">
-                    <dt className="text-sm font-medium text-zinc-500">Friendly Report Document</dt>
+                    <dt className="text-sm font-medium text-zinc-500">{tReview('friendlyReportDocument')}</dt>
                     <dd className="mt-1 text-sm text-zinc-900 p-3 bg-zinc-50 rounded-md border border-zinc-100">
                       <div className="flex items-center gap-2">
                         {getFileIcon(formData.friendlyReportDocument.type)}
@@ -519,7 +520,7 @@ export default function ReviewSubmit() {
                           rel="noopener noreferrer"
                           className="ml-auto text-xs text-zinc-600 hover:text-zinc-900 underline"
                         >
-                          View
+                          {tReview('view')}
                         </a>
                       </div>
                     </dd>
@@ -529,7 +530,7 @@ export default function ReviewSubmit() {
                 {/* Display bodily injuries description if available */}
                 {formData.bodilyInjuries && formData.bodilyInjuriesDescription && (
                   <div className="sm:col-span-2 mt-2">
-                    <dt className="text-sm font-medium text-zinc-500">Injuries Description</dt>
+                    <dt className="text-sm font-medium text-zinc-500">{tReview('injuriesDescription')}</dt>
                     <dd className="mt-1 text-sm text-zinc-900 p-3 bg-zinc-50 rounded-md border border-zinc-100">
                       {formData.bodilyInjuriesDescription}
                     </dd>
@@ -538,7 +539,7 @@ export default function ReviewSubmit() {
 
                 {/* Display damage description */}
                 <div className="sm:col-span-2 mt-2">
-                  <dt className="text-sm font-medium text-zinc-500">Damage Description</dt>
+                  <dt className="text-sm font-medium text-zinc-500">{tReview('damageDescription')}</dt>
                   <dd className="mt-1 text-sm text-zinc-900 p-3 bg-zinc-50 rounded-md border border-zinc-100">
                     {formData.damageDescription}
                   </dd>
@@ -548,7 +549,7 @@ export default function ReviewSubmit() {
                 {formData.damagePhotos.length > 0 && (
                   <div className="sm:col-span-2 mt-2">
                     <dt className="text-sm font-medium text-zinc-500">
-                      Damage Photos ({formData.damagePhotos.length})
+                      {tReview('damagePhotos')} ({formData.damagePhotos.length})
                     </dt>
                     <dd className="mt-1 text-sm text-zinc-900 p-3 bg-zinc-50 rounded-md border border-zinc-100">
                       <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
@@ -593,7 +594,7 @@ export default function ReviewSubmit() {
           <AccordionItem value="parties" className="border border-zinc-200 rounded-md mb-4">
             <AccordionTrigger className="px-4 hover:no-underline hover:bg-zinc-50">
               <div className="flex justify-between items-center w-full">
-                <span className="font-medium">Involved Parties</span>
+                <span className="font-medium">{tReview('involvedParties')}</span>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -604,7 +605,7 @@ export default function ReviewSubmit() {
                   }}
                 >
                   <Edit className="h-4 w-4" />
-                  Edit
+                  {tReview('edit')}
                 </Button>
               </div>
             </AccordionTrigger>
@@ -612,31 +613,31 @@ export default function ReviewSubmit() {
               <div className="space-y-4">
                 {formData.drivers.length > 0 ? (
                   <div>
-                    <h4 className="text-sm font-medium text-zinc-500 mb-2">Other Drivers</h4>
+                    <h4 className="text-sm font-medium text-zinc-500 mb-2">{tReview('otherDrivers')}</h4>
                     <ul className="space-y-4">
                       {formData.drivers.map((driver, index) => (
                         <li key={index} className="border border-zinc-100 rounded-md p-3">
                           <div className="grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
                             <div className="sm:col-span-1">
-                              <dt className="text-sm font-medium text-zinc-500">Name</dt>
+                              <dt className="text-sm font-medium text-zinc-500">{tReview('name')}</dt>
                               <dd className="mt-1 text-sm text-zinc-900">
                                 {driver.firstName} {driver.lastName}
                               </dd>
                             </div>
                             <div className="sm:col-span-1">
-                              <dt className="text-sm font-medium text-zinc-500">Contact</dt>
+                              <dt className="text-sm font-medium text-zinc-500">{tReview('contact')}</dt>
                               <dd className="mt-1 text-sm text-zinc-900">
                                 {driver.email} / {driver.phone}
                               </dd>
                             </div>
                             <div className="sm:col-span-1">
-                              <dt className="text-sm font-medium text-zinc-500">Vehicle</dt>
+                              <dt className="text-sm font-medium text-zinc-500">{tReview('vehicle')}</dt>
                               <dd className="mt-1 text-sm text-zinc-900">
                                 {driver.vehicleMake} {driver.vehicleModel} ({driver.licensePlate})
                               </dd>
                             </div>
                             <div className="sm:col-span-1">
-                              <dt className="text-sm font-medium text-zinc-500">Insurance</dt>
+                              <dt className="text-sm font-medium text-zinc-500">{tReview('insurance')}</dt>
                               <dd className="mt-1 text-sm text-zinc-900">
                                 {driver.insuranceCompany} - {driver.policyNumber}
                               </dd>
@@ -647,30 +648,30 @@ export default function ReviewSubmit() {
                     </ul>
                   </div>
                 ) : (
-                  <p className="text-sm text-zinc-500">No other drivers added.</p>
+                  <p className="text-sm text-zinc-500">{tReview('noOtherDrivers')}</p>
                 )}
 
                 {formData.witnesses.length > 0 ? (
                   <div>
-                    <h4 className="text-sm font-medium text-zinc-500 mb-2">Witnesses</h4>
+                    <h4 className="text-sm font-medium text-zinc-500 mb-2">{tReview('witnesses')}</h4>
                     <ul className="space-y-4">
                       {formData.witnesses.map((witness, index) => (
                         <li key={index} className="border border-zinc-100 rounded-md p-3">
                           <div className="grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
                             <div className="sm:col-span-1">
-                              <dt className="text-sm font-medium text-zinc-500">Name</dt>
+                              <dt className="text-sm font-medium text-zinc-500">{tReview('name')}</dt>
                               <dd className="mt-1 text-sm text-zinc-900">
                                 {witness.firstName} {witness.lastName}
                               </dd>
                             </div>
                             <div className="sm:col-span-1">
-                              <dt className="text-sm font-medium text-zinc-500">Contact</dt>
+                              <dt className="text-sm font-medium text-zinc-500">{tReview('contact')}</dt>
                               <dd className="mt-1 text-sm text-zinc-900">
                                 {witness.email} / {witness.phone}
                               </dd>
                             </div>
                             <div className="sm:col-span-2">
-                              <dt className="text-sm font-medium text-zinc-500">Statement</dt>
+                              <dt className="text-sm font-medium text-zinc-500">{tReview('statement')}</dt>
                               <dd className="mt-1 text-sm text-zinc-900">{witness.description}</dd>
                             </div>
                           </div>
@@ -679,7 +680,7 @@ export default function ReviewSubmit() {
                     </ul>
                   </div>
                 ) : (
-                  <p className="text-sm text-zinc-500">No witnesses added.</p>
+                  <p className="text-sm text-zinc-500">{tReview('noWitnesses')}</p>
                 )}
               </div>
             </AccordionContent>
@@ -689,7 +690,7 @@ export default function ReviewSubmit() {
           <AccordionItem value="documents" className="border border-zinc-200 rounded-md mb-4">
             <AccordionTrigger className="px-4 hover:no-underline hover:bg-zinc-50">
               <div className="flex justify-between items-center w-full">
-                <span className="font-medium">Documentation</span>
+                <span className="font-medium">{tReview('documentation')}</span>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -700,7 +701,7 @@ export default function ReviewSubmit() {
                   }}
                 >
                   <Edit className="h-4 w-4" />
-                  Edit
+                  {tReview('edit')}
                 </Button>
               </div>
             </AccordionTrigger>
@@ -715,7 +716,7 @@ export default function ReviewSubmit() {
                       <div className="flex items-center gap-2">
                         {getFileIcon(doc.type)}
                         <span className="text-sm text-zinc-900">{doc.name}</span>
-                        <span className="text-xs text-zinc-500 capitalize">({doc.type.split("/")[1] || "file"})</span>
+                        <span className="text-xs text-zinc-500 capitalize">({doc.type.split("/")[1] || tReview('documentation')})</span>
                       </div>
                       <a
                         href={doc.url}
@@ -723,13 +724,13 @@ export default function ReviewSubmit() {
                         rel="noopener noreferrer"
                         className="text-xs text-zinc-600 hover:text-zinc-900 underline"
                       >
-                        View
+                        {tReview('view')}
                       </a>
                     </li>
                   ))}
                 </ul>
               ) : (
-                <p className="text-sm text-zinc-500">No documents uploaded.</p>
+                <p className="text-sm text-zinc-500">{tReview('noDocuments')}</p>
               )}
             </AccordionContent>
           </AccordionItem>
@@ -746,7 +747,7 @@ export default function ReviewSubmit() {
                 required
               />
               <label htmlFor="terms" className="ml-2 block text-sm text-zinc-500">
-                I confirm that all the information provided is accurate and complete to the best of my knowledge.
+                {tReview('confirmInfo')}
               </label>
             </div>
 
@@ -755,10 +756,10 @@ export default function ReviewSubmit() {
                 {isSubmitting ? (
                   <div className="flex items-center gap-2">
                     <Loader2 className="h-4 w-4 animate-spin" />
-                    Submitting...
+                    {tReview('submitting')}
                   </div>
                 ) : (
-                  "Submit Claim"
+                  tReview('submitClaim')
                 )}
               </Button>
             </div>
