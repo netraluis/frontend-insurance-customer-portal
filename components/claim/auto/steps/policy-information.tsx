@@ -15,7 +15,7 @@ import { useTranslations } from 'next-intl'
 
 export default function PolicyInformation() {
   const { formData, updateFormData } = useClaimForm()
-  const t = useTranslations('ClaimAuto')
+  const t = useTranslations('ClaimAuto.PolicyInformationForm')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target

@@ -242,6 +242,31 @@
         "tableName": "Nom",
         "tableActions": "Accions",
         "deleteAction": "Eliminar"
+      },
+      "PolicyInformationForm": {
+        "personalInformation": "Informació personal",
+        "personalInformationDesc": "Si us plau, proporciona les teves dades de contacte per poder processar el teu part.",
+        "firstName": "Nom",
+        "firstNamePlaceholder": "Introdueix el teu nom",
+        "lastName": "Cognom",
+        "lastNamePlaceholder": "Introdueix el teu cognom",
+        "email": "Correu electrònic",
+        "emailPlaceholder": "el.teu.email@exemple.com",
+        "phone": "Telèfon",
+        "phonePlaceholder": "Número de telèfon",
+        "differentDriver": "Conductor diferent",
+        "differentDriverDesc": "El conductor és diferent del titular de la pòlissa?",
+        "driverFirstName": "Nom del conductor",
+        "driverFirstNamePlaceholder": "Introdueix el nom del conductor",
+        "driverLastName": "Cognom del conductor",
+        "driverLastNamePlaceholder": "Introdueix el cognom del conductor",
+        "driverDateOfBirth": "Data de naixement",
+        "driverID": "DNI del conductor",
+        "driverIDPlaceholder": "Introdueix el DNI del conductor (opcional)",
+        "driverEmail": "Email del conductor",
+        "driverEmailPlaceholder": "conductor.email@exemple.com (opcional)",
+        "driverPhone": "Telèfon del conductor",
+        "driverPhonePlaceholder": "Número de telèfon (opcional)"
       }
     },
     "GeneralClaimAuto": {

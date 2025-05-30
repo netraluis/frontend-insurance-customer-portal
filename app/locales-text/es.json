@@ -237,6 +237,31 @@
         "tableName": "Nombre",
         "tableActions": "Acciones",
         "deleteAction": "Eliminar"
+      },
+      "PolicyInformationForm": {
+        "personalInformation": "Información personal",
+        "personalInformationDesc": "Por favor, proporciona tus datos de contacto para poder procesar tu parte.",
+        "firstName": "Nombre",
+        "firstNamePlaceholder": "Introduce tu nombre",
+        "lastName": "Apellido",
+        "lastNamePlaceholder": "Introduce tu apellido",
+        "email": "Correo electrónico",
+        "emailPlaceholder": "tu.email@ejemplo.com",
+        "phone": "Teléfono",
+        "phonePlaceholder": "Número de teléfono",
+        "differentDriver": "Conductor diferente",
+        "differentDriverDesc": "¿El conductor es diferente al titular de la póliza?",
+        "driverFirstName": "Nombre del conductor",
+        "driverFirstNamePlaceholder": "Introduce el nombre del conductor",
+        "driverLastName": "Apellido del conductor",
+        "driverLastNamePlaceholder": "Introduce el apellido del conductor",
+        "driverDateOfBirth": "Fecha de nacimiento",
+        "driverID": "DNI del conductor",
+        "driverIDPlaceholder": "Introduce el DNI del conductor (opcional)",
+        "driverEmail": "Email del conductor",
+        "driverEmailPlaceholder": "conductor.email@ejemplo.com (opcional)",
+        "driverPhone": "Teléfono del conductor",
+        "driverPhonePlaceholder": "Número de teléfono (opcional)"
       }
     },
     "GeneralClaimAuto": {
