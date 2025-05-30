@@ -323,8 +323,18 @@
     },
     "GeneralClaimAuto": {
       "PolicyInformation": {
-        "title": "Policy Information",
-        "description": "Please provide your policy details."
+        "title": "Personal Information",
+        "description": "Please provide your contact details so we can process your claim.",
+        "firstName": "First Name",
+        "firstNamePlaceholder": "Enter your first name",
+        "lastName": "Last Name",
+        "lastNamePlaceholder": "Enter your last name",
+        "email": "Email Address",
+        "emailPlaceholder": "your.email@example.com",
+        "phone": "Phone Number",
+        "phonePlaceholder": "Phone number",
+        "policyNumber": "Policy Number",
+        "policyNumberPlaceholder": "Enter your policy number"
       },
       "AccidentDetails": {
         "title": "Accident Details",

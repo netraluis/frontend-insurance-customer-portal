@@ -352,8 +352,18 @@
     },
     "GeneralClaimAuto": {
       "PolicyInformation": {
-        "title": "Información de la póliza",
-        "description": "Por favor, proporciona los datos de tu póliza."
+        "title": "Información personal",
+        "description": "Por favor, proporciona tus datos de contacto para poder procesar tu parte.",
+        "firstName": "Nombre",
+        "firstNamePlaceholder": "Introduce tu nombre",
+        "lastName": "Apellido",
+        "lastNamePlaceholder": "Introduce tu apellido",
+        "email": "Correo electrónico",
+        "emailPlaceholder": "tu.email@ejemplo.com",
+        "phone": "Teléfono",
+        "phonePlaceholder": "Número de teléfono",
+        "policyNumber": "Número de póliza",
+        "policyNumberPlaceholder": "Introduce tu número de póliza"
       },
       "AccidentDetails": {
         "title": "Detalles del accidente",

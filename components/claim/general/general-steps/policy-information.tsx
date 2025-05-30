@@ -6,9 +6,11 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
 import { PhoneInput } from "@/components/ui/phone-input"
+import { useTranslations } from 'next-intl'
 
 export default function PolicyInformation() {
   const { formData, updateFormData } = useGeneralClaimForm()
+  const t = useTranslations('GeneralClaimAuto.PolicyInformation')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -23,44 +25,44 @@ export default function PolicyInformation() {
     <Card className="border-none shadow-none">
       <CardContent className="p-0 space-y-6">
         <div className="space-y-2">
-          <h3 className="text-lg font-medium text-zinc-900">Personal Information</h3>
-          <p className="text-sm text-zinc-500">Please provide your contact details so we can process your claim.</p>
+          <h3 className="text-lg font-medium text-zinc-900">{t('title')}</h3>
+          <p className="text-sm text-zinc-500">{t('description')}</p>
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div className="space-y-2">
-            <Label htmlFor="firstName">First Name</Label>
+            <Label htmlFor="firstName">{t('firstName')}</Label>
             <Input
               id="firstName"
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
-              placeholder="Enter your first name"
+              placeholder={t('firstNamePlaceholder')}
               required
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="lastName">Last Name</Label>
+            <Label htmlFor="lastName">{t('lastName')}</Label>
             <Input
               id="lastName"
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
-              placeholder="Enter your last name"
+              placeholder={t('lastNamePlaceholder')}
               required
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email">Email Address</Label>
+            <Label htmlFor="email">{t('email')}</Label>
             <Input
               id="email"
               name="email"
               type="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="your.email@example.com"
+              placeholder={t('emailPlaceholder')}
               required
             />
           </div>
@@ -71,20 +73,20 @@ export default function PolicyInformation() {
               value={formData.phone}
               onChange={handlePhoneChange}
               defaultCountry="AD"
-              label="Phone Number"
-              placeholder="Phone number"
+              label={t('phone')}
+              placeholder={t('phonePlaceholder')}
               required
             />
           </div>
 
           <div className="space-y-2 sm:col-span-2">
-            <Label htmlFor="policyNumber">Policy Number</Label>
+            <Label htmlFor="policyNumber">{t('policyNumber')}</Label>
             <Input
               id="policyNumber"
               name="policyNumber"
               value={formData.policyNumber}
               onChange={handleChange}
-              placeholder="Enter your policy number"
+              placeholder={t('policyNumberPlaceholder')}
               required
             />
           </div>

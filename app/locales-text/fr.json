@@ -327,8 +327,18 @@
     },
     "GeneralClaimAuto": {
       "PolicyInformation": {
-        "title": "Informations sur la police",
-        "description": "Veuillez fournir les détails de votre police."
+        "title": "Informations personnelles",
+        "description": "Veuillez fournir vos coordonnées pour que nous puissions traiter votre déclaration.",
+        "firstName": "Prénom",
+        "firstNamePlaceholder": "Entrez votre prénom",
+        "lastName": "Nom",
+        "lastNamePlaceholder": "Entrez votre nom",
+        "email": "Adresse e-mail",
+        "emailPlaceholder": "votre.email@exemple.com",
+        "phone": "Numéro de téléphone",
+        "phonePlaceholder": "Numéro de téléphone",
+        "policyNumber": "Numéro de police",
+        "policyNumberPlaceholder": "Entrez votre numéro de police"
       },
       "AccidentDetails": {
         "title": "Détails de l'accident",

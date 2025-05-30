@@ -357,8 +357,18 @@
     },
     "GeneralClaimAuto": {
       "PolicyInformation": {
-        "title": "Informació de la pòlissa",
-        "description": "Si us plau, proporciona les dades de la teva pòlissa."
+        "title": "Informació personal",
+        "description": "Si us plau, proporciona les teves dades de contacte per poder processar el teu part.",
+        "firstName": "Nom",
+        "firstNamePlaceholder": "Introdueix el teu nom",
+        "lastName": "Cognom",
+        "lastNamePlaceholder": "Introdueix el teu cognom",
+        "email": "Correu electrònic",
+        "emailPlaceholder": "el.teu.email@exemple.com",
+        "phone": "Telèfon",
+        "phonePlaceholder": "Número de telèfon",
+        "policyNumber": "Número de pòlissa",
+        "policyNumberPlaceholder": "Introdueix el teu número de pòlissa"
       },
       "AccidentDetails": {
         "title": "Detalls de l'accident",
