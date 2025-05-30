@@ -22,10 +22,12 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Plus, Trash2, Edit2, AlertCircle, Users, Eye } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
+import { useTranslations } from 'next-intl'
 
 export default function InvolvedParties() {
   const { formData, updateFormData } = useGeneralClaimForm()
   const isMobile = useIsMobile()
+  const t = useTranslations('GeneralClaimAuto.InvolvedParties')
 
   // State for the initial questions
   const [hasInvolvedParties, setHasInvolvedParties] = useState(formData.hasInvolvedParties)
@@ -250,10 +252,8 @@ export default function InvolvedParties() {
     <Card className="border-none shadow-none">
       <CardContent className="p-0 space-y-6">
         <div className="space-y-2">
-          <h3 className="text-lg font-medium text-zinc-900">Involved Parties</h3>
-          <p className="text-sm text-zinc-500">
-            Provide information about other parties involved in or witnessing the incident.
-          </p>
+          <h3 className="text-lg font-medium text-zinc-900">{t('title')}</h3>
+          <p className="text-sm text-zinc-500">{t('description')}</p>
         </div>
 
         {/* Involved Parties Box */}
@@ -263,14 +263,12 @@ export default function InvolvedParties() {
             <div className="flex items-start gap-3">
               <Users className="h-5 w-5 text-zinc-700 mt-0.5" />
               <div>
-                <h4 className="font-medium text-zinc-900">Were other parties involved in the incident?</h4>
-                <p className="text-sm text-zinc-500">
-                  Select &apos;Yes&apos; if there were other people or companies involved in the incident.
-                </p>
+                <h4 className="font-medium text-zinc-900">{t('question')}</h4>
+                <p className="text-sm text-zinc-500">{t('questionHint')}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-zinc-500">{hasInvolvedParties ? "Yes" : "No"}</span>
+              <span className="text-sm font-medium text-zinc-500">{hasInvolvedParties ? t('yes') : t('no')}</span>
               <Switch
                 checked={hasInvolvedParties}
                 onCheckedChange={setHasInvolvedParties}
@@ -288,14 +286,12 @@ export default function InvolvedParties() {
                   <div className="flex items-center gap-2">
                     <Users className="h-5 w-5 text-zinc-500" />
                     <div>
-                      <h4 className="text-md font-medium text-zinc-900">Do you know the person involved?</h4>
-                      <p className="text-sm text-zinc-500">
-                        Select &apos;Yes&apos; if you have information about the involved person or company.
-                      </p>
+                      <h4 className="text-md font-medium text-zinc-900">{t('knowsInvolvedPerson')}</h4>
+                      <p className="text-sm text-zinc-500">{t('knowsInvolvedPersonHint')}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium text-zinc-500">{knowsInvolvedPerson ? "Yes" : "No"}</span>
+                    <span className="text-sm font-medium text-zinc-500">{knowsInvolvedPerson ? t('yes') : t('no')}</span>
                     <Switch
                       checked={knowsInvolvedPerson}
                       onCheckedChange={setKnowsInvolvedPerson}
@@ -308,7 +304,7 @@ export default function InvolvedParties() {
               {knowsInvolvedPerson && (
                 <>
                   <div className="flex justify-between items-center">
-                    <h5 className="text-sm font-medium text-zinc-900">Involved Parties</h5>
+                    <h5 className="text-sm font-medium text-zinc-900">{t('title')}</h5>
                     <Dialog
                       open={partyDialogOpen}
                       onOpenChange={(open) => {
@@ -326,16 +322,16 @@ export default function InvolvedParties() {
                           className="flex items-center gap-1"
                         >
                           <Plus className="h-4 w-4" />
-                          Add Party
+                          {t('addParty')}
                         </Button>
                       </DialogTrigger>
                       <DialogContent
                         className={isMobile ? "w-[calc(100%-32px)] p-0 h-[90vh] max-h-[600px]" : "sm:max-w-[600px]"}
                       >
                         <DialogHeader className={isMobile ? "px-4 py-3 border-b" : ""}>
-                          <DialogTitle>{editingPartyIndex !== null ? "Edit Party" : "Add Party"}</DialogTitle>
+                          <DialogTitle>{editingPartyIndex !== null ? t('editParty') : t('addParty')}</DialogTitle>
                           <DialogDescription className={isMobile ? "text-sm" : ""}>
-                            Enter the details of the person or company involved in the incident.
+                            {t('dialogDescription')}
                           </DialogDescription>
                         </DialogHeader>
 
@@ -343,71 +339,71 @@ export default function InvolvedParties() {
                           <div className={`grid grid-cols-1 gap-4 sm:grid-cols-2 ${isMobile ? "p-4" : "py-4"}`}>
                             <div className="space-y-2 sm:col-span-2">
                               <Label htmlFor="fullName">
-                                Full Name / Company <span className="text-red-500">*</span>
+                                {t('fullName')} <span className="text-red-500">*</span>
                               </Label>
                               <Input
                                 id="fullName"
                                 name="fullName"
                                 value={partyFormData.fullName}
                                 onChange={handlePartyChange}
-                                placeholder="Full name or company name"
+                                placeholder={t('fullNamePlaceholder')}
                                 required
                                 ref={partyNameRef}
                               />
                             </div>
                             <div className="space-y-2">
-                              <Label htmlFor="email">Email</Label>
+                              <Label htmlFor="email">{t('email')}</Label>
                               <Input
                                 id="email"
                                 name="email"
                                 type="email"
                                 value={partyFormData.email}
                                 onChange={handlePartyChange}
-                                placeholder="Email address"
+                                placeholder={t('emailPlaceholder')}
                               />
                             </div>
                             <div className="space-y-2">
-                              <Label htmlFor="phone">Phone</Label>
+                              <Label htmlFor="phone">{t('phone')}</Label>
                               <Input
                                 id="phone"
                                 name="phone"
                                 value={partyFormData.phone}
                                 onChange={handlePartyChange}
-                                placeholder="Phone number"
+                                placeholder={t('phonePlaceholder')}
                               />
                             </div>
                             <div className="space-y-2 sm:col-span-2">
                               <Label htmlFor="description">
-                                Description of Involvement <span className="text-red-500">*</span>
+                                {t('description')} <span className="text-red-500">*</span>
                               </Label>
                               <Textarea
                                 id="description"
                                 name="description"
                                 value={partyFormData.description}
                                 onChange={handlePartyChange}
-                                placeholder="Describe how this party was involved in the incident"
+                                placeholder={t('descriptionPlaceholder')}
                                 rows={4}
                                 required
                               />
                             </div>
                             <div className="space-y-2">
-                              <Label htmlFor="insuranceCompany">Insurance Company</Label>
+                              <Label htmlFor="insuranceCompany">{t('insuranceCompany')}</Label>
                               <Input
                                 id="insuranceCompany"
                                 name="insuranceCompany"
                                 value={partyFormData.insuranceCompany}
                                 onChange={handlePartyChange}
-                                placeholder="Insurance company name"
+                                placeholder={t('insuranceCompanyPlaceholder')}
                               />
                             </div>
                             <div className="space-y-2">
-                              <Label htmlFor="policyNumber">Policy Number</Label>
+                              <Label htmlFor="policyNumber">{t('policyNumber')}</Label>
                               <Input
                                 id="policyNumber"
                                 name="policyNumber"
                                 value={partyFormData.policyNumber}
                                 onChange={handlePartyChange}
-                                placeholder="Insurance policy number"
+                                placeholder={t('policyNumberPlaceholder')}
                               />
                             </div>
                           </div>
@@ -416,20 +412,20 @@ export default function InvolvedParties() {
                           >
                             <AlertCircle className="h-4 w-4" />
                             <span>
-                              Fields marked with <span className="text-red-500">*</span> are required
+                              {t('requiredFields').replace('*', '<span class="text-red-500">*</span>')}
                             </span>
                           </div>
                         </ScrollArea>
 
                         <DialogFooter className={isMobile ? "flex p-4 border-t bg-zinc-50" : ""}>
                           <Button variant="outline" onClick={() => setPartyDialogOpen(false)}>
-                            Cancel
+                            {t('cancel')}
                           </Button>
                           <Button
                             onClick={handleAddParty}
                             disabled={!partyFormData.fullName || !partyFormData.description}
                           >
-                            {editingPartyIndex !== null ? "Update" : "Add"} Party
+                            {editingPartyIndex !== null ? t('update') : t('add')} {t('addParty').split(' ')[1]}
                           </Button>
                         </DialogFooter>
                       </DialogContent>
@@ -443,10 +439,10 @@ export default function InvolvedParties() {
                         <Table>
                           <TableHeader>
                             <TableRow>
-                              <TableHead>Name</TableHead>
-                              <TableHead>Contact</TableHead>
-                              <TableHead>Insurance</TableHead>
-                              <TableHead className="w-[100px]">Actions</TableHead>
+                              <TableHead>{t('name')}</TableHead>
+                              <TableHead>{t('contact')}</TableHead>
+                              <TableHead>{t('insurance')}</TableHead>
+                              <TableHead className="w-[100px]">{t('actions')}</TableHead>
                             </TableRow>
                           </TableHeader>
                           <TableBody>
@@ -457,13 +453,13 @@ export default function InvolvedParties() {
                                   <div className="text-sm text-zinc-500 line-clamp-1">{party.description}</div>
                                 </TableCell>
                                 <TableCell>
-                                  <div>{party.email || "No email provided"}</div>
-                                  <div className="text-sm text-zinc-500">{party.phone || "No phone provided"}</div>
+                                  <div>{party.email || t('noEmail')}</div>
+                                  <div className="text-sm text-zinc-500">{party.phone || t('noPhone')}</div>
                                 </TableCell>
                                 <TableCell>
-                                  <div>{party.insuranceCompany || "Not provided"}</div>
+                                  <div>{party.insuranceCompany || t('notProvided')}</div>
                                   <div className="text-sm text-zinc-500">
-                                    {party.policyNumber || "No policy number"}
+                                    {party.policyNumber || t('noPolicyNumber')}
                                   </div>
                                 </TableCell>
                                 <TableCell>
@@ -491,10 +487,8 @@ export default function InvolvedParties() {
                     </>
                   ) : (
                     <div className="text-center py-6 border border-dashed rounded-md border-zinc-300 bg-zinc-50">
-                      <p className="text-zinc-500">No involved parties added yet.</p>
-                      <p className="text-sm text-zinc-400 mt-1">
-                        Click &apos;Add Party&apos; to add information about other parties involved.
-                      </p>
+                      <p className="text-zinc-500">{t('noParties')}</p>
+                      <p className="text-sm text-zinc-400 mt-1">{t('addPartyHint')}</p>
                     </div>
                   )}
                 </>
@@ -509,17 +503,15 @@ export default function InvolvedParties() {
             <div className="flex items-start gap-3">
               <Eye className="h-5 w-5 text-zinc-700 mt-0.5" />
               <div>
-                <h4 className="font-medium text-zinc-900">Add Testimony</h4>
-                <p className="text-sm text-zinc-500">
-                  Add testimony from witnesses or other relevant parties if applicable.
-                </p>
+                <h4 className="font-medium text-zinc-900">{t('addTestimony')}</h4>
+                <p className="text-sm text-zinc-500">{t('addTestimonyHint')}</p>
               </div>
             </div>
           </div>
 
           <div className="p-4 space-y-4">
             <div className="flex justify-between items-center">
-              <h5 className="text-sm font-medium text-zinc-900">Testimonies</h5>
+              <h5 className="text-sm font-medium text-zinc-900">{t('testimonies')}</h5>
               <Dialog
                 open={testimonyDialogOpen}
                 onOpenChange={(open) => {
@@ -537,16 +529,16 @@ export default function InvolvedParties() {
                     className="flex items-center gap-1"
                   >
                     <Plus className="h-4 w-4" />
-                    Add Testimony
+                    {t('addTestimony')}
                   </Button>
                 </DialogTrigger>
                 <DialogContent
                   className={isMobile ? "w-[calc(100%-32px)] p-0 h-[90vh] max-h-[600px]" : "sm:max-w-[600px]"}
                 >
                   <DialogHeader className={isMobile ? "px-4 py-3 border-b" : ""}>
-                    <DialogTitle>{editingTestimonyIndex !== null ? "Edit Testimony" : "Add Testimony"}</DialogTitle>
+                    <DialogTitle>{editingTestimonyIndex !== null ? t('editTestimony') : t('addTestimonyDialog')}</DialogTitle>
                     <DialogDescription className={isMobile ? "text-sm" : ""}>
-                      Enter the details of a testimony related to the incident.
+                      {t('testimonyDialogDescription')}
                     </DialogDescription>
                   </DialogHeader>
 
@@ -554,49 +546,49 @@ export default function InvolvedParties() {
                     <div className={`grid grid-cols-1 gap-4 sm:grid-cols-2 ${isMobile ? "p-4" : "py-4"}`}>
                       <div className="space-y-2 sm:col-span-2">
                         <Label htmlFor="testimonyFullName">
-                          Full Name <span className="text-red-500">*</span>
+                          {t('testimonyFullName')} <span className="text-red-500">*</span>
                         </Label>
                         <Input
                           id="testimonyFullName"
                           name="fullName"
                           value={testimonyFormData.fullName}
                           onChange={handleTestimonyChange}
-                          placeholder="Full name"
+                          placeholder={t('testimonyFullNamePlaceholder')}
                           required
                           ref={testimonyNameRef}
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="testimonyEmail">Email</Label>
+                        <Label htmlFor="testimonyEmail">{t('email')}</Label>
                         <Input
                           id="testimonyEmail"
                           name="email"
                           type="email"
                           value={testimonyFormData.email}
                           onChange={handleTestimonyChange}
-                          placeholder="Email address"
+                          placeholder={t('emailPlaceholder')}
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="testimonyPhone">Phone</Label>
+                        <Label htmlFor="testimonyPhone">{t('phone')}</Label>
                         <Input
                           id="testimonyPhone"
                           name="phone"
                           value={testimonyFormData.phone}
                           onChange={handleTestimonyChange}
-                          placeholder="Phone number"
+                          placeholder={t('phonePlaceholder')}
                         />
                       </div>
                       <div className="space-y-2 sm:col-span-2">
                         <Label htmlFor="testimonyDescription">
-                          Testimony Description <span className="text-red-500">*</span>
+                          {t('testimonyDescription')} <span className="text-red-500">*</span>
                         </Label>
                         <Textarea
                           id="testimonyDescription"
                           name="description"
                           value={testimonyFormData.description}
                           onChange={handleTestimonyChange}
-                          placeholder="Testimony description or statement"
+                          placeholder={t('testimonyDescriptionPlaceholder')}
                           rows={4}
                           required
                         />
@@ -605,20 +597,20 @@ export default function InvolvedParties() {
                     <div className={`text-sm text-zinc-500 flex items-center gap-1 mb-4 ${isMobile ? "px-4" : ""}`}>
                       <AlertCircle className="h-4 w-4" />
                       <span>
-                        Fields marked with <span className="text-red-500">*</span> are required
+                        {t('requiredFields').replace('*', '<span class="text-red-500">*</span>')}
                       </span>
                     </div>
                   </ScrollArea>
 
                   <DialogFooter className={isMobile ? "flex p-4 border-t bg-zinc-50" : ""}>
                     <Button variant="outline" onClick={() => setTestimonyDialogOpen(false)}>
-                      Cancel
+                      {t('cancel')}
                     </Button>
                     <Button
                       onClick={handleAddTestimony}
                       disabled={!testimonyFormData.fullName || !testimonyFormData.description}
                     >
-                      {editingTestimonyIndex !== null ? "Update" : "Add"} Testimony
+                      {editingTestimonyIndex !== null ? t('update') : t('add')} {t('addTestimony').split(' ')[1]}
                     </Button>
                   </DialogFooter>
                 </DialogContent>
@@ -632,10 +624,10 @@ export default function InvolvedParties() {
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead>Name</TableHead>
-                        <TableHead>Contact</TableHead>
-                        <TableHead>Testimony</TableHead>
-                        <TableHead className="w-[100px]">Actions</TableHead>
+                        <TableHead>{t('name')}</TableHead>
+                        <TableHead>{t('contact')}</TableHead>
+                        <TableHead>{t('testimonies')}</TableHead>
+                        <TableHead className="w-[100px]">{t('actions')}</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -645,8 +637,8 @@ export default function InvolvedParties() {
                             <div className="font-medium">{testimony.fullName}</div>
                           </TableCell>
                           <TableCell>
-                            <div>{testimony.email || "No email provided"}</div>
-                            <div className="text-sm text-zinc-500">{testimony.phone || "No phone provided"}</div>
+                            <div>{testimony.email || t('noEmail')}</div>
+                            <div className="text-sm text-zinc-500">{testimony.phone || t('noPhone')}</div>
                           </TableCell>
                           <TableCell>
                             <div className="max-w-[200px] truncate">{testimony.description}</div>
@@ -676,10 +668,8 @@ export default function InvolvedParties() {
               </>
             ) : (
               <div className="text-center py-6 border border-dashed rounded-md border-zinc-300 bg-zinc-50">
-                <p className="text-zinc-500">No testimonies added yet.</p>
-                <p className="text-sm text-zinc-400 mt-1">
-                  Click &apos;Add Testimony&apos; to add information about testimonies related to the incident.
-                </p>
+                <p className="text-zinc-500">{t('noTestimonies')}</p>
+                <p className="text-sm text-zinc-400 mt-1">{t('addTestimonyHint2')}</p>
               </div>
             )}
           </div>
