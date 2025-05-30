@@ -341,6 +341,18 @@
         "confirmInfo": "Confirmo que tota la informació proporcionada és precisa i completa segons el meu millor coneixement.",
         "submitting": "Enviant...",
         "submitClaim": "Enviar part"
+      },
+      "VehicleInformationForm": {
+        "title": "Detalls del vehicle",
+        "description": "Si us plau, proporciona informació sobre el teu vehicle.",
+        "vehicleType": "Tipus de vehicle",
+        "vehicleTypePlaceholder": "Selecciona el tipus de vehicle",
+        "vehicleMake": "Marca del vehicle",
+        "vehicleMakePlaceholder": "p. ex., Toyota, Honda, BMW",
+        "vehicleModel": "Model del vehicle",
+        "vehicleModelPlaceholder": "p. ex., Corolla, Civic, X5",
+        "licensePlate": "Matrícula",
+        "licensePlatePlaceholder": "Introdueix el número de matrícula"
       }
     },
     "GeneralClaimAuto": {

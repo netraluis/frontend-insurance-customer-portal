@@ -311,6 +311,18 @@
         "confirmInfo": "Je confirme que toutes les informations fournies sont exactes et complètes au meilleur de ma connaissance.",
         "submitting": "Envoi...",
         "submitClaim": "Soumettre la déclaration"
+      },
+      "VehicleInformationForm": {
+        "title": "Détails du véhicule",
+        "description": "Veuillez fournir des informations sur votre véhicule.",
+        "vehicleType": "Type de véhicule",
+        "vehicleTypePlaceholder": "Sélectionnez le type de véhicule",
+        "vehicleMake": "Marque du véhicule",
+        "vehicleMakePlaceholder": "ex., Toyota, Honda, BMW",
+        "vehicleModel": "Modèle du véhicule",
+        "vehicleModelPlaceholder": "ex., Corolla, Civic, X5",
+        "licensePlate": "Plaque d'immatriculation",
+        "licensePlatePlaceholder": "Entrez le numéro de plaque d'immatriculation"
       }
     },
     "GeneralClaimAuto": {

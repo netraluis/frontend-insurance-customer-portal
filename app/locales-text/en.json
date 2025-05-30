@@ -307,6 +307,18 @@
         "confirmInfo": "I confirm that all the information provided is accurate and complete to the best of my knowledge.",
         "submitting": "Submitting...",
         "submitClaim": "Submit Claim"
+      },
+      "VehicleInformationForm": {
+        "title": "Vehicle Details",
+        "description": "Please provide information about your vehicle.",
+        "vehicleType": "Vehicle Type",
+        "vehicleTypePlaceholder": "Select vehicle type",
+        "vehicleMake": "Vehicle Make",
+        "vehicleMakePlaceholder": "e.g., Toyota, Honda, BMW",
+        "vehicleModel": "Vehicle Model",
+        "vehicleModelPlaceholder": "e.g., Corolla, Civic, X5",
+        "licensePlate": "License Plate",
+        "licensePlatePlaceholder": "Enter license plate number"
       }
     },
     "GeneralClaimAuto": {
