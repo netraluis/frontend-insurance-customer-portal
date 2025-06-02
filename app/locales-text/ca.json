@@ -379,7 +379,12 @@
     },
     "AccidentDetails": {
       "title": "Detalls de l'accident",
-      "description": "Si us plau, proporciona informació detallada sobre l'accident."
+      "description": "Si us plau, proporciona informació detallada sobre l'accident.",
+      "locationLabel": "Lloc de l'accident",
+      "locationPlaceholder": "Introdueix l'adreça o el lloc on ha ocorregut l'accident",
+      "dateLabel": "Data de l'accident",
+      "descriptionLabel": "Descripció detallada de l'accident",
+      "descriptionPlaceholder": "Descriu detalladament el que ha ocorregut..."
     },
     "AdditionalInformation": {
       "title": "Informació addicional",
@@ -416,7 +421,7 @@
     },
     "InvolvedParties": {
       "title": "Parts implicades",
-      "description": "Proporciona informació sobre altres parts implicades o testimonis de l'incident.",
+      "description": "Descripció de la implicació",
       "question": "Hi havia altres parts implicades en l'incident?",
       "questionHint": "Selecciona 'Sí' si hi havia altres persones o empreses implicades en l'incident.",
       "yes": "Sí",
@@ -433,7 +438,6 @@
       "emailPlaceholder": "Adreça electrònica",
       "phone": "Telèfon",
       "phonePlaceholder": "Número de telèfon",
-      "description": "Descripció de la implicació",
       "descriptionPlaceholder": "Descriu com va estar implicada aquesta part en l'incident",
       "insuranceCompany": "Companyia d'assegurances",
       "insuranceCompanyPlaceholder": "Nom de la companyia d'assegurances",

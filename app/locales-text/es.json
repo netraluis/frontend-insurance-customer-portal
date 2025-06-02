@@ -10,15 +10,6 @@
     "examples": "Ejemplos",
     "goToNextjs": "Ir a nextjs.org →"
   },
-  "ChatWidget": {
-    "open": "Abrir Chat",
-    "close": "Cerrar chat",
-    "title": "Chat Globalrisc",
-    "placeholder": "Escribe tu mensaje...",
-    "send": "Enviar",
-    "loading": "Cargando...",
-    "welcome": "¿En qué podemos ayudarte hoy?"
-  },
   "LoginPage": {
     "company": "Acme Inc",
     "testimonial": "Acme Inc ha transformado la forma en que gestionamos nuestro negocio, proporcionando una seguridad y eficiencia incomparables.",
@@ -38,6 +29,15 @@
     "verifyButton": "Verificar y acceder",
     "backToLogin": "Volver al inicio de sesión",
     "resendCode": "Reenviar código"
+  },
+  "ChatWidget": {
+    "open": "Abrir Chat",
+    "close": "Cerrar chat",
+    "title": "Chat Globalrisc",
+    "placeholder": "Escribe tu mensaje...",
+    "send": "Enviar",
+    "loading": "Cargando...",
+    "welcome": "¿En qué podemos ayudarte hoy?"
   },
   "ClaimAuto": {
     "PolicyInformation": {
@@ -223,6 +223,18 @@
     "accidentDetailsDescription": "Por favor, proporciona información detallada sobre el accidente.",
     "damageDocumentationTitle": "Documentación de daños",
     "damageDocumentationDescription": "Por favor, proporciona una descripción detallada de los daños del vehículo y adjunta fotos si es posible.",
+    "PoliceInvolvement": {
+      "title": "Intervención policial",
+      "question": "¿Intervino la policía en el accidente?"
+    },
+    "TrafficServiceInvolvement": {
+      "title": "Intervención de tráfico",
+      "question": "¿Intervino el servicio de tráfico local?"
+    },
+    "FriendlyAccidentReport": {
+      "title": "Parte amistoso",
+      "question": "¿Se realizó un parte amistoso?"
+    },
     "Documentation": {
       "title": "Documentación",
       "description": "Sube fotos, vídeos e informes oficiales relacionados con el accidente.",
@@ -409,7 +421,7 @@
     },
     "InvolvedParties": {
       "title": "Partes implicadas",
-      "description": "Proporciona información sobre otras partes implicadas o testigos del incidente.",
+      "description": "Descripción de la implicación",
       "question": "¿Hubo otras partes implicadas en el incidente?",
       "questionHint": "Selecciona 'Sí' si hubo otras personas o empresas implicadas en el incidente.",
       "yes": "Sí",
@@ -426,7 +438,6 @@
       "emailPlaceholder": "Dirección de correo electrónico",
       "phone": "Teléfono",
       "phonePlaceholder": "Número de teléfono",
-      "description": "Descripción de la implicación",
       "descriptionPlaceholder": "Describe cómo estuvo implicada esta parte en el incidente",
       "insuranceCompany": "Compañía de seguros",
       "insuranceCompanyPlaceholder": "Nombre de la compañía de seguros",
@@ -553,17 +564,5 @@
     "complete": "{percent}% Completado",
     "step": "Paso {current}/{total}",
     "goToStep": "Ir al paso {step}"
-  },
-  "PoliceInvolvement": {
-    "title": "Intervención policial",
-    "question": "¿Intervino la policía en el accidente?"
-  },
-  "TrafficServiceInvolvement": {
-    "title": "Intervención de tráfico",
-    "question": "¿Intervino el servicio de tráfico local?"
-  },
-  "FriendlyAccidentReport": {
-    "title": "Parte amistoso",
-    "question": "¿Se realizó un parte amistoso?"
   }
 }
