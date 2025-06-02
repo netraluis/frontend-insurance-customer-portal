@@ -64,7 +64,7 @@ export default function MessageBubble({ message, isFirstInGroup, isLastInGroup }
       <div className={cn("flex items-start gap-3", isUser && "flex-row-reverse", isLastInGroup ? "mb-4" : "mb-1")}>
         {!isUser && isFirstInGroup && (
           <Avatar className="h-8 w-8 bg-zinc-950 mt-1 shrink-0">
-            <img src="/abstract-logo.png" alt="Globalrisc AI Agent" />
+            <img src="/globalriscLogo.png" alt="Globalrisc AI Agent" />
           </Avatar>
         )}
 
