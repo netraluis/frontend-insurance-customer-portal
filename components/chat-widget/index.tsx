@@ -231,8 +231,8 @@ export default function Home(
             className={`rounded-full px-4 py-2 bg-zinc-950 text-white hover:bg-zinc-800 shadow-lg ${isMobile ? "h-12" : ""}`}
             onClick={handleToggle}
           >
-            <MessageSquare className={`${isMobile ? "h-6 w-6" : "h-5 w-5"} mr-2`} />
-            Open Chat Widget
+            <MessageSquare className={`${isMobile ? "h-6 w-6" : "h-5 w-5"} `} />
+            {/* Open Chat Widget */}
           </Button>
         </div>
       )}

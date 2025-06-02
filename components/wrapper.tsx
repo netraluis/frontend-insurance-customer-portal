@@ -236,7 +236,7 @@ export default function Wrapper({ children }: { children: React.ReactNode }) {
               onClick={handleToggle}
             >
               <MessageSquare className={`${isMobile ? "h-6 w-6" : "h-5 w-5"} mr-2`} />
-              Open Chat Widget
+              {/* Open Chat Widget */}
             </Button>
           </div>
         )}

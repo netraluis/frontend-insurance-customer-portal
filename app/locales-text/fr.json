@@ -86,7 +86,13 @@
       "bodilyInjuriesDescriptionShort": "Décrivez les blessures subies.",
       "bodilyInjuriesDescriptionLong": "Veuillez fournir des détails sur les blessures subies lors de l'accident.",
       "bodilyInjuriesPlaceholderShort": "Décrivez les blessures et les soins médicaux reçus...",
-      "bodilyInjuriesPlaceholderLong": "Décrivez la nature et l'étendue des blessures, qui a été blessé et les soins médicaux reçus..."
+      "bodilyInjuriesPlaceholderLong": "Décrivez la nature et l'étendue des blessures, qui a été blessé et les soins médicaux reçus...",
+      "damageDocumentationTitle": "Documentation des dommages",
+      "damageDocumentationDescription": "Veuillez fournir une description détaillée des dommages au véhicule et joindre des photos si possible.",
+      "damageDescriptionLabel": "Description des dommages",
+      "damageDescriptionPlaceholder": "Décrivez les dommages à votre véhicule en détail...",
+      "damagePhotosLabel": "Photos des dommages",
+      "damagePhotosDescription": "Téléchargez des photos claires montrant les dommages à votre véhicule si possible."
     },
     "DamageDocumentation": {
       "title": "Documentation des dommages",

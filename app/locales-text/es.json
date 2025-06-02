@@ -86,7 +86,13 @@
       "bodilyInjuriesDescriptionShort": "Describe las lesiones sufridas.",
       "bodilyInjuriesDescriptionLong": "Por favor, proporciona detalles sobre las lesiones sufridas en el accidente.",
       "bodilyInjuriesPlaceholderShort": "Describe las lesiones y la atención médica recibida...",
-      "bodilyInjuriesPlaceholderLong": "Describe la naturaleza y el alcance de las lesiones, quién resultó herido y cualquier atención médica recibida..."
+      "bodilyInjuriesPlaceholderLong": "Describe la naturaleza y el alcance de las lesiones, quién resultó herido y cualquier atención médica recibida...",
+      "damageDocumentationTitle": "Documentación de daños",
+      "damageDocumentationDescription": "Por favor, proporciona una descripción detallada de los daños del vehículo y adjunta fotos si es posible.",
+      "damageDescriptionLabel": "Descripción de los daños",
+      "damageDescriptionPlaceholder": "Describe los daños de tu vehículo en detalle...",
+      "damagePhotosLabel": "Fotos de daños",
+      "damagePhotosDescription": "Sube fotos claras que muestren los daños de tu vehículo si es posible."
     },
     "DamageDocumentation": {
       "title": "Documentación de daños",

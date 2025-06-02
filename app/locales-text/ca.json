@@ -86,7 +86,13 @@
       "bodilyInjuriesDescriptionShort": "Descriu les lesions sofertes.",
       "bodilyInjuriesDescriptionLong": "Si us plau, proporciona detalls sobre les lesions sofertes en l'accident.",
       "bodilyInjuriesPlaceholderShort": "Descriu les lesions i l'atenció mèdica rebuda...",
-      "bodilyInjuriesPlaceholderLong": "Descriu la naturalesa i l'abast de les lesions, qui va resultar ferit i qualsevol atenció mèdica rebuda..."
+      "bodilyInjuriesPlaceholderLong": "Descriu la naturalesa i l'abast de les lesions, qui va resultar ferit i qualsevol atenció mèdica rebuda...",
+      "damageDocumentationTitle": "Documentació de danys",
+      "damageDocumentationDescription": "Si us plau, proporciona una descripció detallada dels danys del vehicle i adjunta fotos si és possible.",
+      "damageDescriptionLabel": "Descripció dels danys",
+      "damageDescriptionPlaceholder": "Descriu els danys del teu vehicle en detall...",
+      "damagePhotosLabel": "Fotos dels danys",
+      "damagePhotosDescription": "Puja fotos clares que mostrin els danys del teu vehicle si és possible."
     },
     "DamageDocumentation": {
       "title": "Documentació de danys",
