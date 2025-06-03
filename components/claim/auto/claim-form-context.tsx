@@ -22,31 +22,41 @@ export type Driver = {
   policyNumber: string
 }
 
-export type Document = {
-  id: string
-  name: string
-  type: string
-  url: string
-  size: number
-}
+// export type Document = {
+//   id: string
+//   name: string
+//   type: string
+//   url: string
+//   size: number
+// }
 
-// Type for the friendly report document
-export type FriendlyReportDocument = {
-  id: string
-  name: string
-  type: string
-  url: string
-  size: number
-}
+// // Type for the friendly report document
+// export type FriendlyReportDocument = {
+//   id: string
+//   name: string
+//   type: string
+//   url: string
+//   size: number
+// }
 
-// Types for damage photos and videos
-export type DamageMedia = {
+// // Types for damage photos and videos
+// export type DamageMedia = {
+//   id: string
+//   name: string
+//   type: string
+//   url: string
+//   size: number
+//   thumbnail?: string // For video thumbnails
+// }
+
+export type MediaFile = {
   id: string
   name: string
   type: string
   url: string
   size: number
-  thumbnail?: string // For video thumbnails
+  thumbnail?: string
+  // buffer: Buffer
 }
 
 // Update the FormData type to include vehicleType
@@ -80,18 +90,18 @@ export type FormData = {
   policeInvolved: boolean
   trafficServiceInvolved: boolean
   friendlyReport: boolean
-  friendlyReportDocument: FriendlyReportDocument | null
+  friendlyReportDocument: MediaFile | null
   bodilyInjuries: boolean
   bodilyInjuriesDescription: string
   damageDescription: string
-  damagePhotos: DamageMedia[]
+  damagePhotos: MediaFile[]
 
   // Step 4: Involved Parties
   drivers: Driver[]
   witnesses: Witness[]
 
   // Step 5: Documentation
-  documents: Document[]
+  documents: MediaFile[]
 }
 
 // Update the isStepComplete function for step 2 to include vehicleType check
@@ -106,6 +116,8 @@ type ClaimFormContextType = {
   loadProgress: () => boolean
   isSubmitted: boolean
   setIsSubmitted: (value: boolean) => void
+  isSubmitting: boolean
+  setIsSubmitting: (value: boolean) => void
 }
 
 // Update the FormData type to include vehicleType
@@ -153,6 +165,7 @@ export function ClaimFormProvider({ children }: { children: ReactNode }) {
   const [formData, setFormData] = useState<FormData>(initialFormData)
   const [currentStep, setCurrentStep] = useState(1)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const updateFormData = (data: Partial<FormData>) => {
     setFormData((prev) => ({ ...prev, ...data }))
@@ -241,6 +254,14 @@ export function ClaimFormProvider({ children }: { children: ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []) // Empty dependency array ensures this only runs once
 
+  // Expose form state and step to window for debugging/testing (non-production only)
+  useEffect(() => {
+    if (typeof window !== "undefined" && process.env.NODE_ENV !== "production") {
+      (window as any).__CLAIM_FORM_STATE__ = formData;
+      (window as any).__CLAIM_FORM_STEP__ = currentStep;
+    }
+  }, [formData, currentStep]);
+
   return (
     <ClaimFormContext.Provider
       value={{
@@ -253,6 +274,8 @@ export function ClaimFormProvider({ children }: { children: ReactNode }) {
         loadProgress,
         isSubmitted,
         setIsSubmitted,
+        isSubmitting,
+        setIsSubmitting,
       }}
     >
       {children}

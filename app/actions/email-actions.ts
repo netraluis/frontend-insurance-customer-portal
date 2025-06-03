@@ -2,13 +2,13 @@
 import type { FormData } from "../../components/claim/auto/claim-form-context"
 import type { FormData as GeneralFormData } from "../../components/claim/general/general-claim-form-context"
 import { LoopsClient } from "loops";
+import fs from 'fs';
 
 const loops = new LoopsClient(process.env.LOOPS_API_KEY!);
 
 export async function sendConfirmationEmail(formData: FormData | GeneralFormData, claimNumber: string, pdfBase64: string) {
   console.log("Sending confirmation email... (base64 length)", pdfBase64.length)
   try {
-
      await loops.sendTransactionalEmail({
       transactionalId: process.env.TRANSACTION_ID_RESUME_EMAIL!,
       email: formData.email,

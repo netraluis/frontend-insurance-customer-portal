@@ -33,6 +33,7 @@ export type MediaFile = {
   url: string
   size: number
   thumbnail?: string
+  // buffer: Buffer
 }
 
 export type FormData = {
