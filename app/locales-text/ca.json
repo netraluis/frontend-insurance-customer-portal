@@ -390,7 +390,15 @@
       "locationPlaceholder": "Introdueix l'adreça o el lloc on ha ocorregut l'accident",
       "dateLabel": "Data de l'accident",
       "descriptionLabel": "Descripció detallada de l'accident",
-      "descriptionPlaceholder": "Descriu detalladament el que ha ocorregut..."
+      "descriptionPlaceholder": "Descriu detalladament el que ha ocorregut...",
+      "accidentDetailsTitle": "Detalls de l'accident",
+      "accidentDetailsDescription": "Si us plau, proporciona informació detallada sobre l'accident.",
+      "damageDocumentationTitle": "Documentació de danys",
+      "damageDocumentationDescription": "Si us plau, proporciona una descripció detallada dels danys del vehicle i adjunta fotos si és possible.",
+      "damageDescriptionLabel": "Descripció dels danys",
+      "damageDescriptionPlaceholder": "Descriu els danys del teu vehicle en detall...",
+      "damagePhotosLabel": "Fotos dels danys",
+      "damagePhotosDescription": "Puja fotos clares que mostrin els danys del teu vehicle si és possible."
     },
     "AdditionalInformation": {
       "title": "Informació addicional",
@@ -558,7 +566,9 @@
       "additionalComments": "Comentaris addicionals",
       "confirmInfo": "Confirmo que tota la informació proporcionada és precisa i completa segons el meu millor coneixement.",
       "submitting": "Enviant...",
-      "submitClaim": "Enviar part"
+      "submitClaim": "Enviar part",
+      "previous": "Anterior",
+      "reviewAndSubmit": "Revisar i enviar"
     },
     "stepPolicy": "Pòlissa",
     "stepAccident": "Accident",
@@ -569,6 +579,25 @@
     "formProgress": "Progrés del formulari",
     "complete": "{percent}% Completat",
     "step": "Pas {current}/{total}",
-    "goToStep": "Ves al pas {step}"
+    "goToStep": "Ves al pas {step}",
+    "policyInformation": "Informació de la pòlissa",
+    "saveProgress": "Desar progrés",
+    "accidentDetails": "Detalls de l'accident",
+    "next": "Següent",
+    "additionalInformation": "Informació addicional",
+    "involvedParties": "Parts implicades",
+    "additionalDocumentation": "Documentació addicional",
+    "previous": "Anterior",
+    "reviewAndSubmit": "Revisar i enviar",
+    "submitClaim": "Enviar part"
+  },
+  "ClaimGeneral": {
+    "locationLabel": "Lloc de l'accident",
+    "locationPlaceholder": "Introdueix l'adreça o lloc on va ocórrer l'accident",
+    "dateLabel": "Data de l'accident",
+    "descriptionLabel": "Descripció detallada de l'accident",
+    "descriptionPlaceholder": "Descriu el que ha passat amb detall...",
+    "damageDescriptionLabel": "Descripció dels danys",
+    "damageDescriptionPlaceholder": "Descriu els danys del teu vehicle en detall..."
   }
 }

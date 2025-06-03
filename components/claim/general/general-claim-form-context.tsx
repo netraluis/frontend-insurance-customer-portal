@@ -2,6 +2,18 @@
 
 import { createContext, useContext, useState, type ReactNode, useEffect } from "react"
 
+/*
+driverFirstName: '',
+driverLastName: '',
+driverDateOfBirth: null,
+driverID: '',
+vehicleMake: '',
+vehicleModel: '',
+licensePlate: '',
+vehicleType: '',
+  friendlyReportDocument: null,
+*/
+
 export type InvolvedParty = {
   fullName: string
   email: string
@@ -46,23 +58,23 @@ export type FormData = {
 
   // Step 1.5: Driver Information (si es diferente al asegurado)
   hasDifferentDriver: boolean
-  driverFirstName: string
-  driverLastName: string
-  driverDateOfBirth: Date | null
-  driverID: string
+  // driverFirstName: string
+  // driverLastName: string
+  // driverDateOfBirth: Date | null
+  // driverID: string
 
   // Step 2: Vehicle Information
-  vehicleMake: string
-  vehicleModel: string
-  licensePlate: string
-  vehicleType: string // Add this new field
+  // vehicleMake: string
+  // vehicleModel: string
+  // licensePlate: string
+  // vehicleType: string // Add this new field
   // Step 2: Accident Details
   accidentLocation: string
   accidentDate: Date | null
   accidentDescription: string
   damageDescription: string
   damagePhotos: MediaFile[]
-  friendlyReportDocument: MediaFile | null
+  // friendlyReportDocument: MediaFile | null
 
   // Step 3: Additional Information
   policeInvolved: boolean
@@ -96,6 +108,8 @@ type GeneralClaimFormContextType = {
   loadProgress: () => boolean
   isSubmitted: boolean
   setIsSubmitted: (value: boolean) => void
+  isSubmitting: boolean
+  setIsSubmitting: (value: boolean) => void
 }
 
 const initialFormData: FormData = {
@@ -106,22 +120,22 @@ const initialFormData: FormData = {
   policyNumber: "",
 
   hasDifferentDriver: false,
-  driverFirstName: "",
-  driverLastName: "",
-  driverDateOfBirth: null,
-  driverID: "",
+  // driverFirstName: "",
+  // driverLastName: "",
+  // driverDateOfBirth: null,
+  // driverID: "",
 
-  vehicleMake: "",
-  vehicleModel: "",
-  licensePlate: "",
-  vehicleType: "",
+  // vehicleMake: "",
+  // vehicleModel: "",
+  // licensePlate: "",
+  // vehicleType: "",
 
   accidentLocation: "",
   accidentDate: null,
   accidentDescription: "",
   damageDescription: "",
   damagePhotos: [],
-  friendlyReportDocument: null,
+  // friendlyReportDocument: null,
 
   policeInvolved: false,
   trafficServiceInvolved: false,
@@ -148,6 +162,7 @@ export function GeneralClaimFormProvider({ children }: { children: ReactNode }) 
   const [formData, setFormData] = useState<FormData>(initialFormData)
   const [currentStep, setCurrentStep] = useState(1)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const updateFormData = (data: Partial<FormData>) => {
     setFormData((prev) => ({ ...prev, ...data }))
@@ -223,6 +238,13 @@ export function GeneralClaimFormProvider({ children }: { children: ReactNode }) 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []) // Empty dependency array ensures this only runs once
 
+  useEffect(() => {
+    if (typeof window !== "undefined" && process.env.NODE_ENV !== "production") {
+      (window as any).__CLAIM_FORM_STATE__ = formData;
+      (window as any).__CLAIM_FORM_STEP__ = currentStep;
+    }
+  }, [formData, currentStep]);
+
   return (
     <GeneralClaimFormContext.Provider
       value={{
@@ -235,6 +257,8 @@ export function GeneralClaimFormProvider({ children }: { children: ReactNode }) 
         loadProgress,
         isSubmitted,
         setIsSubmitted,
+        isSubmitting,
+        setIsSubmitting,
       }}
     >
       {children}

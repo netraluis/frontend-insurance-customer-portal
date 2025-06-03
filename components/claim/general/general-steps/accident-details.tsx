@@ -15,7 +15,7 @@ import { useTranslations } from 'next-intl'
 export default function AccidentDetails() {
   const { formData, updateFormData } = useGeneralClaimForm()
   const isMobile = useIsMobile()
-  const t = useTranslations('ClaimAuto')
+  const t = useTranslations('GeneralClaimAuto.AccidentDetails')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target

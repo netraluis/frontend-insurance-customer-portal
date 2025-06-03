@@ -390,7 +390,15 @@
       "locationPlaceholder": "Entrez l'adresse ou le lieu où l'accident s'est produit",
       "dateLabel": "Date de l'accident",
       "descriptionLabel": "Description détaillée de l'accident",
-      "descriptionPlaceholder": "Veuillez décrire ce qui s'est passé en détail..."
+      "descriptionPlaceholder": "Veuillez décrire ce qui s'est passé en détail...",
+      "accidentDetailsTitle": "Détails de l'accident",
+      "accidentDetailsDescription": "Veuillez fournir des informations détaillées sur l'accident.",
+      "damageDocumentationTitle": "Documentation des dommages",
+      "damageDocumentationDescription": "Veuillez fournir une description détaillée des dommages au véhicule et joindre des photos si possible.",
+      "damageDescriptionLabel": "Description des dommages",
+      "damageDescriptionPlaceholder": "Décrivez les dommages à votre véhicule en détail...",
+      "damagePhotosLabel": "Photos des dommages",
+      "damagePhotosDescription": "Téléchargez des photos claires montrant les dommages à votre véhicule si possible."
     },
     "AdditionalInformation": {
       "title": "Informations supplémentaires",
@@ -558,7 +566,8 @@
       "additionalComments": "Commentaires supplémentaires",
       "confirmInfo": "Je confirme que toutes les informations fournies sont exactes et complètes au meilleur de ma connaissance.",
       "submitting": "Envoi en cours...",
-      "submitClaim": "Envoyer la déclaration"
+      "submitClaim": "Soumettre la déclaration",
+      "reviewAndSubmit": "Vérifier et soumettre"
     },
     "stepPolicy": "Police",
     "stepAccident": "Accident",
@@ -569,6 +578,25 @@
     "formProgress": "Progression du formulaire",
     "complete": "{percent}% Terminé",
     "step": "Étape {current}/{total}",
-    "goToStep": "Aller à l'étape {step}"
+    "goToStep": "Aller à l'étape {step}",
+    "policyInformation": "Informations sur la police",
+    "saveProgress": "Enregistrer la progression",
+    "accidentDetails": "Détails de l'accident",
+    "next": "Suivant",
+    "additionalInformation": "Informations supplémentaires",
+    "involvedParties": "Parties impliquées",
+    "additionalDocumentation": "Documentation supplémentaire",
+    "previous": "Précédent",
+    "reviewAndSubmit": "Vérifier et soumettre",
+    "submitClaim": "Soumettre la déclaration"
+  },
+  "ClaimGeneral": {
+    "locationLabel": "Lieu de l'accident",
+    "locationPlaceholder": "Entrez l'adresse ou le lieu où l'accident s'est produit",
+    "dateLabel": "Date de l'accident",
+    "descriptionLabel": "Description détaillée de l'accident",
+    "descriptionPlaceholder": "Veuillez décrire ce qui s'est passé en détail...",
+    "damageDescriptionLabel": "Description des dommages",
+    "damageDescriptionPlaceholder": "Décrivez les dommages à votre véhicule en détail..."
   }
 }

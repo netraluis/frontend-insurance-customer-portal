@@ -12,13 +12,13 @@ import ReviewSubmit from "./general-steps/review-submit"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { toast } from "@/components/ui/use-toast"
-import { ArrowLeft, ArrowRight, Save } from "lucide-react"
+import { ArrowLeft, ArrowRight, Loader2, Save } from "lucide-react"
 import { useTranslations } from 'next-intl'
 
 export default function GeneralClaimFormLayout() {
-  const { currentStep, setCurrentStep, isStepComplete, saveProgress, loadProgress, isSubmitted } = useGeneralClaimForm()
+  const { currentStep, setCurrentStep, isStepComplete, saveProgress, loadProgress, isSubmitted, isSubmitting } = useGeneralClaimForm()
   const [isFormSubmitted, setIsFormSubmitted] = useState(false)
-  const t = useTranslations('ClaimAuto')
+  const t = useTranslations('GeneralClaimAuto')
 
   // Listen for changes in the DOM to detect when the form has been submitted
   useEffect(() => {
@@ -51,13 +51,13 @@ export default function GeneralClaimFormLayout() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []) // Empty dependency array ensures this only runs once
 
-  const handleSave = () => {
-    saveProgress()
-    toast({
-      title: "Progress Saved",
-      description: "Your form progress has been saved. You can return later to continue.",
-    })
-  }
+  // const handleSave = () => {
+  //   saveProgress()
+  //   toast({
+  //     title: "Progress Saved",
+  //     description: "Your form progress has been saved. You can return later to continue.",
+  //   })
+  // }
 
   const handleNext = () => {
     if (currentStep < 6) {
@@ -147,10 +147,10 @@ export default function GeneralClaimFormLayout() {
               )}
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" onClick={handleSave} className="flex items-center gap-2">
+              {/* <Button variant="outline" onClick={handleSave} className="flex items-center gap-2">
                 <Save className="h-4 w-4" />
                 {t('saveProgress')}
-              </Button>
+              </Button> */}
               {currentStep < 6 ? (
                 <Button
                   onClick={handleNext}
@@ -162,7 +162,7 @@ export default function GeneralClaimFormLayout() {
                 </Button>
               ) : (
                 <Button type="submit" form="review-form">
-                  {t('submitClaim')}
+                  {isSubmitting ?<Loader2 className="h-4 w-4 animate-spin" /> : t('submitClaim')}
                 </Button>
               )}
             </div>

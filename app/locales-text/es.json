@@ -390,7 +390,15 @@
       "locationPlaceholder": "Introduce la dirección o lugar donde ocurrió el accidente",
       "dateLabel": "Fecha del accidente",
       "descriptionLabel": "Descripción detallada del accidente",
-      "descriptionPlaceholder": "Describe lo sucedido con detalle..."
+      "descriptionPlaceholder": "Describe lo sucedido con detalle...",
+      "accidentDetailsTitle": "Detalles del accidente",
+      "accidentDetailsDescription": "Por favor, proporciona información detallada sobre el accidente.",
+      "damageDocumentationTitle": "Documentación de daños",
+      "damageDocumentationDescription": "Por favor, proporciona una descripción detallada de los daños del vehículo y adjunta fotos si es posible.",
+      "damageDescriptionLabel": "Descripción de los daños",
+      "damageDescriptionPlaceholder": "Describe los daños de tu vehículo en detalle...",
+      "damagePhotosLabel": "Fotos de daños",
+      "damagePhotosDescription": "Sube fotos claras que muestren los daños de tu vehículo si es posible."
     },
     "AdditionalInformation": {
       "title": "Información adicional",
@@ -558,7 +566,8 @@
       "additionalComments": "Comentarios adicionales",
       "confirmInfo": "Confirmo que toda la información proporcionada es precisa y completa según mi leal saber y entender.",
       "submitting": "Enviando...",
-      "submitClaim": "Enviar parte"
+      "submitClaim": "Enviar parte",
+      "reviewAndSubmit": "Revisar y enviar"
     },
     "stepPolicy": "Póliza",
     "stepAccident": "Accidente",
@@ -569,6 +578,25 @@
     "formProgress": "Progreso del formulario",
     "complete": "{percent}% Completado",
     "step": "Paso {current}/{total}",
-    "goToStep": "Ir al paso {step}"
+    "goToStep": "Ir al paso {step}",
+    "policyInformation": "Información de la póliza",
+    "saveProgress": "Guardar progreso",
+    "accidentDetails": "Detalles del accidente",
+    "next": "Siguiente",
+    "additionalInformation": "Información adicional",
+    "involvedParties": "Partes implicadas",
+    "additionalDocumentation": "Documentación adicional",
+    "previous": "Anterior",
+    "reviewAndSubmit": "Revisar y enviar",
+    "submitClaim": "Enviar parte"
+  },
+  "ClaimGeneral": {
+    "locationLabel": "Lugar del accidente",
+    "locationPlaceholder": "Introduce la dirección o lugar donde ocurrió el accidente",
+    "dateLabel": "Fecha del incidente",
+    "descriptionLabel": "Descripción detallada del accidente",
+    "descriptionPlaceholder": "Describe lo sucedido con detalle...",
+    "damageDescriptionLabel": "Descripción de los daños",
+    "damageDescriptionPlaceholder": "Describe los daños de tu vehículo en detalle..."
   }
 }

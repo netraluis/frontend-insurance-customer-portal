@@ -27,8 +27,7 @@ import Image from "next/image"
 import { useTranslations } from 'next-intl'
 
 export default function ReviewSubmit() {
-  const { formData, setCurrentStep, setIsSubmitted } = useGeneralClaimForm()
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const { formData, setCurrentStep, setIsSubmitted, setIsSubmitting } = useGeneralClaimForm()
   const [isLocalSubmitted, setIsLocalSubmitted] = useState(false)
   const [claimNumber, setClaimNumber] = useState("")
   const [pdfUrl, setPdfUrl] = useState<string | null>(null)
@@ -327,7 +326,7 @@ export default function ReviewSubmit() {
             <AccordionTrigger className="px-4 hover:no-underline hover:bg-zinc-50">
               <div className="flex justify-between items-center w-full">
                 <span className="font-medium">{tReview('policyInformation')}</span>
-                <Button
+                {/* <Button
                   variant="ghost"
                   size="sm"
                   className="h-8 gap-1 text-zinc-500"
@@ -338,7 +337,7 @@ export default function ReviewSubmit() {
                 >
                   <Edit className="h-4 w-4" />
                   {tReview('edit')}
-                </Button>
+                </Button> */}
               </div>
             </AccordionTrigger>
             <AccordionContent className="px-4 pb-4 pt-2">
@@ -370,7 +369,7 @@ export default function ReviewSubmit() {
             <AccordionTrigger className="px-4 hover:no-underline hover:bg-zinc-50">
               <div className="flex justify-between items-center w-full">
                 <span className="font-medium">{tReview('accidentDetails')}</span>
-                <Button
+                {/* <Button
                   variant="ghost"
                   size="sm"
                   className="h-8 gap-1 text-zinc-500"
@@ -381,7 +380,7 @@ export default function ReviewSubmit() {
                 >
                   <Edit className="h-4 w-4" />
                   {tReview('edit')}
-                </Button>
+                </Button> */}
               </div>
             </AccordionTrigger>
             <AccordionContent className="px-4 pb-4 pt-2">
@@ -456,7 +455,7 @@ export default function ReviewSubmit() {
             <AccordionTrigger className="px-4 hover:no-underline hover:bg-zinc-50">
               <div className="flex justify-between items-center w-full">
                 <span className="font-medium">{tReview('additionalInformation')}</span>
-                <Button
+                {/* <Button
                   variant="ghost"
                   size="sm"
                   className="h-8 gap-1 text-zinc-500"
@@ -467,7 +466,7 @@ export default function ReviewSubmit() {
                 >
                   <Edit className="h-4 w-4" />
                   {tReview('edit')}
-                </Button>
+                </Button> */}
               </div>
             </AccordionTrigger>
             <AccordionContent className="px-4 pb-4 pt-2">
@@ -559,7 +558,7 @@ export default function ReviewSubmit() {
             <AccordionTrigger className="px-4 hover:no-underline hover:bg-zinc-50">
               <div className="flex justify-between items-center w-full">
                 <span className="font-medium">{tReview('involvedParties')}</span>
-                <Button
+                {/* <Button
                   variant="ghost"
                   size="sm"
                   className="h-8 gap-1 text-zinc-500"
@@ -570,7 +569,7 @@ export default function ReviewSubmit() {
                 >
                   <Edit className="h-4 w-4" />
                   {tReview('edit')}
-                </Button>
+                </Button> */}
               </div>
             </AccordionTrigger>
             <AccordionContent className="px-4 pb-4 pt-2">
@@ -662,7 +661,7 @@ export default function ReviewSubmit() {
             <AccordionTrigger className="px-4 hover:no-underline hover:bg-zinc-50">
               <div className="flex justify-between items-center w-full">
                 <span className="font-medium">{tReview('additionalDocumentation')}</span>
-                <Button
+                {/* <Button
                   variant="ghost"
                   size="sm"
                   className="h-8 gap-1 text-zinc-500"
@@ -673,7 +672,7 @@ export default function ReviewSubmit() {
                 >
                   <Edit className="h-4 w-4" />
                   {tReview('edit')}
-                </Button>
+                </Button> */}
               </div>
             </AccordionTrigger>
             <AccordionContent className="px-4 pb-4 pt-2">
@@ -735,7 +734,7 @@ export default function ReviewSubmit() {
             </div>
 
             <div className="flex justify-end">
-              <Button type="submit" className="w-full sm:w-auto bg-zinc-800 hover:bg-zinc-900" disabled={isSubmitting}>
+              {/* <Button type="submit" className="w-full sm:w-auto bg-zinc-800 hover:bg-zinc-900" disabled={isSubmitting}>
                 {isSubmitting ? (
                   <div className="flex items-center gap-2">
                     <Loader2 className="h-4 w-4 animate-spin" />
@@ -744,7 +743,7 @@ export default function ReviewSubmit() {
                 ) : (
                   tReview('submitClaim')
                 )}
-              </Button>
+              </Button> */}
             </div>
           </form>
         </div>

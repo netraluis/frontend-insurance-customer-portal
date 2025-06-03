@@ -390,7 +390,15 @@
       "locationPlaceholder": "Enter the address or location where the accident occurred",
       "dateLabel": "Date of the Accident",
       "descriptionLabel": "Detailed Description of the Accident",
-      "descriptionPlaceholder": "Please describe what happened in detail..."
+      "descriptionPlaceholder": "Please describe what happened in detail...",
+      "accidentDetailsTitle": "Accident Details",
+      "accidentDetailsDescription": "Please provide detailed information about the accident.",
+      "damageDocumentationTitle": "Damage Documentation",
+      "damageDocumentationDescription": "Please provide a detailed description of the vehicle damage and attach photos if available.",
+      "damageDescriptionLabel": "Damage Description",
+      "damageDescriptionPlaceholder": "Describe the damage to your vehicle in detail...",
+      "damagePhotosLabel": "Damage Photos",
+      "damagePhotosDescription": "Upload clear photos showing the damage to your vehicle if available."
     },
     "AdditionalInformation": {
       "title": "Additional Information",
@@ -558,7 +566,9 @@
       "additionalComments": "Additional Comments",
       "confirmInfo": "I confirm that all the information provided is accurate and complete to the best of my knowledge.",
       "submitting": "Submitting...",
-      "submitClaim": "Submit Claim"
+      "submitClaim": "Submit Claim",
+      "previous": "Previous",
+      "reviewAndSubmit": "Review and Submit"
     },
     "stepPolicy": "Policy",
     "stepAccident": "Accident",
@@ -569,6 +579,25 @@
     "formProgress": "Form Progress",
     "complete": "{percent}% Complete",
     "step": "Step {current}/{total}",
-    "goToStep": "Go to {step} step"
+    "goToStep": "Go to {step} step",
+    "policyInformation": "Policy Information",
+    "saveProgress": "Save Progress",
+    "accidentDetails": "Accident Details",
+    "next": "Next",
+    "additionalInformation": "Additional Information",
+    "involvedParties": "Involved Parties",
+    "additionalDocumentation": "Additional Documentation",
+    "previous": "Previous",
+    "reviewAndSubmit": "Review and Submit",
+    "submitClaim": "Submit Claim"
+  },
+  "ClaimGeneral": {
+    "locationLabel": "Location of the Accident",
+    "locationPlaceholder": "Enter the address or location where the accident occurred",
+    "dateLabel": "Date of Incident",
+    "descriptionLabel": "Detailed Description of the Accident",
+    "descriptionPlaceholder": "Please describe what happened in detail...",
+    "damageDescriptionLabel": "Damage Description",
+    "damageDescriptionPlaceholder": "Describe the damage to your vehicle in detail..."
   }
 }
