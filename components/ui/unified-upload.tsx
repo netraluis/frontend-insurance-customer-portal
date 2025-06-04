@@ -31,6 +31,7 @@ export type MediaFile = {
   url: string
   size: number
   thumbnail?: string
+  data?: string
   relativePath?: string // For directory uploads
 }
 
@@ -200,6 +201,19 @@ export function UnifiedUpload({
     })
   }
 
+  // Convert a File to a base64 string (without the data prefix)
+  const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = () => {
+        const result = reader.result as string
+        resolve(result.split(',')[1])
+      }
+      reader.onerror = () => reject(reader.error)
+      reader.readAsDataURL(file)
+    })
+  }
+
   // Handle files
   const handleFiles = async (selectedFiles: File[]) => {
     if (selectedFiles.length === 0) return
@@ -242,6 +256,8 @@ export function UnifiedUpload({
           thumbnail = await generateVideoThumbnail(file)
         }
 
+        const data = await fileToBase64(file)
+
         newFiles.push({
           id,
           name: file.name,
@@ -249,6 +265,7 @@ export function UnifiedUpload({
           url,
           size: file.size,
           thumbnail,
+          data,
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           relativePath: (file as any).webkitRelativePath || (file as any).relativePath || undefined,
         })
