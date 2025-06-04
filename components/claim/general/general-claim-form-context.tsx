@@ -240,7 +240,9 @@ export function GeneralClaimFormProvider({ children }: { children: ReactNode }) 
 
   useEffect(() => {
     if (typeof window !== "undefined" && process.env.NODE_ENV !== "production") {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (window as any).__CLAIM_FORM_STATE__ = formData;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (window as any).__CLAIM_FORM_STEP__ = currentStep;
     }
   }, [formData, currentStep]);

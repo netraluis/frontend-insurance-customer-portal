@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import {
   CheckCircle2,
-  Edit,
   Download,
   Mail,
   FileText,
@@ -27,7 +26,7 @@ import Image from "next/image"
 import { useTranslations } from 'next-intl'
 
 export default function ReviewSubmit() {
-  const { formData, setCurrentStep, setIsSubmitted, setIsSubmitting } = useClaimForm()
+  const { formData, setIsSubmitted, setIsSubmitting } = useClaimForm()
   const [isLocalSubmitted, setIsLocalSubmitted] = useState(false)
   const [claimNumber, setClaimNumber] = useState("")
   const [pdfUrl, setPdfUrl] = useState<string | null>(null)
@@ -39,10 +38,10 @@ export default function ReviewSubmit() {
   const [pdfGenerationError, setPdfGenerationError] = useState<string | null>(null)
   const tReview = useTranslations('ClaimAuto.ReviewSubmit')
 
-  const handleEditSection = (step: number) => {
-    setCurrentStep(step)
-    window.scrollTo(0, 0)
-  }
+  // const handleEditSection = (step: number) => {
+  //   setCurrentStep(step)
+  //   window.scrollTo(0, 0)
+  // }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()

@@ -12,11 +12,11 @@ import ReviewSubmit from "./general-steps/review-submit"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { toast } from "@/components/ui/use-toast"
-import { ArrowLeft, ArrowRight, Loader2, Save } from "lucide-react"
+import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react"
 import { useTranslations } from 'next-intl'
 
 export default function GeneralClaimFormLayout() {
-  const { currentStep, setCurrentStep, isStepComplete, saveProgress, loadProgress, isSubmitted, isSubmitting } = useGeneralClaimForm()
+  const { currentStep, setCurrentStep, isStepComplete, loadProgress, isSubmitted, isSubmitting } = useGeneralClaimForm()
   const [isFormSubmitted, setIsFormSubmitted] = useState(false)
   const t = useTranslations('GeneralClaimAuto')
 

@@ -45,9 +45,9 @@ export function generateClaimAutoPDF(
   // doc.text("AUTO CLAIM SUMMARY", pageWidth / 2, 15, { align: "center" });
   // doc.setFontSize(10);
   // doc.setFont("helvetica", "normal");
-  // doc.text(`Claim Reference: ${claimNumber}`, pageWidth / 2, 22, {
-  //   align: "center",
-  // });
+  doc.text(`Claim Reference: ${claimNumber}`, pageWidth / 2, 22, {
+    align: "center",
+  });
 
   // Claimant Info
   doc.setFontSize(14);
@@ -298,6 +298,7 @@ export function generateClaimAutoPDF(
     autoTable(doc, {
       startY: (doc.lastAutoTable?.finalY ?? 0) + 14,
       head: [["Document Name", "Type"]],
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       body: formData.documents.map((docu: any) => [docu.name, docu.type]),
       theme: "grid",
       headStyles: tableStyles,
@@ -363,9 +364,9 @@ export function generateClaimGeneralPDF(
     // doc.setFont("helvetica", "normal");
     // doc.setFontSize(10);
     // doc.setTextColor(113, 113, 122); // Zinc-500
-    // doc.text(`Claim Reference: ${claimNumber}`, pageWidth / 2, 30, {
-    //   align: "center",
-    // });
+    doc.text(`Claim Reference: ${claimNumber}`, pageWidth / 2, 30, {
+      align: "center",
+    });
     doc.text(`Generated on: ${format(new Date(), "PPP")}`, pageWidth / 2, 35, {
       align: "center",
     });
