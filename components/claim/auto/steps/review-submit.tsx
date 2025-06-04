@@ -57,7 +57,7 @@ export default function ReviewSubmit() {
 
       // Generate PDF - only do this once with the generated claim number
       setIsGeneratingPdf(true)
-      const { dataUrl, buffer } = generateClaimAutoPDF(formData, generatedClaimNumber)
+      const { dataUrl, buffer } = await generateClaimAutoPDF(formData, generatedClaimNumber)
 
       if (!dataUrl) {
         throw new Error("Failed to generate PDF")
@@ -134,7 +134,7 @@ export default function ReviewSubmit() {
     setPdfGenerationError(null)
 
     try {
-      const { dataUrl, buffer } = generateClaimAutoPDF(formData, claimNumber)
+      const { dataUrl, buffer } = await generateClaimAutoPDF(formData, claimNumber)
 
       if (!dataUrl) {
         throw new Error("Failed to regenerate PDF")

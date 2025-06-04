@@ -6,7 +6,7 @@ import { LoopsClient } from "loops";
 const loops = new LoopsClient(process.env.LOOPS_API_KEY!);
 
 export async function sendConfirmationEmail(formData: FormData | GeneralFormData, claimNumber: string, pdfBase64: string) {
-  console.log("Sending confirmation email... (base64 length)", pdfBase64.length)
+  console.log("Sending confirmation email... (base64 length)", pdfBase64.length, formData.damagePhotos)
   try {
      await loops.sendTransactionalEmail({
       transactionalId: process.env.TRANSACTION_ID_RESUME_EMAIL!,
