@@ -207,7 +207,7 @@ test.describe("Auto Claim Form - Step 1", () => {
     await page.getByRole('textbox', { name: 'Comentarios adicionales' }).fill('');
     await page.getByRole('button', { name: 'Siguiente' }).click();
     await page.getByRole('checkbox', { name: 'Confirmo que toda la' }).check();
-    await page.getByRole('button', { name: 'GeneralClaimAuto.submitClaim' }).click();
+    await page.getByRole('button', { name: 'Enviar parte' }).click();
 
     const formState = await page.evaluate(() => (window as any).__CLAIM_FORM_STATE__);
     const currentStep = await page.evaluate(() => (window as any).__CLAIM_FORM_STEP__);
