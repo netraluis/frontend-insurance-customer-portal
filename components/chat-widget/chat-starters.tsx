@@ -3,6 +3,7 @@
 import { useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import { useTranslations } from 'next-intl'
 
 interface ChatStartersProps {
   onStarterClick: (starter: string) => void
@@ -12,14 +13,9 @@ export default function ChatStarters({ onStarterClick }: ChatStartersProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [showLeftArrow, setShowLeftArrow] = useState(false)
   const [showRightArrow, setShowRightArrow] = useState(true)
+  const t = useTranslations('ChatWidget')
 
-  const starters = [
-    "Tramitar un sinistre",
-    "Demanar un pressupost",
-    "Demanar informació",
-    "Consultar pòlissa",
-    "Modificar dades personals",
-  ]
+  const starters = t.raw('starters') as string[]
 
   const handleScroll = () => {
     if (!scrollContainerRef.current) return

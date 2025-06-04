@@ -5,12 +5,14 @@ import type React from "react"
 import { useState, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Upload } from "lucide-react"
+import { useTranslations } from 'next-intl'
 
 interface FileUploadProps {
   onFileChange: (files: File[]) => void
 }
 
 export default function FileUpload({ onFileChange }: FileUploadProps) {
+  const t = useTranslations('ChatWidget')
   const [dragActive, setDragActive] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -64,13 +66,13 @@ export default function FileUpload({ onFileChange }: FileUploadProps) {
         onChange={handleChange}
         className="hidden"
         id="file-upload"
-        aria-label="File upload"
+        aria-label={t('fileUploadLabel')}
       />
 
       <Upload className="h-8 w-8 text-zinc-400 mb-2" />
-      <p className="text-sm text-zinc-600 text-center mb-2">Drag and drop files here, or click to select files</p>
+      <p className="text-sm text-zinc-600 text-center mb-2">{t('fileUploadDrop')}</p>
       <Button variant="outline" size="sm" onClick={handleButtonClick} className="text-xs">
-        Select Files
+        {t('fileUploadButton')}
       </Button>
     </div>
   )

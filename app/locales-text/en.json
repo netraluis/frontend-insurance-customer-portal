@@ -31,13 +31,22 @@
     "resendCode": "Resend code"
   },
   "ChatWidget": {
-    "open": "Open Chat Widget",
-    "close": "Close chat",
-    "title": "Globalrisc Chat",
-    "placeholder": "Type your message...",
-    "send": "Send",
-    "loading": "Loading...",
-    "welcome": "How can we help you today?"
+    "starters": [
+      "File a claim",
+      "Request a quote",
+      "Request information",
+      "Check my policy",
+      "Update personal details"
+    ],
+    "suggestions": "Suggestions",
+    "agentWelcome": "I'm the Globalrisc AI assistant, ask me anything! How can I help you?",
+    "inputPlaceholder": "Type your message",
+    "fileUploadDrop": "Drag and drop files here, or click to select files",
+    "fileUploadButton": "Select Files",
+    "fileUploadLabel": "Upload files",
+    "agentDisclaimer": "This agent may make mistakes. Please use with discretion.",
+    "openChat": "Open Chat Widget",
+    "closeChat": "Close chat"
   },
   "ClaimAuto": {
     "PolicyInformation": {

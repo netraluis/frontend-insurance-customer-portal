@@ -3,19 +3,21 @@
 import { useState, useEffect, useRef } from "react"
 import ChatWidget from "@/components/chat-widget/chat-widget"
 import { Button } from "@/components/ui/button"
-import { MessageSquare, X, ArrowLeft } from "lucide-react"
+import { MessageSquare, X } from "lucide-react"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { useScreenSize } from "@/hooks/use-screen-size"
+import { useTranslations } from 'next-intl'
 
 export default function Home(
 ) {
   const [isOpen, setIsOpen] = useState(false)
-  // const [isHovered, setIsHovered] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false)
   const [safeAreaBottom, setSafeAreaBottom] = useState(0)
   const widgetContainerRef = useRef<HTMLDivElement>(null)
+
+  const t = useTranslations('ChatWidget')
 
   // Detect device sizes
   const isMobile = useMediaQuery("(max-width: 768px)")
@@ -181,27 +183,12 @@ export default function Home(
             paddingBottom: isMobile ? `${safeAreaBottom}px` : undefined,
           }}
         >
-          {isVerySmall && (
-            <div className="w-full flex items-center justify-between p-4 bg-white border-b border-zinc-200">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-10 w-10"
-                onClick={handleToggle}
-                aria-label="Close chat"
-              >
-                <ArrowLeft className="h-5 w-5" />
-              </Button>
-              <span className="font-semibold">Globalrisc Chat</span>
-              <div className="w-10"></div> {/* Spacer for centering */}
-            </div>
-          )}
 
           <div
             className={`${isVerySmall ? "w-full h-full" : isMobile ? "w-full" : ""} ${!isVerySmall && "mb-4"}`}
             style={{ width: !isMobile && !isVerySmall ? "460px" : undefined }}
           >
-            <ChatWidget isFullScreen={isVerySmall} />
+            <ChatWidget isFullScreen={isVerySmall} setIsOpen={setIsOpen} />
           </div>
 
           {!isVerySmall && !isKeyboardOpen && (
@@ -209,7 +196,7 @@ export default function Home(
               size="icon"
               className={`rounded-full h-10 w-10 bg-zinc-950 text-white hover:bg-zinc-800 shadow-lg ${isMobile ? "mb-4 mr-4" : ""}`}
               onClick={handleToggle}
-              aria-label="Close chat"
+              aria-label={t('closeChat')}
               style={{ transition: "none" }}
             >
               <X className="h-5 w-5" />
@@ -230,6 +217,7 @@ export default function Home(
           <Button
             className={`rounded-full px-4 py-2 bg-zinc-950 text-white hover:bg-zinc-800 shadow-lg ${isMobile ? "h-12" : ""}`}
             onClick={handleToggle}
+            aria-label={t('openChat')}
           >
             <MessageSquare className={`${isMobile ? "h-6 w-6" : "h-5 w-5"} `} />
             {/* Open Chat Widget */}

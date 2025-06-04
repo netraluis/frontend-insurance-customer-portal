@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState, useRef, useEffect } from "react"
 import { v4 as uuidv4 } from "uuid"
-import { MoreVertical, Paperclip, Send, X } from "lucide-react"
+import { Paperclip, Send, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Avatar } from "@/components/ui/avatar"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -12,6 +12,7 @@ import ChatStarters from "./chat-starters"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { useScreenSize } from "@/hooks/use-screen-size"
 import MessageBubble from "./message-bubble"
+import { useTranslations } from 'next-intl'
 
 
 export type Message = {
@@ -23,7 +24,8 @@ export type Message = {
   files?: File[]
 }
 
-export default function ChatWidget({ isFullScreen = false }: { isFullScreen?: boolean }) {
+export default function ChatWidget({ isFullScreen = false, setIsOpen }: { isFullScreen?: boolean, setIsOpen: (isOpen: boolean) => void }) {
+  const t = useTranslations('ChatWidget')
   const [sessionId] = useState(() => uuidv4())
   const [messages, setMessages] = useState<Message[]>([])
   const [inputValue, setInputValue] = useState("")
@@ -106,7 +108,7 @@ export default function ChatWidget({ isFullScreen = false }: { isFullScreen?: bo
     setMessages([
       {
         id: uuidv4(),
-        content: "Sóc un l'assistent de IA de Globalrisc, pregunta'm el que vulguis! Com et puc ajudar?",
+        content: t('agentWelcome'),
         sender: "agent",
         timestamp: new Date(),
         status: "delivered",
@@ -418,8 +420,8 @@ export default function ChatWidget({ isFullScreen = false }: { isFullScreen?: bo
           </Avatar>
           <span className="font-semibold text-ml">Globalrisc AI Agent</span>
         </div>
-        <Button variant="ghost" size="icon" className="rounded-full">
-          <MoreVertical className="h-5 w-5" />
+        <Button variant="ghost" size="icon" className="rounded-full" onClick={() => setIsOpen(false)} aria-label={t('closeChat')}>
+          <X className="h-5 w-5" />
         </Button>
       </div>
 
@@ -459,7 +461,7 @@ export default function ChatWidget({ isFullScreen = false }: { isFullScreen?: bo
       {/* Chat starters */}
       {messages.length <= 2 && !isKeyboardVisible && (
         <div className="px-2 py-0">
-          <p className="text-xs text-zinc-500 mb-0">Sugerències</p>
+          <p className="text-xs text-zinc-500 mb-0">{t('suggestions')}</p>
           <ChatStarters onStarterClick={handleStarterClick} />
         </div>
       )}
@@ -472,7 +474,7 @@ export default function ChatWidget({ isFullScreen = false }: { isFullScreen?: bo
         onChange={handleFileChange}
         className="hidden"
         accept="image/*,application/pdf,text/plain,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-        aria-label="Upload files"
+        aria-label={t('fileUploadLabel')}
       />
 
       {/* Files preview */}
@@ -508,7 +510,7 @@ export default function ChatWidget({ isFullScreen = false }: { isFullScreen?: bo
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Escriu el teu missatge"
+            placeholder={t('inputPlaceholder')}
             className="placeholder:text-zinc-500 flex-1 resize-none outline-none text-sm max-h-24 min-h-[26px]"
             rows={1}
           />
@@ -517,7 +519,7 @@ export default function ChatWidget({ isFullScreen = false }: { isFullScreen?: bo
             size="icon"
             className={`${isFullScreen || isMobile ? "h-10 w-10" : "h-8 w-8"} shrink-0`}
             onClick={openFilePicker}
-            aria-label="Attach file"
+            aria-label={t('fileUploadLabel')}
           >
             <Paperclip className={`${isFullScreen || isMobile ? "h-6 w-6" : "h-5 w-5"} text-zinc-500`} />
           </Button>
@@ -526,14 +528,14 @@ export default function ChatWidget({ isFullScreen = false }: { isFullScreen?: bo
             className={`${isFullScreen || isMobile ? "h-8 w-8" : "h-8 w-8"} shrink-0 rounded-ml bg-zinc-950 hover:bg-zinc-800`}
             onClick={() => handleSendMessage()}
             disabled={isLoading || (!inputValue.trim() && files.length === 0)}
-            aria-label="Send message"
+            aria-label={t('openChat')}
           >
             <Send className={`${isFullScreen || isMobile ? "h-5 w-5" : "h-4 w-4"}`} />
           </Button>
         </div>
         {!isKeyboardVisible && (
           <p className="text-xs text-zinc-400 text-center mt-3">
-            This agent may make mistakes. Please use with discretion
+            {t('agentDisclaimer')}
           </p>
         )}
       </div>

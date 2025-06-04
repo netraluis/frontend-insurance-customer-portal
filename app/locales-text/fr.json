@@ -31,8 +31,22 @@
     "resendCode": "Renvoyer le code"
   },
   "ChatWidget": {
-    "open": "Ouvrir le chat",
-    "close": "Fermer le chat",
+    "starters": [
+      "Déclarer un sinistre",
+      "Demander un devis",
+      "Demander des informations",
+      "Consulter la police",
+      "Modifier les données personnelles"
+    ],
+    "suggestions": "Suggestions",
+    "agentWelcome": "Je suis l'assistant IA de Globalrisc, posez-moi vos questions ! Comment puis-je vous aider ?",
+    "inputPlaceholder": "Écrivez votre message",
+    "fileUploadDrop": "Glissez-déposez des fichiers ici, ou cliquez pour sélectionner des fichiers",
+    "fileUploadButton": "Sélectionner des fichiers",
+    "fileUploadLabel": "Télécharger des fichiers",
+    "agentDisclaimer": "Cet agent peut faire des erreurs. Veuillez l'utiliser avec précaution.",
+    "openChat": "Ouvrir le chat",
+    "closeChat": "Fermer le chat",
     "title": "Chat Globalrisc",
     "placeholder": "Écrivez votre message...",
     "send": "Envoyer",

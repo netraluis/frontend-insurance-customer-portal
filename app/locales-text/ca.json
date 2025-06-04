@@ -31,13 +31,22 @@
     "resendCode": "Reenviar codi"
   },
   "ChatWidget": {
-    "open": "Obrir el xat",
-    "close": "Tancar xat",
-    "title": "Xat Globalrisc",
-    "placeholder": "Escriu el teu missatge...",
-    "send": "Envia",
-    "loading": "Carregant...",
-    "welcome": "En què et podem ajudar avui?"
+    "starters": [
+      "Tramitar un sinistre",
+      "Demanar un pressupost",
+      "Demanar informació",
+      "Consultar pòlissa",
+      "Modificar dades personals"
+    ],
+    "suggestions": "Sugerències",
+    "agentWelcome": "Sóc l'assistent d'IA de Globalrisc, pregunta'm el que vulguis! Com et puc ajudar?",
+    "inputPlaceholder": "Escriu el teu missatge",
+    "fileUploadDrop": "Arrossega i deixa anar fitxers aquí, o fes clic per seleccionar fitxers",
+    "fileUploadButton": "Selecciona fitxers",
+    "fileUploadLabel": "Pujar fitxers",
+    "agentDisclaimer": "Aquest agent pot cometre errors. Si us plau, utilitza'l amb precaució.",
+    "openChat": "Obrir el xat",
+    "closeChat": "Tancar xat"
   },
   "ClaimAuto": {
     "PolicyInformation": {
