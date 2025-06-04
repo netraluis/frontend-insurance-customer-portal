@@ -1,4 +1,188 @@
+# Insurance Customer Portal
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Repository Overview
+
+This project is a Next.js frontend for an insurance customer portal. The application is multilingual and uses the `next-intl` package to localize all routes.
+
+```
+/
+├── app/                # Next.js app directory
+│   ├── [locale]/       # Dynamic locale segment (dashboard, claim forms, etc.)
+│   ├── actions/        # Server actions such as email sending
+│   ├── locales-text/   # JSON translation files for each language
+│   ├── globals.css     # Global Tailwind styles
+│   └── layout.tsx      # Root layout applying Google fonts
+├── components/         # UI and feature components
+│   ├── claim/          # Multi-step claim form components (auto/general)
+│   ├── chat-widget/    # In-app chat widget implementation
+│   ├── ui/             # Reusable shadcn/ui components
+│   └── ...             # Misc. UI pieces (cards, lists, etc.)
+├── hooks/              # Custom React hooks (media queries, screen size)
+├── i18n/               # next-intl configuration (routing, helpers)
+├── lib/                # Utility modules (env vars, PDF generator, auth API)
+├── tests/              # Playwright E2E tests
+├── middleware.ts       # next-intl middleware for locale routing
+├── next.config.ts      # Next.js configuration
+└── tailwind.config.ts  # Tailwind configuration
+```
+
+### Internationalization
+
+Routing is configured via `i18n/routing.ts`, listing supported locales and a default locale:
+
+```ts
+export const routing = defineRouting({
+  locales: ['ca', 'fr', 'en', 'es'],
+  defaultLocale: 'ca'
+});
+```
+
+Every request passes through `middleware.ts` to resolve the active locale and load translations:
+
+```ts
+import createMiddleware from 'next-intl/middleware';
+import {routing} from './i18n/routing';
+
+export default createMiddleware(routing);
+```
+
+Translations live in `app/locales-text/*.json`. Example keys:
+
+```json
+{
+  "HomePage": {
+    "title": "Hello world!"
+  },
+  "LoginPage": {
+    "company": "Acme Inc"
+  }
+}
+```
+
+### Layouts and Pages
+
+`app/layout.tsx` wraps the entire site with fonts and global styles:
+
+```tsx
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {children}
+      </body>
+    </html>
+  );
+}
+```
+
+A secondary layout in `app/[locale]/layout.tsx` loads locale messages and shows a language switcher and chat widget:
+
+```tsx
+export default async function LocaleLayout({ children, params }: { children: React.ReactNode; params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const messages = (await import(`@/app/locales-text/${locale}.json`)).default;
+
+  return (
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <div key={locale}>
+        {children}
+        <div className="fixed top-4 right-4 z-50">
+          <LocaleSwitcher />
+        </div>
+        <ChatWidget />
+      </div>
+    </NextIntlClientProvider>
+  );
+}
+```
+
+### Claim Forms
+
+Two multi-step claim forms exist: “auto” and “general.” State management is handled by React Contexts such as `ClaimFormProvider`:
+
+```tsx
+const ClaimFormContext = createContext<ClaimFormContextType | undefined>(undefined);
+
+export function ClaimFormProvider({ children }: { children: React.ReactNode }) {
+  const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [currentStep, setCurrentStep] = useState(1);
+
+  const isStepComplete = (step: number): boolean => {
+    switch (step) {
+      case 1:
+        return /* ... */;
+      case 2:
+        return /* ... */;
+      default:
+        return false;
+    }
+  };
+
+  return (
+    <ClaimFormContext.Provider value={{ formData, setFormData, currentStep, setCurrentStep }}>
+      {children}
+    </ClaimFormContext.Provider>
+  );
+}
+```
+
+Each step is a component under `components/claim/auto/steps` or `components/claim/general/general-steps`. A layout component like `ClaimFormLayout` or `GeneralClaimFormLayout` uses a stepper and navigation buttons to move through the form.
+
+### Chat Widget
+
+The chat feature lives in `components/chat-widget/`. `ChatWidget` sends messages (and files) to an API endpoint and renders bot replies:
+
+```tsx
+const handleSendMessage = async (content: string = inputValue) => {
+  if (!content.trim() && files.length === 0) return;
+  const newMessage: Message = { /* ... */ };
+  setMessages((prev) => [...prev, newMessage]);
+
+  const response = await fetch(process.env.NEXT_PUBLIC_N8N_SEND_MESSAGE!, {
+    method: 'POST',
+    body: formData
+  });
+  // ...
+};
+```
+
+### Utilities and Environment
+
+`lib/env.ts` centralizes required environment variables. A default backend URL is provided:
+
+```ts
+const DEFAULTS: Record<keyof EnvVars, string> = {
+  BACKEND_URL: 'https://backend-insurance-customer-portal.onrender.com/v1'
+};
+```
+
+The library also contains PDF generation helpers (`generate-pdf.ts`), authentication helpers (`auth.ts`), and a list of countries for phone inputs (`countries.ts`).
+
+### Testing
+
+Playwright is configured in `playwright.config.ts` and tests reside under `tests/`:
+
+```ts
+export default defineConfig({
+  testDir: './tests',
+  fullyParallel: true,
+  forbidOnly: !!process.env.CI,
+  // ...
+});
+```
+
+`tests/claim-auto.spec.ts` demonstrates end-to-end interaction with the auto claim form.
+
+**Next Steps to Explore**
+
+1. **Run the app** – Start the development server with `npm run dev` and explore routes such as `/en/login` or `/en/claim-auto`.
+2. **Translations** – Edit files in `app/locales-text/` to update text in different languages. Use `fieldCheck.js` to verify missing keys.
+3. **Forms** – Review React Hook Form usage within claim form steps and how data flows through `ClaimFormProvider` and `GeneralClaimFormProvider`.
+4. **PDF Generation** – See `lib/generate-pdf.ts` for how form data is converted into a downloadable PDF.
+5. **Chat Widget** – Check out `components/chat-widget` to understand the chat interface and how messages are sent to the backend.
+6. **Testing** – Review Playwright tests in `tests/` and adapt them to your needs.
 
 ## Getting Started
 
