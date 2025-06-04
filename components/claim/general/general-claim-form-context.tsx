@@ -45,6 +45,7 @@ export type MediaFile = {
   url: string
   size: number
   thumbnail?: string
+  data?: string
   // buffer: Buffer
 }
 

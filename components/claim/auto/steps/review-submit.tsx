@@ -20,7 +20,7 @@ import {
 import { format } from "date-fns"
 import { toast } from "@/components/ui/use-toast"
 import { generateClaimAutoPDF } from "@/lib/generate-pdf"
-import { sendConfirmationEmail } from "@/app/actions/email-actions"
+import { sendConfirmationEmail, type Attachment } from "@/app/actions/email-actions"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import Image from "next/image"
 import { useTranslations } from 'next-intl'
@@ -167,8 +167,43 @@ export default function ReviewSubmit() {
 
     try {
       // Convert pdfBuffer to base64 before sending
-      const base64 = Buffer.from(pdfBuffer).toString("base64");
-      const result = await sendConfirmationEmail(formData, claimNumber, base64)
+      const base64 = Buffer.from(pdfBuffer).toString("base64")
+
+      const attachments: Attachment[] = []
+      if (formData.friendlyReport && formData.friendlyReportDocument?.data) {
+        attachments.push({
+          filename: formData.friendlyReportDocument.name,
+          contentType: formData.friendlyReportDocument.type,
+          data: formData.friendlyReportDocument.data,
+        })
+      }
+
+      formData.damagePhotos.forEach((photo) => {
+        if (photo.data) {
+          attachments.push({
+            filename: photo.name,
+            contentType: photo.type,
+            data: photo.data,
+          })
+        }
+      })
+
+      formData.documents.forEach((doc) => {
+        if (doc.data) {
+          attachments.push({
+            filename: doc.name,
+            contentType: doc.type,
+            data: doc.data,
+          })
+        }
+      })
+
+      const result = await sendConfirmationEmail(
+        formData,
+        claimNumber,
+        base64,
+        attachments
+      )
 
       if (result.success) {
         setIsEmailSent(true)
