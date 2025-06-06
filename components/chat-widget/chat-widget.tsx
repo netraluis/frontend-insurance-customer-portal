@@ -13,6 +13,7 @@ import { useMediaQuery } from "@/hooks/use-media-query"
 import { useScreenSize } from "@/hooks/use-screen-size"
 import MessageBubble from "./message-bubble"
 import { useTranslations } from 'next-intl'
+import ChatWidgetMobile from "./chat-widget-mobile"
 
 
 export type Message = {
@@ -396,6 +397,10 @@ export default function ChatWidget({ isFullScreen = false, setIsOpen }: { isFull
 
     // Default desktop height
     return "h-[650px]"
+  }
+
+  if (isMobile) {
+    return <ChatWidgetMobile isFullScreen={isFullScreen} setIsOpen={setIsOpen} />
   }
 
   return (
