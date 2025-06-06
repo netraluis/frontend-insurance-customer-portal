@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { uploadFileToSupabase } from "./upload-file-to-supbase"
+import { supabase } from "./supabase-client";
 
 
 export function cn(...inputs: ClassValue[]) {
@@ -32,4 +33,26 @@ export async function uploadBlobsAndGetUrls(files: { name: string; type: string;
   }
 
   return uploadedUrls // array de { name, type, url }
+}
+
+export async function uploadPdfToStorage(buffer: Buffer, claimNumber: string): Promise<string | null> {
+  const fileName = `${claimNumber}/pdf/${claimNumber}.pdf`
+  const { error } = await supabase.storage
+    .from('claim-uploads') 
+    .upload(fileName, buffer, {
+      contentType: 'application/pdf',
+      upsert: true,
+    })
+
+  if (error) {
+    console.error('Error uploading PDF:', error)
+    return null
+  }
+
+  const { data: publicUrlData } = supabase
+    .storage
+    .from('claim-uploads')
+    .getPublicUrl(fileName)
+
+  return publicUrlData?.publicUrl || null
 }

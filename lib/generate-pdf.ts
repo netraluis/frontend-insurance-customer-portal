@@ -13,7 +13,7 @@ const margins = {
 };
 
 const tableStyles = {
-  fillColor: [161, 161, 170] as Color,
+  fillColor: [111, 176, 201] as Color,
   textColor: [255, 255, 255] as Color,
   fontStyle: "bold" as FontStyle,
 };
@@ -116,11 +116,7 @@ export async function generateClaimAutoPDF(
       ],
     ],
     theme: "grid",
-    headStyles: {
-      fillColor: [161, 161, 170],
-      textColor: [255, 255, 255],
-      fontStyle: "bold",
-    },
+    headStyles: tableStyles,
     margin: margins,
   });
 
@@ -143,11 +139,7 @@ export async function generateClaimAutoPDF(
       ],
     ],
     theme: "grid",
-    headStyles: {
-      fillColor: [161, 161, 170],
-      textColor: [255, 255, 255],
-      fontStyle: "bold",
-    },
+    headStyles: tableStyles,
     margin: margins,
   });
 
@@ -171,11 +163,7 @@ export async function generateClaimAutoPDF(
       ],
     ],
     theme: "grid",
-    headStyles: {
-      fillColor: [161, 161, 170],
-      textColor: [255, 255, 255],
-      fontStyle: "bold",
-    },
+    headStyles: tableStyles,
     margin: margins,
   });
 
@@ -216,11 +204,7 @@ export async function generateClaimAutoPDF(
     head: [["Damage Description"]],
     body: [[formData.damageDescription]],
     theme: "grid",
-    headStyles: {
-      fillColor: [161, 161, 170],
-      textColor: [255, 255, 255],
-      fontStyle: "bold",
-    },
+    headStyles: tableStyles,
     margin: margins,
   });
 

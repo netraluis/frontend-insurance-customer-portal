@@ -24,6 +24,8 @@ import { sendConfirmationEmail } from "@/app/actions/email-actions"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import Image from "next/image"
 import { useTranslations } from 'next-intl'
+import { useIsMobile } from "@/hooks/use-mobile"
+import { uploadPdfToStorage } from "@/lib/utils"
 
 export default function ReviewSubmit() {
   const { formData, setIsSubmitted, setIsSubmitting } = useClaimForm()
@@ -37,6 +39,7 @@ export default function ReviewSubmit() {
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false)
   const [pdfGenerationError, setPdfGenerationError] = useState<string | null>(null)
   const tReview = useTranslations('ClaimAuto.ReviewSubmit')
+  const isMobile = useIsMobile()
 
   // const handleEditSection = (step: number) => {
   //   setCurrentStep(step)
@@ -58,14 +61,16 @@ export default function ReviewSubmit() {
       // Generate PDF - only do this once with the generated claim number
       setIsGeneratingPdf(true)
       const { dataUrl, buffer } = await generateClaimAutoPDF(formData, generatedClaimNumber)
+      const publicUrl = await uploadPdfToStorage(buffer, generatedClaimNumber)
 
-      if (!dataUrl) {
+
+      if (!dataUrl || !publicUrl) {
         throw new Error("Failed to generate PDF")
       }
 
       // Update all state at once to prevent cascading renders
       setClaimNumber(generatedClaimNumber)
-      setPdfUrl(dataUrl)
+      setPdfUrl(publicUrl)
       setPdfBuffer(buffer)
       setIsLocalSubmitted(true)
       setIsSubmitted(true) // Update the context state
@@ -260,7 +265,17 @@ export default function ReviewSubmit() {
         ) : (
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
             <Button
-              onClick={handleDownloadPdf}
+              onClick={() => {
+                if (isMobile && pdfUrl) {
+                  window.open(pdfUrl, '_blank')
+                  toast({
+                    title: 'PDF abierto',
+                    description: 'El PDF se ha abierto en una nueva pestaña. Usa la opción "Compartir" o "Abrir en..." para guardarlo.',
+                  })
+                } else {
+                  handleDownloadPdf()
+                }
+              }}
               className="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-900"
               disabled={!pdfUrl || isGeneratingPdf}
             >
@@ -276,7 +291,6 @@ export default function ReviewSubmit() {
                 </>
               )}
             </Button>
-
             <Button
               onClick={handleSendEmail}
               variant="outline"
