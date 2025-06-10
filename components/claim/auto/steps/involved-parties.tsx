@@ -320,7 +320,7 @@ export default function InvolvedParties() {
                     </Button>
                   </DialogTrigger>
                   <DialogContent
-                    className={isMobile ? "w-[calc(100%-32px)] p-0 h-[90vh] max-h-[600px]" : "sm:max-w-[600px]"}
+                    className={isMobile ? "w-[calc(100%-32px)] p-0 h-[90dvh] pb-2" : "sm:max-w-[600px]"}
                   >
                     <DialogHeader className={isMobile ? "px-4 py-3 border-b" : ""}>
                       <DialogTitle>{editingDriverIndex !== null ? tInvolved('editDriver') : tInvolved('addDriver')}</DialogTitle>
@@ -329,7 +329,7 @@ export default function InvolvedParties() {
                       </DialogDescription>
                     </DialogHeader>
 
-                    <ScrollArea className={isMobile ? "h-[calc(90vh-130px)] max-h-[470px]" : ""}>
+                    <ScrollArea>
                       <div className={`grid grid-cols-1 gap-4 sm:grid-cols-2 ${isMobile ? "p-4" : "py-4"}`}>
                         <div className="space-y-2">
                           <Label htmlFor="driverFirstName">
@@ -447,7 +447,7 @@ export default function InvolvedParties() {
                       </div>
                     </ScrollArea>
 
-                    <DialogFooter className={isMobile ? "flex p-4 border-t bg-zinc-50" : ""}>
+                    <DialogFooter className={isMobile ? "flex bg-zinc-50 rounded-xs mx-2" : ""}>
                       <Button variant="outline" onClick={() => setDriverDialogOpen(false)}>
                         {tInvolved('cancel')}
                       </Button>
@@ -580,7 +580,7 @@ export default function InvolvedParties() {
                     </Button>
                   </DialogTrigger>
                   <DialogContent
-                    className={isMobile ? "w-[calc(100%-32px)] p-0 h-[90vh] max-h-[600px]" : "sm:max-w-[600px]"}
+                    className={isMobile ? "w-[calc(100%-32px)] p-0 h-[90dvh] pb-2" : "sm:max-w-[600px]"}
                   >
                     <DialogHeader className={isMobile ? "px-4 py-3 border-b" : ""}>
                       <DialogTitle>{editingWitnessIndex !== null ? tInvolved('editWitness') : tInvolved('addWitness')}</DialogTitle>
@@ -589,7 +589,7 @@ export default function InvolvedParties() {
                       </DialogDescription>
                     </DialogHeader>
 
-                    <ScrollArea className={isMobile ? "h-[calc(90vh-130px)] max-h-[470px]" : ""}>
+                    <ScrollArea>
                       <div className={`grid grid-cols-1 gap-4 sm:grid-cols-2 ${isMobile ? "p-4" : "py-4"}`}>
                         <div className="space-y-2">
                           <Label htmlFor="witnessFirstName">
@@ -662,7 +662,7 @@ export default function InvolvedParties() {
                       </div>
                     </ScrollArea>
 
-                    <DialogFooter className={isMobile ? "flex p-4 border-t bg-zinc-50" : ""}>
+                    <DialogFooter className={isMobile ? "flex bg-zinc-50 rounded-xs mx-2" : ""}>
                       <Button variant="outline" onClick={() => setWitnessDialogOpen(false)}>
                         {tInvolved('cancel')}
                       </Button>

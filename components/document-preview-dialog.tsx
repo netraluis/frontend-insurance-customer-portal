@@ -16,6 +16,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Image from 'next/image';
+import { useIsMobile } from "@/hooks/use-mobile"
 
 interface Document {
   id: string
@@ -38,6 +39,7 @@ interface DocumentPreviewDialogProps {
 }
 
 export function DocumentPreviewDialog({ document, open, onOpenChange }: DocumentPreviewDialogProps) {
+  const isMobile = useIsMobile()
   if (!document) return null
 
   const getDocumentIcon = () => {
@@ -88,7 +90,7 @@ export function DocumentPreviewDialog({ document, open, onOpenChange }: Document
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[700px] max-h-[90vh] overflow-auto">
+      <DialogContent className={isMobile ? "w-[calc(100%-32px)] p-0 h-[90dvh] pb-2" : "sm:max-w-[600px]"}>
         <DialogHeader>
           <div className="flex items-center gap-3">
             <div className={cn("flex h-10 w-10 items-center justify-center rounded-md", getDocumentTypeColor())}>
