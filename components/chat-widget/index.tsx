@@ -219,7 +219,7 @@ export default function Home(
             onClick={handleToggle}
             aria-label={t('openChat')}
           >
-            <MessageSquare className={`${isMobile ? "h-6 w-6" : "h-5 w-5"} `} />
+            <MessageSquare className={`${isMobile ? "h-5 w-5" : "h-5 w-5"} `} />
             {/* Open Chat Widget */}
           </Button>
         </div>
