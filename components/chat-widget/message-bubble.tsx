@@ -1,3 +1,4 @@
+import React from "react"
 import { Avatar } from "@/components/ui/avatar"
 import { cn } from "@/lib/utils"
 import { FileText, ImageIcon, FileArchive } from "lucide-react"
@@ -59,6 +60,49 @@ export default function MessageBubble({ message, isFirstInGroup, isLastInGroup }
     }
   }
 
+  // Utilidad para reemplazar urls especiales por enlaces clicables
+  const renderMessageContent = (content: string) => {
+    const urls = [
+      {
+        url: 'https://www.theagentslab.dev/claim-auto',
+        label: 'https://www.theagentslab.dev/claim-auto',
+      },
+      {
+        url: 'https://www.theagentslab.dev/claim-general',
+        label: 'https://www.theagentslab.dev/claim-general',
+      },
+    ]
+    let result: (string | React.ReactNode)[] = [content]
+    urls.forEach(({ url, label }) => {
+      result = result.flatMap((part) => {
+        if (typeof part === 'string' && part.includes(url)) {
+          const split = part.split(url)
+          const arr: (string | React.ReactNode)[] = []
+          split.forEach((str, idx) => {
+            if (str) arr.push(str)
+            if (idx < split.length - 1) {
+              arr.push(
+                <a
+                  key={url + idx}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline text-zinc-900 font-medium hover:text-zinc-700 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-zinc-400 rounded"
+                  tabIndex={0}
+                >
+                  {label}
+                </a>
+              )
+            }
+          })
+          return arr
+        }
+        return part
+      })
+    })
+    return <span>{result}</span>
+  }
+
   return (
     <div className="group">
       <div className={cn("flex items-start gap-3", isUser && "flex-row-reverse", isLastInGroup ? "mb-4" : "mb-1")}>
@@ -80,7 +124,9 @@ export default function MessageBubble({ message, isFirstInGroup, isLastInGroup }
             !isFirstInGroup && !isUser && "ml-[3px]", // Slight adjustment for agent messages
           )}
         >
-          <p className="text-[15px] leading-relaxed whitespace-pre-wrap break-words">{message.content}</p>
+          <p className="text-[15px] leading-relaxed whitespace-pre-wrap break-words">
+            {renderMessageContent(message.content)}
+          </p>
 
           {message.files && message.files.length > 0 && (
             <div className="mt-2 space-y-1">
