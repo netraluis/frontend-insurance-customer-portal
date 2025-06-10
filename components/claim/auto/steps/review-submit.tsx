@@ -24,7 +24,6 @@ import { sendConfirmationEmail } from "@/app/actions/email-actions"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import Image from "next/image"
 import { useTranslations } from 'next-intl'
-import { useIsMobile } from "@/hooks/use-mobile"
 import { uploadPdfToStorage } from "@/lib/utils"
 
 export default function ReviewSubmit() {
@@ -40,7 +39,6 @@ export default function ReviewSubmit() {
   const [pdfGenerationError, setPdfGenerationError] = useState<string | null>(null)
   const tReview = useTranslations('ClaimAuto.ReviewSubmit')
   const t = useTranslations()
-  const isMobile = useIsMobile()
 
 
   // const handleEditSection = (step: number) => {

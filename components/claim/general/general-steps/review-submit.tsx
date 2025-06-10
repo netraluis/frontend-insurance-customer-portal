@@ -39,6 +39,7 @@ export default function ReviewSubmit() {
   const [pdfGenerationError, setPdfGenerationError] = useState<string | null>(null)
 
   const tReview = useTranslations('GeneralClaimAuto.ReviewSubmit')
+  const t = useTranslations()
   const isMobile = useIsMobile()
 
   // const handleEditSection = (step: number) => {
@@ -60,7 +61,7 @@ export default function ReviewSubmit() {
 
       // Generate PDF - only do this once with the generated claim number
       setIsGeneratingPdf(true)
-      const { dataUrl, buffer } = await generateClaimGeneralPDF(formData, generatedClaimNumber)
+      const { dataUrl, buffer } = await generateClaimGeneralPDF(formData, generatedClaimNumber, t )
       const publicUrl = await uploadPdfToStorage(buffer, generatedClaimNumber)
 
       if (!dataUrl || !publicUrl) {
@@ -138,7 +139,7 @@ export default function ReviewSubmit() {
     setPdfGenerationError(null)
 
     try {
-      const { dataUrl, buffer } = await generateClaimGeneralPDF(formData, claimNumber)
+      const { dataUrl, buffer } = await generateClaimGeneralPDF(formData, claimNumber, t )
 
       if (!dataUrl) {
         throw new Error("Failed to regenerate PDF")

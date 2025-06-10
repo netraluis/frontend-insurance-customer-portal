@@ -368,7 +368,8 @@ export async function generateClaimAutoPDF(
 
 export async function generateClaimGeneralPDF(
   formData: GeneralFormData,
-  claimNumber: string
+  claimNumber: string,
+  t: (key: string) => string
 ): Promise<{ dataUrl: string; buffer: Buffer }> {
   try {
     const doc = new jsPDF();
@@ -380,29 +381,25 @@ export async function generateClaimGeneralPDF(
     const logoX = (pageWidth - logoWidth) / 2;
     const logoY = 8;
     // Header
-    // doc.setFillColor(241, 241, 243);
-    // doc.rect(0, 0, pageWidth, 40, "F");
     doc.addImage(logoBase64, "PNG", logoX, logoY, logoWidth, logoHeight);
-    // doc.setFont("helvetica", "bold");
-    // doc.setFontSize(20);
-    // doc.setTextColor(24, 24, 27); // Zinc-900
-    // doc.text("GENERAL CLAIM SUMMARY", pageWidth / 2, 20, { align: "center" });
-    // doc.setFont("helvetica", "normal");
-    // doc.setFontSize(10);
-    // doc.setTextColor(113, 113, 122); // Zinc-500
-    doc.text(`Claim Reference: ${claimNumber}`, pageWidth / 2, 50, {
+    doc.text(`${t('ClaimAuto.ReviewSubmit.referenceNumber')} ${claimNumber}`, pageWidth / 2, 50, {
       align: "center",
     });
 
     // Claimant Info
     doc.setFontSize(14);
     doc.setFont("helvetica", "bold");
-    doc.text("Claimant Information", 14, 70);
+    doc.text(t('ClaimAuto.PolicyInformationForm.personalInformation'), 14, 70);
     doc.setFontSize(10);
     doc.setFont("helvetica", "normal");
     autoTable(doc, {
       startY: 75,
-      head: [["Full Name", "Email", "Phone", "Policy Number"]],
+      head: [[
+        t('ClaimAuto.ReviewSubmit.fullName'),
+        t('ClaimAuto.ReviewSubmit.emailAddress'),
+        t('ClaimAuto.ReviewSubmit.phoneNumber'),
+        t('ClaimAuto.InvolvedParties.policyNumber'),
+      ]],
       body: [
         [
           `${formData.firstName} ${formData.lastName}`,
@@ -420,12 +417,16 @@ export async function generateClaimGeneralPDF(
     // Accident Info
     doc.setFontSize(14);
     doc.setFont("helvetica", "bold");
-    doc.text("Accident Details", 14, (doc.lastAutoTable?.finalY ?? 0) + 15);
+    doc.text(t('ClaimAuto.ReviewSubmit.accidentDetails'), 14, (doc.lastAutoTable?.finalY ?? 0) + 15);
     doc.setFontSize(10);
     doc.setFont("helvetica", "normal");
     autoTable(doc, {
       startY: (doc.lastAutoTable?.finalY ?? 0) + 20,
-      head: [["Location", "Date", "Description"]],
+      head: [[
+        t('ClaimAuto.ReviewSubmit.location'),
+        t('ClaimAuto.ReviewSubmit.incidentDate'),
+        t('ClaimAuto.ReviewSubmit.description'),
+      ]],
       body: [
         [
           formData.accidentLocation,
@@ -442,7 +443,7 @@ export async function generateClaimGeneralPDF(
     // Damage Description & Photos
     autoTable(doc, {
       startY: (doc.lastAutoTable?.finalY ?? 0) + 5,
-      head: [["Damage Description"]],
+      head: [[t('ClaimAuto.ReviewSubmit.damageDescription')]],
       body: [[formData.damageDescription]],
       theme: "grid",
       headStyles: tableStyles,
@@ -456,10 +457,8 @@ export async function generateClaimGeneralPDF(
       );
       autoTable(doc, {
         startY: (doc.lastAutoTable?.finalY ?? 0) + 5,
-        head: [["Photo Name"]],
-        body: links.map((photo) => [
-          photo.url
-        ]),
+        head: [[t('ClaimAuto.ReviewSubmit.damagePhotos')]],
+        body: links.map((photo) => [photo.url]),
         theme: "grid",
         headStyles: {
           fillColor: [161, 161, 170],
@@ -474,24 +473,22 @@ export async function generateClaimGeneralPDF(
     // Police, Firefighters, Reports, Medical
     autoTable(doc, {
       startY: (doc.lastAutoTable?.finalY ?? 0) + 5,
-      head: [
-        [
-          "Police Involved",
-          "Traffic Service",
-          "Firefighters",
-          "Police Report",
-          "Friendly Report",
-          "Bodily Injuries",
-        ],
-      ],
+      head: [[
+        t('ClaimAuto.ReviewSubmit.policeInvolved'),
+        t('ClaimAuto.ReviewSubmit.trafficServiceInvolved'),
+        t('GeneralClaimAuto.AdditionalInformation.firefightersInvolvement'),
+        t('GeneralClaimAuto.AdditionalInformation.policeReport'),
+        t('ClaimAuto.ReviewSubmit.friendlyAccidentReport'),
+        t('ClaimAuto.ReviewSubmit.bodilyInjuries'),
+      ]],
       body: [
         [
-          formData.policeInvolved ? "Yes" : "No",
-          formData.trafficServiceInvolved ? "Yes" : "No",
-          formData.firefightersInvolved ? "Yes" : "No",
-          formData.policeReport ? "Yes" : "No",
-          formData.friendlyReport ? "Yes" : "No",
-          formData.bodilyInjuries ? "Yes" : "No",
+          formData.policeInvolved ? t('ClaimAuto.ReviewSubmit.yes') : t('ClaimAuto.ReviewSubmit.no'),
+          formData.trafficServiceInvolved ? t('ClaimAuto.ReviewSubmit.yes') : t('ClaimAuto.ReviewSubmit.no'),
+          formData.firefightersInvolved ? t('ClaimAuto.ReviewSubmit.yes') : t('ClaimAuto.ReviewSubmit.no'),
+          formData.policeReport ? t('ClaimAuto.ReviewSubmit.yes') : t('ClaimAuto.ReviewSubmit.no'),
+          formData.friendlyReport ? t('ClaimAuto.ReviewSubmit.yes') : t('ClaimAuto.ReviewSubmit.no'),
+          formData.bodilyInjuries ? t('ClaimAuto.ReviewSubmit.yes') : t('ClaimAuto.ReviewSubmit.no'),
         ],
       ],
       theme: "grid",
@@ -507,7 +504,7 @@ export async function generateClaimGeneralPDF(
       const urls = links.map((link) => link.url);
       autoTable(doc, {
         startY: (doc.lastAutoTable?.finalY ?? 0) + 5,
-        head: [["Police Report Document"]],
+        head: [[t('GeneralClaimAuto.ReviewSubmit.policeReportDocument')]],
         body: [[urls]],
         theme: "grid",
         headStyles: {
@@ -522,7 +519,7 @@ export async function generateClaimGeneralPDF(
     if (formData.bodilyInjuries && formData.bodilyInjuriesDescription) {
       autoTable(doc, {
         startY: (doc.lastAutoTable?.finalY ?? 0) + 5,
-        head: [["Bodily Injuries Description"]],
+        head: [[t('ClaimAuto.ReviewSubmit.injuriesDescription')]],
         body: [[formData.bodilyInjuriesDescription]],
         theme: "grid",
         headStyles: {
@@ -542,7 +539,7 @@ export async function generateClaimGeneralPDF(
       const urls = links.map((link) => link.url);
       autoTable(doc, {
         startY: (doc.lastAutoTable?.finalY ?? 0) + 5,
-        head: [["Medical Report Document"]],
+        head: [[t('GeneralClaimAuto.ReviewSubmit.medicalReportDocument')]],
         body: [[urls]],
         theme: "grid",
         headStyles: {
@@ -559,21 +556,19 @@ export async function generateClaimGeneralPDF(
     if (formData.involvedParties.length > 0) {
       doc.setFontSize(14);
       doc.setFont("helvetica", "bold");
-      doc.text("Involved Parties", 14, (doc.lastAutoTable?.finalY ?? 0) + 15);
+      doc.text(t('GeneralClaimAuto.InvolvedParties.title'), 14, (doc.lastAutoTable?.finalY ?? 0) + 15);
       doc.setFontSize(10);
       doc.setFont("helvetica", "normal");
       autoTable(doc, {
         startY: (doc.lastAutoTable?.finalY ?? 0) + 20,
-        head: [
-          [
-            "Full Name",
-            "Email",
-            "Phone",
-            "Description",
-            "Insurance",
-            "Policy Number",
-          ],
-        ],
+        head: [[
+          t('ClaimAuto.ReviewSubmit.fullName'),
+          t('ClaimAuto.ReviewSubmit.emailAddress'),
+          t('ClaimAuto.ReviewSubmit.phoneNumber'),
+          t('ClaimAuto.ReviewSubmit.description'),
+          t('ClaimAuto.InvolvedParties.insuranceCompany'),
+          t('ClaimAuto.InvolvedParties.policyNumber'),
+        ]],
         body: formData.involvedParties.map((p) => [
           p.fullName,
           p.email,
@@ -597,12 +592,17 @@ export async function generateClaimGeneralPDF(
     if (formData.testimonies.length > 0) {
       doc.setFontSize(14);
       doc.setFont("helvetica", "bold");
-      doc.text("Testimonies", 14, (doc.lastAutoTable?.finalY ?? 0) + 15);
+      doc.text(t('GeneralClaimAuto.InvolvedParties.testimonies'), 14, (doc.lastAutoTable?.finalY ?? 0) + 15);
       doc.setFontSize(10);
       doc.setFont("helvetica", "normal");
       autoTable(doc, {
         startY: (doc.lastAutoTable?.finalY ?? 0) + 20,
-        head: [["Full Name", "Email", "Phone", "Description"]],
+        head: [[
+          t('ClaimAuto.ReviewSubmit.fullName'),
+          t('ClaimAuto.ReviewSubmit.emailAddress'),
+          t('ClaimAuto.ReviewSubmit.phoneNumber'),
+          t('ClaimAuto.ReviewSubmit.description'),
+        ]],
         body: formData.testimonies.map((t) => [
           t.fullName,
           t.email,
@@ -629,16 +629,12 @@ export async function generateClaimGeneralPDF(
       const urls = links.map((link) => link.url);
       doc.setFontSize(14);
       doc.setFont("helvetica", "bold");
-      doc.text(
-        "Additional Documents",
-        14,
-        (doc.lastAutoTable?.finalY ?? 0) + 15
-      );
+      doc.text(t('GeneralClaimAuto.AdditionalDocumentation.documentsLabel'), 14, (doc.lastAutoTable?.finalY ?? 0) + 15);
       doc.setFontSize(10);
       doc.setFont("helvetica", "normal");
       autoTable(doc, {
         startY: (doc.lastAutoTable?.finalY ?? 0) + 20,
-        head: [["Document Name", "Type", "Size (KB)"]],
+        head: [[t('ClaimAuto.Documentation.tableName')]],
         body: [urls],
         theme: "grid",
         headStyles: {
@@ -658,7 +654,7 @@ export async function generateClaimGeneralPDF(
     ) {
       autoTable(doc, {
         startY: (doc.lastAutoTable?.finalY ?? 0) + 5,
-        head: [["Additional Comments"]],
+        head: [[t('GeneralClaimAuto.AdditionalDocumentation.commentsLabel')]],
         body: [[formData.additionalComments]],
         theme: "grid",
         headStyles: {
