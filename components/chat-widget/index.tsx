@@ -155,7 +155,7 @@ export default function Home(
   }
 
   return (
-    <div >
+    <div>
       {isVisible && (
         <div
           ref={widgetContainerRef}
@@ -164,7 +164,7 @@ export default function Home(
             : isMobile
               ? "bottom-0 right-0 left-0 z-50"
               : "bottom-8 right-8 z-50"
-            } flex flex-col items-end safe-area-bottom`}
+            } flex flex-col items-end safe-area-bottom${!isVerySmall ? ' mb-20' : ''}`}
           style={{
             transitionProperty: "opacity, transform",
             transitionDuration: `${animationDuration}ms`,
@@ -183,31 +183,41 @@ export default function Home(
             paddingBottom: isMobile ? `${safeAreaBottom}px` : undefined,
           }}
         >
-
           <div
             className={`${isVerySmall ? "w-full h-full" : isMobile ? "w-full" : ""} ${!isVerySmall && "mb-4"}`}
             style={{ width: !isMobile && !isVerySmall ? "460px" : undefined }}
           >
             <ChatWidget isFullScreen={isVerySmall} setIsOpen={setIsOpen} />
           </div>
-
-          {!isVerySmall && !isKeyboardOpen && (
-            <Button
-              size="icon"
-              className={`rounded-full h-10 w-10 bg-zinc-950 text-white hover:bg-zinc-800 shadow-lg ${isMobile ? "mb-4 mr-4" : ""}`}
-              onClick={handleToggle}
-              aria-label={t('closeChat')}
-              style={{ transition: "none" }}
-            >
-              <X className="h-5 w-5" />
-            </Button>
-          )}
         </div>
       )}
 
+      {/* Botón de cerrar (X) en la misma posición que el de abrir */}
+      {isVisible && !isVerySmall && !isKeyboardOpen && (
+        <div
+          className="fixed bottom-8 right-4 z-50"
+          style={{
+            opacity: isAnimating && isOpen ? 0 : 1,
+            transition: "opacity 200ms ease",
+            pointerEvents: isAnimating ? "none" : "auto",
+          }}
+        >
+          <Button
+            size="icon"
+            className="rounded-full h-10 w-10 bg-zinc-950 text-white hover:bg-zinc-800 shadow-lg"
+            onClick={handleToggle}
+            aria-label={t('closeChat')}
+            style={{ transition: "none" }}
+          >
+            <X className="h-5 w-5" />
+          </Button>
+        </div>
+      )}
+
+      {/* Botón de abrir (MessageSquare) en la misma posición */}
       {(!isVisible || isAnimating) && (
         <div
-          className={`fixed bottom-8 right-4 z-50`}
+          className="fixed bottom-8 right-4 z-50"
           style={{
             opacity: isAnimating && !isOpen ? 0 : 1,
             transition: "opacity 200ms ease",
@@ -215,11 +225,11 @@ export default function Home(
           }}
         >
           <Button
-            className={`rounded-full px-4 py-2 bg-zinc-950 text-white hover:bg-zinc-800 shadow-lg ${isMobile ? "h-12" : ""}`}
+            className="rounded-full h-10 w-10 bg-zinc-950 text-white hover:bg-zinc-800 shadow-lg"
             onClick={handleToggle}
             aria-label={t('openChat')}
           >
-            <MessageSquare className={`${isMobile ? "h-5 w-5" : "h-5 w-5"} `} />
+            <MessageSquare className="h-5 w-5" />
             {/* Open Chat Widget */}
           </Button>
         </div>
