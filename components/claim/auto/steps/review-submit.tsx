@@ -39,7 +39,9 @@ export default function ReviewSubmit() {
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false)
   const [pdfGenerationError, setPdfGenerationError] = useState<string | null>(null)
   const tReview = useTranslations('ClaimAuto.ReviewSubmit')
+  const t = useTranslations()
   const isMobile = useIsMobile()
+
 
   // const handleEditSection = (step: number) => {
   //   setCurrentStep(step)
@@ -60,7 +62,7 @@ export default function ReviewSubmit() {
 
       // Generate PDF - only do this once with the generated claim number
       setIsGeneratingPdf(true)
-      const { dataUrl, buffer } = await generateClaimAutoPDF(formData, generatedClaimNumber)
+      const { dataUrl, buffer } = await generateClaimAutoPDF(formData, generatedClaimNumber, t )
       const publicUrl = await uploadPdfToStorage(buffer, generatedClaimNumber)
 
 
@@ -139,7 +141,7 @@ export default function ReviewSubmit() {
     setPdfGenerationError(null)
 
     try {
-      const { dataUrl, buffer } = await generateClaimAutoPDF(formData, claimNumber)
+      const { dataUrl, buffer } = await generateClaimAutoPDF(formData, claimNumber, t )
 
       if (!dataUrl) {
         throw new Error("Failed to regenerate PDF")
@@ -266,7 +268,7 @@ export default function ReviewSubmit() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
             <Button
               onClick={() => {
-                if (isMobile && pdfUrl) {
+                if (pdfUrl) {
                   window.open(pdfUrl, '_blank')
                   toast({
                     title: 'PDF abierto',
