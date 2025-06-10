@@ -23,8 +23,9 @@ export function LocaleSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" aria-label="Change language">
+        <Button variant="ghost" aria-label="Change language" className='mt-1 mr-4 mb-2 border border-zinc-200'>
           <Globe className="h-5 w-5 text-zinc-700" />
+          {locales.find(l => l.code === locale)?.label}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-[120px]">

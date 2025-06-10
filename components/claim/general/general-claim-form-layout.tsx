@@ -115,7 +115,7 @@ export default function GeneralClaimFormLayout() {
   const showProgressIndicator = !isFormSubmitted && !isSubmitted
 
   return (
-    <div className="container mx-auto py-8 px-4 max-w-4xl">
+    <div className="container mx-auto py-8 pt-0 px-4 max-w-4xl">
       {/* Progress indicator moved outside the card */}
       {showProgressIndicator && (
         <div className="mb-4 bg-white rounded-lg shadow-sm border border-zinc-200 p-4">

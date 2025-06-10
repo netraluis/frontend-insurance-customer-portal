@@ -9,10 +9,10 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       <div key={locale}>
-        {children}
-        <div className="fixed top-4 right-4 z-50">
+        <div className="flex justify-end">
           <LocaleSwitcher />
         </div>
+        {children}
         <ChatWidget />
       </div>
     </NextIntlClientProvider>
