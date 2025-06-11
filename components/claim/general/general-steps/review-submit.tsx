@@ -24,7 +24,6 @@ import { sendConfirmationEmail } from "@/app/actions/email-actions"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import Image from "next/image"
 import { useTranslations } from 'next-intl'
-import { useIsMobile } from "@/hooks/use-mobile"
 import { uploadPdfToStorage } from "@/lib/utils"
 
 export default function ReviewSubmit() {
@@ -40,7 +39,7 @@ export default function ReviewSubmit() {
 
   const tReview = useTranslations('GeneralClaimAuto.ReviewSubmit')
   const t = useTranslations()
-  const isMobile = useIsMobile()
+
 
   // const handleEditSection = (step: number) => {
   //   setCurrentStep(step)
@@ -262,7 +261,7 @@ export default function ReviewSubmit() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
               <Button
                 onClick={() => {
-                  if (isMobile && pdfUrl) {
+                  if (pdfUrl) {
                     window.open(pdfUrl, '_blank')
                     toast({
                       title: 'PDF abierto',
