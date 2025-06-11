@@ -412,7 +412,7 @@ export default function InvolvedParties() {
                           >
                             <AlertCircle className="h-4 w-4" />
                             <span>
-                              {t('requiredFields').replace('*', '<span class="text-red-500">*</span>')}
+                              {t('requiredFields')}
                             </span>
                           </div>
                         </ScrollArea>
@@ -597,7 +597,7 @@ export default function InvolvedParties() {
                     <div className={`text-sm text-zinc-500 flex items-center gap-1 mb-4 ${isMobile ? "px-4" : ""}`}>
                       <AlertCircle className="h-4 w-4" />
                       <span>
-                        {t('requiredFields').replace('*', '<span class="text-red-500">*</span>')}
+                        {t('requiredFields')}
                       </span>
                     </div>
                   </ScrollArea>

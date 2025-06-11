@@ -756,14 +756,14 @@ export function UnifiedUpload({
                   className={isMobile ? "h-8 w-8 p-0" : ""}
                   onClick={() => handleRemoveAll()}
                 >
-                  {isMobile ? (
-                    <X className="h-4 w-4" />
+                  <X className="h-4 w-4" />
+                  {/* {isMobile ? (
                   ) : (
                     <>
                       <X className="h-4 w-4 mr-1" />
                       Remove
                     </>
-                  )}
+                  )} */}
                 </Button>
                 <Button
                   variant="outline"
@@ -772,8 +772,8 @@ export function UnifiedUpload({
                   onClick={handleButtonClick}
                   disabled={disabled || isUploading}
                 >
-                  <Upload className="h-4 w-4 mr-1" />
-                  Change
+                  <Upload className="h-4 w-4" />
+                  {/* Change */}
                 </Button>
               </div>
             </div>
