@@ -460,11 +460,7 @@ export async function generateClaimGeneralPDF(
         head: [[t('ClaimAuto.ReviewSubmit.damagePhotos')]],
         body: links.map((photo) => [photo.url]),
         theme: "grid",
-        headStyles: {
-          fillColor: [161, 161, 170],
-          textColor: [255, 255, 255],
-          fontStyle: "bold",
-        },
+        headStyles: tableStyles,
         styles: { fontSize: 10 },
         margin: margins,
       });
@@ -507,11 +503,7 @@ export async function generateClaimGeneralPDF(
         head: [[t('GeneralClaimAuto.ReviewSubmit.policeReportDocument')]],
         body: [[urls]],
         theme: "grid",
-        headStyles: {
-          fillColor: [161, 161, 170],
-          textColor: [255, 255, 255],
-          fontStyle: "bold",
-        },
+        headStyles: tableStyles,
         styles: { fontSize: 10 },
         margin: margins,
       });
@@ -522,11 +514,7 @@ export async function generateClaimGeneralPDF(
         head: [[t('ClaimAuto.ReviewSubmit.injuriesDescription')]],
         body: [[formData.bodilyInjuriesDescription]],
         theme: "grid",
-        headStyles: {
-          fillColor: [161, 161, 170],
-          textColor: [255, 255, 255],
-          fontStyle: "bold",
-        },
+        headStyles: tableStyles,
         styles: { fontSize: 10 },
         margin: margins,
       });
@@ -542,11 +530,7 @@ export async function generateClaimGeneralPDF(
         head: [[t('GeneralClaimAuto.ReviewSubmit.medicalReportDocument')]],
         body: [[urls]],
         theme: "grid",
-        headStyles: {
-          fillColor: [161, 161, 170],
-          textColor: [255, 255, 255],
-          fontStyle: "bold",
-        },
+        headStyles: tableStyles,
         styles: { fontSize: 10 },
         margin: margins,
       });
@@ -578,11 +562,7 @@ export async function generateClaimGeneralPDF(
           p.policyNumber,
         ]),
         theme: "grid",
-        headStyles: {
-          fillColor: [161, 161, 170],
-          textColor: [255, 255, 255],
-          fontStyle: "bold",
-        },
+        headStyles: tableStyles,
         styles: { fontSize: 10 },
         margin: margins,
       });
@@ -610,11 +590,7 @@ export async function generateClaimGeneralPDF(
           t.description,
         ]),
         theme: "grid",
-        headStyles: {
-          fillColor: [161, 161, 170],
-          textColor: [255, 255, 255],
-          fontStyle: "bold",
-        },
+        headStyles: tableStyles,
         styles: { fontSize: 10 },
         margin: margins,
       });
@@ -637,11 +613,7 @@ export async function generateClaimGeneralPDF(
         head: [[t('ClaimAuto.Documentation.tableName')]],
         body: [urls],
         theme: "grid",
-        headStyles: {
-          fillColor: [161, 161, 170],
-          textColor: [255, 255, 255],
-          fontStyle: "bold",
-        },
+        headStyles: tableStyles,
         styles: { fontSize: 10 },
         margin: margins,
       });
@@ -657,11 +629,7 @@ export async function generateClaimGeneralPDF(
         head: [[t('GeneralClaimAuto.AdditionalDocumentation.commentsLabel')]],
         body: [[formData.additionalComments]],
         theme: "grid",
-        headStyles: {
-          fillColor: [161, 161, 170],
-          textColor: [255, 255, 255],
-          fontStyle: "bold",
-        },
+        headStyles: tableStyles,
         styles: { fontSize: 10 },
         margin: margins,
       });
