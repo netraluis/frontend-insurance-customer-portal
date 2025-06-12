@@ -42,7 +42,7 @@ export default function AccidentDetails() {
         <div className="space-y-4">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="accidentLocation">{t('locationLabel')}</Label>
+              <Label htmlFor="accidentLocation">{t('locationLabel')} <span className="text-destructive">*</span></Label>
               <Input
                 id="accidentLocation"
                 name="accidentLocation"
@@ -54,7 +54,7 @@ export default function AccidentDetails() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="accidentDate">{t('dateLabel')}</Label>
+              <Label htmlFor="accidentDate">{t('dateLabel')} <span className="text-destructive">*</span></Label>
               <DateTimePicker
                 value={formData.accidentDate || undefined}
                 onChange={handleDateChange}
@@ -66,7 +66,7 @@ export default function AccidentDetails() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="accidentDescription">{t('descriptionLabel')}</Label>
+            <Label htmlFor="accidentDescription">{t('descriptionLabel')} <span className="text-destructive">*</span></Label>
             <Textarea
               id="accidentDescription"
               name="accidentDescription"

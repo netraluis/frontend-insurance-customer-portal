@@ -150,6 +150,7 @@ export default function AdditionalInformation() {
                   successMessage={t('successMessage')}
                   mobileSuccessMessage={t('mobileSuccessMessage')}
                   captureMethod="environment"
+                  required={true}
                 />
               </div>
             )}
@@ -161,7 +162,7 @@ export default function AdditionalInformation() {
               <div className="flex items-center gap-2">
                 <Activity className="h-5 w-5 text-zinc-500" />
                 <div>
-                  <h4 className="text-md font-medium text-zinc-900">{t('bodilyInjuries')}</h4>
+                  <h4 className="text-md font-medium text-zinc-900">{t('bodilyInjuries')} <span className="text-destructive">*</span></h4>
                   <p className="text-sm text-zinc-500">{t('bodilyInjuriesQuestion')}</p>
                 </div>
               </div>
@@ -217,6 +218,7 @@ export default function AdditionalInformation() {
                   successMessage={t('medicalSuccessMessage')}
                   mobileSuccessMessage={t('medicalMobileSuccessMessage')}
                   captureMethod="environment"
+                  required={true}
                 />
               </div>
             )}
