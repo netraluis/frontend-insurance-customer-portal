@@ -31,13 +31,13 @@
     "resendCode": "Reenviar codi"
   },
   "ChatWidget": {
-    "starters": [
-      "Tramitar un sinistre",
-      "Demanar un pressupost",
-      "Demanar informació",
-      "Consultar pòlissa",
-      "Modificar dades personals"
-    ],
+    "starters": {
+      "0": "Tramitar un sinistre",
+      "1": "Demanar un pressupost",
+      "2": "Demanar informació",
+      "3": "Consultar pòlissa",
+      "4": "Modificar dades personals"
+    },
     "suggestions": "Sugerències",
     "agentWelcome": "Sóc l'assistent d'IA de Globalrisc, pregunta'm el que vulguis! Com et puc ajudar?",
     "inputPlaceholder": "Escriu el teu missatge",
@@ -168,7 +168,8 @@
       "insurance": "Assegurança",
       "name": "Nom",
       "noEmail": "Sense correu electrònic",
-      "noPhone": "Sense telèfon"
+      "noPhone": "Sense telèfon",
+      "descriptionDriver": "Descripció del conductor"
     },
     "UploadDocumentation": {
       "title": "Pujar documentació",

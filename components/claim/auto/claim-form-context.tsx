@@ -20,6 +20,7 @@ export type Driver = {
   licensePlate: string
   insuranceCompany: string
   policyNumber: string
+  description: string
 }
 
 // export type Document = {
@@ -62,43 +63,43 @@ export type MediaFile = {
 // Update the FormData type to include vehicleType
 export type FormData = {
   // Step 1: Policy Information
-  firstName: string
-  lastName: string
-  email: string
-  phone: string
+  firstName: string // *
+  lastName: string // *
+  email: string // *
+  phone: string // *
 
   // Additional driver information
   hasDifferentDriver: boolean
-  driverFirstName: string
-  driverLastName: string
-  driverDateOfBirth: Date | null
+  driverFirstName: string // * si esta activo, es obligatorio
+  driverLastName: string // * si esta activo, es obligatorio
+  driverDateOfBirth: Date | null // * si esta activo, es obligatorio
   driverPhone: string
-  driverEmail: string
-  driverID: string
+  driverEmail: string 
+  driverID: string 
 
   // Step 2: Vehicle Information
-  vehicleMake: string
-  vehicleModel: string
-  licensePlate: string
-  vehicleType: string // Add this new field
+  vehicleMake: string // *
+  vehicleModel: string // *
+  licensePlate: string // *
+  vehicleType: string // *
   // coverageType field removed
 
   // Step 3: Accident Details
-  incidentDate: Date | null
-  accidentLocation: string
-  accidentDescription: string
+  incidentDate: Date | null // *
+  accidentLocation: string // *
+  accidentDescription: string // *
   policeInvolved: boolean
   trafficServiceInvolved: boolean
   friendlyReport: boolean
   friendlyReportDocument: MediaFile | null
   bodilyInjuries: boolean
   bodilyInjuriesDescription: string
-  damageDescription: string
+  damageDescription: string // *
   damagePhotos: MediaFile[]
 
   // Step 4: Involved Parties
-  drivers: Driver[]
-  witnesses: Witness[]
+  drivers: Driver[] // no es obligatorio
+  witnesses: Witness[] // *
 
   // Step 5: Documentation
   documents: MediaFile[]

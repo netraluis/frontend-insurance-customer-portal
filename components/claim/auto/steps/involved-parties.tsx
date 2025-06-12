@@ -48,6 +48,7 @@ export default function InvolvedParties() {
     licensePlate: "",
     insuranceCompany: "",
     policyNumber: "",
+    description: "",
   })
 
   // Witness state
@@ -100,7 +101,7 @@ export default function InvolvedParties() {
   }, [hasWitnesses, updateFormData, formData.witnesses.length])
 
   // Driver handlers
-  const handleDriverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleDriverChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setDriverFormData((prev) => ({ ...prev, [name]: value }))
   }
@@ -142,6 +143,7 @@ export default function InvolvedParties() {
       licensePlate: "",
       insuranceCompany: "",
       policyNumber: "",
+      description: "",
     })
     setEditingDriverIndex(null)
   }
@@ -333,7 +335,7 @@ export default function InvolvedParties() {
                       <div className={`grid grid-cols-1 gap-4 sm:grid-cols-2 ${isMobile ? "p-4" : "py-4"}`}>
                         <div className="space-y-2">
                           <Label htmlFor="driverFirstName">
-                            {tInvolved('firstName')} <span className="text-red-500">*</span>
+                            {tInvolved('firstName')}
                           </Label>
                           <Input
                             id="driverFirstName"
@@ -341,13 +343,12 @@ export default function InvolvedParties() {
                             value={driverFormData.firstName}
                             onChange={handleDriverChange}
                             placeholder={tInvolved('firstNamePlaceholder')}
-                            required
                             ref={driverFirstNameRef}
                           />
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="driverLastName">
-                            {tInvolved('lastName')} <span className="text-red-500">*</span>
+                            {tInvolved('lastName')}
                           </Label>
                           <Input
                             id="driverLastName"
@@ -355,7 +356,6 @@ export default function InvolvedParties() {
                             value={driverFormData.lastName}
                             onChange={handleDriverChange}
                             placeholder={tInvolved('lastNamePlaceholder')}
-                            required
                           />
                         </div>
                         <div className="space-y-2">
@@ -381,7 +381,7 @@ export default function InvolvedParties() {
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="driverVehicleMake">
-                            {tInvolved('vehicleMake')} <span className="text-red-500">*</span>
+                            {tInvolved('vehicleMake')}
                           </Label>
                           <Input
                             id="driverVehicleMake"
@@ -389,12 +389,11 @@ export default function InvolvedParties() {
                             value={driverFormData.vehicleMake}
                             onChange={handleDriverChange}
                             placeholder={tInvolved('vehicleMakePlaceholder')}
-                            required
                           />
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="driverVehicleModel">
-                            {tInvolved('vehicleModel')} <span className="text-red-500">*</span>
+                            {tInvolved('vehicleModel')}
                           </Label>
                           <Input
                             id="driverVehicleModel"
@@ -402,12 +401,12 @@ export default function InvolvedParties() {
                             value={driverFormData.vehicleModel}
                             onChange={handleDriverChange}
                             placeholder={tInvolved('vehicleModelPlaceholder')}
-                            required
+                            
                           />
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="driverLicensePlate">
-                            {tInvolved('licensePlate')} <span className="text-red-500">*</span>
+                            {tInvolved('licensePlate')}
                           </Label>
                           <Input
                             id="driverLicensePlate"
@@ -415,7 +414,6 @@ export default function InvolvedParties() {
                             value={driverFormData.licensePlate}
                             onChange={handleDriverChange}
                             placeholder={tInvolved('licensePlatePlaceholder')}
-                            required
                           />
                         </div>
                         <div className="space-y-2">
@@ -438,13 +436,27 @@ export default function InvolvedParties() {
                             placeholder={tInvolved('policyNumberPlaceholder')}
                           />
                         </div>
+                        <div className="space-y-2 sm:col-span-2">
+                          <Label htmlFor="driverDescription">
+                            {tInvolved('statement')}
+                          </Label>
+                          <Textarea
+                            id="description"
+                            name="description"
+                            value={driverFormData.description}
+                            onChange={handleDriverChange}
+                            placeholder={tInvolved('statementPlaceholder')}
+                            rows={4}
+                            
+                          />
+                        </div>
                       </div>
-                      <div className={`text-sm text-zinc-500 flex items-center gap-1 mb-4 ${isMobile ? "px-4" : ""}`}>
+                      {/* <div className={`text-sm text-zinc-500 flex items-center gap-1 mb-4 ${isMobile ? "px-4" : ""}`}>
                         <AlertCircle className="h-4 w-4" />
                         <span>
                           {tInvolved('requiredFields')}
                         </span>
-                      </div>
+                      </div> */}
                     </ScrollArea>
 
                     <DialogFooter className={isMobile ? "flex bg-zinc-50 rounded-xs mx-2" : ""}>
@@ -453,13 +465,13 @@ export default function InvolvedParties() {
                       </Button>
                       <Button
                         onClick={handleAddDriver}
-                        disabled={
-                          !driverFormData.firstName ||
-                          !driverFormData.lastName ||
-                          !driverFormData.vehicleMake ||
-                          !driverFormData.vehicleModel ||
-                          !driverFormData.licensePlate
-                        }
+                        // disabled={
+                        //   !driverFormData.firstName ||
+                        //   !driverFormData.lastName ||
+                        //   !driverFormData.vehicleMake ||
+                        //   !driverFormData.vehicleModel ||
+                        //   !driverFormData.licensePlate
+                        // }
                       >
                         {editingDriverIndex !== null ? tInvolved('updateDriver') : tInvolved('addDriver')}
                       </Button>

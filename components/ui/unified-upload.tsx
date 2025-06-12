@@ -61,6 +61,7 @@ export interface UnifiedUploadProps extends Omit<React.HTMLAttributes<HTMLDivEle
   captureMethod?: "user" | "environment" | boolean
   variant?: "default" | "compact" | "inline"
   allowDirectories?: boolean
+  required?: boolean
 }
 
 function formatFileSize(bytes: number): string {
@@ -100,6 +101,7 @@ export function UnifiedUpload({
   variant = "default",
   allowDirectories = false,
   className,
+  required = false,
   ...props
 }: UnifiedUploadProps) {
   const [files, setFiles] = React.useState<MediaFile[]>(!value ? [] : Array.isArray(value) ? value : [value])
@@ -583,7 +585,7 @@ export function UnifiedUpload({
     <div className={cn("space-y-3", className)} {...props}>
       {label && (
         <div className="flex justify-between items-center">
-          <Label className="text-zinc-900">{label}</Label>
+          <Label className="text-zinc-900">{label} {required && <span className="text-destructive">*</span>}</Label>
           {multiple && files.length > 0 && variant !== "compact" && (
             <Button
               variant="outline"

@@ -31,13 +31,13 @@
     "resendCode": "Resend code"
   },
   "ChatWidget": {
-    "starters": [
-      "File a claim",
-      "Request a quote",
-      "Request information",
-      "Check my policy",
-      "Update personal details"
-    ],
+    "starters": {
+      "0": "File a claim",
+      "1": "Request a quote",
+      "2": "Request information",
+      "3": "Check my policy",
+      "4": "Update personal details"
+    },
     "suggestions": "Suggestions",
     "agentWelcome": "I'm the Globalrisc AI assistant, ask me anything! How can I help you?",
     "inputPlaceholder": "Type your message",
@@ -168,7 +168,8 @@
       "insurance": "Insurance",
       "name": "Name",
       "noEmail": "No email provided",
-      "noPhone": "No phone provided"
+      "noPhone": "No phone provided",
+      "descriptionDriver": "Driver description"
     },
     "UploadDocumentation": {
       "title": "Upload Documentation",

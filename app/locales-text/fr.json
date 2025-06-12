@@ -31,13 +31,13 @@
     "resendCode": "Renvoyer le code"
   },
   "ChatWidget": {
-    "starters": [
-      "Déclarer un sinistre",
-      "Demander un devis",
-      "Demander des informations",
-      "Consulter la police",
-      "Modifier les données personnelles"
-    ],
+    "starters": {
+      "0": "Déclarer un sinistre",
+      "1": "Demander un devis",
+      "2": "Demander des informations",
+      "3": "Consulter la police",
+      "4": "Modifier les données personnelles"
+    },
     "suggestions": "Suggestions",
     "agentWelcome": "Je suis l'assistant IA de Globalrisc, posez-moi vos questions ! Comment puis-je vous aider ?",
     "inputPlaceholder": "Écrivez votre message",
@@ -46,12 +46,7 @@
     "fileUploadLabel": "Télécharger des fichiers",
     "agentDisclaimer": "Cet agent peut faire des erreurs. Veuillez l'utiliser avec précaution.",
     "openChat": "Ouvrir le chat",
-    "closeChat": "Fermer le chat",
-    "title": "Chat Globalrisc",
-    "placeholder": "Écrivez votre message...",
-    "send": "Envoyer",
-    "loading": "Chargement...",
-    "welcome": "Comment pouvons-nous vous aider aujourd'hui ?"
+    "closeChat": "Fermer le chat"
   },
   "ClaimAuto": {
     "PolicyInformation": {
@@ -173,7 +168,8 @@
       "insurance": "Assurance",
       "name": "Nom",
       "noEmail": "Aucun e-mail fourni",
-      "noPhone": "Aucun téléphone fourni"
+      "noPhone": "Aucun téléphone fourni",
+      "descriptionDriver": "Description du conducteur"
     },
     "UploadDocumentation": {
       "title": "Télécharger la documentation",
@@ -581,6 +577,7 @@
       "confirmInfo": "Je confirme que toutes les informations fournies sont exactes et complètes au meilleur de ma connaissance.",
       "submitting": "Envoi en cours...",
       "submitClaim": "Soumettre la déclaration",
+      "previous": "Précédent",
       "reviewAndSubmit": "Vérifier et soumettre"
     },
     "stepPolicy": "Police",

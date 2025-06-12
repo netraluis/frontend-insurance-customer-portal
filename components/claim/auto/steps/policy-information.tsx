@@ -60,7 +60,7 @@ export default function PolicyInformation() {
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div className="space-y-2">
-            <Label htmlFor="firstName">{t('firstName')}</Label>
+            <Label htmlFor="firstName">{t('firstName')} <span className="text-destructive">*</span></Label>
             <Input
               id="firstName"
               name="firstName"
@@ -72,7 +72,7 @@ export default function PolicyInformation() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="lastName">{t('lastName')}</Label>
+            <Label htmlFor="lastName">{t('lastName')} <span className="text-destructive">*</span></Label>
             <Input
               id="lastName"
               name="lastName"
@@ -84,7 +84,7 @@ export default function PolicyInformation() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email">{t('email')}</Label>
+            <Label htmlFor="email">{t('email')} <span className="text-destructive">*</span></Label>
             <Input
               id="email"
               name="email"

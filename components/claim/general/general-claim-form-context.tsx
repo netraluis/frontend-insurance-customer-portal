@@ -50,14 +50,14 @@ export type MediaFile = {
 
 export type FormData = {
   // Step 1: Policy Information
-  firstName: string
-  lastName: string
-  email: string
-  phone: string
-  policyNumber: string
+  firstName: string // *
+  lastName: string // *
+  email: string // *
+  phone: string // *
+  policyNumber: string // *
 
   // Step 1.5: Driver Information (si es diferente al asegurado)
-  hasDifferentDriver: boolean
+  hasDifferentDriver: boolean // TDOD no deberia de estar aqui
   // driverFirstName: string
   // driverLastName: string
   // driverDateOfBirth: Date | null
@@ -69,10 +69,10 @@ export type FormData = {
   // licensePlate: string
   // vehicleType: string // Add this new field
   // Step 2: Accident Details
-  accidentLocation: string
-  accidentDate: Date | null
-  accidentDescription: string
-  damageDescription: string
+  accidentLocation: string // *
+  accidentDate: Date | null // *
+  accidentDescription: string // *
+  damageDescription: string // *
   damagePhotos: MediaFile[]
   // friendlyReportDocument: MediaFile | null
 
@@ -82,16 +82,16 @@ export type FormData = {
   friendlyReport: boolean
   firefightersInvolved: boolean
   policeReport: boolean
-  policeReportDocument: MediaFile | null
+  policeReportDocument: MediaFile | null // * si esta activo, es obligatorio
   bodilyInjuries: boolean
-  bodilyInjuriesDescription: string
+  bodilyInjuriesDescription: string // * si esta activo, es obligatorio
   medicalReportDocument: MediaFile | null
 
   // Step 4: Involved Parties
   hasInvolvedParties: boolean
   knowsInvolvedPerson: boolean
   involvedParties: InvolvedParty[]
-  testimonies: Testimony[]
+  testimonies: Testimony[] // * si esta activo, es obligatorio
 
   // Step 5: Additional Documentation
   additionalDocuments: MediaFile[]

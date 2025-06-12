@@ -75,7 +75,7 @@ export default function AccidentDetails() {
         <div className="space-y-4">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="accidentLocation">{tAccident('locationLabel')}</Label>
+              <Label htmlFor="accidentLocation">{tAccident('locationLabel')}<span className="text-destructive">*</span></Label>
               <Input
                 id="accidentLocation"
                 name="accidentLocation"
@@ -87,7 +87,7 @@ export default function AccidentDetails() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="incidentDate">{tAccident('dateLabel')}</Label>
+              <Label htmlFor="incidentDate">{tAccident('dateLabel')}<span className="text-destructive">*</span></Label>
               <DateTimePicker
                 value={formData.incidentDate || undefined}
                 onChange={handleDateChange}
@@ -99,7 +99,7 @@ export default function AccidentDetails() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="accidentDescription">{tAccident('descriptionLabel')}</Label>
+            <Label htmlFor="accidentDescription">{tAccident('descriptionLabel')}<span className="text-destructive">*</span></Label>
             <Textarea
               id="accidentDescription"
               name="accidentDescription"
@@ -238,6 +238,7 @@ export default function AccidentDetails() {
                   successMessage={tAccident('friendlyReportSuccessMessage')}
                   mobileSuccessMessage={tAccident('friendlyReportMobileSuccessMessage')}
                   captureMethod="environment"
+                  required={true}
                 />
               </div>
             )}
@@ -267,7 +268,7 @@ export default function AccidentDetails() {
                     <AlertCircle className="h-5 w-5 text-zinc-500 mt-0.5" />
                     <div>
                       <Label htmlFor="bodilyInjuriesDescription" className="text-zinc-900">
-                        {tAccident('bodilyInjuriesLabel') + ' ' + tAccident('descriptionLabel')}
+                        {tAccident('bodilyInjuriesLabel') + ' ' + tAccident('descriptionLabel')}<span className="text-destructive">*</span>
                       </Label>
                       <p className="text-sm text-zinc-500 mb-2">
                         {isMobile

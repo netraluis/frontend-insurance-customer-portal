@@ -267,6 +267,7 @@ export async function generateClaimAutoPDF(
           t("ClaimAuto.InvolvedParties.licensePlate"),
           t("ClaimAuto.InvolvedParties.insuranceCompany"),
           t("ClaimAuto.InvolvedParties.policyNumber"),
+          t("ClaimAuto.InvolvedParties.descriptionDriver"),
         ],
       ],
       body: formData.drivers.map((driver) => [
@@ -277,6 +278,7 @@ export async function generateClaimAutoPDF(
         driver.licensePlate,
         driver.insuranceCompany,
         driver.policyNumber,
+        driver.description,
       ]),
       theme: "grid",
       headStyles: tableStyles,

@@ -46,7 +46,7 @@ export default function VehicleInformation() {
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div className="space-y-2">
-            <Label htmlFor="vehicleType">{tVehicle('vehicleType')}</Label>
+            <Label htmlFor="vehicleType">{tVehicle('vehicleType')}<span className="text-destructive">*</span></Label>
             <Select value={formData.vehicleType} onValueChange={handleVehicleTypeChange}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder={tVehicle('vehicleTypePlaceholder')} />
@@ -65,7 +65,7 @@ export default function VehicleInformation() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="vehicleMake">{tVehicle('vehicleMake')}</Label>
+            <Label htmlFor="vehicleMake">{tVehicle('vehicleMake')}<span className="text-destructive">*</span></Label>
             <Input
               id="vehicleMake"
               name="vehicleMake"
@@ -77,7 +77,7 @@ export default function VehicleInformation() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="vehicleModel">{tVehicle('vehicleModel')}</Label>
+            <Label htmlFor="vehicleModel">{tVehicle('vehicleModel')}<span className="text-destructive">*</span></Label>
             <Input
               id="vehicleModel"
               name="vehicleModel"
@@ -89,7 +89,7 @@ export default function VehicleInformation() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="licensePlate">{tVehicle('licensePlate')}</Label>
+            <Label htmlFor="licensePlate">{tVehicle('licensePlate')}<span className="text-destructive">*</span></Label>
             <Input
               id="licensePlate"
               name="licensePlate"
