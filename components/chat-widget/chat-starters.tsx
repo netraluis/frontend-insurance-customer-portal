@@ -15,7 +15,10 @@ export default function ChatStarters({ onStarterClick }: ChatStartersProps) {
   const [showRightArrow, setShowRightArrow] = useState(true)
   const t = useTranslations('ChatWidget')
 
-  const starters = t.raw('starters') as string[]
+  const starters = t.raw('starters')
+
+  const arrStarters: string[] = Object.values(starters);
+
 
   const handleScroll = () => {
     if (!scrollContainerRef.current) return
@@ -56,7 +59,7 @@ export default function ChatStarters({ onStarterClick }: ChatStartersProps) {
         className="flex gap-3 overflow-x-auto scrollbar-hide py-2 px-1"
         onScroll={handleScroll}
       >
-        {starters.map((starter, index) => (
+        {arrStarters.map((starter, index) => (
           <Button
             key={index}
             variant="outline"
