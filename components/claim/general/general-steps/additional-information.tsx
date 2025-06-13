@@ -162,8 +162,9 @@ export default function AdditionalInformation() {
               <div className="flex items-center gap-2">
                 <Activity className="h-5 w-5 text-zinc-500" />
                 <div>
-                  <h4 className="text-md font-medium text-zinc-900">{t('bodilyInjuries')} <span className="text-destructive">*</span></h4>
+                  <h4 className="text-md font-medium text-zinc-900">{t('bodilyInjuries')}</h4>
                   <p className="text-sm text-zinc-500">{t('bodilyInjuriesQuestion')}</p>
+
                 </div>
               </div>
               <Switch
@@ -180,7 +181,7 @@ export default function AdditionalInformation() {
                     <AlertCircle className="h-5 w-5 text-zinc-500 mt-0.5" />
                     <div>
                       <Label htmlFor="bodilyInjuriesDescription" className="text-zinc-900">
-                        {t('bodilyInjuriesDescriptionLabel')}
+                        {t('bodilyInjuriesDescriptionLabel')}<span className="text-destructive">*</span>
                       </Label>
                       <p className="text-sm text-zinc-500 mb-2">
                         {isMobile ? t('bodilyInjuriesDescriptionShort') : t('bodilyInjuriesDescriptionLong')}
@@ -218,7 +219,6 @@ export default function AdditionalInformation() {
                   successMessage={t('medicalSuccessMessage')}
                   mobileSuccessMessage={t('medicalMobileSuccessMessage')}
                   captureMethod="environment"
-                  required={true}
                 />
               </div>
             )}

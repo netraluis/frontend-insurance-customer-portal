@@ -284,7 +284,7 @@ export default function InvolvedParties() {
               <div className="border border-zinc-200 rounded-md overflow-hidden">
                 <div className="bg-zinc-50 px-3 sm:px-4 py-3 flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Users className="h-5 w-5 text-zinc-500" />
+                    {/* <Users className="h-5 w-5 text-zinc-500" /> */}
                     <div>
                       <h4 className="text-md font-medium text-zinc-900">{t('knowsInvolvedPerson')}</h4>
                       <p className="text-sm text-zinc-500">{t('knowsInvolvedPersonHint')}</p>
@@ -326,7 +326,7 @@ export default function InvolvedParties() {
                         </Button>
                       </DialogTrigger>
                       <DialogContent
-                        className={isMobile ? "w-[calc(100%-32px)] p-0 h-[90dvh] pb-2" : "sm:max-w-[600px]"}
+                        className={isMobile ? "w-[calc(100%-32px)] p-0 h-[90dvh]  pb-2" : "sm:max-w-[600px]"}
                       >
                         <DialogHeader className={isMobile ? "px-4 py-3 border-b" : ""}>
                           <DialogTitle>{editingPartyIndex !== null ? t('editParty') : t('addParty')}</DialogTitle>
@@ -533,7 +533,7 @@ export default function InvolvedParties() {
                   </Button>
                 </DialogTrigger>
                 <DialogContent
-                  className={isMobile ? "w-[calc(100%-32px)] p-0 h-[90vh] max-h-[600px]" : "sm:max-w-[600px]"}
+                  className={isMobile ? "w-[calc(100%-32px)] p-0 h-[90dvh] pb-2": "sm:max-w-[600px]"}
                 >
                   <DialogHeader className={isMobile ? "px-4 py-3 border-b" : ""}>
                     <DialogTitle>{editingTestimonyIndex !== null ? t('editTestimony') : t('addTestimonyDialog')}</DialogTitle>
@@ -542,8 +542,8 @@ export default function InvolvedParties() {
                     </DialogDescription>
                   </DialogHeader>
 
-                  <ScrollArea className={isMobile ? "h-[calc(90vh-130px)] max-h-[470px]" : ""}>
-                    <div className={`grid grid-cols-1 gap-4 sm:grid-cols-2 ${isMobile ? "p-4" : "py-4"}`}>
+                  <ScrollArea >
+                  <div className={`grid grid-cols-1 gap-4 sm:grid-cols-2 ${isMobile ? "p-4" : "py-4"}`}>
                       <div className="space-y-2 sm:col-span-2">
                         <Label htmlFor="testimonyFullName">
                           {t('testimonyFullName')} <span className="text-red-500">*</span>
@@ -602,7 +602,7 @@ export default function InvolvedParties() {
                     </div>
                   </ScrollArea>
 
-                  <DialogFooter className={isMobile ? "flex p-4 border-t bg-zinc-50" : ""}>
+                  <DialogFooter className={isMobile ? "flex bg-zinc-50 rounded-xs mx-2" : ""}>
                     <Button variant="outline" onClick={() => setTestimonyDialogOpen(false)}>
                       {t('cancel')}
                     </Button>
