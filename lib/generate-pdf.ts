@@ -7,7 +7,7 @@ import { uploadBlobsAndGetUrls } from "./utils";
 
 const margins = {
   top: 10,
-  bottom: 20,
+  bottom: 30,
   left: 14,
   right: 14,
 };
