@@ -177,7 +177,7 @@
     },
     "ReviewAndSubmit": {
       "title": "Revisar y enviar",
-      "description": "Revisa tu parte antes de enviarlo."
+      "description": "Revisa tu declaración antes de enviarlo."
     },
     "policyInformation": "Información de la póliza",
     "vehicleInformation": "Información del vehículo",
@@ -185,7 +185,7 @@
     "involvedParties": "Implicados",
     "uploadDocumentation": "Subir documentación",
     "reviewAndSubmit": "Revisar y enviar",
-    "autoClaimForm": "Parte de auto",
+    "autoClaimForm": "declaración de auto",
     "previous": "Anterior",
     "saveProgress": "Guardar progreso",
     "progressSaved": "Progreso guardado",
@@ -193,9 +193,9 @@
     "progressRestored": "Progreso restaurado",
     "progressRestoredDesc": "Tus datos guardados previamente han sido cargados.",
     "next": "Siguiente",
-    "submitClaim": "Enviar parte",
+    "submitClaim": "Enviar declaración",
     "personalInformation": "Información personal",
-    "personalInformationDesc": "Por favor, proporciona tus datos de contacto para poder procesar tu parte.",
+    "personalInformationDesc": "Por favor, proporciona tus datos de contacto para poder procesar tu declaración.",
     "firstName": "Nombre",
     "firstNamePlaceholder": "Introduce tu nombre",
     "lastName": "Apellido",
