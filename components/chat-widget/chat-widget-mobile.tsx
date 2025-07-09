@@ -189,7 +189,7 @@ export default function ChatWidgetMobile({ setIsOpen }: { isFullScreen?: boolean
         <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-200 bg-white">
           <div className="flex items-center gap-3">
             <Avatar className="h-10 w-10 bg-zinc-950">
-              <img src="/globalriscSymbol.png" alt="Globalrisc AI Agent" />
+              <img src="/globalrisc_logo_avatar.png" alt="Globalrisc AI Agent" />
             </Avatar>
             <span className="font-semibold text-base">Globalrisc AI Agent</span>
           </div>
@@ -215,7 +215,7 @@ export default function ChatWidgetMobile({ setIsOpen }: { isFullScreen?: boolean
         {isLoading && (
           <div className="flex items-start gap-3 mb-4">
             <Avatar className="h-8 w-8 bg-zinc-950 mt-1">
-              <img src="/globalriscSymbol.png"alt="Globalrisc AI Agent" />
+              <img src="/globalrisc_logo_avatar.png"alt="Globalrisc AI Agent" />
             </Avatar>
             <div className="flex flex-col gap-2 max-w-[80%]">
               <Skeleton className="h-4 w-24" />
