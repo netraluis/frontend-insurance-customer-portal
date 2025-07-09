@@ -32,11 +32,11 @@
   },
   "ChatWidget": {
     "starters": {
-      "0": "Tramitar un siniestro",
-      "1": "Pedir un presupuesto",
-      "2": "Solicitar información",
-      "3": "Consultar póliza",
-      "4": "Modificar datos personales"
+      "0": "Declaración de un siniestro",
+      "1": "Solicitar un presupuesto",
+      "2": "Dar de baja una póliza",
+      "3": "Fraccionar el recibo de la póliza",
+      "4": "¿Cuál es el horario de oficina?"
     },
     "suggestions": "Sugerencias",
     "agentWelcome": "Soy el asistente de IA de Globalrisc, ¡pregúntame lo que quieras! ¿En qué puedo ayudarte?",

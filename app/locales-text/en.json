@@ -32,11 +32,11 @@
   },
   "ChatWidget": {
     "starters": {
-      "0": "File a claim",
+      "0": "Claim declaration",
       "1": "Request a quote",
-      "2": "Request information",
-      "3": "Check my policy",
-      "4": "Update personal details"
+      "2": "Cancel a policy",
+      "3": "Split the policy payment",
+      "4": "What are the office hours?"
     },
     "suggestions": "Suggestions",
     "agentWelcome": "I'm the Globalrisc AI assistant, ask me anything! How can I help you?",

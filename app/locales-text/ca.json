@@ -32,11 +32,11 @@
   },
   "ChatWidget": {
     "starters": {
-      "0": "Tramitar un sinistre",
+      "0": "Declaració d’un sinistre",
       "1": "Demanar un pressupost",
-      "2": "Demanar informació",
-      "3": "Consultar pòlissa",
-      "4": "Modificar dades personals"
+      "2": "Donar de baixa una pòlissa",
+      "3": "Fraccionar el rebut de la pòlissa",
+      "4": "Quin és l’horari d’oficina?"
     },
     "suggestions": "Sugerències",
     "agentWelcome": "Sóc l'assistent d'IA de Globalrisc, pregunta'm el que vulguis! Com et puc ajudar?",

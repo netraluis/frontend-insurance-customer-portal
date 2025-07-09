@@ -32,11 +32,11 @@
   },
   "ChatWidget": {
     "starters": {
-      "0": "Déclarer un sinistre",
+      "0": "Déclaration d’un sinistre",
       "1": "Demander un devis",
-      "2": "Demander des informations",
-      "3": "Consulter la police",
-      "4": "Modifier les données personnelles"
+      "2": "Résilier une police",
+      "3": "Fractionner le paiement de la police",
+      "4": "Quels sont les horaires du bureau ?"
     },
     "suggestions": "Suggestions",
     "agentWelcome": "Je suis l'assistant IA de Globalrisc, posez-moi vos questions ! Comment puis-je vous aider ?",
