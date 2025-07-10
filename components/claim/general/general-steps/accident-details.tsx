@@ -42,14 +42,13 @@ export default function AccidentDetails() {
         <div className="space-y-4">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="accidentLocation">{t('locationLabel')} <span className="text-destructive">*</span></Label>
+              <Label htmlFor="accidentLocation">{t('locationLabel')}</Label>
               <Input
                 id="accidentLocation"
                 name="accidentLocation"
                 value={formData.accidentLocation}
                 onChange={handleChange}
                 placeholder={t('locationPlaceholder')}
-                required
               />
             </div>
 
