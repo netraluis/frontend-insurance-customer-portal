@@ -3,6 +3,7 @@ import { Avatar } from "@/components/ui/avatar"
 import { cn } from "@/lib/utils"
 import { FileText, ImageIcon, FileArchive } from "lucide-react"
 import type { Message } from "./chat-widget"
+import Markdown from "react-markdown"
 
 interface MessageBubbleProps {
   message: Message
@@ -62,45 +63,7 @@ export default function MessageBubble({ message, isFirstInGroup, isLastInGroup }
 
   // Utilidad para reemplazar urls especiales por enlaces clicables
   const renderMessageContent = (content: string) => {
-    const urls = [
-      {
-        url: 'https://www.theagentslab.dev/claim-auto',
-        label: 'https://www.theagentslab.dev/claim-auto',
-      },
-      {
-        url: 'https://www.theagentslab.dev/claim-general',
-        label: 'https://www.theagentslab.dev/claim-general',
-      },
-    ]
-    let result: (string | React.ReactNode)[] = [content]
-    urls.forEach(({ url, label }) => {
-      result = result.flatMap((part) => {
-        if (typeof part === 'string' && part.includes(url)) {
-          const split = part.split(url)
-          const arr: (string | React.ReactNode)[] = []
-          split.forEach((str, idx) => {
-            if (str) arr.push(str)
-            if (idx < split.length - 1) {
-              arr.push(
-                <a
-                  key={url + idx}
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline text-zinc-900 font-medium hover:text-zinc-700 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-zinc-400 rounded"
-                  tabIndex={0}
-                >
-                  {label}
-                </a>
-              )
-            }
-          })
-          return arr
-        }
-        return part
-      })
-    })
-    return <span>{result}</span>
+    return <span><Markdown>{content}</Markdown></span>
   }
 
   return (
