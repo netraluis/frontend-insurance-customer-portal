@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { Car, Bike, Truck, CarIcon as Suv, Bus, Sailboat, Tractor, HelpCircle } from "lucide-react"
+import { Car, Bike, Truck, Bus, Sailboat, Tractor, HelpCircle } from "lucide-react"
 import { useTranslations } from 'next-intl'
 
 import { useClaimForm } from "../claim-form-context"
