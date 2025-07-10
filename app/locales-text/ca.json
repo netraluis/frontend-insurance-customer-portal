@@ -375,7 +375,9 @@
       "vehicleModel": "Model del vehicle",
       "vehicleModelPlaceholder": "p. ex., Corolla, Civic, X5",
       "licensePlate": "Matrícula",
-      "licensePlatePlaceholder": "Introdueix el número de matrícula"
+      "licensePlatePlaceholder": "Introdueix el número de matrícula",
+      "vehicleCommentsLabel": "Altres comentaris",
+      "vehicleCommentsPlaceholder": "Altres comentaris"
     }
   },
   "GeneralClaimAuto": {

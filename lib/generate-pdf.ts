@@ -125,6 +125,7 @@ export async function generateClaimAutoPDF(
       t("ClaimAuto.VehicleInformationForm.vehicleModel"),
       t("ClaimAuto.VehicleInformationForm.vehicleType"),
       t("ClaimAuto.VehicleInformationForm.licensePlate"),
+      t("ClaimAuto.VehicleInformationForm.vehicleComments"),
     ]],
     body: [
       [
@@ -132,6 +133,7 @@ export async function generateClaimAutoPDF(
         formData.vehicleModel,
         formData.vehicleType,
         formData.licensePlate,
+        formData.vehicleComments,
       ],
     ],
     theme: "grid",

@@ -82,6 +82,7 @@ export type FormData = {
   vehicleModel: string // *
   licensePlate: string // *
   vehicleType: string // *
+  vehicleComments: string
   // coverageType field removed
 
   // Step 3: Accident Details
@@ -140,6 +141,7 @@ const initialFormData: FormData = {
   vehicleModel: "",
   licensePlate: "",
   vehicleType: "", // Initialize with empty string
+  vehicleComments: "",
   // coverageType field removed
 
   incidentDate: null,

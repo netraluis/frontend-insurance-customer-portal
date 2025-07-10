@@ -9,13 +9,16 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 export default function VehicleInformation() {
   const { formData, updateFormData } = useClaimForm()
   const tVehicle = useTranslations('ClaimAuto.VehicleInformationForm')
   const tType = useTranslations('ClaimAuto.vehicleType')
+  const isMobile = useIsMobile()
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     updateFormData({ [name]: value })
   }
@@ -98,20 +101,18 @@ export default function VehicleInformation() {
               required
             />
           </div>
-          {/* TODO: Add vehicle year */}
-{/* 
-          <div className="space-y-2">
-            <Label htmlFor="accidentDescription">{tAccident('descriptionLabel')}<span className="text-destructive">*</span></Label>
-            <Textarea
-              id="accidentDescription"
-              name="accidentDescription"
-              value={formData.accidentDescription}
-              onChange={handleChange}
-              placeholder={tAccident('descriptionPlaceholder')}
-              rows={isMobile ? 4 : 5}
-              required
-            />
-          </div> */}
+
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="vehicleComments">{tVehicle('vehicleCommentsLabel')}</Label>
+          <Textarea
+            id="vehicleComments"
+            name="vehicleComments"
+            value={formData.vehicleComments}
+            onChange={handleChange}
+            // placeholder={tVehicle('vehicleCommentsPlaceholder')}
+            rows={isMobile ? 4 : 5}
+          />
         </div>
       </CardContent>
     </Card>
