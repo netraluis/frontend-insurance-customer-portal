@@ -65,7 +65,7 @@ export default function MessageBubble({ message, isFirstInGroup, isLastInGroup }
   const renderMessageContent = (content: string) => {
     return <span><Markdown
       components={{
-        a: ({ node, ...props }) => (
+        a: ({...props }) => (
           <a {...props} className="text-blue-600 underline hover:text-blue-800" />
         ),
       }}>{content}</Markdown></span>
