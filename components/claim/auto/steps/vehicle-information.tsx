@@ -98,6 +98,20 @@ export default function VehicleInformation() {
               required
             />
           </div>
+          {/* TODO: Add vehicle year */}
+{/* 
+          <div className="space-y-2">
+            <Label htmlFor="accidentDescription">{tAccident('descriptionLabel')}<span className="text-destructive">*</span></Label>
+            <Textarea
+              id="accidentDescription"
+              name="accidentDescription"
+              value={formData.accidentDescription}
+              onChange={handleChange}
+              placeholder={tAccident('descriptionPlaceholder')}
+              rows={isMobile ? 4 : 5}
+              required
+            />
+          </div> */}
         </div>
       </CardContent>
     </Card>
