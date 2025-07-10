@@ -29,7 +29,6 @@ export default function VehicleInformation() {
     { value: "car", label: tType("car"), icon: <Car className="mr-2 h-4 w-4" /> },
     { value: "motorbike", label: tType("motorbike"), icon: <Bike className="mr-2 h-4 w-4" /> },
     { value: "truck", label: tType("truck"), icon: <Truck className="mr-2 h-4 w-4" /> },
-    { value: "suv", label: tType("suv"), icon: <Suv className="mr-2 h-4 w-4" /> },
     { value: "bus", label: tType("bus"), icon: <Bus className="mr-2 h-4 w-4" /> },
     { value: "boat", label: tType("boat"), icon: <Sailboat className="mr-2 h-4 w-4" /> },
     { value: "agricultural", label: tType("agricultural"), icon: <Tractor className="mr-2 h-4 w-4" /> },
