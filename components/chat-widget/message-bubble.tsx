@@ -63,7 +63,12 @@ export default function MessageBubble({ message, isFirstInGroup, isLastInGroup }
 
   // Utilidad para reemplazar urls especiales por enlaces clicables
   const renderMessageContent = (content: string) => {
-    return <span><Markdown>{content}</Markdown></span>
+    return <span><Markdown
+      components={{
+        a: ({ node, ...props }) => (
+          <a {...props} className="text-blue-600 underline hover:text-blue-800" />
+        ),
+      }}>{content}</Markdown></span>
   }
 
   return (
