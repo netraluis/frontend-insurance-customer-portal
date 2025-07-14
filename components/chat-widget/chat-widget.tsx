@@ -302,7 +302,7 @@ export default function ChatWidget({ isFullScreen = false, setIsOpen, lang }: { 
       </div>
 
       {/* Chat starters */}
-      {messages.length <= 2  && (
+      {messages.length <= 2  && !isLoading && (
         <div className="px-2 py-0">
           <p className="text-xs text-zinc-500 mb-0">{t('suggestions')}</p>
           <ChatStarters onStarterClick={handleStarterClick} lang={lang} />

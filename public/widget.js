@@ -46183,7 +46183,7 @@
         isLoading && /* @__PURE__ */ import_react11.default.createElement("div", { className: "flex items-start gap-3 mb-4" }, /* @__PURE__ */ import_react11.default.createElement(Avatar2, { className: "h-8 w-8 bg-zinc-950 mt-1" }, /* @__PURE__ */ import_react11.default.createElement("img", { src: `${"https://formularis.globalrisc.ad/"}globalrisc_logo_avatar.png`, alt: "Globalrisc AI Agent" })), /* @__PURE__ */ import_react11.default.createElement("div", { className: "flex flex-col gap-2 max-w-[80%]" }, /* @__PURE__ */ import_react11.default.createElement(Skeleton, { className: "h-4 w-24" }), /* @__PURE__ */ import_react11.default.createElement(Skeleton, { className: "h-4 w-40" }), /* @__PURE__ */ import_react11.default.createElement(Skeleton, { className: "h-4 w-32" }))),
         /* @__PURE__ */ import_react11.default.createElement("div", { ref: messagesEndRef })
       ),
-      messages.length <= 2 && /* @__PURE__ */ import_react11.default.createElement("div", { className: "px-2 py-0" }, /* @__PURE__ */ import_react11.default.createElement("p", { className: "text-xs text-zinc-500 mb-0" }, t("suggestions")), /* @__PURE__ */ import_react11.default.createElement(ChatStarters, { onStarterClick: handleStarterClick, lang })),
+      messages.length <= 2 && !isLoading && /* @__PURE__ */ import_react11.default.createElement("div", { className: "px-2 py-0" }, /* @__PURE__ */ import_react11.default.createElement("p", { className: "text-xs text-zinc-500 mb-0" }, t("suggestions")), /* @__PURE__ */ import_react11.default.createElement(ChatStarters, { onStarterClick: handleStarterClick, lang })),
       /* @__PURE__ */ import_react11.default.createElement(
         "input",
         {

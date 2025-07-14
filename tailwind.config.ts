@@ -185,8 +185,11 @@ const config = {
   'placeholder:text-zinc-500',
   'min-h-[26px]',
   'rounded-ml',
-  'hover:bg-zinc-800'
+  'hover:bg-zinc-800',
 
+  {
+    pattern: /(disabled|focus-visible|aria-invalid|hover|dark):[a-zA-Z0-9\-\[\]\/\\\:\.]+/,
+  }
   ],
   prefix: "",
   theme: {
