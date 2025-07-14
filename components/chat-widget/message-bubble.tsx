@@ -76,7 +76,7 @@ export default function MessageBubble({ message, isFirstInGroup, isLastInGroup }
       <div className={cn("flex items-start gap-3", isUser && "flex-row-reverse", isLastInGroup ? "mb-4" : "mb-1")}>
         {!isUser && isFirstInGroup && (
           <Avatar className="h-8 w-8 bg-zinc-950 mt-1 shrink-0">
-            <img src="/globalrisc_logo_avatar.png" alt="Globalrisc AI Agent" />
+            <img src={`${process.env.NEXT_PUBLIC_MAIN_URL}globalrisc_logo_avatar.png`} alt="Globalrisc AI Agent" />
           </Avatar>
         )}
 
@@ -92,9 +92,9 @@ export default function MessageBubble({ message, isFirstInGroup, isLastInGroup }
             !isFirstInGroup && !isUser && "ml-[3px]", // Slight adjustment for agent messages
           )}
         >
-          <p className="text-[15px] leading-relaxed whitespace-pre-wrap break-words">
+          <div className="text-[15px] leading-relaxed whitespace-pre-wrap break-words">
             {renderMessageContent(message.content)}
-          </p>
+          </div>
 
           {message.files && message.files.length > 0 && (
             <div className="mt-2 space-y-1">

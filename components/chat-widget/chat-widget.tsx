@@ -1,19 +1,18 @@
 "use client"
 
-import type React from "react"
-
+import type ReactType from "react"
+import React from "react"
 import { useState, useRef, useEffect } from "react"
 import { v4 as uuidv4 } from "uuid"
 import { Paperclip, Send, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Avatar } from "@/components/ui/avatar"
-import { Skeleton } from "@/components/ui/skeleton"
+import { Button } from "../../components/ui/button"
+import { Avatar } from "../../components/ui/avatar"
+import { Skeleton } from "../../components/ui/skeleton"
+import { useMediaQuery } from "../../hooks/use-media-query"
 import ChatStarters from "./chat-starters"
-import { useMediaQuery } from "@/hooks/use-media-query"
-import { useScreenSize } from "@/hooks/use-screen-size"
 import MessageBubble from "./message-bubble"
-import { useTranslations } from 'next-intl'
 import ChatWidgetMobile from "./chat-widget-mobile"
+import { getT } from "./locales"
 
 
 export type Message = {
@@ -25,16 +24,13 @@ export type Message = {
   files?: File[]
 }
 
-export default function ChatWidget({ isFullScreen = false, setIsOpen }: { isFullScreen?: boolean, setIsOpen: (isOpen: boolean) => void }) {
-  const t = useTranslations('ChatWidget')
+export default function ChatWidget({ isFullScreen = false, setIsOpen, lang }: { isFullScreen?: boolean, setIsOpen: (isOpen: boolean) => void, lang: string }) {
+  const t = getT(lang);
   const [sessionId] = useState(() => uuidv4())
   const [messages, setMessages] = useState<Message[]>([])
   const [inputValue, setInputValue] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [files, setFiles] = useState<File[]>([])
-  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false)
-  const [viewportHeight, setViewportHeight] = useState(0)
-  const [browserUIHeight, setBrowserUIHeight] = useState(0)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const messagesContainerRef = useRef<HTMLDivElement>(null)
@@ -44,65 +40,7 @@ export default function ChatWidget({ isFullScreen = false, setIsOpen }: { isFull
 
   // Detect mobile devices and screen sizes
   const isMobile = useMediaQuery("(max-width: 480px)")
-  const isSmallMobile = useMediaQuery("(max-width: 480px)")
-  const screenSize = useScreenSize()
-  const isLandscape = useMediaQuery("(orientation: landscape)")
 
-  // Update viewport height and detect browser UI on resize
-  useEffect(() => {
-    if (!isMobile) return
-
-    const updateViewportDimensions = () => {
-      // Get actual viewport height (without browser UI)
-      const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight
-      setViewportHeight(vh)
-
-      // Estimate browser UI height
-      let uiHeight = 0
-
-      if (window.visualViewport) {
-        // More accurate method using visualViewport
-        uiHeight = window.innerHeight - window.visualViewport.height
-      } else {
-        // Fallback method
-        uiHeight = window.outerHeight - window.innerHeight
-      }
-
-      // Ensure we have at least a minimum safe value
-      uiHeight = Math.max(uiHeight, 15)
-
-      setBrowserUIHeight(uiHeight)
-    }
-
-    // Set initial values
-    updateViewportDimensions()
-
-    // Add event listeners
-    window.addEventListener("resize", updateViewportDimensions)
-
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener("resize", updateViewportDimensions)
-      window.visualViewport.addEventListener("scroll", updateViewportDimensions)
-    }
-
-    // Handle orientation changes
-    window.addEventListener("orientationchange", () => {
-      // Short delay to let the browser UI adjust
-      setTimeout(updateViewportDimensions, 100)
-    })
-
-    // Clean up
-    return () => {
-      window.removeEventListener("resize", updateViewportDimensions)
-
-      if (window.visualViewport) {
-        window.visualViewport.removeEventListener("resize", updateViewportDimensions)
-        window.visualViewport.removeEventListener("scroll", updateViewportDimensions)
-      }
-
-      window.removeEventListener("orientationchange", updateViewportDimensions)
-    }
-  }, [isMobile])
 
   // Add initial agent message when component mounts
   useEffect(() => {
@@ -120,7 +58,7 @@ export default function ChatWidget({ isFullScreen = false, setIsOpen }: { isFull
   // Scroll to bottom when messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: isMobile ? "auto" : "smooth" })
-  }, [messages, isMobile])
+  }, [messages])
 
   // Auto-resize textarea
   useEffect(() => {
@@ -130,78 +68,7 @@ export default function ChatWidget({ isFullScreen = false, setIsOpen }: { isFull
     }
   }, [inputValue])
 
-  // Handle keyboard visibility on mobile
-  useEffect(() => {
-    if (!isMobile) return
 
-    // Function to detect keyboard visibility
-    const detectKeyboard = () => {
-      // Use visual viewport API if available (more reliable)
-      if (window.visualViewport) {
-        const keyboardThreshold = window.innerHeight * 0.15 // 15% threshold
-        const heightDiff = window.innerHeight - window.visualViewport.height
-        setIsKeyboardVisible(heightDiff > keyboardThreshold)
-      } else {
-        // Fallback method
-        const isKeyboard = window.innerHeight < window.outerHeight * 0.75
-        setIsKeyboardVisible(isKeyboard)
-      }
-    }
-
-    // Set up event listeners
-    window.addEventListener("resize", detectKeyboard)
-
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener("resize", detectKeyboard)
-      window.visualViewport.addEventListener("scroll", detectKeyboard)
-    }
-
-    // Initial detection
-    detectKeyboard()
-
-    // Clean up
-    return () => {
-      window.removeEventListener("resize", detectKeyboard)
-      if (window.visualViewport) {
-        window.visualViewport.removeEventListener("resize", detectKeyboard)
-        window.visualViewport.removeEventListener("scroll", detectKeyboard)
-      }
-    }
-  }, [isMobile])
-
-  // Ensure input is visible when focused on mobile
-  useEffect(() => {
-    if (!isMobile || !inputRef.current) return
-
-    const handleFocus = () => {
-      // Short delay to let the keyboard appear
-      setTimeout(() => {
-        if (inputContainerRef.current) {
-          // Scroll the input into view
-          inputContainerRef.current.scrollIntoView({ behavior: "smooth", block: "end" })
-
-          // Additional adjustment for iOS
-          if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-            window.scrollTo(0, 0)
-          }
-        }
-      }, 300)
-    }
-
-    inputRef.current.addEventListener("focus", handleFocus)
-
-    return () => {
-      inputRef.current?.removeEventListener("focus", handleFocus)
-    }
-  }, [isMobile])
-
-  // Adjust layout when keyboard appears
-  useEffect(() => {
-    if (!isMobile || !isKeyboardVisible || !inputContainerRef.current) return
-
-    // Ensure input is visible when keyboard is shown
-    inputContainerRef.current.scrollIntoView({ behavior: "smooth", block: "end" })
-  }, [isKeyboardVisible, isMobile])
 
   const handleSendMessage = async (content: string = inputValue) => {
     if (!content.trim() && files.length === 0) return
@@ -243,7 +110,6 @@ export default function ChatWidget({ isFullScreen = false, setIsOpen }: { isFull
         // body: JSON.stringify({message: "me he chocado con el coche ", sessionId: "f47ac10b-58cc-4372-a567-0e02b2c3d480"}),
         body: formData
       })
-
 
       if (!response.ok) {
         throw new Error("Failed to send message")
@@ -315,7 +181,7 @@ export default function ChatWidget({ isFullScreen = false, setIsOpen }: { isFull
     }
   }
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleKeyDown = (e: ReactType.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault()
       handleSendMessage()
@@ -323,7 +189,7 @@ export default function ChatWidget({ isFullScreen = false, setIsOpen }: { isFull
   }
 
   // Handle file selection from native file picker
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: ReactType.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const selectedFiles = Array.from(e.target.files)
       setFiles((prev) => [...prev, ...selectedFiles])
@@ -376,52 +242,26 @@ export default function ChatWidget({ isFullScreen = false, setIsOpen }: { isFull
       return "h-[calc(100vh-56px)]"
     }
 
-    if (isMobile) {
-      if (isKeyboardVisible) {
-        return "h-auto min-h-[50vh]"
-      }
-
-      if (isLandscape) {
-        return "h-[85vh]"
-      }
-
-      // Different heights based on screen size
-      if (screenSize === "xs") {
-        return "h-[85vh]"
-      } else if (screenSize === "sm") {
-        return "h-[80vh]"
-      } else {
-        return "h-[75vh]"
-      }
-    }
-
     // Default desktop height
     return "h-[650px]"
   }
 
   if (isMobile) {
-    return <ChatWidgetMobile isFullScreen={isFullScreen} setIsOpen={setIsOpen} />
+    return <ChatWidgetMobile isFullScreen={isFullScreen} setIsOpen={setIsOpen} lang={lang} />
   }
 
   return (
     <div
       ref={widgetRef}
-      className={`flex flex-col ${getOptimalHeight()} w-full ${
-        !isFullScreen && "rounded-xl border border-zinc-200"
-      } bg-white ${!isFullScreen && "shadow-lg"} overflow-hidden`}
-      style={{
-        // Dynamic height adjustments for mobile
-        maxHeight: isMobile && !isFullScreen ? `calc(${viewportHeight}px - ${browserUIHeight}px - 20px)` : undefined,
-        // Adjust height when keyboard is visible on mobile
-        height: isMobile && isKeyboardVisible && !isFullScreen ? "auto" : undefined,
-        minHeight: isMobile && isKeyboardVisible ? "50vh" : undefined,
-      }}
+      className={`flex flex-col ${getOptimalHeight()} w-full 
+         rounded-xl border border-zinc-200
+     bg-white shadow-lg overflow-hidden `}
     >
       {/* Header */}
-      <div className={`flex items-center justify-between p-4 border-b border-zinc-200 }`}>
+      <div className={`flex items-center justify-between p-4 border-b border-zinc-200`}>
         <div className="flex items-center gap-3">
           <Avatar className="h-10 w-10 bg-zinc-950">
-            <img src="/globalrisc_logo_avatar.png"alt="Globalrisc AI Agent" />
+            <img src={`${process.env.NEXT_PUBLIC_MAIN_URL}globalrisc_logo_avatar.png`} alt="Globalrisc AI Agent" />
           </Avatar>
           <span className="font-semibold text-ml">Globalrisc AI Agent</span>
         </div>
@@ -433,9 +273,7 @@ export default function ChatWidget({ isFullScreen = false, setIsOpen }: { isFull
       {/* Messages */}
       <div
         ref={messagesContainerRef}
-        className={`flex-1 p-5 overflow-y-auto bg-white ${
-          isMobile && isKeyboardVisible ? (isSmallMobile ? "max-h-[35vh]" : "max-h-[40vh]") : ""
-        }`}
+        className={`flex-1 p-5 overflow-y-auto bg-white`}
       >
         {processedMessages.map((message) => (
           <MessageBubble
@@ -449,13 +287,13 @@ export default function ChatWidget({ isFullScreen = false, setIsOpen }: { isFull
         {isLoading && (
           <div className="flex items-start gap-3 mb-4">
             <Avatar className="h-8 w-8 bg-zinc-950 mt-1">
-              <img src="/globalrisc_logo_avatar.png"alt="Globalrisc AI Agent" />
+              <img src={`${process.env.NEXT_PUBLIC_MAIN_URL}globalrisc_logo_avatar.png`} alt="Globalrisc AI Agent" />
             </Avatar>
             <div className="flex flex-col gap-2 max-w-[80%]">
               <Skeleton className="h-4 w-24" />
               <Skeleton className="h-4 w-40" />
               <Skeleton className="h-4 w-32" />
-  
+
             </div>
           </div>
         )}
@@ -464,10 +302,10 @@ export default function ChatWidget({ isFullScreen = false, setIsOpen }: { isFull
       </div>
 
       {/* Chat starters */}
-      {messages.length <= 2 && !isKeyboardVisible && (
+      {messages.length <= 2  && (
         <div className="px-2 py-0">
           <p className="text-xs text-zinc-500 mb-0">{t('suggestions')}</p>
-          <ChatStarters onStarterClick={handleStarterClick} />
+          <ChatStarters onStarterClick={handleStarterClick} lang={lang} />
         </div>
       )}
 
@@ -505,9 +343,7 @@ export default function ChatWidget({ isFullScreen = false, setIsOpen }: { isFull
       {/* Input area */}
       <div
         ref={inputContainerRef}
-        className={`p-3 ${isFullScreen ? "border-t border-zinc-200" : ""} ${
-          isMobile ? "sticky bottom-0 bg-white z-10" : ""
-        }`}
+        className={`p-3 ${isFullScreen ? "border-t border-zinc-200" : ""}`}
       >
         <div className="flex items-end gap-2 bg-white rounded-lg border border-zinc-200 px-2 py-2">
           <textarea
@@ -522,27 +358,25 @@ export default function ChatWidget({ isFullScreen = false, setIsOpen }: { isFull
           <Button
             variant="ghost"
             size="icon"
-            className={`${isFullScreen || isMobile ? "h-10 w-10" : "h-8 w-8"} shrink-0`}
+            className={`${isFullScreen ? "h-10 w-10" : "h-8 w-8"} shrink-0`}
             onClick={openFilePicker}
             aria-label={t('fileUploadLabel')}
           >
-            <Paperclip className={`${isFullScreen || isMobile ? "h-6 w-6" : "h-5 w-5"} text-zinc-500`} />
+            <Paperclip className={`${isFullScreen ? "h-6 w-6" : "h-5 w-5"} text-zinc-500`} />
           </Button>
           <Button
             size="icon"
-            className={`${isFullScreen || isMobile ? "h-8 w-8" : "h-8 w-8"} shrink-0 rounded-ml bg-zinc-950 hover:bg-zinc-800`}
+            className={`${isFullScreen ? "h-8 w-8" : "h-8 w-8"} shrink-0 rounded-ml bg-zinc-950 hover:bg-zinc-800`}
             onClick={() => handleSendMessage()}
             disabled={isLoading || (!inputValue.trim() && files.length === 0)}
             aria-label={t('openChat')}
           >
-            <Send className={`${isFullScreen || isMobile ? "h-5 w-5" : "h-4 w-4"}`} />
+            <Send className={`${isFullScreen ? "h-5 w-5" : "h-4 w-4"}`} />
           </Button>
         </div>
-        {!isKeyboardVisible && (
-          <p className="text-xs text-zinc-400 text-center mt-3">
-            {t('agentDisclaimer')}
-          </p>
-        )}
+        <p className="text-xs text-zinc-400 text-center mt-3">
+          {t('agentDisclaimer')}
+        </p>
       </div>
     </div>
   )

@@ -1,6 +1,7 @@
 "use client"
 
-import type React from "react"
+import type ReactType from "react"
+import React from "react"
 import { useState, useRef, useEffect } from "react"
 import { v4 as uuidv4 } from "uuid"
 import { Send, X } from "lucide-react"
@@ -9,8 +10,8 @@ import { Avatar } from "@/components/ui/avatar"
 import { Skeleton } from "@/components/ui/skeleton"
 import ChatStarters from "./chat-starters"
 import MessageBubble from "./message-bubble"
-import { useTranslations } from 'next-intl'
 import { Textarea } from "../ui/textarea"
+import { getT } from "./locales"
 
 export type Message = {
   id: string
@@ -21,8 +22,8 @@ export type Message = {
   files?: File[]
 }
 
-export default function ChatWidgetMobile({ setIsOpen }: { isFullScreen?: boolean, setIsOpen: (isOpen: boolean) => void }) {
-  const t = useTranslations('ChatWidget')
+export default function ChatWidgetMobile({ setIsOpen, lang }: { isFullScreen?: boolean, setIsOpen: (isOpen: boolean) => void, lang: string }) {
+  const t = getT(lang);
   const [sessionId] = useState(() => uuidv4())
   const [messages, setMessages] = useState<Message[]>([])
   const [inputValue, setInputValue] = useState("")
@@ -148,7 +149,7 @@ export default function ChatWidgetMobile({ setIsOpen }: { isFullScreen?: boolean
     }
   }
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleKeyDown = (e: ReactType.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault()
       handleSendMessage()
@@ -189,7 +190,7 @@ export default function ChatWidgetMobile({ setIsOpen }: { isFullScreen?: boolean
         <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-200 bg-white">
           <div className="flex items-center gap-3">
             <Avatar className="h-10 w-10 bg-zinc-950">
-              <img src="/globalrisc_logo_avatar.png" alt="Globalrisc AI Agent" />
+              <img src={`${process.env.NEXT_PUBLIC_MAIN_URL}globalrisc_logo_avatar.png`} alt="Globalrisc AI Agent" />
             </Avatar>
             <span className="font-semibold text-base">Globalrisc AI Agent</span>
           </div>
@@ -215,7 +216,7 @@ export default function ChatWidgetMobile({ setIsOpen }: { isFullScreen?: boolean
         {isLoading && (
           <div className="flex items-start gap-3 mb-4">
             <Avatar className="h-8 w-8 bg-zinc-950 mt-1">
-              <img src="/globalrisc_logo_avatar.png"alt="Globalrisc AI Agent" />
+              <img src={`${process.env.NEXT_PUBLIC_MAIN_URL}globalrisc_logo_avatar.png`} alt="Globalrisc AI Agent" />
             </Avatar>
             <div className="flex flex-col gap-2 max-w-[80%]">
               <Skeleton className="h-4 w-24" />
@@ -230,7 +231,7 @@ export default function ChatWidgetMobile({ setIsOpen }: { isFullScreen?: boolean
       {messages.length <= 1 && (
         <div className="px-2 py-0">
           <p className="text-xs text-zinc-500 mb-0">{t('suggestions')}</p>
-          <ChatStarters onStarterClick={handleStarterClick} />
+          <ChatStarters onStarterClick={handleStarterClick} lang={lang} />
         </div>
       )}
 

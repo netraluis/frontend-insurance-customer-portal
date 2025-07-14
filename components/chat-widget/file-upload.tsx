@@ -1,22 +1,23 @@
 "use client"
 
-import type React from "react"
-
+import type ReactType from "react"
+import React from "react"
 import { useState, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Upload } from "lucide-react"
-import { useTranslations } from 'next-intl'
+import { getT } from "./locales"
 
 interface FileUploadProps {
   onFileChange: (files: File[]) => void
+  lang: string
 }
 
-export default function FileUpload({ onFileChange }: FileUploadProps) {
-  const t = useTranslations('ChatWidget')
+export default function FileUpload({ onFileChange, lang }: FileUploadProps) {
+  const t = getT(lang);
   const [dragActive, setDragActive] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const handleDrag = (e: React.DragEvent) => {
+  const handleDrag = (e: ReactType.DragEvent) => {
     e.preventDefault()
     e.stopPropagation()
 
@@ -27,7 +28,7 @@ export default function FileUpload({ onFileChange }: FileUploadProps) {
     }
   }
 
-  const handleDrop = (e: React.DragEvent) => {
+  const handleDrop = (e: ReactType.DragEvent) => {
     e.preventDefault()
     e.stopPropagation()
     setDragActive(false)
@@ -37,7 +38,7 @@ export default function FileUpload({ onFileChange }: FileUploadProps) {
     }
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ReactType.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
 
     if (e.target.files && e.target.files.length > 0) {

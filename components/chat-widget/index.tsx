@@ -1,14 +1,20 @@
 "use client"
 
+import React from "react"
 import { useState, useEffect, useRef } from "react"
 import ChatWidget from "@/components/chat-widget/chat-widget"
 import { Button } from "@/components/ui/button"
 import { MessageSquare, X } from "lucide-react"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { useScreenSize } from "@/hooks/use-screen-size"
-import { useTranslations } from 'next-intl'
+import { getT } from "./locales"
 
 export default function Home(
+  {
+    lang = "ca"
+  }: {
+    lang?: string
+  }
 ) {
   const [isOpen, setIsOpen] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
@@ -17,7 +23,9 @@ export default function Home(
   const [safeAreaBottom, setSafeAreaBottom] = useState(0)
   const widgetContainerRef = useRef<HTMLDivElement>(null)
 
-  const t = useTranslations('ChatWidget')
+  // const t = translations[lang as keyof typeof translations]
+
+  const t = getT(lang);
 
   // Detect device sizes
   const isMobile = useMediaQuery("(max-width: 768px)")
@@ -187,7 +195,7 @@ export default function Home(
             className={`${isVerySmall ? "w-full h-full" : isMobile ? "w-full" : ""} ${!isVerySmall && "mb-4"}`}
             style={{ width: !isMobile && !isVerySmall ? "460px" : undefined }}
           >
-            <ChatWidget isFullScreen={isVerySmall} setIsOpen={setIsOpen} />
+            <ChatWidget isFullScreen={isVerySmall} setIsOpen={setIsOpen} lang={lang} />
           </div>
         </div>
       )}
@@ -237,3 +245,4 @@ export default function Home(
     </div>
   )
 }
+

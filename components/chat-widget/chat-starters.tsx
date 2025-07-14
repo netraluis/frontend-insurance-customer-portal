@@ -1,23 +1,22 @@
 "use client"
-
+import React from "react"
 import { useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import { useTranslations } from 'next-intl'
+import { getT } from "./locales"
 
 interface ChatStartersProps {
   onStarterClick: (starter: string) => void
+  lang: string
 }
 
-export default function ChatStarters({ onStarterClick }: ChatStartersProps) {
+export default function ChatStarters({ onStarterClick, lang }: ChatStartersProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [showLeftArrow, setShowLeftArrow] = useState(false)
   const [showRightArrow, setShowRightArrow] = useState(true)
-  const t = useTranslations('ChatWidget')
+  const t = getT(lang);
 
-  const starters = t.raw('starters')
-
-  const arrStarters: string[] = Object.values(starters);
+  const arrStarters: string[] = t('starters')
 
 
   const handleScroll = () => {
