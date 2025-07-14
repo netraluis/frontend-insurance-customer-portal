@@ -45742,7 +45742,7 @@
         content3
       ));
     };
-    return /* @__PURE__ */ import_react8.default.createElement("div", { className: "group" }, /* @__PURE__ */ import_react8.default.createElement("div", { className: cn("flex items-start gap-3", isUser && "flex-row-reverse", isLastInGroup ? "mb-4" : "mb-1") }, !isUser && isFirstInGroup && /* @__PURE__ */ import_react8.default.createElement(Avatar2, { className: "h-8 w-8 bg-zinc-950 mt-1 shrink-0" }, /* @__PURE__ */ import_react8.default.createElement("img", { src: `${"https://formularis.globalrisc.ad"}globalrisc_logo_avatar.png`, alt: "Globalrisc AI Agent" })), !isUser && !isFirstInGroup && /* @__PURE__ */ import_react8.default.createElement("div", { className: "w-8 shrink-0" }), /* @__PURE__ */ import_react8.default.createElement(
+    return /* @__PURE__ */ import_react8.default.createElement("div", { className: "group" }, /* @__PURE__ */ import_react8.default.createElement("div", { className: cn("flex items-start gap-3", isUser && "flex-row-reverse", isLastInGroup ? "mb-4" : "mb-1") }, !isUser && isFirstInGroup && /* @__PURE__ */ import_react8.default.createElement(Avatar2, { className: "h-8 w-8 bg-zinc-950 mt-1 shrink-0" }, /* @__PURE__ */ import_react8.default.createElement("img", { src: `${"https://formularis.globalrisc.ad/"}globalrisc_logo_avatar.png`, alt: "Globalrisc AI Agent" })), !isUser && !isFirstInGroup && /* @__PURE__ */ import_react8.default.createElement("div", { className: "w-8 shrink-0" }), /* @__PURE__ */ import_react8.default.createElement(
       "div",
       {
         className: cn(
@@ -45938,7 +45938,7 @@
         role: "dialog",
         "aria-modal": "true"
       },
-      !isKeyboardOpen && /* @__PURE__ */ import_react9.default.createElement("div", { className: "flex items-center justify-between px-4 py-3 border-b border-zinc-200 bg-white" }, /* @__PURE__ */ import_react9.default.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ import_react9.default.createElement(Avatar2, { className: "h-10 w-10 bg-zinc-950" }, /* @__PURE__ */ import_react9.default.createElement("img", { src: `${"https://formularis.globalrisc.ad"}globalrisc_logo_avatar.png`, alt: "Globalrisc AI Agent" })), /* @__PURE__ */ import_react9.default.createElement("span", { className: "font-semibold text-base" }, "Globalrisc AI Agent")), /* @__PURE__ */ import_react9.default.createElement(Button, { variant: "ghost", size: "icon", className: "rounded-full", onClick: () => setIsOpen(false), "aria-label": t("closeChat") }, /* @__PURE__ */ import_react9.default.createElement(X, { className: "h-5 w-5" }))),
+      !isKeyboardOpen && /* @__PURE__ */ import_react9.default.createElement("div", { className: "flex items-center justify-between px-4 py-3 border-b border-zinc-200 bg-white" }, /* @__PURE__ */ import_react9.default.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ import_react9.default.createElement(Avatar2, { className: "h-10 w-10 bg-zinc-950" }, /* @__PURE__ */ import_react9.default.createElement("img", { src: `${"https://formularis.globalrisc.ad/"}globalrisc_logo_avatar.png`, alt: "Globalrisc AI Agent" })), /* @__PURE__ */ import_react9.default.createElement("span", { className: "font-semibold text-base" }, "Globalrisc AI Agent")), /* @__PURE__ */ import_react9.default.createElement(Button, { variant: "ghost", size: "icon", className: "rounded-full", onClick: () => setIsOpen(false), "aria-label": t("closeChat") }, /* @__PURE__ */ import_react9.default.createElement(X, { className: "h-5 w-5" }))),
       /* @__PURE__ */ import_react9.default.createElement(
         "div",
         {
@@ -45954,7 +45954,7 @@
             isLastInGroup: message.isLastInGroup
           }
         )),
-        isLoading && /* @__PURE__ */ import_react9.default.createElement("div", { className: "flex items-start gap-3 mb-4" }, /* @__PURE__ */ import_react9.default.createElement(Avatar2, { className: "h-8 w-8 bg-zinc-950 mt-1" }, /* @__PURE__ */ import_react9.default.createElement("img", { src: `${"https://formularis.globalrisc.ad"}globalrisc_logo_avatar.png`, alt: "Globalrisc AI Agent" })), /* @__PURE__ */ import_react9.default.createElement("div", { className: "flex flex-col gap-2 max-w-[80%]" }, /* @__PURE__ */ import_react9.default.createElement(Skeleton, { className: "h-4 w-24" }), /* @__PURE__ */ import_react9.default.createElement(Skeleton, { className: "h-4 w-40" }), /* @__PURE__ */ import_react9.default.createElement(Skeleton, { className: "h-4 w-32" }))),
+        isLoading && /* @__PURE__ */ import_react9.default.createElement("div", { className: "flex items-start gap-3 mb-4" }, /* @__PURE__ */ import_react9.default.createElement(Avatar2, { className: "h-8 w-8 bg-zinc-950 mt-1" }, /* @__PURE__ */ import_react9.default.createElement("img", { src: `${"https://formularis.globalrisc.ad/"}globalrisc_logo_avatar.png`, alt: "Globalrisc AI Agent" })), /* @__PURE__ */ import_react9.default.createElement("div", { className: "flex flex-col gap-2 max-w-[80%]" }, /* @__PURE__ */ import_react9.default.createElement(Skeleton, { className: "h-4 w-24" }), /* @__PURE__ */ import_react9.default.createElement(Skeleton, { className: "h-4 w-40" }), /* @__PURE__ */ import_react9.default.createElement(Skeleton, { className: "h-4 w-32" }))),
         /* @__PURE__ */ import_react9.default.createElement("div", { ref: messagesEndRef })
       ),
       messages.length <= 1 && /* @__PURE__ */ import_react9.default.createElement("div", { className: "px-2 py-0" }, /* @__PURE__ */ import_react9.default.createElement("p", { className: "text-xs text-zinc-500 mb-0" }, t("suggestions")), /* @__PURE__ */ import_react9.default.createElement(ChatStarters, { onStarterClick: handleStarterClick, lang })),
@@ -46164,7 +46164,7 @@
          rounded-xl border border-zinc-200
      bg-white shadow-lg overflow-hidden `
       },
-      /* @__PURE__ */ import_react11.default.createElement("div", { className: `flex items-center justify-between p-4 border-b border-zinc-200` }, /* @__PURE__ */ import_react11.default.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ import_react11.default.createElement(Avatar2, { className: "h-10 w-10 bg-zinc-950" }, /* @__PURE__ */ import_react11.default.createElement("img", { src: `${"https://formularis.globalrisc.ad"}globalrisc_logo_avatar.png`, alt: "Globalrisc AI Agent" })), /* @__PURE__ */ import_react11.default.createElement("span", { className: "font-semibold text-ml" }, "Globalrisc AI Agent")), /* @__PURE__ */ import_react11.default.createElement(Button, { variant: "ghost", size: "icon", className: "rounded-full", onClick: () => setIsOpen(false), "aria-label": t("closeChat") }, /* @__PURE__ */ import_react11.default.createElement(X, { className: "h-5 w-5" }))),
+      /* @__PURE__ */ import_react11.default.createElement("div", { className: `flex items-center justify-between p-4 border-b border-zinc-200` }, /* @__PURE__ */ import_react11.default.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ import_react11.default.createElement(Avatar2, { className: "h-10 w-10 bg-zinc-950" }, /* @__PURE__ */ import_react11.default.createElement("img", { src: `${"https://formularis.globalrisc.ad/"}globalrisc_logo_avatar.png`, alt: "Globalrisc AI Agent" })), /* @__PURE__ */ import_react11.default.createElement("span", { className: "font-semibold text-ml" }, "Globalrisc AI Agent")), /* @__PURE__ */ import_react11.default.createElement(Button, { variant: "ghost", size: "icon", className: "rounded-full", onClick: () => setIsOpen(false), "aria-label": t("closeChat") }, /* @__PURE__ */ import_react11.default.createElement(X, { className: "h-5 w-5" }))),
       /* @__PURE__ */ import_react11.default.createElement(
         "div",
         {
@@ -46180,7 +46180,7 @@
             isLastInGroup: message.isLastInGroup
           }
         )),
-        isLoading && /* @__PURE__ */ import_react11.default.createElement("div", { className: "flex items-start gap-3 mb-4" }, /* @__PURE__ */ import_react11.default.createElement(Avatar2, { className: "h-8 w-8 bg-zinc-950 mt-1" }, /* @__PURE__ */ import_react11.default.createElement("img", { src: `${"https://formularis.globalrisc.ad"}globalrisc_logo_avatar.png`, alt: "Globalrisc AI Agent" })), /* @__PURE__ */ import_react11.default.createElement("div", { className: "flex flex-col gap-2 max-w-[80%]" }, /* @__PURE__ */ import_react11.default.createElement(Skeleton, { className: "h-4 w-24" }), /* @__PURE__ */ import_react11.default.createElement(Skeleton, { className: "h-4 w-40" }), /* @__PURE__ */ import_react11.default.createElement(Skeleton, { className: "h-4 w-32" }))),
+        isLoading && /* @__PURE__ */ import_react11.default.createElement("div", { className: "flex items-start gap-3 mb-4" }, /* @__PURE__ */ import_react11.default.createElement(Avatar2, { className: "h-8 w-8 bg-zinc-950 mt-1" }, /* @__PURE__ */ import_react11.default.createElement("img", { src: `${"https://formularis.globalrisc.ad/"}globalrisc_logo_avatar.png`, alt: "Globalrisc AI Agent" })), /* @__PURE__ */ import_react11.default.createElement("div", { className: "flex flex-col gap-2 max-w-[80%]" }, /* @__PURE__ */ import_react11.default.createElement(Skeleton, { className: "h-4 w-24" }), /* @__PURE__ */ import_react11.default.createElement(Skeleton, { className: "h-4 w-40" }), /* @__PURE__ */ import_react11.default.createElement(Skeleton, { className: "h-4 w-32" }))),
         /* @__PURE__ */ import_react11.default.createElement("div", { ref: messagesEndRef })
       ),
       messages.length <= 2 && /* @__PURE__ */ import_react11.default.createElement("div", { className: "px-2 py-0" }, /* @__PURE__ */ import_react11.default.createElement("p", { className: "text-xs text-zinc-500 mb-0" }, t("suggestions")), /* @__PURE__ */ import_react11.default.createElement(ChatStarters, { onStarterClick: handleStarterClick, lang })),
@@ -46452,7 +46452,6 @@
   Promise.all([
     fetch("https://formularis.globalrisc.ad/widget-bundle.css").then((res) => res.text())
   ]).then(([css1]) => {
-    console.log(css1);
     function getWidgetScriptTag() {
       const scripts = document.getElementsByTagName("script");
       for (let i = 0; i < scripts.length; i++) {

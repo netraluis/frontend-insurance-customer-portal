@@ -62,7 +62,6 @@ Promise.all([
   fetch("https://formularis.globalrisc.ad/widget-bundle.css").then(res => res.text())
 ]).then(([css1]) => {
 
-  console.log(css1);
   function getWidgetScriptTag() {
     const scripts = document.getElementsByTagName("script");
     for (let i = 0; i < scripts.length; i++) {
