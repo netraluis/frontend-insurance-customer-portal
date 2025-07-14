@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss"
+// import type { Config } from "tailwindcss"
 
 const config = {
   darkMode: ["class", "media"],
@@ -272,10 +272,18 @@ const config = {
       },
     },
   },
-  plugins: [
-    require('tailwind-scrollbar'),
-    require("tailwindcss-animate")
-  ],
+  variants: {
+    extend: {
+      pointerEvents: ['disabled'],
+      opacity: ['disabled'],
+      borderColor: ['focus-visible', 'aria-invalid'],
+      ringColor: ['focus-visible', 'aria-invalid', 'dark'],
+      ringWidth: ['focus-visible'],
+      backgroundColor: ['hover', 'dark', 'has', 'aria-invalid'],
+      textColor: ['hover', 'dark'],
+      // ...agrega lo que uses...
+    },
+  },
 } 
 
 export default config
