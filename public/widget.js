@@ -46164,7 +46164,7 @@
          rounded-xl border border-zinc-200
      bg-white shadow-lg overflow-hidden `
       },
-      /* @__PURE__ */ import_react11.default.createElement("div", { className: `flex items-center justify-between p-4 border-b border-zinc-200` }, /* @__PURE__ */ import_react11.default.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ import_react11.default.createElement(Avatar2, { className: "h-10 w-10 bg-zinc-950" }, /* @__PURE__ */ import_react11.default.createElement("img", { src: `${"https://formularis.globalrisc.ad/"}globalrisc_logo_avatar.png`, alt: "Globalrisc AI Agent" })), /* @__PURE__ */ import_react11.default.createElement("span", { className: "font-semibold text-ml" }, "Globalrisc AI Agent")), /* @__PURE__ */ import_react11.default.createElement(Button, { variant: "ghost", size: "icon", className: "rounded-full", onClick: () => setIsOpen(false), "aria-label": t("closeChat") }, /* @__PURE__ */ import_react11.default.createElement(X, { className: "h-5 w-5" }))),
+      /* @__PURE__ */ import_react11.default.createElement("div", { className: `flex items-center justify-between p-4 border-b border-zinc-200` }, /* @__PURE__ */ import_react11.default.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ import_react11.default.createElement(Avatar2, { className: "h-10 w-10 bg-zinc-950" }, /* @__PURE__ */ import_react11.default.createElement("img", { src: `${"https://formularis.globalrisc.ad/"}globalrisc_logo_avatar.png`, alt: "Globalrisc AI Agent" })), /* @__PURE__ */ import_react11.default.createElement("span", { className: "font-semibold" }, "Globalrisc AI Agent")), /* @__PURE__ */ import_react11.default.createElement(Button, { variant: "ghost", size: "icon", className: "rounded-full", onClick: () => setIsOpen(false), "aria-label": t("closeChat") }, /* @__PURE__ */ import_react11.default.createElement(X, { className: "h-5 w-5" }))),
       /* @__PURE__ */ import_react11.default.createElement(
         "div",
         {
@@ -46384,7 +46384,7 @@
       "div",
       {
         ref: widgetContainerRef,
-        className: `fixed transition-all ${isVerySmall ? "inset-0 z-50 bg-white" : isMobile ? "bottom-0 right-0 left-0 z-50" : "bottom-0 right-4 z-50"} flex flex-col items-end safe-area-bottom${!isVerySmall ? " mb-20" : ""}`,
+        className: `fixed transition-all ${isVerySmall ? "inset-0 z-50 bg-white" : isMobile ? "bottom-0 right-0 left-0 z-50" : "bottom-0 right-4 z-50"} flex flex-col items-end safe-area-bottom ${!isVerySmall ? " mb-20" : ""}`,
         style: {
           transitionProperty: "opacity, transform",
           transitionDuration: `${animationDuration}ms`,

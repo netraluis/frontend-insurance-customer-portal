@@ -172,7 +172,7 @@ export default function Home(
             : isMobile
               ? "bottom-0 right-0 left-0 z-50"
               : "bottom-0 right-4 z-50"
-            } flex flex-col items-end safe-area-bottom${!isVerySmall ? ' mb-20' : ''}`}
+            } flex flex-col items-end safe-area-bottom ${!isVerySmall ? ' mb-20' : ''}`}
           style={{
             transitionProperty: "opacity, transform",
             transitionDuration: `${animationDuration}ms`,

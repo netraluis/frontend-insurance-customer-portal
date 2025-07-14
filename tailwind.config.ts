@@ -73,7 +73,6 @@ const config = {
   "w-10",
   "bg-zinc-950",
   "font-semibold",
-  "text-ml",
 
   // Button (header close)
   "rounded-full",
@@ -156,8 +155,6 @@ const config = {
   // Others (from conditional rendering)
   "flex-end",
   'safe-area-bottom',
-  'h-[650px]',
-  'text-ml',
   'disabled:pointer-events-none',
   'disabled:opacity-50',
   '[&_svg]:pointer-events-none',
@@ -272,6 +269,10 @@ const config = {
       },
     },
   },
+  plugins: [
+    require('tailwind-scrollbar'),
+    require('tailwindcss-animate'),
+  ],
   variants: {
     extend: {
       pointerEvents: ['disabled'],

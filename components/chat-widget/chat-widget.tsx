@@ -263,7 +263,7 @@ export default function ChatWidget({ isFullScreen = false, setIsOpen, lang }: { 
           <Avatar className="h-10 w-10 bg-zinc-950">
             <img src={`${process.env.NEXT_PUBLIC_MAIN_URL}globalrisc_logo_avatar.png`} alt="Globalrisc AI Agent" />
           </Avatar>
-          <span className="font-semibold text-ml">Globalrisc AI Agent</span>
+          <span className="font-semibold">Globalrisc AI Agent</span>
         </div>
         <Button variant="ghost" size="icon" className="rounded-full" onClick={() => setIsOpen(false)} aria-label={t('closeChat')}>
           <X className="h-5 w-5" />
