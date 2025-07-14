@@ -164,8 +164,10 @@ A veces Tailwind purga clases dinámicas que sí usas en tu widget pero no apare
 1. **Saca todas las clases usadas en tu widget**
 
 ```js
+// Selecciona el shadow root de tu widget
+const root = document.querySelector('#my-chat-widget-root').shadowRoot;
+
 // 1. Saca todas las clases usadas en los nodos del shadow root
-const root = document.querySelector('YOUR_WIDGET_SELECTOR').shadowRoot;
 const usedClasses = new Set();
 root.querySelectorAll('*').forEach(el => {
   if (typeof el.className === 'string') {
@@ -173,34 +175,29 @@ root.querySelectorAll('*').forEach(el => {
   }
 });
 console.log('Clases usadas:', [...usedClasses]);
-```
 
-2. **Saca todas las clases presentes en el CSS del shadow root**
-
-```js
-// 2. Saca todas las clases definidas en los <style> del shadow root
+// 2. Saca todas las clases presentes en el CSS del shadow root
 const styles = Array.from(root.querySelectorAll('style'));
 const cssText = styles.map(s => s.textContent).join('\n');
 const cssClasses = new Set(
   [...cssText.matchAll(/\.([a-zA-Z0-9\-\_\[\]\:\/\\]+)[\s,{]/g)].map(m => m[1])
 );
 console.log('Clases en CSS:', [...cssClasses]);
-```
 
-3. **Detecta y resalta las clases faltantes**
-
-```js
+const missingClasses = new Set();
 // 3. Pinta de magenta los elementos con clases que faltan en el CSS
-document.querySelectorAll('*').forEach(el => {
+root.querySelectorAll('*').forEach(el => {
   if (typeof el.className === 'string') {
     el.className.split(/\s+/).forEach(cls => {
       if (cls && !cssClasses.has(cls)) {
         el.style.outline = '2px solid magenta';
+                missingClasses.add(cls);
         console.warn('Clase faltante en CSS:', cls, el);
       }
     });
   }
 });
+console.log('Clases faltantes en CSS:', [...missingClasses]);
 ```
 
 > **Tip:** Puedes usar esto en la consola del navegador para depurar tu widget embebido y construir una safelist precisa para Tailwind.

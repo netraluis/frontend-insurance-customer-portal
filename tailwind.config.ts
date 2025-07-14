@@ -155,6 +155,41 @@ const config = {
 
   // Others (from conditional rendering)
   "flex-end",
+  'safe-area-bottom',
+  'h-[650px]',
+  'text-ml',
+  'disabled:pointer-events-none',
+  'disabled:opacity-50',
+  '[&_svg]:pointer-events-none',
+  "[&_svg:not([class*='size-'])]:size-4",
+  '[&_svg]:shrink-0',
+  'focus-visible:border-ring',
+  'focus-visible:ring-ring/50',
+  'focus-visible:ring-[3px]',
+  'aria-invalid:ring-destructive/20',
+  'dark:aria-invalid:ring-destructive/40',
+  'aria-invalid:border-destructive',
+  'hover:bg-accent',
+  'hover:text-accent-foreground',
+  'dark:hover:bg-accent/50',
+  'group',
+  'max-w-[90%]',
+  'sm:max-w-[85%]',
+  'text-[15px]',
+  'top-1/2',
+  '-translate-y-1/2',
+  'sm:h-6',
+  'sm:w-6',
+  'scrollbar-hide',
+  'dark:bg-input/30',
+  'dark:border-input',
+  'dark:hover:bg-input/50',
+  'has-[>svg]:px-3',
+  'placeholder:text-zinc-500',
+  'min-h-[26px]',
+  'rounded-ml',
+  'hover:bg-zinc-800'
+
   ],
   prefix: "",
   theme: {
@@ -237,7 +272,10 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require('tailwind-scrollbar'),
+    require("tailwindcss-animate")
+  ],
 } 
 
 export default config
