@@ -59,9 +59,10 @@ import ChatWidget from "../components/chat-widget/index";
 
 
 Promise.all([
-  fetch("http://localhost:3000/widget-bundle.css").then(res => res.text())
+  fetch("https://formularis.globalrisc.ad/widget-bundle.css").then(res => res.text())
 ]).then(([css1]) => {
 
+  console.log(css1);
   function getWidgetScriptTag() {
     const scripts = document.getElementsByTagName("script");
     for (let i = 0; i < scripts.length; i++) {
@@ -89,8 +90,6 @@ Promise.all([
 
   // Inyecta ambos CSS
   const style1 = document.createElement("style");
-  console.log(css1.includes("bg-red-500"));
-  console.log(css1.includes("rounded-xl"));
   style1.textContent = css1;
   shadow.appendChild(style1);
 
