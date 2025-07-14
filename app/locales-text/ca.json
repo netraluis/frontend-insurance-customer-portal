@@ -1,5 +1,33 @@
 {
   "HomePage": {
+    "services": {
+      "autoClaim": {
+        "title": "Report Auto Claim",
+        "description": "File a claim for your vehicle insurance coverage quickly and efficiently. Get immediate assistance for accidents, theft, or damage.",
+        "action": "Report Auto Claim"
+      },
+      "generalClaim": {
+        "title": "Report General Claim",
+        "description": "Submit claims for home, health, travel, or other insurance policies. Our comprehensive claim process covers all your insurance needs.",
+        "action": "Report General Claim"
+      },
+      "getQuote": {
+        "title": "Request Quote",
+        "description": "Get personalized insurance quotes tailored to your specific needs. Compare coverage options and find the perfect policy.",
+        "action": "Get Quote"
+      }
+    },
+    "additionalInformation": {
+      "title": "Necessites assistència immediata?",
+      "description": "El nostre assistent virtual està disponible 24/7 per guiar-te en la gestió de reclamacions o respondre preguntes sobre la teva cobertura. Per consultes que requereixin atenció personalitzada, pots trucar-nos en horari laboral.",
+      "phone": "Truca'ns al 812 000",
+      "chat": "Iniciar xat en directe"
+    },
+    "footer": {
+      "legal": "Avís legal",
+      "privacy": "Política de privacitat",
+      "solvency": "Informació financera i de solvència"
+    },
     "title": "Hello world!",
     "about": "Ves a la pàgina d'informació",
     "getStarted": "Comença editant",

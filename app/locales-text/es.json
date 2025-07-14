@@ -1,5 +1,33 @@
 {
   "HomePage": {
+    "services": {
+      "autoClaim": {
+        "title": "Report Auto Claim",
+        "description": "File a claim for your vehicle insurance coverage quickly and efficiently. Get immediate assistance for accidents, theft, or damage.",
+        "action": "Report Auto Claim"
+      },
+      "generalClaim": {
+        "title": "Report General Claim",
+        "description": "Submit claims for home, health, travel, or other insurance policies. Our comprehensive claim process covers all your insurance needs.",
+        "action": "Report General Claim"
+      },
+      "getQuote": {
+        "title": "Request Quote",
+        "description": "Get personalized insurance quotes tailored to your specific needs. Compare coverage options and find the perfect policy.",
+        "action": "Get Quote"
+      }
+    },
+    "additionalInformation": {
+      "title": "Necesitas ayuda inmediata?",
+      "description": "Nuestro asistente virtual está disponible 24/7 para guiarte en la gestión de reclamaciones o responder preguntas sobre tu cobertura. Para consultas personalizadas, puedes llamar durante nuestras horas laborales.",
+      "phone": "Llámanos al 812 000",
+      "chat": "Iniciar chat en vivo"
+    },
+    "footer": {
+      "legal": "Aviso legal",
+      "privacy": "Política de privacidad",
+      "solvency": "Información financiera y solvencia"
+    },
     "title": "¡Hola mundo!",
     "about": "Ir a la página de información",
     "getStarted": "Comienza editando",
