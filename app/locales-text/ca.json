@@ -2,19 +2,19 @@
   "HomePage": {
     "services": {
       "autoClaim": {
-        "title": "Report Auto Claim",
-        "description": "File a claim for your vehicle insurance coverage quickly and efficiently. Get immediate assistance for accidents, theft, or damage.",
-        "action": "Report Auto Claim"
+        "title": "Formulari de sinistre d’automòbil",
+        "description": "Accedeix al formulari per comunicar un accident, robatori o dany relacionat amb la teva assegurança de vehicle.",
+        "action": "Accedir al formulari"
       },
       "generalClaim": {
-        "title": "Report General Claim",
-        "description": "Submit claims for home, health, travel, or other insurance policies. Our comprehensive claim process covers all your insurance needs.",
-        "action": "Report General Claim"
+        "title": "Formulari de sinistre general",
+        "description": "Tria aquest formulari per declarar sinistres relacionats amb la llar, salut, viatges o altres cobertures.",
+        "action": "Accedir al formulari"
       },
       "getQuote": {
-        "title": "Request Quote",
-        "description": "Get personalized insurance quotes tailored to your specific needs. Compare coverage options and find the perfect policy.",
-        "action": "Get Quote"
+        "title": "Formulari de sol·licitud de pressupost",
+        "description": "Completa aquest formulari per rebre un pressupost personalitzat segons les teves necessitats d’assegurança.",
+        "action": "Sol·licitar pressupost"
       }
     },
     "additionalInformation": {
