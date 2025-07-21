@@ -35,24 +35,27 @@ export default function InsuranceServices() {
       title: t('services.getQuote.title'),
       description: t('services.getQuote.description'),
       action: t('services.getQuote.action'),
-      href: "/quote",
+      href: "https://globalrisc.ad/pressupost/",
     },
   ]
 
   return (
     <div className="min-h-screen bg-zinc-50">
       {/* Header */}
-      <header className="border-b border-zinc-200 bg-white">
-        <div className="container mx-auto px-4 py-6">
+      {/* <header className="border-b border-zinc-200 bg-white">
+        <div className="px-4 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-semibold text-zinc-900">Globalrisc</h1>
-              
+              <img
+                src="/globalrisc_2.svg"
+                alt="Globalrisc Logo"
+                className="h-16 w-auto"
+              />
             </div>
-            
+
           </div>
         </div>
-      </header>
+      </header> */}
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-12 text-zinc-50 opacity-100 rounded-xl">
@@ -112,16 +115,17 @@ export default function InsuranceServices() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
                   variant="outline"
-                  className="border-zinc-300 text-zinc-700 hover:bg-zinc-50 font-medium px-6 bg-white"
+                  className="border-zinc-300 hover:bg-zinc-50 font-medium px-6 bg-black text-white"
+                  onClick={() => window.open('https://globalrisc.ad/contacte/', '_blank')}
                 >
-                  {t('additionalInformation.phone')}      
+                  {t('additionalInformation.phone')}
                 </Button>
-                <Button
+                {/* <Button
                   variant="outline"
                   className="border-zinc-300 hover:bg-zinc-50 font-medium px-6 bg-black text-white"
                 >
                   {t('additionalInformation.chat')}
-                </Button>
+                </Button> */}
               </div>
             </div>
           </div>
@@ -134,9 +138,9 @@ export default function InsuranceServices() {
           <div className="flex flex-col md:flex-row justify-between items-center text-sm text-zinc-500">
             <p>© Globalrisc 2025</p>
             <div className="flex gap-6 mt-4 md:mt-0">
-              <span className="hover:text-zinc-700 cursor-pointer transition-colors">{t('footer.legal')}</span>
-              <span className="hover:text-zinc-700 cursor-pointer transition-colors">{t('footer.privacy')}</span>
-              <span className="hover:text-zinc-700 cursor-pointer transition-colors">{t('footer.solvency')}</span>
+              <span onClick={() => window.open('https://globalrisc.ad/avis-legal/', '_blank')} className="hover:text-zinc-700 cursor-pointer transition-colors">{t('footer.legal')}</span>
+              <span onClick={() => window.open('https://globalrisc.ad/avis-legal/', '_blank')} className="hover:text-zinc-700 cursor-pointer transition-colors">{t('footer.privacy')}</span>
+              <span onClick={() => window.open('https://globalrisc.ad/solvencia-anual/', '_blank')} className="hover:text-zinc-700 cursor-pointer transition-colors">{t('footer.solvency')}</span>
             </div>
           </div>
         </div>

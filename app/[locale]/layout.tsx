@@ -9,10 +9,23 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       <div key={locale}>
-        <div className="flex justify-end lg:fixed lg:top-1 lg:right-0 lg:block">
-          <LocaleSwitcher />
-        </div>
+        <header className="border-b border-zinc-200 bg-white">
+          <div className="px-4 py-6">
+            <div className="flex items-center justify-between">
+              <div className="mr-3">
+                <img
+                  src="/globalrisc_2.svg"
+                  alt="Globalrisc Logo"
+                  className="h-12 w-auto"
+                />
+              </div>
+              <LocaleSwitcher />
+            </div>
+          </div>
+        </header>
+        <div className="mb-4">
           {children}
+        </div>
         <ChatWidget />
       </div>
     </NextIntlClientProvider>
